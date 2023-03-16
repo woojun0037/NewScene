@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BossMonster_Tiger : MonoBehaviour
 {
+    
+    public SkinnedMeshRenderer mat;
+
     public GameObject MonsterObject; //몬스터 부모 받아옴
     public GameObject targetPosition; //playerposition
     public Transform targettransform;
@@ -44,6 +47,7 @@ public class BossMonster_Tiger : MonoBehaviour
     bool BossMonsterDie = false; //보스가 사망하였는가
     bool TargetHere; //플레이어가 보스 몬스터의 범위(Trigger)안에 들어옴 //안들어오면 패턴 공격
     bool StartAttack;
+    bool isDamage;
 
     //보스 돌진관련
     bool isrush;//최대돌진횟수 랜덤값 변경용
@@ -72,6 +76,11 @@ public class BossMonster_Tiger : MonoBehaviour
         Pattern_2
     }
     public BossPattern bosspattern;
+
+    void Awake()
+    {
+        
+    }
 
     void Start() //초기화
     {
@@ -430,6 +439,7 @@ public class BossMonster_Tiger : MonoBehaviour
         {
             HitScript Hit = other.GetComponent<HitScript>();
             BossHp -= Hit.damage;
+            StartCoroutine(OnDamge());
         }
     }
 
@@ -465,6 +475,22 @@ public class BossMonster_Tiger : MonoBehaviour
             //MonsterDie();
         }
 
+    }
+
+    IEnumerator OnDamge()
+    {
+        mat.GetComponent<SkinnedMeshRenderer>().material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+
+        if (BossHp > 0)
+        {
+            mat.GetComponent<SkinnedMeshRenderer>().material.color = Color.white;
+        }
+        else
+        {
+            mat.GetComponent<SkinnedMeshRenderer>().material.color = Color.gray;
+            Destroy(gameObject, 10);
+        }
     }
 
     IEnumerator Move_Time()
