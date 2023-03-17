@@ -5,6 +5,11 @@ using UnityEditor;
 
 public class PlayerSkill : MonoBehaviour
 {
+    public TrailRenderer trailEffect;
+    public Transform CloudPos;
+    public GameObject Cloud;
+    public Rigidbody Cloudprab;
+
     public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
     public float radius = 3f;
@@ -46,7 +51,23 @@ public class PlayerSkill : MonoBehaviour
             else
                 isCollision = false;
         }
+
+       if(Input.GetKey(KeyCode.R))
+        {
+
+            Vector3 spawn = transform.position;
+            spawn.y = 1f;
+            StartCoroutine("CloudTime");
+            Rigidbody CloudRigid = Instantiate(Cloudprab, transform.position, transform.rotation);
+            CloudRigid.velocity = transform.forward * 20;
+        }
     }
+
+    //IEnumerable CloudTime()
+    //{
+
+    //    Destroy(gameObject, 1);
+    //}
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
     private void OnDrawGizmos()

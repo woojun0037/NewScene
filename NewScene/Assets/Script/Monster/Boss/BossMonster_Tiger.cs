@@ -6,7 +6,6 @@ public class BossMonster_Tiger : MonoBehaviour
 {
     
     public SkinnedMeshRenderer mat;
-
     public GameObject MonsterObject; //몬스터 부모 받아옴
     public GameObject targetPosition; //playerposition
     public Transform targettransform;
