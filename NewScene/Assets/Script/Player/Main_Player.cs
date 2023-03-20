@@ -199,7 +199,6 @@ public class Main_Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R))
         {
-            Anim.SetTrigger("Skill");
             CloudSkillUI.cloudGauge += Time.deltaTime;
         }
 

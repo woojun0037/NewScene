@@ -9,6 +9,7 @@ public class PlayerSkill : MonoBehaviour
     public Transform CloudPos;
     public GameObject Cloud;
     public Rigidbody Cloudprab;
+    public int SmokeTime;
 
     public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
@@ -63,11 +64,11 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    //IEnumerable CloudTime()
-    //{
-
-    //    Destroy(gameObject, 1);
-    //}
+    IEnumerable CloudTime()
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(gameObject, 1);
+    }
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
     private void OnDrawGizmos()
