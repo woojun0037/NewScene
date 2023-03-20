@@ -7,24 +7,29 @@ public class PlayerSkill : MonoBehaviour
 {
     public TrailRenderer trailEffect;
     public Transform CloudPos;
-    public GameObject Cloud;
     public Rigidbody Cloudprab;
-    public int SmokeTime;
+    public GameObject Cloud;
 
     public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
     public float radius = 3f;
-
+    
     Color _blue = new Color(0f, 0f, 1f, 0.2f);
     Color _red = new Color(1f, 0f, 0f, 0.2f);
 
     bool isCollision = false;
+    bool CloudisDelay;
 
     void Update()
     {
         Skill();
     }
 
+    void Start()
+    {
+        GameObject CloudSkill = Instantiate(Cloud);
+    }
+    
     void Skill()
     {
        if(Input.GetKey(KeyCode.L))
@@ -55,19 +60,22 @@ public class PlayerSkill : MonoBehaviour
 
        if(Input.GetKey(KeyCode.R))
         {
-
-            Vector3 spawn = transform.position;
-            spawn.y = 1f;
-            StartCoroutine("CloudTime");
-            Rigidbody CloudRigid = Instantiate(Cloudprab, transform.position, transform.rotation);
-            CloudRigid.velocity = transform.forward * 20;
+           if(CloudisDelay == false)
+           {
+               CloudisDelay = true;
+               StartCoroutine("CloudTime");
+               Vector3 spawn = transform.position;
+               spawn.y = 1f;
+               Rigidbody CloudRigid = Instantiate(Cloudprab, transform.position, transform.rotation);
+               CloudRigid.velocity = transform.forward * 20;
+           }
         }
     }
 
     IEnumerable CloudTime()
     {
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject, 1);
+        CloudisDelay = false;
     }
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
