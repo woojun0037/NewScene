@@ -5,7 +5,6 @@ using UnityEngine;
 public class Main_Player : MonoBehaviour
 {
     [SerializeField] Vector3 MovePlayer;
-    [SerializeField] Rigidbody Rigid;
     [SerializeField] Animator Anim;
     [SerializeField] Collider weaponCollider;
 
@@ -14,7 +13,6 @@ public class Main_Player : MonoBehaviour
     [SerializeField] float DashSpeed = 5f;
 
     private Vector3 mousePos;
-    private Vector3 Dir = Vector3.zero;
     private Vector3 player_Move_Input;
     private Vector3 heading;
 
@@ -29,17 +27,6 @@ public class Main_Player : MonoBehaviour
     public float AttackSpeed = 0.5f;
 
     Queue<int> inputBufferQ = new Queue<int>();
-
-    void Awake()
-    {
-        Rigid = this.GetComponent<Rigidbody>();
-        
-    }
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -114,6 +101,7 @@ public class Main_Player : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Dash();
         CalTargetPos();
         AnimationBoolCheck();
     }
@@ -122,7 +110,7 @@ public class Main_Player : MonoBehaviour
     {
         mousePos = Input.mousePosition;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
@@ -136,6 +124,7 @@ public class Main_Player : MonoBehaviour
             }
         }
     }
+
     public void PlayerHP(int PlayerHP)
     {
         HP = PlayerHP;

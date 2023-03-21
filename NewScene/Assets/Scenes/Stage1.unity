@@ -2331,7 +2331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
-  Rigid: {fileID: 115793827}
   Anim: {fileID: 5866666020565131484}
   weaponCollider: {fileID: 3946056032647828522}
   RotateSpeed: 10
@@ -4521,7 +4520,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256328194}
-  - component: {fileID: 256328195}
   m_Layer: 0
   m_Name: CloudPos
   m_TagString: Untagged
@@ -4544,24 +4542,6 @@ Transform:
   m_Father: {fileID: 543450652359948966}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256328195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256328193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trailEffect: {fileID: 1469543355326332688, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
-  CloudPos: {fileID: 256328194}
-  Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
-  target: {fileID: 0}
-  angleRange: 30
-  radius: 3
 --- !u!1001 &256956309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45834,7 +45814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trailEffect: {fileID: 1469543355326332688, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
+  trailEffect: {fileID: 0}
   CloudPos: {fileID: 256328194}
   Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
   target: {fileID: 543450652776705149}

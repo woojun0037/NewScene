@@ -5,30 +5,28 @@ using UnityEditor;
 
 public class PlayerSkill : MonoBehaviour
 {
+    public static PlayerSkill Instance;
+
     public TrailRenderer trailEffect;
     public Transform CloudPos;
     public GameObject Cloudprab;
 
-    public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
+    public Transform target;// 부채꼴에 포함되는지 판별할 타겟
+
     public float angleRange = 30f;
     public float radius = 3f;
 
-    Color _blue = new Color(0f, 0f, 1f, 0.2f);
-    Color _red = new Color(1f, 0f, 0f, 0.2f);
+    private Vector3 mousePos;
+    private Color _blue = new Color(0f, 0f, 1f, 0.2f);
+    private Color _red = new Color(1f, 0f, 0f, 0.2f);
 
     bool isCollision = false;
-    bool CloudisDelay;
+    bool CloudisDelay = true;
 
     void Update()
     {
         Skill();
     }
-
-    void Start()
-    {
-       
-    }
-
     void Skill()
     {
         if (Input.GetKey(KeyCode.L))
@@ -57,14 +55,32 @@ public class PlayerSkill : MonoBehaviour
                 isCollision = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        
+        mousePos = Input.mousePosition;
+        if (Input.GetKeyDown(KeyCode.R))//구름 스킬
         {
             if (CloudisDelay == true)
             {
-               CloudisDelay = false;
-               Debug.Log("Kecode.R");
-               StartCoroutine(CloudTime());
+                CloudisDelay = false;
+                Debug.Log("Kecode.R");
+
+                Ray ray = Camera.main.ScreenPointToRay(mousePos);
+                Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+
+                if (Physics.Raycast(ray, out RaycastHit rayHit))
+                {
+                    if (rayHit.collider.tag == "Platform")
+                    {
+                        transform.LookAt(rayHit.point);
+                    }
+                }
+                StartCoroutine(CloudTime());
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+
         }
     }
 
@@ -74,7 +90,7 @@ public class PlayerSkill : MonoBehaviour
         Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
         CloudRigid.velocity = transform.forward * 50;
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.5f);
         CloudisDelay = true;
     }
 
