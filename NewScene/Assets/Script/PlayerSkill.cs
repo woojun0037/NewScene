@@ -7,13 +7,12 @@ public class PlayerSkill : MonoBehaviour
 {
     public TrailRenderer trailEffect;
     public Transform CloudPos;
-    public Rigidbody Cloudprab;
-    public GameObject Cloud;
+    public GameObject Cloudprab;
 
     public Transform target;    // 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
     public float radius = 3f;
-    
+
     Color _blue = new Color(0f, 0f, 1f, 0.2f);
     Color _red = new Color(1f, 0f, 0f, 0.2f);
 
@@ -27,12 +26,12 @@ public class PlayerSkill : MonoBehaviour
 
     void Start()
     {
-        GameObject CloudSkill = Instantiate(Cloud);
+       
     }
-    
+
     void Skill()
     {
-       if(Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.L))
         {
             Vector3 interV = target.position - transform.position;
 
@@ -58,24 +57,25 @@ public class PlayerSkill : MonoBehaviour
                 isCollision = false;
         }
 
-       if(Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-           if(CloudisDelay == false)
-           {
-               CloudisDelay = true;
-               StartCoroutine("CloudTime");
-               Vector3 spawn = transform.position;
-               spawn.y = 1f;
-               Rigidbody CloudRigid = Instantiate(Cloudprab, transform.position, transform.rotation);
-               CloudRigid.velocity = transform.forward * 20;
-           }
+            if (CloudisDelay == true)
+            {
+               CloudisDelay = false;
+               Debug.Log("Kecode.R");
+               StartCoroutine(CloudTime());
+            }
         }
     }
 
-    IEnumerable CloudTime()
+    IEnumerator CloudTime()
     {
-        yield return new WaitForSeconds(1f);
-        CloudisDelay = false;
+        GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
+        Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
+        CloudRigid.velocity = transform.forward * 50;
+
+        yield return new WaitForSeconds(5f);
+        CloudisDelay = true;
     }
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
