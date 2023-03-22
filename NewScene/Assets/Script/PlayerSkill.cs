@@ -27,7 +27,7 @@ public class PlayerSkill : MonoBehaviour
     {
         Skill();
     }
-    void Skill()
+    public void Skill()
     {
         if (Input.GetKey(KeyCode.L))
         {
@@ -59,6 +59,8 @@ public class PlayerSkill : MonoBehaviour
         mousePos = Input.mousePosition;
         if (Input.GetKeyDown(KeyCode.R))//구름 스킬
         {
+            Invoke("DestroyCloudShoot", 5f);
+
             if (CloudisDelay == true)
             {
                 CloudisDelay = false;
@@ -83,14 +85,16 @@ public class PlayerSkill : MonoBehaviour
 
         }
     }
+    
+    private void DestroyCloudShoot()
+    {
+        ObjectPool.ReturnObject(this);
+    }
+
 
     IEnumerator CloudTime()
     {
-        GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
-        Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
-        CloudRigid.velocity = transform.forward * 50;
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.1f);
         CloudisDelay = true;
     }
 
