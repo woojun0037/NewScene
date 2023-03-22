@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 44321153}
   - component: {fileID: 44321152}
   - component: {fileID: 44321151}
+  - component: {fileID: 44321154}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Platform
@@ -786,6 +787,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &44321154
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44321150}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1001 &44793935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39813,7 +39828,7 @@ MonoBehaviour:
   FlyingObject: {fileID: 367779128467859420, guid: 1688e51f3bbee9844955bf68221bcbde, type: 3}
   amount: 5000
   destroyDelay: 1
-  spawnInterval: 0.1
+  spawnInterval: 0.3
   spawnRaius: 1
   spawnForce: 0
   spawnOffset: {x: 0, y: 5, z: 0}
