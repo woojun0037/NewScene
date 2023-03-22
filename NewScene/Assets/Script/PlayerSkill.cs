@@ -86,14 +86,18 @@ public class PlayerSkill : MonoBehaviour
         }
     }
     
-    private void DestroyCloudShoot()
-    {
-        ObjectPool.ReturnObject(this);
-    }
+    //private void DestroyCloudShoot()
+    //{
+    //    ObjectPool.ReturnObject(this);
+    //}
 
 
     IEnumerator CloudTime()
     {
+        GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
+        Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
+        CloudRigid.velocity = transform.forward * 50;
+
         yield return new WaitForSeconds(0.1f);
         CloudisDelay = true;
     }

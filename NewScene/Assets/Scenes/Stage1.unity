@@ -4520,8 +4520,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 256328194}
-  - component: {fileID: 256328195}
-  - component: {fileID: 256328196}
   m_Layer: 0
   m_Name: CloudPos
   m_TagString: Untagged
@@ -4536,42 +4534,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 256328193}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.481, y: 2.727, z: -0.33}
+  m_LocalRotation: {x: -0, y: 0.7701487, z: -0, w: 0.6378645}
+  m_LocalPosition: {x: 0.02467896, y: 0.7260001, z: 0.022802321}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_Father: {fileID: 543450652359948966}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &256328195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256328193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0fe93e119d13c44ab0e521ae08814dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trailEffect: {fileID: 1469543355326332688, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
-  CloudPos: {fileID: 8454258566895425496, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
-  Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
---- !u!114 &256328196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256328193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d81f383151820634a9f3c502e6ef546c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PoolingObjectPrefab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
 --- !u!1001 &256956309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39805,6 +39775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2067220297}
+  - component: {fileID: 2067220298}
   m_Layer: 0
   m_Name: Blizzard
   m_TagString: Untagged
@@ -39820,13 +39791,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2067220296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7.16, y: 4, z: -0.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067220298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067220296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35d38d8db48e4614ca40b6d575f15732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FlyingObject: {fileID: 367779128467859420, guid: 1688e51f3bbee9844955bf68221bcbde, type: 3}
+  amount: 5000
+  destroyDelay: 1
+  spawnInterval: 0.1
+  spawnRaius: 1
+  spawnForce: 0
+  spawnOffset: {x: 0, y: 5, z: 0}
 --- !u!1 &2067745297
 GameObject:
   m_ObjectHideFlags: 0
@@ -41657,6 +41647,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7024483453567142812}
+  - {fileID: 256328194}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -100.734, z: 0}
