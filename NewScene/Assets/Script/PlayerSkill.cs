@@ -5,13 +5,16 @@ using UnityEditor;
 
 public class PlayerSkill : MonoBehaviour
 {
+    [SerializeField] private BlizzardSpawner FSkill;
     public static PlayerSkill Instance;
 
     public TrailRenderer trailEffect;
     public Transform CloudPos;
     public GameObject Cloudprab;
-
     public Transform target;// 부채꼴에 포함되는지 판별할 타겟
+
+    public float RainSkillTime;
+    public float RainSkillCool;
 
     public float angleRange = 30f;
     public float radius = 3f;
@@ -20,13 +23,21 @@ public class PlayerSkill : MonoBehaviour
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
 
+    bool isSkillOn = false;
     bool isCollision = false;
     bool CloudisDelay = true;
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
         Skill();
+        TrySkill();
     }
+
     public void Skill()
     {
         if (Input.GetKey(KeyCode.L))
@@ -55,7 +66,7 @@ public class PlayerSkill : MonoBehaviour
                 isCollision = false;
         }
 
-        
+
         mousePos = Input.mousePosition;
         if (Input.GetKeyDown(KeyCode.R))//구름 스킬
         {
@@ -82,20 +93,27 @@ public class PlayerSkill : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            Ray ray = new Ray(transform.position, transform.forward);
+            isSkillOn = true;
+            TrySkill();
+        }
+    }
 
-            if (Physics.Raycast(ray, 10))
+    public void TrySkill()
+    {
+        if(isSkillOn == true)
+        {
+            if(RainSkillTime < 3)
+            { 
+                FSkill.RainDrop();
+                RainSkillTime += Time.deltaTime;
+            }
+            else if(RainSkillTime > 3)
             {
-                //BlizzardSpawner.RainDrop();
+                isSkillOn = false;
+                RainSkillTime = 0;
             }
         }
     }
-    
-    //private void DestroyCloudShoot()
-    //{
-    //    ObjectPool.ReturnObject(this);
-    //}
-
 
     IEnumerator CloudTime()
     {
@@ -106,6 +124,8 @@ public class PlayerSkill : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         CloudisDelay = true;
     }
+
+
 
     // 유니티 에디터에 부채꼴을 그려줄 메소드
     private void OnDrawGizmos()

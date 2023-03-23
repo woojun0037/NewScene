@@ -25,12 +25,12 @@ public class FlyingObj : MonoBehaviour
 
             foreach (Collider col in objectsInRnage)
             {
-                Rigidbody enemy = col.GetComponent<Rigidbody>();
+                Rigidbody Monster = col.GetComponent<Rigidbody>();
 
-                if (enemy != null)
+                if (Monster != null)
                 {
 
-                    Destroy(enemy.gameObject);
+                    Destroy(Monster.gameObject);
                 }
             }
 

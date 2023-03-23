@@ -2354,7 +2354,7 @@ MonoBehaviour:
   isAttack: 0
   attackInputOn: 0
   damage: 10
-  HP: 1000
+  HP: 999999
   MaxDistance: 1.5
   AttackSpeed: 0.5
 --- !u!1001 &118869992
@@ -3629,7 +3629,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: cd46f5d58383e8643b883c957f96c6a5, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cd46f5d58383e8643b883c957f96c6a5, type: 3}
       propertyPath: m_LocalScale.x
@@ -35301,6 +35301,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+--- !u!1 &1914690218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1914690219}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1914690219
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914690218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.67, y: 3.96, z: 0.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1914892335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
@@ -39797,7 +39828,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2067220297
 Transform:
   m_ObjectHideFlags: 0
@@ -39827,10 +39858,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlyingObject: {fileID: 367779128467859420, guid: 1688e51f3bbee9844955bf68221bcbde, type: 3}
   amount: 5000
-  destroyDelay: 1
-  spawnInterval: 0.3
-  spawnRaius: 1
-  spawnForce: 0
+  destroyDelay: 3
+  spawnInterval: 0.01
+  spawnRaius: 3
+  spawnForce: 5
+  SpawnTime: 5
   spawnOffset: {x: 0, y: 5, z: 0}
 --- !u!1 &2067745297
 GameObject:
@@ -40216,7 +40248,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 6.604, z: 0}
 --- !u!114 &2091475217
 MonoBehaviour:
@@ -43977,7 +44009,7 @@ MonoBehaviour:
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
-  KnockBackForce: 1
+  KnockBackForce: 3
   KnockBakcTime: 0.1
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -44029,7 +44061,7 @@ MonoBehaviour:
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
-  KnockBackForce: 1
+  KnockBackForce: 3
   KnockBakcTime: 0.1
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -44081,7 +44113,7 @@ MonoBehaviour:
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
-  KnockBackForce: 1
+  KnockBackForce: 3
   KnockBakcTime: 0.1
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -45880,6 +45912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FSkill: {fileID: 2067220298}
   trailEffect: {fileID: 0}
   CloudPos: {fileID: 256328194}
   Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}

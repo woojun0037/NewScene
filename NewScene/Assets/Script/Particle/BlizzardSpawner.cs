@@ -11,6 +11,8 @@ public class BlizzardSpawner : MonoBehaviour
     public float spawnInterval;
     public float spawnRaius;
     public float spawnForce;
+    public float SpawnTime;
+
     public Vector3 spawnOffset;
 
     private bool isDead = false;
@@ -50,6 +52,5 @@ public class BlizzardSpawner : MonoBehaviour
             }
         }
     }
-
 }
 

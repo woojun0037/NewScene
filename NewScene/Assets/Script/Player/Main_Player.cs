@@ -98,6 +98,7 @@ public class Main_Player : MonoBehaviour
         Skill();
 
     }
+
     void FixedUpdate()
     {
         Move();
@@ -193,8 +194,7 @@ public class Main_Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.F))
         {
-            Anim.SetTrigger("Skill");
-            RainSkillUI.rainGauge += Time.deltaTime;
+            RainSkillUI.rainGauge += Time.deltaTime; 
         }
     }
 
