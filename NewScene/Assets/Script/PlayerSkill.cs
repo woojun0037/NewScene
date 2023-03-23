@@ -82,7 +82,12 @@ public class PlayerSkill : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Ray ray = new Ray(transform.position, transform.forward);
 
+            if (Physics.Raycast(ray, 10))
+            {
+                //BlizzardSpawner.RainDrop();
+            }
         }
     }
     
@@ -97,7 +102,7 @@ public class PlayerSkill : MonoBehaviour
         GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
         Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
         CloudRigid.velocity = transform.forward * 50;
-
+        Destroy(intantCloud, 3);
         yield return new WaitForSeconds(0.1f);
         CloudisDelay = true;
     }

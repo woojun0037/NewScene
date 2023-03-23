@@ -16,16 +16,16 @@ public class BlizzardSpawner : MonoBehaviour
     private bool isDead = false;
     private float spawnIntervalTimer;
 
-    void Update()
+    public void RainDrop()
     {
-        if(!isDead)
+        if (!isDead)
         {
-            if(spawnIntervalTimer <= 0)
+            if (spawnIntervalTimer <= 0)
             {
                 spawnIntervalTimer = spawnInterval;
                 amount -= 1;
 
-                var spawnPosition = transform.position + new Vector3(Random.insideUnitCircle.x * spawnRaius, 0, 
+                var spawnPosition = transform.position + new Vector3(Random.insideUnitCircle.x * spawnRaius, 0,
                                                                      Random.insideUnitCircle.y * spawnRaius) + spawnOffset;
 
                 var obj = Instantiate(FlyingObject, spawnPosition, Quaternion.identity);
@@ -38,15 +38,15 @@ public class BlizzardSpawner : MonoBehaviour
 
                 Destroy(obj, destroyDelay);
 
-                if(amount <= 0)
+                if (amount <= 0)
                 {
                     isDead = true;
                     Destroy(gameObject, destroyDelay);
                 }
             }
-            else 
-            { 
-                spawnIntervalTimer -= Time.deltaTime; 
+            else
+            {
+                spawnIntervalTimer -= Time.deltaTime;
             }
         }
     }
