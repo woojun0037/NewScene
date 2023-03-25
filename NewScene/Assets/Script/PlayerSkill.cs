@@ -2,40 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class PlayerSkill : MonoBehaviour
 {
-    [SerializeField] private BlizzardSpawner FSkill;
-    public static PlayerSkill Instance;
+    public Transform player;
 
-    public TrailRenderer trailEffect;
-    public Transform CloudPos;
-    public GameObject Cloudprab;
+    [Header("WindSkill")]
     public Transform target;// 부채꼴에 포함되는지 판별할 타겟
-
-    public float RainSkillTime;
-    public float RainSkillCool;
-
     public float angleRange = 30f;
     public float radius = 3f;
-
     private Vector3 mousePos;
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
-
     bool isSkillOn = false;
     bool isCollision = false;
+
+    [Header("CloudSkill")]
+    public static PlayerSkill Instance;
+    public TrailRenderer trailEffect;
+    public Transform CloudPos;
+    public GameObject Cloudprab;
     bool CloudisDelay = true;
+
+    [Header("RainDropSkill")]
+    private Vector3 posUp;
+    private Vector3 postion;
+
+    [SerializeField] private BlizzardSpawner RainSkill;
+    public Canvas ability2Canvas;
+    public Image targetCircle;
+    public Image SkillRange;
+
+    public float RainSkillTime;
+    public float RainSkillCool;
+    public float maxAbilityDistance;
 
     private void Start()
     {
-        
+        targetCircle.GetComponent<Image>().enabled = false;
+        SkillRange.GetComponent<Image>().enabled = false;
     }
 
     void Update()
     {
         Skill();
         TrySkill();
+
+
     }
 
     public void Skill()
@@ -93,6 +107,25 @@ public class PlayerSkill : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if(hit.collider.gameObject != this.gameObject)
+                {
+                    posUp = new Vector3(hit.point.x, 10f, hit.point.z);
+                    postion = hit.point;
+                }
+            }
+
+            var hitPosDir = (hit.point - transform.position).normalized;
+            float distance = Vector3.Distance(hit.point, transform.position);
+            distance = Mathf.Min(distance, maxAbilityDistance);
+
+            var newHitPos = transform.position + hitPosDir * distance;
+            ability2Canvas.transform.position = (newHitPos);
+
             isSkillOn = true;
             TrySkill();
         }
@@ -102,12 +135,12 @@ public class PlayerSkill : MonoBehaviour
     {
         if(isSkillOn == true)
         {
-            if(RainSkillTime < 3)
-            { 
-                FSkill.RainDrop();
+            if(RainSkillTime < RainSkillCool)
+            {
+                RainSkill.RainDrop();
                 RainSkillTime += Time.deltaTime;
             }
-            else if(RainSkillTime > 3)
+            else if(RainSkillTime > RainSkillCool)
             {
                 isSkillOn = false;
                 RainSkillTime = 0;
