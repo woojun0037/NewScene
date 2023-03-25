@@ -15,8 +15,10 @@ public class PlayerSkill : MonoBehaviour
     private Vector3 mousePos;
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
+
     bool isSkillOn = false;
     bool isCollision = false;
+    bool isSkillUse;
 
     [Header("CloudSkill")]
     public static PlayerSkill Instance;
@@ -46,13 +48,37 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        Skill();
-        TrySkill();
 
+        WindSkill();
+        CloudSkill();
+        RainDropSkill();
+        Rainnig();
 
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        
+        //비 스킬 이미지 인풋
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            if (hit.collider.gameObject != this.gameObject)
+            {
+                posUp = new Vector3(hit.point.x, 0f, hit.point.z);
+                postion = hit.point;
+            }
+        }
+        
+
+        //비 스킬 이미지 인풋
+        var hitPosDir = (hit.point - transform.position).normalized;
+        float distance = Vector3.Distance(hit.point, transform.position);
+        distance = Mathf.Min(distance, maxAbilityDistance);
+
+        var newHitPos = transform.position + hitPosDir * distance;
+        ability2Canvas.transform.position = (newHitPos);
     }
 
-    public void Skill()
+    public void WindSkill()
     {
         if (Input.GetKey(KeyCode.L))
         {
@@ -80,7 +106,10 @@ public class PlayerSkill : MonoBehaviour
                 isCollision = false;
         }
 
+    }
 
+    public void CloudSkill()
+    {
         mousePos = Input.mousePosition;
         if (Input.GetKeyDown(KeyCode.R))//구름 스킬
         {
@@ -104,44 +133,38 @@ public class PlayerSkill : MonoBehaviour
                 StartCoroutine(CloudTime());
             }
         }
+    }
 
+    public void RainDropSkill()
+    {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                if(hit.collider.gameObject != this.gameObject)
-                {
-                    posUp = new Vector3(hit.point.x, 10f, hit.point.z);
-                    postion = hit.point;
-                }
-            }
-
-            var hitPosDir = (hit.point - transform.position).normalized;
-            float distance = Vector3.Distance(hit.point, transform.position);
-            distance = Mathf.Min(distance, maxAbilityDistance);
-
-            var newHitPos = transform.position + hitPosDir * distance;
-            ability2Canvas.transform.position = (newHitPos);
-
+            SkillRange.GetComponent<Image>().enabled = true;
+            targetCircle.GetComponent<Image>().enabled = true;
+            
+        }
+        if (Input.GetMouseButton(0))
+        {
+            SkillRange.GetComponent<Image>().enabled = false;
+            targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;
-            TrySkill();
+            Rainnig();
         }
     }
 
-    public void TrySkill()
+    void Rainnig()
     {
-        if(isSkillOn == true)
+        if (isSkillOn == true)
         {
-            if(RainSkillTime < RainSkillCool)
+            if (RainSkillTime < RainSkillCool)
             {
+                isSkillUse = true;
                 RainSkill.RainDrop();
                 RainSkillTime += Time.deltaTime;
             }
-            else if(RainSkillTime > RainSkillCool)
+            else if (RainSkillTime > RainSkillCool)
             {
+                isSkillUse = false;
                 isSkillOn = false;
                 RainSkillTime = 0;
             }
@@ -153,8 +176,8 @@ public class PlayerSkill : MonoBehaviour
         GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
         Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
         CloudRigid.velocity = transform.forward * 50;
-        Destroy(intantCloud, 3);
-        yield return new WaitForSeconds(0.1f);
+        Destroy(intantCloud, 2);
+        yield return new WaitForSeconds(3f);
         CloudisDelay = true;
     }
 
