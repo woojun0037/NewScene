@@ -14,9 +14,9 @@ public class PlayerSkill : MonoBehaviour
     private Color _blue = new Color(0f, 0f, 1f, 0.2f);
     private Color _red = new Color(1f, 0f, 0f, 0.2f);
 
-    bool isSkillOn = false;
-    bool isCollision = false;
-    bool isSkillUse;
+    public bool isSkillOn = false;
+    public bool isCollision = false;
+    public bool isSkillUse = true;
 
     [Header("CloudSkill")]
     public static PlayerSkill Instance;
@@ -27,7 +27,7 @@ public class PlayerSkill : MonoBehaviour
 
     [Header("RainDropSkill")]
     private Vector3 posUp;
-    private Vector3 postion;
+    public Vector3 postion;
 
     [SerializeField] private BlizzardSpawner RainSkill;
     public Canvas ability2Canvas;
@@ -37,7 +37,8 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillTime;
     public float RainSkillCool;
     public float maxAbilityDistance;
-    bool RainSkillCheck;
+    public bool RainSkillCheck;
+    public bool isTest;
 
     private void Start()
     {
@@ -51,30 +52,33 @@ public class PlayerSkill : MonoBehaviour
         WindSkill();
         CloudSkill();
         RainDropSkill();
-        Rainnig();
+        
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        
+
         //비 스킬 이미지 인풋
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            if (hit.collider.gameObject != this.gameObject)
+        if(isSkillUse)
+        { 
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                posUp = new Vector3(hit.point.x, 0f, hit.point.z);
-                postion = hit.point;
+                if (hit.collider.gameObject != this.gameObject)
+                {
+                    posUp = new Vector3(hit.point.x, 0, hit.point.z);
+                    postion = hit.point;
+                    
+                }
             }
+            //비 스킬 이미지 인풋
+            var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
+            float distance = Vector3.Distance(hit.point, transform.position);
+            distance = Mathf.Min(distance, maxAbilityDistance);
+
+            var newHitPos = transform.position + hitPosDir * distance;
+            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z) + hitPosDir * distance;
+            ability2Canvas.transform.position = (newHitPos);
         }
-        
-
-        //비 스킬 이미지 인풋
-        var hitPosDir = (hit.point - transform.position).normalized;
-        float distance = Vector3.Distance(hit.point, transform.position);
-        distance = Mathf.Min(distance, maxAbilityDistance);
-
-        var newHitPos = transform.position + hitPosDir * distance;
-        ability2Canvas.transform.position = (newHitPos);
     }
 
     public void WindSkill()
@@ -136,7 +140,7 @@ public class PlayerSkill : MonoBehaviour
 
     public void RainDropSkill()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && isSkillUse)
         {
             SkillRange.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
@@ -156,20 +160,33 @@ public class PlayerSkill : MonoBehaviour
     {
         if (isSkillOn == true)
         {
-            if (RainSkillTime < RainSkillCool)
-            {
-                isSkillUse = true;
-                RainSkill.RainDrop();
-                RainSkillTime += Time.deltaTime;
-            }
-            else if (RainSkillTime > RainSkillCool)
+            if (!isTest)
             {
                 isSkillUse = false;
+                RainSkill.RainDrop();
+                isTest = true;
+                StartCoroutine(TestCor());
+            }
+            else if (isTest)
+            {
+                isSkillUse = true;
                 isSkillOn = false;
                 RainSkillTime = 0;
             }
         }
     }
+
+    IEnumerator TestCor()
+    {
+        while(RainSkillTime <= RainSkillCool)
+        {
+            RainSkillTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        Rainnig();
+        isTest = !isTest;
+    }
+   
 
     IEnumerator CloudTime()
     {

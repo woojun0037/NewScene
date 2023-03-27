@@ -8,13 +8,18 @@ public class FlyingObj : MonoBehaviour
     public string[] tagsToCheck;
     public float impactRaidus;
     public float destroyDelay;
-
+    
     private GameObject ImpactFX;
 
     void Start()
     {
-        ImpactFX = transform.Find("ImpactFX").gameObject;
+        ImpactFX = this.gameObject;
+        
+    }
 
+    private void Update()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
