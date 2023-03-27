@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerSkill : MonoBehaviour
 {
-    public Transform player;
-
     [Header("WindSkill")]
     public Transform target;// 부채꼴에 포함되는지 판별할 타겟
     public float angleRange = 30f;
@@ -39,6 +37,7 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillTime;
     public float RainSkillCool;
     public float maxAbilityDistance;
+    bool RainSkillCheck;
 
     private void Start()
     {
@@ -141,13 +140,14 @@ public class PlayerSkill : MonoBehaviour
         {
             SkillRange.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
-            
+            RainSkillCheck = true;
         }
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && RainSkillCheck == true)
         {
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;
+            RainSkillCheck = false;
             Rainnig();
         }
     }
