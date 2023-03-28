@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
+    //PlayerSkill skillcall;
+    windStorm iswindstorm;
+
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Animator Anim;
     [SerializeField] Collider weaponCollider;
@@ -95,8 +98,9 @@ public class Main_Player : MonoBehaviour
             isAttack = false;
         }
 
-        Skill();
-
+        Skill_E();
+        Skill_F();
+        Skill_R();
     }
 
     void FixedUpdate()
@@ -179,22 +183,28 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    public void Skill()
+    public void Skill_E()
     {
         if (Input.GetKey(KeyCode.E))
         {
             Anim.SetTrigger("Skill");
             WindSkillUI.windGauge += Time.deltaTime;
         }
+    }
 
+    public void Skill_R()
+    { 
         if (Input.GetKey(KeyCode.R))
         {
             CloudSkillUI.cloudGauge += Time.deltaTime;
         }
+    }
 
+    public void Skill_F()
+    {
         if (Input.GetKey(KeyCode.F))
         {
-            RainSkillUI.rainGauge += Time.deltaTime; 
+            RainSkillUI.rainGauge += Time.deltaTime;
         }
     }
 
