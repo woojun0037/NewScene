@@ -14,6 +14,8 @@ public class windStorm : MonoBehaviour
         particles = new ParticleSystem.Particle[WindStorm.main.maxParticles];
     }
 
+    //public void WindStormAnim()
+    //{
     //    WindStorm = GetComponent<ParticleSystem>();
     //    int num = WindStorm.GetParticles(particles);
 
