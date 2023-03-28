@@ -66,6 +66,11 @@ public class Enemy : MonoBehaviour
             StartAttack = false;
         }
 
+        if(targetTransform == null)
+        {
+            return;
+        }
+
         if (StartAttack) //start attack
         {
             transform.LookAt(targetTransform); //LookAt은 player가 y가면 회전해서 나중에 변경
