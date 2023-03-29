@@ -5,7 +5,7 @@ using UnityEngine;
 public class Main_Player : MonoBehaviour
 {
     //PlayerSkill skillcall;
-    windStorm iswindstorm;
+    WindStorm iswindstorm;
 
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Animator Anim;
@@ -19,6 +19,10 @@ public class Main_Player : MonoBehaviour
     private Vector3 player_Move_Input;
     private Vector3 heading;
 
+    public bool E_skillCheck;
+    public bool R_skillCheck;
+    public bool F_skillCheck;
+
     bool isMove = false;
     bool isDelay;
     public bool isAttack = false;
@@ -27,7 +31,8 @@ public class Main_Player : MonoBehaviour
     public int damage;
     public int HP;
     public float MaxDistance = 1.5f;
-    public float AttackSpeed = 0.5f;
+    public float AttackSpeed = 3f;
+    public float addAttackSpeed;
 
     Queue<int> inputBufferQ = new Queue<int>();
 
@@ -101,6 +106,10 @@ public class Main_Player : MonoBehaviour
         Skill_E();
         Skill_F();
         Skill_R();
+        Tafoon();
+        Frozen();
+        Thunder();
+        Anim.SetFloat("AttackSpeed", AttackSpeed * addAttackSpeed);
     }
 
     void FixedUpdate()
@@ -188,14 +197,17 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             Anim.SetTrigger("Skill");
+            E_skillCheck = true;
             WindSkillUI.windGauge += Time.deltaTime;
         }
     }
+
 
     public void Skill_R()
     { 
         if (Input.GetKey(KeyCode.R))
         {
+            R_skillCheck = true;
             CloudSkillUI.cloudGauge += Time.deltaTime;
         }
     }
@@ -204,7 +216,39 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
+            F_skillCheck = true;
             RainSkillUI.rainGauge += Time.deltaTime;
+        }
+    }
+
+    public void Tafoon()//태풍 스킬
+    {
+        if (E_skillCheck == true && R_skillCheck == true)
+        {
+            addAttackSpeed = 3f;
+            E_skillCheck = false;
+            R_skillCheck = false;
+
+            if(E_skillCheck == false || R_skillCheck == false)
+            {
+                addAttackSpeed = 1f;
+            }
+        }
+    }
+
+    public void Frozen()//얼음 스킬
+    {
+        if(E_skillCheck == true && F_skillCheck)
+        {
+           
+        }
+    }
+
+    public void Thunder()//번게 스킬
+    {
+        if(R_skillCheck == true && F_skillCheck == true)
+        {
+
         }
     }
 

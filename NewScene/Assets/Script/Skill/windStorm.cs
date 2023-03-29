@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class windStorm : MonoBehaviour
+public class WindStorm : MonoBehaviour
 {
-    ParticleSystem WindStorm;
+
+    ParticleSystem _WindStorm;
     ParticleSystem.Particle[] particles;
-    
+
     void Start()
-    { 
-        WindStorm = GetComponent<ParticleSystem>();
-        particles = new ParticleSystem.Particle[WindStorm.main.maxParticles];
+    {
+        _WindStorm = GetComponent<ParticleSystem>();
+        particles = new ParticleSystem.Particle[_WindStorm.main.maxParticles];
     }
 
     //public void WindStormAnim()
     //{
     //    WindStorm = GetComponent<ParticleSystem>();
     //    int num = WindStorm.GetParticles(particles);
-
-
     //}
 
     void Update()
     {
-        int num = WindStorm.GetParticles(particles);
+        int num = _WindStorm.GetParticles(particles);
 
-        particles[0].velocity = new Vector3(0, 0, 1) * 5;
-        particles[1].velocity = new Vector3(-0.3f, 0, 1) * 5;
-        particles[2].velocity = new Vector3(0.3f, 0, 1) * 5;
-        WindStorm.SetParticles(particles, num);
+        particles[0].velocity = new Vector3(0, 0, 1) * 10;
+        particles[1].velocity = new Vector3(-1f, 0, 1) * 10;
+        particles[2].velocity = new Vector3(1f, 0, 1) * 10;
+
+        _WindStorm.SetParticles(particles, num);
     }
 }

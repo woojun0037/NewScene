@@ -9,7 +9,7 @@ public class PlayerSkill : MonoBehaviour
 
     private Vector3 mousePos;
     [Header("WindSkill")]
-    windStorm windskill;
+    WindStorm windskill;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
