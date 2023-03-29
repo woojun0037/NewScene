@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
     void DieMonster()
     {
         if (curHearth < 1)
@@ -120,4 +121,5 @@ public class Enemy : MonoBehaviour
             Debug.Log("hit to Player");
         }
     }
+
 }

@@ -20,10 +20,6 @@ public class BlizzardSpawner : MonoBehaviour
     private bool isDead = false;
     public float spawnIntervalTimer;
 
-    
-
-    
-
     public void RainDrop()
     {
         if (!isDead)
