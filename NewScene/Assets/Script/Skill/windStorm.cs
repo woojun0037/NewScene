@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class windStorm : MonoBehaviour
 {
-    
     ParticleSystem WindStorm;
     ParticleSystem.Particle[] particles;
     
@@ -26,7 +25,7 @@ public class windStorm : MonoBehaviour
     {
         int num = WindStorm.GetParticles(particles);
 
-        particles[0].velocity = new Vector3(0, 0, 1f) * 5;
+        particles[0].velocity = new Vector3(0, 0, 1) * 5;
         particles[1].velocity = new Vector3(-0.3f, 0, 1) * 5;
         particles[2].velocity = new Vector3(0.3f, 0, 1) * 5;
         WindStorm.SetParticles(particles, num);
