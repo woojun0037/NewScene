@@ -25,8 +25,8 @@ public class WindStorm : MonoBehaviour
         int num = _WindStorm.GetParticles(particles);
 
         particles[0].velocity = new Vector3(0, 0, 1) * 10;
-        particles[1].velocity = new Vector3(-1f, 0, 1) * 10;
-        particles[2].velocity = new Vector3(1f, 0, 1) * 10;
+        particles[1].velocity = new Vector3(-2f, 0, 1) * 10;
+        particles[2].velocity = new Vector3(2f, 0, 1) * 10;
 
         _WindStorm.SetParticles(particles, num);
     }

@@ -35,6 +35,7 @@ public class Main_Player : MonoBehaviour
     public float addAttackSpeed;
 
     Queue<int> inputBufferQ = new Queue<int>();
+    Queue<int> skillBufferQ = new Queue<int>();
 
     void Update()
     {
@@ -51,6 +52,7 @@ public class Main_Player : MonoBehaviour
                 {
                     inputBufferQ.Enqueue(0);
                 }
+
                 if (Anim.GetBool("isAttack0_to_1") == false && inputBufferQ.Count > 0)
                 {
                     Anim.SetBool("isAttack0_to_1", true);
@@ -106,9 +108,11 @@ public class Main_Player : MonoBehaviour
         Skill_E();
         Skill_F();
         Skill_R();
+
         Tafoon();
         Frozen();
         Thunder();
+
         Anim.SetFloat("AttackSpeed", AttackSpeed * addAttackSpeed);
     }
 
@@ -197,7 +201,7 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             Anim.SetTrigger("Skill");
-            E_skillCheck = true;
+            skillBufferQ.Enqueue(0);
             WindSkillUI.windGauge += Time.deltaTime;
         }
     }
@@ -207,7 +211,7 @@ public class Main_Player : MonoBehaviour
     { 
         if (Input.GetKey(KeyCode.R))
         {
-            R_skillCheck = true;
+            skillBufferQ.Enqueue(0);
             CloudSkillUI.cloudGauge += Time.deltaTime;
         }
     }
@@ -216,7 +220,7 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            F_skillCheck = true;
+            skillBufferQ.Enqueue(0);
             RainSkillUI.rainGauge += Time.deltaTime;
         }
     }
