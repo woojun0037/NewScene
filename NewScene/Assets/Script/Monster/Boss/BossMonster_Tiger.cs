@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossMonster_Tiger : MonoBehaviour
 {
-    
+    //Ch
     public SkinnedMeshRenderer mat;
     public GameObject MonsterObject; //몬스터 부모 받아옴
     public GameObject targetPosition; //playerposition
@@ -330,6 +330,9 @@ public class BossMonster_Tiger : MonoBehaviour
 
         if (!rushfirst)  //처음 플레이어 위치 잡아줌
         {
+            Vector3 spawn0 = targettransform.position;
+            spawn0.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리
+            transform.LookAt(spawn0);
             animator.SetBool("isChargeattack_Set", true);
             Rush_Target_Vector3 = transform.position; //값 안주면 0.0.0로 이동해서 이거 줌.. //시작위치
             // Rush_Target_Vector3 = targettransform.position;
@@ -342,7 +345,7 @@ public class BossMonster_Tiger : MonoBehaviour
         //캐릭터 보면서 대쉬
         Vector3 spawn1 = targettransform.position;
         spawn1.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리
-        transform.LookAt(spawn1);
+       // transform.LookAt(spawn1);
 
 
         if (!isrush) //isrush = false 시 랜덤값 변경
@@ -378,7 +381,8 @@ public class BossMonster_Tiger : MonoBehaviour
                     StartCoroutine(BackIdle(0));
                     //animator.SetBool("isChargeattack_Go", false);
                     Rush_Target_Vector3 = spawn;
-                    if (transform.position.z > spawn1.z)
+                    transform.LookAt(spawn);
+                    if (transform.position.z > spawn.z)
                     {
                         n = -1;
                     }
