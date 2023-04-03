@@ -2474,7 +2474,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &115793828
 MonoBehaviour:
@@ -43493,8 +43493,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148356489244}
-  m_LocalRotation: {x: -0, y: -0.7701487, z: -0, w: 0.6378645}
-  m_LocalPosition: {x: -2.5, y: 2.001, z: -0.35}
+  m_LocalRotation: {x: -0, y: -0.7306617, z: -0, w: 0.68273973}
+  m_LocalPosition: {x: -2.49, y: 2.017, z: 0.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43505,7 +43505,7 @@ Transform:
   - {fileID: 540164187}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: -100.734, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -93.884, z: 0}
 --- !u!4 &543450652451067527
 Transform:
   m_ObjectHideFlags: 0
@@ -48567,6 +48567,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
+      propertyPath: prewarm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: cullingMode
       value: 1
       objectReference: {fileID: 0}
@@ -48600,7 +48604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: moveWithTransform
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: ColorModule.enabled
@@ -48920,11 +48924,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: startDelay.maxCurve.m_Curve.Array.data[0].value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: startDelay.maxCurve.m_Curve.Array.data[1].value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7231915265385764022, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
       propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
