@@ -35,13 +35,13 @@ public class BlizzardSpawner : MonoBehaviour
 
             //obj.GetComponent<Rigidbody>().AddForce(forceDirection * spawnForce, ForceMode.VelocityChange);
 
-            Destroy(obj, destroyDelay);
+            //Destroy(obj, destroyDelay);
 
-            if (amount <= 0)
-            {
-                isDead = true;
-                Destroy(gameObject, destroyDelay);
-            }
+            //if (amount <= 0)
+            //{
+            //    isDead = true;
+            //    Destroy(gameObject, destroyDelay);
+            //}
         }
     }
 }

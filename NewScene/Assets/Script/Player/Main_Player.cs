@@ -19,17 +19,18 @@ public class Main_Player : MonoBehaviour
     private Vector3 player_Move_Input;
     private Vector3 heading;
 
+    private bool isMove = false;
+
     public bool E_skillCheck;
     public bool R_skillCheck;
     public bool F_skillCheck;
 
-    bool isMove = false;
-    bool isDelay;
     public bool isAttack = false;
     public bool attackInputOn;
 
     public int damage;
     public int HP;
+
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
@@ -63,7 +64,7 @@ public class Main_Player : MonoBehaviour
                 if (attackInputOn)
                 {
                     inputBufferQ.Enqueue(0);
-                    HitCheck_true_1();
+
                 }
                 Anim.SetBool("isAttack0_to_1", false);
                 if (Anim.GetBool("isAttack1_to_2") == false && inputBufferQ.Count > 0)
@@ -76,7 +77,7 @@ public class Main_Player : MonoBehaviour
                 if (attackInputOn)
                 {
                     inputBufferQ.Enqueue(0);
-                    HitCheck_true_2();
+                    
                 }
                 Anim.SetBool("isAttack1_to_2", false);
                 if (Anim.GetBool("isAttack2_to_3") == false && inputBufferQ.Count > 0)
@@ -86,7 +87,7 @@ public class Main_Player : MonoBehaviour
                 }
                 break;
             case "ATKmotion3":
-                HitCheck_true_3();
+                
                 Anim.SetBool("isAttack0_to_1", false);
                 Anim.SetBool("isAttack1_to_2", false);
                 Anim.SetBool("isAttack2_to_3", false);
@@ -108,18 +109,11 @@ public class Main_Player : MonoBehaviour
         Skill_E();
         Skill_F();
         Skill_R();
-
-        Tafoon();
-        Frozen();
-        Thunder();
-
-        Anim.SetFloat("AttackSpeed", AttackSpeed * addAttackSpeed);
     }
 
     void FixedUpdate()
     {
         Move();
-        Dash();
         CalTargetPos();
         AnimationBoolCheck();
     }
@@ -130,6 +124,7 @@ public class Main_Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            mousePos.z = Camera.main.transform.position.z;
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
@@ -182,19 +177,6 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    private void Dash()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (isDelay == false)
-            {
-                isMove = true;
-                transform.position = this.transform.position + new Vector3(0, 0, 1) * Time.deltaTime;
-                StartCoroutine("DashCool");
-                isDelay = true;
-            }
-        }
-    }
 
     public void Skill_E()
     {
@@ -203,6 +185,7 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("Skill");
             skillBufferQ.Enqueue(0);
             WindSkillUI.windGauge += Time.deltaTime;
+            E_skillCheck = true;
         }
     }
 
@@ -213,6 +196,7 @@ public class Main_Player : MonoBehaviour
         {
             skillBufferQ.Enqueue(0);
             CloudSkillUI.cloudGauge += Time.deltaTime;
+            R_skillCheck = true;
         }
     }
 
@@ -222,88 +206,15 @@ public class Main_Player : MonoBehaviour
         {
             skillBufferQ.Enqueue(0);
             RainSkillUI.rainGauge += Time.deltaTime;
+            F_skillCheck = true;
         }
     }
 
-    public void Tafoon()//태풍 스킬
-    {
-        if (E_skillCheck == true && R_skillCheck == true)
-        {
-            addAttackSpeed = 3f;
-            E_skillCheck = false;
-            R_skillCheck = false;
-
-            if(E_skillCheck == false || R_skillCheck == false)
-            {
-                addAttackSpeed = 1f;
-            }
-        }
-    }
-
-    public void Frozen()//얼음 스킬
-    {
-        if(E_skillCheck == true && F_skillCheck)
-        {
-           
-        }
-    }
-
-    public void Thunder()//번게 스킬
-    {
-        if(R_skillCheck == true && F_skillCheck == true)
-        {
-
-        }
-    }
-
-    IEnumerator DashCool()
-    {
-        yield return new WaitForSeconds(0.5f);
-        isDelay = false;
-    }
 
     private void AnimationBoolCheck()
     {
         Anim.SetBool("isMove", isMove);
     }
-
-
-    void HitCheck_true_1()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
-    void HitCheck_true_2()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
-    void HitCheck_true_3()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
 }
 
 

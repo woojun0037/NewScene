@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0.096728854, g: 0.21785411, b: 0.36861116, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2468,7 +2468,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148356489244}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -45528,7 +45528,6 @@ GameObject:
   - component: {fileID: 7021325087548018601}
   - component: {fileID: 3766086641002480894}
   - component: {fileID: 7021325087548018603}
-  - component: {fileID: 7021325087548018604}
   m_Layer: 0
   m_Name: Gangrim
   m_TagString: Untagged
@@ -47736,8 +47735,8 @@ MonoBehaviour:
   RainSkillTime: 3
   RainSkillCool: 1
   maxAbilityDistance: 5
-  RainSkillCheck: 0
   isTest: 0
+  RainSkillCheck: 0
 --- !u!1 &5892388282118999773
 GameObject:
   m_ObjectHideFlags: 0
@@ -48402,20 +48401,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &7021325087548018604
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3007066315664252065}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 3
-  m_Direction: 2
-  m_Center: {x: -0.18, y: 0, z: 0}
 --- !u!4 &7024483453567142812
 Transform:
   m_ObjectHideFlags: 0

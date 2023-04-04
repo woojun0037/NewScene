@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8697210428755381680}
   - component: {fileID: 9186266256291326822}
   - component: {fileID: 5020480281798446956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FlyingObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ SphereCollider:
   m_GameObject: {fileID: 367779128467859420}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -3888,7 +3888,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 2147483647
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
