@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossMonster_Tiger : MonoBehaviour
 {
-    
+    //Ch
     public SkinnedMeshRenderer mat;
     public GameObject MonsterObject; //몬스터 부모 받아옴
     public GameObject targetPosition; //playerposition
@@ -27,12 +27,19 @@ public class BossMonster_Tiger : MonoBehaviour
     //타이머
     float t = 0; //타이머
     float rush_t = 0; //타이머
-    float time = 0; float attacktime = 0;
+    float time = 0;
+    [SerializeField]
+    float attacktime = 0;
     int i = 0;
     int n = 1;
     int e = 0;
     float timer = 0;
     bool skill1_ = false;
+
+    //패턴 타이머 - 이 시간동안은 근접공격 불가, 움직이는거 불가
+    float patterntimer;
+    //패턴 타이머 후 딜레이 시간.. 0이면 패턴 후 바로 다음 패턴
+    float patterndelaytimer;
 
     public float MonsterYPosition = 2f; //y값 안주니까 땅에 박힘;; //y 값 고정용 회전X
     float MaxRushCount;     //최대 돌진 갯수 2~3 랜덤 받음
@@ -88,22 +95,31 @@ public class BossMonster_Tiger : MonoBehaviour
         targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
         targettransform = GameObject.FindWithTag("Main_gangrim").transform;
         animator = GetComponent<Animator>();
+        animator.SetBool("isIdle", true);
     }
 
     void Update()
     {
+        patterntimer += Time.deltaTime;
+
         //몬스터 이동
         monsterMove();
 
         //돌진 공격 조건 //update 동안 계속 실행되어야됨(돌진이라)
         if (pattern1_rush)
         {
+            Debug.Log("pattern1_rush");
             rush();
         }
         else
         {
             dorush = false;
             rushfirst = false;
+
+            animator.SetBool("isChargeattack_Set", false);
+            animator.SetBool("isChargeattack_Go", false);
+
+
         }
 
         if (ispattern2)
@@ -130,7 +146,7 @@ public class BossMonster_Tiger : MonoBehaviour
         if (!have_targeting) //돌 내려찍기 공격
         {
             targettrans_every = targettransform.position;
-            targettrans_every.y = 0f;
+            targettrans_every.y = MonsterYPosition;
             have_targeting = true;
         }
 
@@ -139,11 +155,13 @@ public class BossMonster_Tiger : MonoBehaviour
 
         if (!onetime)
         {
+            StopAllCoroutines();
+            animator.SetBool("isJumpAttack", false); //...
             random = UnityEngine.Random.Range(0, 3); // 0 1 2
             BossAttack(random);
             DontMove = true;
             StartCoroutine("Move_Time"); //$ 1 2 패턴에 필요
-            animator.SetBool("isAttack", false);
+            animator.SetBool("isWalk", false);
             onetime = true;
         }
         else
@@ -172,21 +190,25 @@ public class BossMonster_Tiger : MonoBehaviour
     {
         time += Time.deltaTime;
         attacktime += Time.deltaTime;
-
+        
         //일단 레이케스트 쏴서 플레이어랑 레이 닿으면 근접공격 아니면 보스공격패턴
         Vector3 spawn = targettransform.position;
         spawn.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리 
 
         Vector3 rayspawn = transform.position;
-        rayspawn.y = 0f; //레이 바닥에서 부터 쏘게만듬
+        rayspawn.y = MonsterYPosition; //레이 바닥에서 부터 쏘게만듬
 
         //현재는 플레이어를 쫒다가 레이케스트에 닿으면 할퀴기 공격 시작
         Debug.DrawRay(rayspawn, transform.forward * MaxDistance, Color.blue, 0.05f);
 
         if (Physics.Raycast(rayspawn, transform.forward, out hit, MaxDistance))
         {
-            animator.SetBool("isWalk", false);
-            StartAttack = true;
+         if(hit.collider.tag == "Main_gangrim")
+            {
+                animator.SetBool("isWalk", false);
+                StartAttack = true;
+            }
+
         }
         else
         {
@@ -207,7 +229,10 @@ public class BossMonster_Tiger : MonoBehaviour
             {
                 if (!FirstNearAttack) //이 조건문으로 몬스터 공격 1회씩
                 {
-                    animator.SetBool("isAttack", true);
+                    time = 0;
+                    StartCoroutine(BackIdle(2));
+
+                    //animator.SetBool("isAttack", true);
                     FirstNearAttack = true;
                     //데미지 주는 오브젝트 껐다켜기
                     //BossAttacker.SetActive(true);
@@ -216,7 +241,7 @@ public class BossMonster_Tiger : MonoBehaviour
             }
             else if (attacktime > 5f)
             {
-                animator.SetBool("isAttack", false);
+                //animator.SetBool("isAttack", false);
                 attacktime = 0;
                 FirstNearAttack = false;
             }
@@ -226,6 +251,7 @@ public class BossMonster_Tiger : MonoBehaviour
             //이 공격을 n초 동안 못하면
             if (time > BossPatternTime)
             {
+                //animator.SetBool("isAttack", false);
                 onetime = false;//조절필요 //보스패턴으로 넘어감
                 time = 0;
             }
@@ -262,7 +288,7 @@ public class BossMonster_Tiger : MonoBehaviour
             bosspattern = BossPattern.Pattern_2;
         }
 
-        //0 돌진공격 1 바닥 내려찍기 2 바위던지기 3 화살비(보류)
+        //0 돌진공격 1 바닥 내려찍기 2 바위던지기
         switch (bosspattern)
         {
             case BossPattern.Pattern_0:
@@ -277,7 +303,8 @@ public class BossMonster_Tiger : MonoBehaviour
 
                 FloorDown();
                 animator.SetBool("isWalk", false);
-                animator.SetBool("isJumpAttack", true);
+                //animator.SetBool("isJumpAttack", true);
+                Debug.Log("Pattern_1");
                 skill1_ = false;
 
 
@@ -290,7 +317,7 @@ public class BossMonster_Tiger : MonoBehaviour
                 break;
 
             default:
-
+                Debug.Log("????");
                 break;
 
         }
@@ -300,8 +327,13 @@ public class BossMonster_Tiger : MonoBehaviour
 
     void rush() //돌진 공격 dorush = false; //0번째 패턴에 사용
     {
+
         if (!rushfirst)  //처음 플레이어 위치 잡아줌
         {
+            Vector3 spawn0 = targettransform.position;
+            spawn0.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리
+            transform.LookAt(spawn0);
+            animator.SetBool("isChargeattack_Set", true);
             Rush_Target_Vector3 = transform.position; //값 안주면 0.0.0로 이동해서 이거 줌.. //시작위치
             // Rush_Target_Vector3 = targettransform.position;
             rushfirst = true;
@@ -313,7 +345,8 @@ public class BossMonster_Tiger : MonoBehaviour
         //캐릭터 보면서 대쉬
         Vector3 spawn1 = targettransform.position;
         spawn1.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리
-        transform.LookAt(spawn1);
+       // transform.LookAt(spawn1);
+
 
         if (!isrush) //isrush = false 시 랜덤값 변경
         {
@@ -337,14 +370,19 @@ public class BossMonster_Tiger : MonoBehaviour
 
             if (i <= MaxRushCount) //연속 돌진횟수
             {
+                //계속 돌아감
+                //animator.SetBool("isChargeattack_Set", true);
                 Vector3 spawn = targettransform.position;
                 spawn.y = MonsterYPosition; //몬스터 바닥에 안박히는 자리
 
 
                 if (rush_t > 2f) //길이 (머무는 시간 및 가는 길이)
                 {
+                    StartCoroutine(BackIdle(0));
+                    //animator.SetBool("isChargeattack_Go", false);
                     Rush_Target_Vector3 = spawn;
-                    if (transform.position.z > spawn1.z)
+                    transform.LookAt(spawn);
+                    if (transform.position.z > spawn.z)
                     {
                         n = -1;
                     }
@@ -359,13 +397,17 @@ public class BossMonster_Tiger : MonoBehaviour
                 }
 
                 transform.position = Vector3.MoveTowards(gameObject.transform.position, Rush_Target_Vector3, 30f * Time.deltaTime);//3번째 값 돌진 속도
-
+                //animator.SetBool("isChargeattack_Go", true);
             }
-            else
+            else //대쉬 종료
             {
+                animator.SetBool("isChargeattack_Set", false);
                 i = 0;
                 isrush = false; //
                 dorush = true; //false면 다시 돌진 가능
+
+                StopCoroutine(BackIdle(0));
+                animator.SetBool("isChargeattack_Go", false);
                 pattern1_rush = false;
             }
 
@@ -375,27 +417,34 @@ public class BossMonster_Tiger : MonoBehaviour
 
     void FloorDown() //바닥 내려찍기 //1번째 패턴
     {
-        animator.SetBool("isWalk", false);
+        StartCoroutine(BackIdle(1));
+        //animator.SetBool("isWalk", false);
 
         Vector3 spawn = targettrans_every;
         spawn.z = UnityEngine.Random.Range(2, 10) + targettrans_every.z;
+        spawn.y = MonsterYPosition;
 
         Vector3 spawn1 = targettrans_every;
         spawn1.z = UnityEngine.Random.Range(-2, -10) + targettrans_every.z;
+        spawn1.y = MonsterYPosition;
 
         Vector3 spawn2 = targettrans_every;
         spawn2.z = UnityEngine.Random.Range(4, 10) + targettrans_every.z;
         spawn2.x = UnityEngine.Random.Range(-4, -10) + targettrans_every.x;
+        spawn2.y = MonsterYPosition;
 
         Vector3 spawn3 = targettrans_every;
         spawn3.x = UnityEngine.Random.Range(2, 10) + targettrans_every.x;
+        spawn3.y = MonsterYPosition;
 
         Vector3 spawn4 = targettrans_every;
         spawn4.x = UnityEngine.Random.Range(-2, -10) + +targettrans_every.x;
+        spawn4.y = MonsterYPosition;
 
         if (!skill1_)
         {
-            animator.SetBool("isWalk", false);
+            //animator.SetBool("isWalk", false);
+            //animator.SetBool("isJumpAttack", false); //...
             //나중에 배열로 정리
             GameObject Skill1 = Instantiate(Boss_Skill_1, spawn, transform.rotation);
             GameObject Skill2 = Instantiate(Boss_Skill_1, spawn1, transform.rotation);
@@ -412,12 +461,13 @@ public class BossMonster_Tiger : MonoBehaviour
 
     void ThrowRock() //바위 던지기
     {
-        Vector3 spawn = transform.position;
-        spawn.y = 1f;
+        animator.SetBool("isWalk", false);
+        Vector3 spawn = targettransform.position;
+        spawn.y = MonsterYPosition;
 
         if (!skill2_)
         {
-            transform.LookAt(targettransform); //그 방향 보고 던짐 + 방향 고정
+            transform.LookAt(spawn); //그 방향 보고 던짐 + 방향 고정
             skill2_ = true;
             StartCoroutine("Rook_Time");
             Rigidbody ThrowRockrigid = Instantiate(Boss_Skill_2, transform.position, transform.rotation);
@@ -503,4 +553,39 @@ public class BossMonster_Tiger : MonoBehaviour
         skill2_ = false;
         yield return new WaitForSeconds(1f);
     }
+
+
+    IEnumerator BackIdle(int i)
+    {
+        if(i == 0) 
+        {
+            Debug.Log("BackIdle -- 0");
+
+            //yield return new WaitForSeconds(0.5f);
+            animator.SetBool("isChargeattack_Go", true);
+            yield return new WaitForSeconds(1.2f);
+            animator.SetBool("isChargeattack_Go", false);
+
+            //animator.SetBool("isChargeattack_Set", false);
+
+        }
+        else if (i == 1)//패턴 1 애니메이션
+        {
+            Debug.Log("BackIdle");
+            animator.SetBool("isJumpAttack", true);
+            yield return new WaitForSeconds(2.3f);
+            animator.SetBool("isJumpAttack", false);
+        }
+        else if (i == 2)
+        {
+            Debug.Log("BackIdle");
+            animator.SetBool("isAttack", true);
+            yield return new WaitForSeconds(1.6f);
+            animator.SetBool("isAttack", false);
+        }
+        //isJumpAttack
+        //isAttack
+    }
+
+
 }
