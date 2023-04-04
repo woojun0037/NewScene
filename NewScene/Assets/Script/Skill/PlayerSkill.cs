@@ -60,7 +60,7 @@ public class PlayerSkill : MonoBehaviour
         if(isSkillUse)
         {
            
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity,7))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject != this.gameObject)
                 {
@@ -76,7 +76,7 @@ public class PlayerSkill : MonoBehaviour
             var newHitPos = transform.position + hitPosDir * distance;
             RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z) + hitPosDir * distance;
             ability2Canvas.transform.position = (newHitPos);
-            ability2Canvas.transform.eulerAngles = Vector3.zero;
+            //ability2Canvas.transform.eulerAngles = Vector3.zero;
         }
     }
 

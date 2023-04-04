@@ -24,24 +24,9 @@ public class BlizzardSpawner : MonoBehaviour
     {
         if (!isDead)
         {
-            amount -= 1;
-
-            //var spawnPosition = transform.position + new Vector3(Random.insideUnitCircle.x * spawnRaius, 0,
-            //                                                     Random.insideUnitCircle.y * spawnRaius) + spawnOffset;
-
             var obj = Instantiate(FlyingObject, RainPos, Quaternion.identity);
 
             var forceDirection = transform.position - (transform.position + spawnOffset);
-
-            //obj.GetComponent<Rigidbody>().AddForce(forceDirection * spawnForce, ForceMode.VelocityChange);
-
-            //Destroy(obj, destroyDelay);
-
-            //if (amount <= 0)
-            //{
-            //    isDead = true;
-            //    Destroy(gameObject, destroyDelay);
-            //}
         }
     }
 }

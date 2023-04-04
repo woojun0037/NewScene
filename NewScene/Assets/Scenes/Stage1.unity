@@ -2474,7 +2474,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &115793828
 MonoBehaviour:
@@ -11999,14 +11999,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624235367}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.5, z: 0.15}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.01}
+  m_LocalScale: {x: 0.09961801, y: 0.33206, z: 0.09961801}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1361499687}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -47611,6 +47611,7 @@ MonoBehaviour:
   Boss_Skill_1: {fileID: 1457255269688624759, guid: 6ff6575d4ce964e4bad47054b4f29e4b, type: 3}
   Boss_Skill_2: {fileID: 5585128518484842410, guid: 4f89b5ab805d76049ba34039413511c7, type: 3}
   random: 0
+  attacktime: 0
   MonsterYPosition: 2
   BossHp: 1000
   Boss_2Page_Pattern: 0
