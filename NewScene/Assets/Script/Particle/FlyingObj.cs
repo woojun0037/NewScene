@@ -8,69 +8,52 @@ public class FlyingObj : MonoBehaviour
     public string[] tagsToCheck;
     public float impactRaidus;
     public float destroyDelay;
-    
+    public float damage;
     private GameObject ImpactFX;
 
     void Start()
     {
         ImpactFX = this.gameObject;
-        
     }
 
     private void Update()
     {
-        
+        Destroy(ImpactFX, 2f);
     }
+
     private void OnParticleCollision(GameObject other)
     {
-        if (tagsToCheck.Contains(other.tag))
+        if (other.tag == "Monster")
         {
-            Collider[] objectsInRnage = Physics.OverlapSphere(transform.position, impactRaidus);
-
-            foreach (Collider col in objectsInRnage)
-            {
-                Rigidbody Monster = col.GetComponent<Rigidbody>();
-
-                if (Monster != null)
-                {
-
-                    Destroy(Monster.gameObject);
-                }
-            }
-
-            ImpactFX.SetActive(true);
-
-            ImpactFX.transform.SetParent(null);
-
-            Destroy(ImpactFX, destroyDelay);
-
-            Destroy(gameObject);
+            Enemy Eny = other.GetComponent<Enemy>();
+            Eny.curHearth -= damage;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (tagsToCheck.Contains(other.tag))
-        {
-            Collider[] objectsInRnage = Physics.OverlapSphere(transform.position, impactRaidus);
 
-            foreach (Collider col in objectsInRnage)
-            {
-                Rigidbody Monster = col.GetComponent<Rigidbody>();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (tagsToCheck.Contains(other.tag))
+    //    {
+    //        Collider[] objectsInRnage = Physics.OverlapSphere(transform.position, impactRaidus);
 
-                if (Monster != null)
-                {
+    //        foreach (Collider col in objectsInRnage)
+    //        {
+    //            Rigidbody Monster = col.GetComponent<Rigidbody>();
 
-                    Destroy(Monster.gameObject);
-                }
-            }
+    //            if (Monster != null)
+    //            {
 
-            ImpactFX.SetActive(true);
+    //                Destroy(Monster.gameObject);
+    //            }
+    //        }
 
-            ImpactFX.transform.SetParent(null);
+    //        ImpactFX.SetActive(true);
 
-            Destroy(ImpactFX, destroyDelay);
+    //        ImpactFX.transform.SetParent(null);
 
-            Destroy(gameObject); 
-        }
-    }
+    //        Destroy(ImpactFX, destroyDelay);
+
+    //        Destroy(gameObject); 
+    //    }
+    //}
 }

@@ -17,6 +17,7 @@ public class PlayerSkill : MonoBehaviour
 
     [Header("CloudSkill")]
     public static PlayerSkill Instance;
+
     public TrailRenderer trailEffect;
     public Transform CloudPos;
     public GameObject Cloudprab;
@@ -43,7 +44,7 @@ public class PlayerSkill : MonoBehaviour
     {
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
-        
+        Instance = this;
     }
 
     void Update()
@@ -74,9 +75,8 @@ public class PlayerSkill : MonoBehaviour
             distance = Mathf.Min(distance, maxAbilityDistance);
 
             var newHitPos = transform.position + hitPosDir * distance;
-            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z) + hitPosDir * distance;
+            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y, transform.position.z) + hitPosDir * distance;
             ability2Canvas.transform.position = (newHitPos);
-            //ability2Canvas.transform.eulerAngles = Vector3.zero;
         }
     }
 

@@ -11,19 +11,25 @@ public class Main_Player : MonoBehaviour
     [SerializeField] Animator Anim;
     [SerializeField] Collider weaponCollider;
 
+    private HitScript hit;
+
     [SerializeField] float RotateSpeed = 10f;
     [SerializeField] float MoveSpeed = 1f;
     [SerializeField] float DashSpeed = 5f;
-
+    [SerializeField] GameObject currentATKEffect;
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
 
     private bool isMove = false;
 
+    public GameObject[] AtkEffect;
+
     public bool E_skillCheck;
     public bool R_skillCheck;
     public bool F_skillCheck;
+
+    public bool[] isClicks;
 
     public bool isAttack = false;
     public bool attackInputOn;
@@ -36,74 +42,30 @@ public class Main_Player : MonoBehaviour
     public float addAttackSpeed;
 
     Queue<int> inputBufferQ = new Queue<int>();
-    Queue<int> skillBufferQ = new Queue<int>();
+
+
+    private void Awake()
+    {
+        hit = weaponCollider.gameObject.GetComponent<HitScript>();
+    }
 
     void Update()
     {
-        attackInputOn = Input.GetMouseButtonDown(0);
-
-        AnimatorClipInfo[] clips = Anim.GetCurrentAnimatorClipInfo(0);
-
-        string currAnimName = clips[0].clip.name;
-
-        switch (currAnimName)
-        {
-            case "Idle":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-                }
-
-                if (Anim.GetBool("isAttack0_to_1") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack0_to_1", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion1":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-
-                }
-                Anim.SetBool("isAttack0_to_1", false);
-                if (Anim.GetBool("isAttack1_to_2") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack1_to_2", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion2":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-                    
-                }
-                Anim.SetBool("isAttack1_to_2", false);
-                if (Anim.GetBool("isAttack2_to_3") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack2_to_3", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion3":
-                
-                Anim.SetBool("isAttack0_to_1", false);
-                Anim.SetBool("isAttack1_to_2", false);
-                Anim.SetBool("isAttack2_to_3", false);
-
-                inputBufferQ.Clear();
-                break;
-        }
-
-        if (inputBufferQ.Count > 0)
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             isAttack = true;
-            Anim.SetBool("isAttack", isAttack);
+            
+            Anim.SetTrigger("isAttack_1");
         }
-        else if (inputBufferQ.Count <= 0)
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && !isClicks[2])
         {
-            isAttack = false;
+            isAttack = true;
+            Anim.SetTrigger("isAttack_2");
+        }
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && isClicks[2])
+        {
+            isAttack = true;
+            Anim.SetTrigger("isAttack_3");
         }
 
         Skill_E();
@@ -111,11 +73,24 @@ public class Main_Player : MonoBehaviour
         Skill_R();
     }
 
+    public void SetAnimCheck(int count)
+    {
+        isClicks[count] = true;
+        
+    }
+    
+    public void GetAnimCheck()
+    {
+        isAttack = false;
+        isClicks[0] = true;
+        isClicks[1] = false;
+        isClicks[2] = false;
+    }
+
     void FixedUpdate()
     {
         Move();
         CalTargetPos();
-        AnimationBoolCheck();
     }
 
     private void CalTargetPos()
@@ -148,6 +123,21 @@ public class Main_Player : MonoBehaviour
         //사망 애니메이션 추가
     }
 
+    public void ATK_Effect_On(int on_count)
+    {
+        if (currentATKEffect == null)
+        {
+            currentATKEffect = Instantiate(AtkEffect[on_count], transform.position, AtkEffect[on_count].transform.rotation);
+        }
+        
+    }
+
+    public void ATK_Effect_Off()
+    {
+        Destroy(currentATKEffect);
+        
+    }
+
     private void Move()
     {
         // 입력값을 Vector3에 저장
@@ -164,6 +154,7 @@ public class Main_Player : MonoBehaviour
         if (player_Move_Input != Vector3.zero && !isAttack)
         {
             isMove = true;
+            AnimationBoolCheck();
             float angle = Mathf.Atan2(heading.z, heading.x) * Mathf.Rad2Deg * -2;
 
             transform.rotation = Quaternion.Lerp(transform.rotation,
@@ -174,6 +165,7 @@ public class Main_Player : MonoBehaviour
         else
         {
             isMove = false;
+            AnimationBoolCheck();
         }
     }
 
@@ -183,7 +175,6 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKey(KeyCode.E))
         {
             Anim.SetTrigger("Skill");
-            skillBufferQ.Enqueue(0);
             WindSkillUI.windGauge += Time.deltaTime;
             E_skillCheck = true;
         }
@@ -191,10 +182,9 @@ public class Main_Player : MonoBehaviour
 
 
     public void Skill_R()
-    { 
+    {
         if (Input.GetKey(KeyCode.R))
         {
-            skillBufferQ.Enqueue(0);
             CloudSkillUI.cloudGauge += Time.deltaTime;
             R_skillCheck = true;
         }
@@ -204,7 +194,7 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-            skillBufferQ.Enqueue(0);
+
             RainSkillUI.rainGauge += Time.deltaTime;
             F_skillCheck = true;
         }

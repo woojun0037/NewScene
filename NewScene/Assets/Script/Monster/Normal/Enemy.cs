@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int maxHearth;
-    public int curHearth;
+    public float curHearth;
   
     public int damageToGive = 1;
 
@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour
     BoxCollider boxCollier;
     Main_Player player;
 
+    private GameObject damageEffect;
+
     [SerializeField] GameObject targetPosition;
     [SerializeField] Transform targetTransform;
 
@@ -34,6 +36,7 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         boxCollier = GetComponent<BoxCollider>();
+
     }
 
     void Start()
@@ -95,26 +98,35 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon" && !isHit)
+        if (other.tag == "Weapon")
         {
-            isHit = true;
-            Vector3 reactVec = transform.position - other.transform.position;
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.back;
-            rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
-
-            HitScript hit;
-            hit = other.GetComponent<HitScript>();
-
-            Gauge.sGauge += hit.damage;
-            curHearth -= hit.damage;
             
-            Debug.Log("Weapon: " + curHearth);
+            Main_Player player = other.GetComponent<HitScript>().Player;
+            if(player.isAttack)
+            {
+                if (damageEffect == null)
+                    damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                else
+                    damageEffect.transform.position = transform.position;
+                damageEffect.SetActive(false);
+                damageEffect.SetActive(true);
+
+                isHit = true;
+                Vector3 reactVec = transform.position - other.transform.position;
+                reactVec = reactVec.normalized;
+                reactVec += Vector3.back;
+                rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
+
+                HitScript hit;
+                hit = other.GetComponent<HitScript>();
+
+                Gauge.sGauge += hit.damage;
+                curHearth -= hit.damage;
+
+                Debug.Log("Weapon: " + curHearth);
+            }
         }
-        else
-        {
-            isHit = false;
-        }
+
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
