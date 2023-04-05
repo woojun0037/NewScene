@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1396382567102605109}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.064886, y: 2.064886, z: 2.064886}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -5167,7 +5167,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.84
+      scalar: 7
       minScalar: 2.5
       maxCurve:
         serializedVersion: 2
@@ -9800,7 +9800,7 @@ Transform:
   m_GameObject: {fileID: 6203414882084728500}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.064886, y: 2.064886, z: 2.064886}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -14682,7 +14682,7 @@ Transform:
   m_GameObject: {fileID: 8529088288741600193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.8259545, y: 0.8259545, z: 0.8259545}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -19832,7 +19832,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5.48
+      scalar: 8
       minScalar: 2.5
       maxCurve:
         serializedVersion: 2
@@ -24448,6 +24448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8529088288966317369}
   - component: {fileID: 6309165318888019762}
+  - component: {fileID: 8424743745097922830}
   m_Layer: 0
   m_Name: StarRays
   m_TagString: Untagged
@@ -24488,6 +24489,20 @@ MonoBehaviour:
   impactRaidus: 1
   destroyDelay: 1
   damage: 1
+--- !u!136 &8424743745097922830
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529088288966317368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5.33
+  m_Height: 5.0865936
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.46, z: 0}
 --- !u!1 &8529088289036397602
 GameObject:
   m_ObjectHideFlags: 0
@@ -24515,7 +24530,7 @@ Transform:
   m_GameObject: {fileID: 8529088289036397602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.536613, y: 2.536613, z: 2.536613}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -29424,7 +29439,7 @@ Transform:
   m_GameObject: {fileID: 8529088289074652707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -3.57}
-  m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
+  m_LocalScale: {x: 1.280085, y: 1.280085, z: 1.280085}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -34306,7 +34321,7 @@ Transform:
   m_GameObject: {fileID: 8529088289311382726}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.064886, y: 2.064886, z: 2.064886}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -39237,6 +39252,8 @@ GameObject:
   - component: {fileID: 8529088290604995119}
   - component: {fileID: 8529088290604995117}
   - component: {fileID: 8529088290604995116}
+  - component: {fileID: 3989389388287136074}
+  - component: {fileID: 3318083700770588205}
   m_Layer: 0
   m_Name: Explosion_Control
   m_TagString: Untagged
@@ -44108,3 +44125,33 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!136 &3989389388287136074
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529088290604995118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 5.33
+  m_Height: 0.000019999998
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0.000000029802322}
+--- !u!114 &3318083700770588205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8529088290604995118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6a9b8f2b5711e47b308cff3046ee87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToCheck: []
+  impactRaidus: 0
+  destroyDelay: 0
+  damage: 0

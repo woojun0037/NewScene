@@ -2492,7 +2492,7 @@ MonoBehaviour:
   Anim: {fileID: 5866666020565131484}
   weaponCollider: {fileID: 3946056032647828522}
   RotateSpeed: 10
-  MoveSpeed: 10
+  MoveSpeed: 6
   DashSpeed: 5
   currentATKEffect: {fileID: 0}
   AtkEffect:
@@ -2506,7 +2506,7 @@ MonoBehaviour:
   isClicks: 000000
   isAttack: 0
   attackInputOn: 0
-  damage: 10
+  damage: 1
   HP: 100
   MaxDistance: 1.5
   AttackSpeed: 0.5
@@ -13524,7 +13524,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 697086028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.0851135, y: 4.454046, z: 2.6560698}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45868,7 +45868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHearth: 15
+  maxHearth: 0
   curHearth: 15
   damageToGive: 0
   MaxDistance: 1
