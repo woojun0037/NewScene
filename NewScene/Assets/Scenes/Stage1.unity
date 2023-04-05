@@ -2489,12 +2489,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
-  Anim: {fileID: 5866666020565131484}
   weaponCollider: {fileID: 3946056032647828522}
-  RotateSpeed: 10
-  MoveSpeed: 6
-  DashSpeed: 5
   currentATKEffect: {fileID: 0}
+  RotateSpeed: 10
+  DashSpeed: 5
+  Anim: {fileID: 5866666020565131484}
   AtkEffect:
   - {fileID: 5036797310264405828, guid: a629c67ec384a4b468035435edffd9f6, type: 3}
   - {fileID: 4751119674105741691, guid: aeb40bf2987016c4d853c6c24ae29331, type: 3}
@@ -2508,6 +2507,7 @@ MonoBehaviour:
   attackInputOn: 0
   damage: 1
   HP: 100
+  MoveSpeed: 6
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 1
@@ -43988,6 +43988,7 @@ GameObject:
   - component: {fileID: 115793827}
   - component: {fileID: 115793826}
   - component: {fileID: 5866666020565131485}
+  - component: {fileID: 5866666020565131486}
   m_Layer: 0
   m_Name: Main_gangrim
   m_TagString: Main_gangrim
@@ -47746,6 +47747,19 @@ MonoBehaviour:
   maxAbilityDistance: 5
   isTest: 0
   RainSkillCheck: 0
+--- !u!114 &5866666020565131486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148356489244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91abc45f29fa08488303d5dc4bc3747, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedUp: 0
 --- !u!1 &5892388282118999773
 GameObject:
   m_ObjectHideFlags: 0

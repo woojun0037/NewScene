@@ -7,10 +7,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: Skill
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5974109919030713714}
   m_Solo: 0
@@ -305,27 +302,27 @@ AnimatorStateMachine:
     m_Position: {x: -380, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5891888231935729118}
-    m_Position: {x: 100, y: -140, z: 0}
+    m_Position: {x: -970, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3122463576567436612}
-    m_Position: {x: -730, y: 20, z: 0}
+    m_Position: {x: -970, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 564020386039549811}
-    m_Position: {x: -380, y: 20, z: 0}
+    m_Position: {x: -660, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -68393397011393700}
-    m_Position: {x: -70, y: 20, z: 0}
+    m_Position: {x: -380, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4699640478697049936}
-    m_Position: {x: 100, y: -250, z: 0}
+    m_Position: {x: -970, y: -130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: -310, y: -280, z: 0}
-  m_EntryPosition: {x: -580, y: -210, z: 0}
-  m_ExitPosition: {x: -540, y: -290, z: 0}
+  m_AnyStatePosition: {x: -710, y: -320, z: 0}
+  m_EntryPosition: {x: -360, y: -210, z: 0}
+  m_ExitPosition: {x: -710, y: -270, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5974109919030713714}
 --- !u!1101 &-2672880170785397656
@@ -417,49 +414,61 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: DoSKILL_1
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: DoSKILL_2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Skill
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: AttackSpeed
+    m_Controller: {fileID: 0}
+  - m_Name: AttackSpeed_1
     m_Type: 1
-    m_DefaultFloat: 1
+    m_DefaultFloat: 1.2
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
+  - m_Name: AttackSpeed_2
+    m_Type: 1
+    m_DefaultFloat: 1.2
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: AttackSpeed_3
+    m_Type: 1
+    m_DefaultFloat: 1.2
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   - m_Name: isAttack_1
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isAttack_2
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: isAttack_3
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Player
