@@ -3013,7 +3013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &754566737
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3215,12 +3215,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
-  Anim: {fileID: 759782988}
   weaponCollider: {fileID: 1630479098}
-  RotateSpeed: 10
-  MoveSpeed: 10
-  DashSpeed: 5
   currentATKEffect: {fileID: 0}
+  RotateSpeed: 10
+  DashSpeed: 5
+  Anim: {fileID: 759782988}
   AtkEffect: []
   E_skillCheck: 0
   R_skillCheck: 0
@@ -3230,6 +3229,7 @@ MonoBehaviour:
   attackInputOn: 0
   damage: 10
   HP: 100
+  MoveSpeed: 10
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 0
@@ -7514,6 +7514,7 @@ MonoBehaviour:
   SetY: 2
   MaxDistance: 5
   chasespeed: 10
+  Distance: 0
   monsterhp: 10
 --- !u!95 &1708353438
 Animator:
@@ -9725,12 +9726,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
-  Anim: {fileID: 2123190462}
   weaponCollider: {fileID: 1133603489}
-  RotateSpeed: 10
-  MoveSpeed: 10
-  DashSpeed: 5
   currentATKEffect: {fileID: 0}
+  RotateSpeed: 10
+  DashSpeed: 5
+  Anim: {fileID: 2123190462}
   AtkEffect: []
   E_skillCheck: 0
   R_skillCheck: 0
@@ -9740,6 +9740,7 @@ MonoBehaviour:
   attackInputOn: 0
   damage: 10
   HP: 100
+  MoveSpeed: 10
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 0
@@ -9809,6 +9810,7 @@ MonoBehaviour:
   SetY: 2
   MaxDistance: 3
   chasespeed: 5
+  Distance: 0
   monsterhp: 10
 --- !u!95 &2140643780
 Animator:

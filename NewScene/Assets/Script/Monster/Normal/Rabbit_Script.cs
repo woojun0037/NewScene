@@ -18,7 +18,8 @@ public class Rabbit_Script : MonoBehaviour
     [SerializeField]
     float chasespeed;
     RaycastHit hit;
-
+    [SerializeField]
+    private float Distance;
     bool meetplayer;
 
     public float monsterhp;
@@ -34,7 +35,11 @@ public class Rabbit_Script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 rayspawn = transform.position;
+
+        Distance = Vector3.Distance(targettransform.transform.position, transform.position);
+    
+
+    Vector3 rayspawn = transform.position;
         rayspawn.y = SetY; //레이 바닥에서 부터 쏘게만듬
 
         Vector3 targety = targettransform.position;
@@ -47,16 +52,24 @@ public class Rabbit_Script : MonoBehaviour
         {
             if (hit.collider.tag == "Main_gangrim") //플레이어에게 레이 닿으면 정지하고 총알 공격
             {
-                Debug.Log("Main tag");
-                DontMove = true;
-                if (!isattack)
+                if(Distance > 1f)
                 {
-                    isattack = true;
-                    transform.LookAt(targety);
-                    animator.SetBool("Attack", true);
-                    StartCoroutine("attacker");
+                    Debug.Log("Main tag");
+                    DontMove = true;
+                    if (!isattack)
+                    {
+                        isattack = true;
+                        transform.LookAt(targety);
+                        animator.SetBool("Attack", true);
+                        StartCoroutine("attacker");
 
+                    }
                 }
+                else
+                {
+                   
+                }
+
             }
 
         }
@@ -67,10 +80,14 @@ public class Rabbit_Script : MonoBehaviour
 
         if (!DontMove)
         {
-            animator.SetBool("Idle", true);
+            if (Distance > 1f)
+            {
+                transform.LookAt(targety);
+            }
+                animator.SetBool("Idle", true);
             animator.SetBool("Move", true);
             //agent.destination = targety;
-            transform.LookAt(targety);
+
             transform.position = Vector3.MoveTowards(gameObject.transform.position, targety, chasespeed * Time.deltaTime);//3번째 값 돌진 속도
         }
         else
