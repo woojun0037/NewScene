@@ -36,7 +36,7 @@ public class Senbi_Bullet_Color : MonoBehaviour
             c.a = f;
             bulletcolor.material.color = c;
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.07f);
         }
     }
 

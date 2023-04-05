@@ -106,9 +106,12 @@ public class Seonbi_Script : MonoBehaviour
 
     IEnumerator attacker()
     {
+        Vector3 target_ = transform.position;
+        target_.y = SetY+0.5f;
+
         animator.SetBool("Attack", true);
-        yield return new WaitForSeconds(1.0f);
-        Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, transform.position, transform.rotation);
+        yield return new WaitForSeconds(0.9f);
+        Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
         yield return new WaitForSeconds(1.3f);
         animator.SetBool("Attack", false);
         yield return new WaitForSeconds(0.7f);
