@@ -69,7 +69,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0
+        functionName: GetAnimCheck
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -123,13 +130,13 @@ ModelImporter:
     serializedVersion: 3
     human: []
     skeleton:
-    - name: idle002(Clone)
+    - name: Main_idle(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: -0.03240177, y: 0.028920012, z: 0.0011876799, w: 0.99905574}
       scale: {x: 1, y: 1, z: 1}
     - name: Root
-      parentName: idle002(Clone)
+      parentName: Main_idle(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -2.6934462e-25, y: 4.32978e-17, z: -0.7071067, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}

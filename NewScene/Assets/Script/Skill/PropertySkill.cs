@@ -6,6 +6,11 @@ public class  PropertySkill : MonoBehaviour
 {
     Main_Player SkillUse;
 
+    private void Start()
+    {
+        SkillUse = GetComponent<Main_Player>();
+    }
+
     public void TafoonSkill()
     {
         if(SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
@@ -16,7 +21,7 @@ public class  PropertySkill : MonoBehaviour
 
     public void IceSkill()
     {
-
+        //if(SkillUse.)
     }
 
     public void Thunder()
