@@ -7,7 +7,7 @@ public class WindSkillUI : MonoBehaviour
 {
     Image windFill;
 
-    float windSkillminGauge = 0.1f;
+    //float windSkillminGauge = 0.1f;
     float windSkillmaxGauge = 7f;
 
     public static float windGauge;

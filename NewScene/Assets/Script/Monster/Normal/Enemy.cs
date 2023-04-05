@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
     public float KnockBakcTime;
 
     bool StartAttack;
-    bool isHit;
 
     RaycastHit hit;
 
@@ -111,7 +110,6 @@ public class Enemy : MonoBehaviour
                 damageEffect.SetActive(false);
                 damageEffect.SetActive(true);
 
-                isHit = true;
                 Vector3 reactVec = transform.position - other.transform.position;
                 reactVec = reactVec.normalized;
                 reactVec += Vector3.back;

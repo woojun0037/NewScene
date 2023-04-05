@@ -42,9 +42,6 @@ public class Main_Player : MonoBehaviour
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
 
-    Queue<int> inputBufferQ = new Queue<int>();
-
-
     private void Awake()
     {
         hit = weaponCollider.gameObject.GetComponent<HitScript>();
@@ -68,9 +65,11 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("isAttack_3");
         }
 
+
         Skill_E();
         Skill_F();
         Skill_R();
+
     }
 
     public void SetAnimCheck(int count)
@@ -168,7 +167,7 @@ public class Main_Player : MonoBehaviour
 
     public void Skill_E()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
            Anim.SetTrigger("Skill");
            WindSkillUI.windGauge += Time.deltaTime;
@@ -178,7 +177,7 @@ public class Main_Player : MonoBehaviour
 
     public void Skill_R()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
            CloudSkillUI.cloudGauge += Time.deltaTime;
            R_skillCheck = true;
@@ -187,7 +186,7 @@ public class Main_Player : MonoBehaviour
 
     public void Skill_F()
     {
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
            RainSkillUI.rainGauge += Time.deltaTime;
            F_skillCheck = true;
