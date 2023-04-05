@@ -46,79 +46,11 @@ public class Main_Player : MonoBehaviour
 
     private void Awake()
     {
-        
         hit = weaponCollider.gameObject.GetComponent<HitScript>();
     }
 
     void Update()
     {
-        //attackInputOn = Input.GetMouseButtonDown(0);
-
-        //AnimatorClipInfo[] clips = Anim.GetCurrentAnimatorClipInfo(0);
-
-        //string currAnimName = clips[0].clip.name;
-
-        //switch (currAnimName)
-        //{
-        //    case "Idle":
-        //        if (attackInputOn)
-        //        {
-        //            inputBufferQ.Enqueue(0);
-        //        }
-
-        //        if (Anim.GetBool("isAttack0_to_1") == false && inputBufferQ.Count > 0)
-        //        {
-        //            Anim.SetBool("isAttack0_to_1", true);
-        //            inputBufferQ.Dequeue();
-        //        }
-        //        break;
-
-        //    case "ATKmotion1":
-        //        if (attackInputOn)
-        //        {
-        //            inputBufferQ.Enqueue(0);
-        //        }
-        //        Anim.SetBool("isAttack0_to_1", false);
-        //        if (Anim.GetBool("isAttack1_to_2") == false && inputBufferQ.Count > 0)
-        //        {
-        //            Anim.SetBool("isAttack1_to_2", true);
-        //            inputBufferQ.Dequeue();
-        //        }
-        //        break;
-
-        //    case "ATKmotion2":
-        //        if (attackInputOn)
-        //        {
-        //            inputBufferQ.Enqueue(0);
-        //        }
-
-        //        Anim.SetBool("isAttack1_to_2", false);
-        //        if (Anim.GetBool("isAttack2_to_3") == false && inputBufferQ.Count > 0)
-        //        {
-        //            Anim.SetBool("isAttack2_to_3", true);
-        //            inputBufferQ.Dequeue();
-        //        }
-        //        break;
-
-        //    case "ATKmotion3":
-        //        Anim.SetBool("isAttack0_to_1", false);
-        //        Anim.SetBool("isAttack1_to_2", false);
-        //        Anim.SetBool("isAttack2_to_3", false);
-
-        //        inputBufferQ.Clear();
-        //        break;
-        //}
-
-        //if (inputBufferQ.Count > 0)
-        //{
-        //    isAttack = true;
-        //    Anim.SetBool("isAttack", isAttack);
-        //}
-
-        //else if (inputBufferQ.Count <= 0)
-        //{
-        //    isAttack = false;
-        //}
         if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             isAttack = true;
@@ -159,7 +91,6 @@ public class Main_Player : MonoBehaviour
     {
         Move();
         CalTargetPos();
-        //AnimationBoolCheck();
     }
 
     private void CalTargetPos()
@@ -272,7 +203,6 @@ public class Main_Player : MonoBehaviour
 
     private void AnimationBoolCheck()
     {
-        //Anim.SetBool("isAttack", isAttack);
         Anim.SetBool("isMove", isMove);
     }
 }
