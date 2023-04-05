@@ -19,16 +19,16 @@ public class  PropertySkill : MonoBehaviour
     {
         if(SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
         {
-            
+            StartCoroutine(TafoonSpecial());
         }
     }
 
     IEnumerator TafoonSpecial()
     {
-        SkillUse.MoveSpeed += 2;
-        SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp + 0.4f);
-        SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp + 0.4f);
-        SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp + 0.4f);
+        SkillUse.MoveSpeed += 5;
+        SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp + 2f);
+        SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp + 2f);
+        SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp + 2f);
         yield return new WaitForSeconds(5f);
     }
 
