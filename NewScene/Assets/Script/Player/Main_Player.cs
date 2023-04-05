@@ -8,15 +8,15 @@ public class Main_Player : MonoBehaviour
     WindStorm iswindstorm;
 
     [SerializeField] Vector3 MovePlayer;
-    [SerializeField] Animator Anim;
     [SerializeField] Collider weaponCollider;
-
-    private HitScript hit;
+    [SerializeField] GameObject currentATKEffect;
 
     [SerializeField] float RotateSpeed = 10f;
-    [SerializeField] float MoveSpeed = 1f;
     [SerializeField] float DashSpeed = 5f;
-    [SerializeField] GameObject currentATKEffect;
+
+    private HitScript hit;
+    public Animator Anim;
+
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -37,6 +37,7 @@ public class Main_Player : MonoBehaviour
     public int damage;
     public int HP;
 
+    public float MoveSpeed = 6f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
@@ -54,7 +55,6 @@ public class Main_Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             isAttack = true;
-            
             Anim.SetTrigger("isAttack_1");
         }
         if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && !isClicks[2])
@@ -76,9 +76,8 @@ public class Main_Player : MonoBehaviour
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;
-        
     }
-    
+
     public void GetAnimCheck()
     {
         isAttack = false;
@@ -129,13 +128,12 @@ public class Main_Player : MonoBehaviour
         {
             currentATKEffect = Instantiate(AtkEffect[on_count], transform.position, AtkEffect[on_count].transform.rotation);
         }
-        
+
     }
 
     public void ATK_Effect_Off()
     {
         Destroy(currentATKEffect);
-        
     }
 
     private void Move()
@@ -148,7 +146,6 @@ public class Main_Player : MonoBehaviour
         heading = Camera.main.transform.forward;
         heading.y = 0;
         heading.Normalize();
-
         heading = heading - player_Move_Input;
 
         if (player_Move_Input != Vector3.zero && !isAttack)
@@ -159,34 +156,32 @@ public class Main_Player : MonoBehaviour
 
             transform.rotation = Quaternion.Lerp(transform.rotation,
                                  Quaternion.Euler(0, angle, 0), Time.deltaTime * RotateSpeed);
-
             transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
         }
         else
         {
             isMove = false;
+
             AnimationBoolCheck();
         }
     }
-
 
     public void Skill_E()
     {
         if (Input.GetKey(KeyCode.E))
         {
-            Anim.SetTrigger("Skill");
-            WindSkillUI.windGauge += Time.deltaTime;
-            E_skillCheck = true;
+           Anim.SetTrigger("Skill");
+           WindSkillUI.windGauge += Time.deltaTime;
+           E_skillCheck = true;
         }
     }
-
 
     public void Skill_R()
     {
         if (Input.GetKey(KeyCode.R))
         {
-            CloudSkillUI.cloudGauge += Time.deltaTime;
-            R_skillCheck = true;
+           CloudSkillUI.cloudGauge += Time.deltaTime;
+           R_skillCheck = true;
         }
     }
 
@@ -194,12 +189,10 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.F))
         {
-
-            RainSkillUI.rainGauge += Time.deltaTime;
-            F_skillCheck = true;
+           RainSkillUI.rainGauge += Time.deltaTime;
+           F_skillCheck = true;
         }
     }
-
 
     private void AnimationBoolCheck()
     {

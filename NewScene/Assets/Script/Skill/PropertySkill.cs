@@ -5,6 +5,10 @@ using UnityEngine;
 public class  PropertySkill : MonoBehaviour
 {
     Main_Player SkillUse;
+    public float SpeedUp;
+
+    private bool TafoonSkillOn;
+    private bool TafoonSkillOff;
 
     private void Start()
     {
@@ -15,13 +19,22 @@ public class  PropertySkill : MonoBehaviour
     {
         if(SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
         {
-
+            
         }
+    }
+
+    IEnumerator TafoonSpecial()
+    {
+        SkillUse.MoveSpeed += 2;
+        SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp + 0.4f);
+        SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp + 0.4f);
+        SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp + 0.4f);
+        yield return new WaitForSeconds(5f);
     }
 
     public void IceSkill()
     {
-        //if(SkillUse.)
+        
     }
 
     public void Thunder()
