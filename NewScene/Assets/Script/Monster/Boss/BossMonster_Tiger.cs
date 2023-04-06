@@ -13,9 +13,12 @@ public class BossMonster_Tiger : MonoBehaviour
     [SerializeField] private float baseAttackDamage;
     [SerializeField] private float dashAttackDamage;
 
-    private Animator anim;
-    private Vector3 tempPos;
+    public SkinnedMeshRenderer mat;
 
+    private GameObject damageEffect;
+    private Animator anim;
+
+    private Vector3 tempPos;
     private bool isAttack;
     private bool isMove;
     private bool isDash;
@@ -309,8 +312,6 @@ public class BossMonster_Tiger : MonoBehaviour
 
     //        animator.SetBool("isChargeattack_Set", false);
     //        animator.SetBool("isChargeattack_Go", false);
-
-
     //    }
 
     //    if (ispattern2)
