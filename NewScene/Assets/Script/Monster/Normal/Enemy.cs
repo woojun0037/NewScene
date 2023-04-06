@@ -10,19 +10,19 @@ public class Enemy : MonoBehaviour
     public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-    public float BackSpeed = -10;
     public float moveSpeed;
-    public float KnockBackForce;
-    public float KnockBakcTime;
 
     public bool DebuffCheck;
     public bool StartAttack;
+
+    private float KnockBackForce = 2f;
+    private float KnockBakcTime;
 
     RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
-    
+
     private GameObject damageEffect;
 
     [SerializeField] GameObject targetPosition;
@@ -93,7 +93,6 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Weapon")
         {
-            DebuffCheck = true;
             Main_Player player = other.GetComponent<HitScript>().Player;
             if (player.isAttack)
             {

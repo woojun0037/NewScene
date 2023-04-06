@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PropertySkill : MonoBehaviour
 {
+
     [SerializeField] private float BuffTime = 6f;
     [SerializeField] private float DebuffTime = 5f;
     [SerializeField] private float StunTime = 3f;
-
+    
     Main_Player SkillUse;
     Enemy enemy;
 
@@ -37,7 +38,7 @@ public class PropertySkill : MonoBehaviour
             SkillUse.R_skillCheck = false;
 
             SkillUse.MoveSpeed += 5f;
-            SpeedUp += 1f;
+            SpeedUp += 2f;
 
             SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
             SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
@@ -64,30 +65,19 @@ public class PropertySkill : MonoBehaviour
         {
             SkillUse.E_skillCheck = false;
             SkillUse.F_skillCheck = false;
-            Debuff = true;
 
-            if(Debuff == true && enemy.DebuffCheck == true)
+            if(SkillUse.isAttack)
             {
-               Ice_DebuffOn();
+               enemy.chasespeed = 1f;
+               StartCoroutine(IceSkillUse());
             }
         }
-    }
-
-    public void Ice_DebuffOn()
-    {
-        if(enemy.moveSpeed > 1)
-        {
-           enemy.moveSpeed -= 2f;
-        }
-        StartCoroutine(IceSkillUse());
     }
 
     IEnumerator IceSkillUse()
     {
         yield return new WaitForSeconds(DebuffTime);
-        enemy.moveSpeed += 2f;
-        Debuff = false;
-        enemy.DebuffCheck = false;
+        enemy.chasespeed = 3f;
     }
 
     public void Thunder()
