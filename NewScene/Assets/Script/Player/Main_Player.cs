@@ -193,6 +193,11 @@ public class Main_Player : MonoBehaviour
         }
     }
 
+    public void GetDamage(float damage)
+    {
+        Debug.Log("Get Damage" + damage);
+    }
+
     private void AnimationBoolCheck()
     {
         Anim.SetBool("isMove", isMove);
