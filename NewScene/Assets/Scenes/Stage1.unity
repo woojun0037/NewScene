@@ -2507,7 +2507,7 @@ MonoBehaviour:
   attackInputOn: 0
   damage: 1
   HP: 100
-  MoveSpeed: 6
+  MoveSpeed: 10
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 1
@@ -47589,10 +47589,10 @@ Animator:
   m_GameObject: {fileID: 919132147740633952}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 303f8373a97a3e94cb483870075c09a8, type: 3}
-  m_Controller: {fileID: 9100000, guid: a67d981e85f5b074992a709397a22420, type: 2}
+  m_Controller: {fileID: 9100000, guid: c150847c69f2d4f4792295da2e8db688, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -47611,21 +47611,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d0417591ff74ea9d7773506a0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2830159858170750480}
-  MonsterObject: {fileID: 919132147740633952}
-  targetPosition: {fileID: 919132148356489244}
-  Boss_Skill_1: {fileID: 1457255269688624759, guid: 6ff6575d4ce964e4bad47054b4f29e4b, type: 3}
-  targettransform: {fileID: 543450652359948966}
-  Boss_Skill_2: {fileID: 5585128518484842410, guid: 4f89b5ab805d76049ba34039413511c7, type: 3}
-  BossPatternTime: 2
-  chasespeed: 2
-  random: 0
-  attacktime: 0
-  MonsterYPosition: 2
-  BossHp: 1000
-  Boss_2Page_Pattern: 0
-  MaxDistance: 5
-  bosspattern: 0
+  targetPos: {x: 0, y: 0, z: 0}
+  player: {fileID: 115793828}
+  effects:
+  - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
+  - {fileID: 280351933351309158, guid: 83b9c63be808fd842aef6fcdbb2fa6e8, type: 3}
+  - {fileID: 2603312678546684873, guid: 58aa20a37616a8e4c9d3e35b5fd78fe7, type: 3}
+  attackRange: 10
+  moveSpeed: 0.4
+  attackCoolTime: 5
+  baseAttackDamage: 3
+  dashAttackDamage: 10
+  mat: {fileID: 0}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -49,27 +49,16 @@ public class Main_Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
-        {
-            isAttack = true;
-            Anim.SetTrigger("isAttack_1");
-        }
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && !isClicks[2])
-        {
-            isAttack = true;
-            Anim.SetTrigger("isAttack_2");
-        }
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && isClicks[2])
-        {
-            isAttack = true;
-            Anim.SetTrigger("isAttack_3");
-        }
-
-
         Skill_E();
         Skill_F();
         Skill_R();
+    }
 
+    void FixedUpdate()
+    {
+        Move();
+        AttackInput();
+        CalTargetPos();
     }
 
     public void SetAnimCheck(int count)
@@ -85,10 +74,23 @@ public class Main_Player : MonoBehaviour
         isClicks[2] = false;
     }
 
-    void FixedUpdate()
-    {
-        Move();
-        CalTargetPos();
+    private void AttackInput()
+    { 
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
+        {
+            isAttack = true;
+            Anim.SetTrigger("isAttack_1");
+        }
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && !isClicks[2])
+        {
+            isAttack = true;
+            Anim.SetTrigger("isAttack_2");
+        }
+        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && isClicks[2])
+        {
+            isAttack = true;
+            Anim.SetTrigger("isAttack_3");
+        }
     }
 
     private void CalTargetPos()
@@ -191,6 +193,12 @@ public class Main_Player : MonoBehaviour
            RainSkillUI.rainGauge += Time.deltaTime;
            F_skillCheck = true;
         }
+    }
+
+    public void GetDamage(float damage)
+    {
+        Debug.Log("Get Damage" + damage);
+
     }
 
     private void AnimationBoolCheck()
