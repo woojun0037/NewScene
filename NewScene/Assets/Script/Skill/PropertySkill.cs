@@ -6,9 +6,10 @@ public class PropertySkill : MonoBehaviour
 {
     [SerializeField] private float BuffTime = 6f;
     [SerializeField] private float DebuffTime = 5f;
-    [SerializeField] private float ThunderTime = 3f;
+    [SerializeField] private float StunTime = 3f;
 
     Main_Player SkillUse;
+    Enemy enemy;
 
     public float SpeedUp = 1.2f;
 
@@ -18,12 +19,14 @@ public class PropertySkill : MonoBehaviour
     private void Start()
     {
         SkillUse = GetComponent<Main_Player>();
+        enemy = GetComponent<Enemy>();
     }
 
     private void Update()
     {
         TafoonSkill();
         IceSkill();
+        Thunder();
     }
 
     public void TafoonSkill()
@@ -62,14 +65,29 @@ public class PropertySkill : MonoBehaviour
             SkillUse.E_skillCheck = false;
             SkillUse.F_skillCheck = false;
             Debuff = true;
-            StartCoroutine(IceSkillUse());
+
+            if(Debuff == true && enemy.DebuffCheck == true)
+            {
+               Ice_DebuffOn();
+            }
         }
+    }
+
+    public void Ice_DebuffOn()
+    {
+        if(enemy.moveSpeed > 1)
+        {
+           enemy.moveSpeed -= 2f;
+        }
+        StartCoroutine(IceSkillUse());
     }
 
     IEnumerator IceSkillUse()
     {
         yield return new WaitForSeconds(DebuffTime);
+        enemy.moveSpeed += 2f;
         Debuff = false;
+        enemy.DebuffCheck = false;
     }
 
     public void Thunder()
@@ -79,12 +97,19 @@ public class PropertySkill : MonoBehaviour
             SkillUse.R_skillCheck = false;
             SkillUse.F_skillCheck = false;
             Stun = true;
+            StunOn();
         }
+    }
+
+    public void StunOn()
+    {
+        enemy.StartAttack = true;
+        StartCoroutine(ThunderSkillUse());
     }
 
     IEnumerator ThunderSkillUse()
     {
-        yield return new WaitForSeconds(ThunderTime);
-
+        yield return new WaitForSeconds(StunTime);
+        Stun = false;
     }
 }

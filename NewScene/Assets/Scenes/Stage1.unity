@@ -4327,15 +4327,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 1
   maxHearth: 5
   curHearth: 5
-  damageToGive: 1
   MaxDistance: 0
   chasespeed: 0
   BackSpeed: 1
   moveSpeed: 0
   KnockBackForce: 0
   KnockBakcTime: 1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!1001 &231842433
@@ -7551,15 +7553,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 1
   maxHearth: 5
   curHearth: 5
-  damageToGive: 1
   MaxDistance: 0
   chasespeed: 0
   BackSpeed: 1
   moveSpeed: 0
   KnockBackForce: 0
   KnockBakcTime: 1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!1001 &372970079
@@ -24228,15 +24232,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 1
   maxHearth: 5
   curHearth: 5
-  damageToGive: 1
   MaxDistance: 0
   chasespeed: 0
   BackSpeed: 1
   moveSpeed: 0
   KnockBackForce: 0
   KnockBakcTime: 1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!1 &1258879916 stripped
@@ -45817,15 +45823,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
   maxHearth: 15
   curHearth: 15
-  damageToGive: 0
   MaxDistance: 1
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
   KnockBackForce: 3
   KnockBakcTime: 0.1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!135 &3469287836559778778
@@ -45869,15 +45877,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
   maxHearth: 0
   curHearth: 15
-  damageToGive: 0
   MaxDistance: 1
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
   KnockBackForce: 3
   KnockBakcTime: 0.1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!135 &3469287837515035044
@@ -45921,15 +45931,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec92d891695be245a4bab011e31ac7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
   maxHearth: 15
   curHearth: 15
-  damageToGive: 0
   MaxDistance: 1
   chasespeed: 1
   BackSpeed: 3
   moveSpeed: 3
   KnockBackForce: 3
   KnockBakcTime: 0.1
+  DebuffCheck: 0
+  StartAttack: 0
   targetPosition: {fileID: 0}
   targetTransform: {fileID: 0}
 --- !u!135 &3469287838256136877
@@ -46352,7 +46364,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 115793828}
-  damage: 5
+  damage: 1
   isAttack: 0
 --- !u!4 &3957359560873417178
 Transform:
@@ -47757,7 +47769,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuffTime: 6
+  DebuffTime: 5
+  StunTime: 3
   SpeedUp: 0
+  Debuff: 0
+  Stun: 0
 --- !u!1 &5892388282118999773
 GameObject:
   m_ObjectHideFlags: 0

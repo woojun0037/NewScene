@@ -15,15 +15,14 @@ public class Enemy : MonoBehaviour
     public float KnockBackForce;
     public float KnockBakcTime;
 
-    private bool StartAttack;
+    public bool DebuffCheck;
+    public bool StartAttack;
 
     RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
-    Main_Player player;
-    PropertySkill propertySkill; 
-
+    
     private GameObject damageEffect;
 
     [SerializeField] GameObject targetPosition;
@@ -37,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        targetPosition = GameObject.FindWithTag("Main_gangrim"); 
+        targetPosition = GameObject.FindWithTag("Main_gangrim");
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
     }
 
@@ -49,7 +48,6 @@ public class Enemy : MonoBehaviour
 
     void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
-
         //현재는 플레이어를 쫒다가 레이케스트에 닿으면 공격 시작으로 설정되어있습니다.
         Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.blue, 0.01f);
         //변경
@@ -65,7 +63,7 @@ public class Enemy : MonoBehaviour
             StartAttack = false;
         }
 
-        if(targetTransform == null)
+        if (targetTransform == null)
         {
             return;
         }
@@ -95,19 +93,21 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Weapon")
         {
+            DebuffCheck = true;
             Main_Player player = other.GetComponent<HitScript>().Player;
-            if(player.isAttack)
+            if (player.isAttack)
             {
                 if (damageEffect == null)
                 {
                     damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
                 }
                 else
-                { 
+                {
                     damageEffect.transform.position = transform.position;
                 }
                 damageEffect.SetActive(false);
                 damageEffect.SetActive(true);
+
 
                 Vector3 reactVec = transform.position - other.transform.position;
                 reactVec = reactVec.normalized;
