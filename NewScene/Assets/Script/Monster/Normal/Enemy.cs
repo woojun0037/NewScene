@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHearth;
-    public float curHearth;
-  
     public int damageToGive = 1;
 
+    public float maxHearth;
+    public float curHearth;
     public float MaxDistance;
     public float chasespeed;
     public float BackSpeed = -10;
-
     public float moveSpeed;
-
     public float KnockBackForce;
     public float KnockBakcTime;
 
-    bool StartAttack;
+    private bool StartAttack;
 
     RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
     Main_Player player;
+    PropertySkill propertySkill; 
 
     private GameObject damageEffect;
 
@@ -35,12 +33,11 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         boxCollier = GetComponent<BoxCollider>();
-
     }
 
     void Start()
     {
-        targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
+        targetPosition = GameObject.FindWithTag("Main_gangrim"); 
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
     }
 
@@ -92,21 +89,23 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Weapon")
         {
-            
             Main_Player player = other.GetComponent<HitScript>().Player;
             if(player.isAttack)
             {
                 if (damageEffect == null)
+                {
                     damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                }
                 else
+                { 
                     damageEffect.transform.position = transform.position;
+                }
                 damageEffect.SetActive(false);
                 damageEffect.SetActive(true);
 

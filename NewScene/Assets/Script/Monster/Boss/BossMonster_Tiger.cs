@@ -7,6 +7,7 @@ public class BossMonster_Tiger : MonoBehaviour
     [SerializeField] private Vector3 targetPos;
     [SerializeField] private Main_Player player;
     [SerializeField] private GameObject[] effects;
+
     [SerializeField] private float attackRange;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackCoolTime;
