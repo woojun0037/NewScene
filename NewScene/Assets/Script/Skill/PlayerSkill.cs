@@ -184,7 +184,7 @@ public class PlayerSkill : MonoBehaviour
     {
         GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
         Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
-        CloudRigid.velocity = transform.forward * 50;
+        CloudRigid.velocity = transform.forward * 5;
         Destroy(intantCloud, 2);
         yield return new WaitForSeconds(3f);
         CloudisDelay = true;

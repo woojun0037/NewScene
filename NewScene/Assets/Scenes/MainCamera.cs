@@ -5,7 +5,6 @@ using UnityEngine;
 public class MainCamera : MonoBehaviour
 {
     [SerializeField] Transform FollowTarget;
-
     public Vector3 FollowPlayer;
 
     void Start()
@@ -17,4 +16,5 @@ public class MainCamera : MonoBehaviour
     {
         this.transform.position = FollowTarget.transform.position + FollowPlayer;
     }
+
 }
