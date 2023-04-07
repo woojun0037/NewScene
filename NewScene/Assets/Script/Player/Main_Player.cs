@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
-    //PlayerSkill skillcall;
-    WindStorm iswindstorm;
 
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider weaponCollider;
@@ -16,7 +14,7 @@ public class Main_Player : MonoBehaviour
 
     private HitScript hit;
     public Animator Anim;
-
+    public Enemy enemy;
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -191,7 +189,7 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
            RainSkillUI.rainGauge += Time.deltaTime;
-           F_skillCheck = true;
+           F_skillCheck = !F_skillCheck;
         }
     }
 

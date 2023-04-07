@@ -8,19 +8,19 @@ public class PropertySkill : MonoBehaviour
     [SerializeField] private float BuffTime = 6f;
     [SerializeField] private float DebuffTime = 5f;
     [SerializeField] private float StunTime = 3f;
-    
-    Main_Player SkillUse;
-    Enemy enemy;
+
+    public Main_Player SkillUse;
+    public Enemy enemy;
 
     public float SpeedUp = 1.2f;
 
     public bool Debuff = false;
     public bool Stun = false;
 
-    private void Start()
+    void Awake()
     {
         SkillUse = GetComponent<Main_Player>();
-        enemy = GetComponent<Enemy>();
+
     }
 
     private void Update()
@@ -63,31 +63,23 @@ public class PropertySkill : MonoBehaviour
     {
         if (SkillUse.E_skillCheck == true && SkillUse.F_skillCheck == true)
         {
-            SkillUse.E_skillCheck = false;
-            SkillUse.F_skillCheck = false;
-
-            if(SkillUse.isAttack)
-            {
-               enemy.chasespeed = 1f;
-               StartCoroutine(IceSkillUse());
-            }
+            Debuff = true;
         }
-    }
-
-    IEnumerator IceSkillUse()
-    {
-        yield return new WaitForSeconds(DebuffTime);
-        enemy.chasespeed = 3f;
+        else
+        {
+            Debuff = false;
+        }
     }
 
     public void Thunder()
     {
         if (SkillUse.R_skillCheck == true && SkillUse.F_skillCheck)
         {
-            SkillUse.R_skillCheck = false;
-            SkillUse.F_skillCheck = false;
             Stun = true;
-            StunOn();
+        }
+        else
+        {
+            Stun = false;
         }
     }
 

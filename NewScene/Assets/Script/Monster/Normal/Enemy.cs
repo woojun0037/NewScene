@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     BoxCollider boxCollier;
 
     private GameObject damageEffect;
+    PropertySkill property;
+    Main_Player player;
 
     [SerializeField] GameObject targetPosition;
     [SerializeField] Transform targetTransform;
@@ -89,11 +91,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Weapon")
         {
-            Main_Player player = other.GetComponent<HitScript>().Player;
+            player = other.GetComponent<HitScript>().Player;
+            player.enemy = this;
+            property = player.GetComponent<PropertySkill>();
+
+
             if (player.isAttack)
             {
                 if (damageEffect == null)
@@ -107,6 +114,17 @@ public class Enemy : MonoBehaviour
                 damageEffect.SetActive(false);
                 damageEffect.SetActive(true);
 
+                if (property.Debuff == true)
+                {
+                    this.chasespeed = 1f;
+                    StartCoroutine(GetDebuffCor());
+                }
+
+                if (property.Stun == true)
+                {
+                    this.chasespeed = 0f;
+                    StartCoroutine(GetStunCor());
+                }
 
                 Vector3 reactVec = transform.position - other.transform.position;
                 reactVec = reactVec.normalized;
@@ -130,4 +148,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    IEnumerator GetDebuffCor()
+    {
+        yield return new WaitForSeconds(5.0f);
+        player.E_skillCheck = false;
+        player.F_skillCheck = false;
+        property.Debuff = false;
+        this.chasespeed = 3f;
+    }
+
+    IEnumerator GetStunCor()
+    {
+        yield return new WaitForSeconds(10.0f);
+        player.R_skillCheck = false;
+        player.F_skillCheck = false;
+        property.Stun = false;
+        this.chasespeed = 3f;
+    }
 }

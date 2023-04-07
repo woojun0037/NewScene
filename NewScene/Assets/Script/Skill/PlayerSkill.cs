@@ -124,12 +124,20 @@ public class PlayerSkill : MonoBehaviour
 
     public void RainDropSkill()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isSkillUse)
+        
+        if (Input.GetKeyDown(KeyCode.F) && isSkillUse && !RainSkillCheck)
         {
             SkillRange.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
             RainSkillCheck = true;
         }
+        else if(Input.GetKeyDown(KeyCode.F))
+        {
+            SkillRange.GetComponent<Image>().enabled = false;
+            targetCircle.GetComponent<Image>().enabled = false;
+            RainSkillCheck = false;
+        }
+
         if (Input.GetMouseButton(0) && RainSkillCheck == true)
         {
             SkillRange.GetComponent<Image>().enabled = false;
