@@ -38,7 +38,7 @@ public class PropertySkill : MonoBehaviour
             SkillUse.R_skillCheck = false;
 
             SkillUse.MoveSpeed += 5f;
-            SpeedUp += 2f;
+            SpeedUp += 3f;
 
             SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
             SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);

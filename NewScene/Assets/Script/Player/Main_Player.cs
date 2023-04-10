@@ -10,7 +10,6 @@ public class Main_Player : MonoBehaviour
     [SerializeField] GameObject currentATKEffect;
 
     [SerializeField] float RotateSpeed = 10f;
-    [SerializeField] float DashSpeed = 5f;
 
     private HitScript hit;
     public Animator Anim;
@@ -74,17 +73,17 @@ public class Main_Player : MonoBehaviour
 
     private void AttackInput()
     { 
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && !isClicks[1] && !isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             isAttack = true;
             Anim.SetTrigger("isAttack_1");
         }
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && !isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
             isAttack = true;
             Anim.SetTrigger("isAttack_2");
         }
-        if (Input.GetMouseButtonDown(0) && !PlayerSkill.Instance.isSkillOn && isClicks[0] && isClicks[1] && isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
             isAttack = true;
             Anim.SetTrigger("isAttack_3");
@@ -192,7 +191,7 @@ public class Main_Player : MonoBehaviour
            F_skillCheck = !F_skillCheck;
         }
     }
-
+    
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);
