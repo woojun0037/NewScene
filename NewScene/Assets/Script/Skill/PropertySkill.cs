@@ -20,7 +20,6 @@ public class PropertySkill : MonoBehaviour
     void Awake()
     {
         SkillUse = GetComponent<Main_Player>();
-
     }
 
     private void Update()
@@ -38,7 +37,7 @@ public class PropertySkill : MonoBehaviour
             SkillUse.R_skillCheck = false;
 
             SkillUse.MoveSpeed += 5f;
-            SpeedUp += 3f;
+            SpeedUp += 2f;
 
             SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
             SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
