@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.096728854, g: 0.21785411, b: 0.36861116, a: 1}
+  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -45701,6 +45701,26 @@ PrefabInstance:
     - target: {fileID: 6380573484578890494, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_Name
       value: Main_gangrim
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: m_Size.x
+      value: 1.2858038
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: m_Size.z
+      value: 0.20004624
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: m_Center.x
+      value: -1.1004506
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: m_Center.y
+      value: 0.019377677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: m_Center.z
+      value: 0.01365333
       objectReference: {fileID: 0}
     - target: {fileID: 7101619276036249291, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_IsActive
