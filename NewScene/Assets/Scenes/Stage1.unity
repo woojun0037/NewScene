@@ -13685,8 +13685,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.46105456, g: 0.4811321, b: 0.34344962, a: 1}
-  m_Intensity: 7.68
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -19220,7 +19220,10 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+<<<<<<< HEAD
   - component: {fileID: 963194231}
+=======
+>>>>>>> parent of 7058b60 (new)
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -19341,6 +19344,7 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+<<<<<<< HEAD
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19358,6 +19362,8 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 0}
+=======
+>>>>>>> parent of 7058b60 (new)
 --- !u!1001 &965216769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45644,6 +45650,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main_gangrim
       objectReference: {fileID: 0}
+<<<<<<< HEAD
     - target: {fileID: 7101619276036249288, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_Size.x
       value: 2.1173882
@@ -45672,6 +45679,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+=======
+>>>>>>> parent of 7058b60 (new)
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
 --- !u!4 &6088987080432700875
