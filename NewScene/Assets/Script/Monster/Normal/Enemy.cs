@@ -92,6 +92,7 @@ public class Enemy : MonoBehaviour
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     void NotDamaged()
     {
         if(hitNum > 0)
@@ -104,6 +105,8 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+=======
+>>>>>>> parent of 7058b60 (new)
 =======
 >>>>>>> parent of 7058b60 (new)
 
