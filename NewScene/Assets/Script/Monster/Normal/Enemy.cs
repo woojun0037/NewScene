@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
         if(hitNum > 0)
         {
             delay += Time.deltaTime;
-            if(delay > 1.0f)
+            if(delay > 0.5f)
             {
                 delay = 0.0f;
                 hitNum = 0;

@@ -136,7 +136,6 @@ public class Main_Player : MonoBehaviour
         {
             currentATKEffect = Instantiate(AtkEffect[on_count], transform.position, AtkEffect[on_count].transform.rotation);
         }
-
     }
 
     public void ATK_Effect_Off()
