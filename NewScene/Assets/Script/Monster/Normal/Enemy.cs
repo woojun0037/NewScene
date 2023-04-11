@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject targetPosition;
     [SerializeField] Transform targetTransform;
 
+    int hitNum;
+    float delay;
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -46,6 +48,7 @@ public class Enemy : MonoBehaviour
     {
         DieMonster();
         monsterMove();
+        NotDamaged();
     }
 
     void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
@@ -91,53 +94,69 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void NotDamaged()
+    {
+        if(hitNum > 0)
+        {
+            delay += Time.deltaTime;
+            if(delay > 1.0f)
+            {
+                delay = 0.0f;
+                hitNum = 0;
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Weapon")
         {
             player = other.GetComponent<HitScript>().Player;
-            player.enemy = this;
-            property = player.GetComponent<PropertySkill>();
-
-
-            if (player.isAttack)
+            if(player.HitState != hitNum)
             {
-                if (damageEffect == null)
+                //print(name);
+                player.enemy = this;
+                property = player.GetComponent<PropertySkill>();
+                hitNum = player.HitState;
+                delay = 0.0f;
+                if (player.isAttack)
                 {
-                    damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                    if (damageEffect == null)
+                    {
+                        damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                    }
+                    else
+                    {
+                        damageEffect.transform.position = transform.position;
+                    }
+                    damageEffect.SetActive(false);
+                    damageEffect.SetActive(true);
+
+                    if (property.Debuff == true)
+                    {
+                        this.chasespeed = 1f;
+                        StartCoroutine(GetDebuffCor());
+                    }
+
+                    if (property.Stun == true)
+                    {
+                        this.chasespeed = 0f;
+                        StartCoroutine(GetStunCor());
+                    }
+
+                    Vector3 reactVec = transform.position - other.transform.position;
+                    reactVec = reactVec.normalized;
+                    reactVec += Vector3.back;
+                    rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
+
+                    HitScript hit;
+                    hit = other.GetComponent<HitScript>();
+
+                    Gauge.sGauge += hit.damage;
+                    curHearth -= hit.damage;
+
+                    Debug.Log("Weapon: " + curHearth);
                 }
-                else
-                {
-                    damageEffect.transform.position = transform.position;
-                }
-                damageEffect.SetActive(false);
-                damageEffect.SetActive(true);
-
-                if (property.Debuff == true)
-                {
-                    this.chasespeed = 1f;
-                    StartCoroutine(GetDebuffCor());
-                }
-
-                if (property.Stun == true)
-                {
-                    this.chasespeed = 0f;
-                    StartCoroutine(GetStunCor());
-                }
-
-                Vector3 reactVec = transform.position - other.transform.position;
-                reactVec = reactVec.normalized;
-                reactVec += Vector3.back;
-                rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
-
-                HitScript hit;
-                hit = other.GetComponent<HitScript>();
-
-                Gauge.sGauge += hit.damage;
-                curHearth -= hit.damage;
-
-                Debug.Log("Weapon: " + curHearth);
             }
         }
 

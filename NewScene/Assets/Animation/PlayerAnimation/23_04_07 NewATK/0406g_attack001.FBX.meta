@@ -64,7 +64,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.2412239
+      - time: 0.23803917
+        functionName: OnWeapon
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
+      - time: 0.2826252
         functionName: ATK_Effect_On
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -73,6 +80,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.35829794
         functionName: ATK_Effect_Off
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5167576
+        functionName: OnWeapon
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
