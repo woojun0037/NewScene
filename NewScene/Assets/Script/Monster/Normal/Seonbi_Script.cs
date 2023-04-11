@@ -1,108 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.AI;
 
-public class Seonbi_Script : MonoBehaviour
+
+public class Seonbi_Script : Enemy
 {
     //private NavMeshAgent agent = null;
     private Animator animator;
 
     [SerializeField]
-    float MaxDistance;
-    [SerializeField]
     float SetY;
-    [SerializeField]
-    float chasespeed;
     RaycastHit hit;
 
     bool isattack;
-    [SerializeField]
     bool DontMove;
-    Transform targettransform;
 
     public Rigidbody SeonbiBullet; 
 
     public float monsterhp;
-
-    // Start is called before the first frame update
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        isattack = false;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
         animator = GetComponent<Animator>();
-        //agent = GetComponent<NavMeshAgent>();
-        targettransform = GameObject.FindWithTag("Main_gangrim").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float time = Time.deltaTime;
+        monsterMove();
+        NotDamaged();
+        DieMonster();
+    }
 
-        Vector3 rayspawn = transform.position;
-        rayspawn.y = SetY +0.5f; //레이 바닥에서 부터 쏘게만듬
+    protected override void monsterMove()
+    {
+        animator.SetBool("Move", true);
+        base.monsterMove();
 
-        Vector3 targety = targettransform.position;
+
+        Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        transform.LookAt(targety);
-        //현재는 플레이어를 쫒다가 레이케스트에 닿으면 할퀴기 공격 시작
-        Debug.DrawRay(rayspawn, transform.forward * MaxDistance, Color.blue, 0.05f);
-
-        if (Physics.Raycast(rayspawn, transform.forward, out hit, MaxDistance))
+        //현재 경로에서 목표 지점까지 남아있는 거리
+        if (agent.remainingDistance <= 5)
         {
-            if (hit.collider.tag == "Main_gangrim") //플레이어에게 레이 닿으면 정지하고 총알 공격
+            if (!isattack)
             {
-                Debug.Log("Main tag");
-                DontMove = true;
-                if (!isattack)
-                {
-                    isattack = true;
-                    transform.LookAt(targety);
-                    StartCoroutine("attacker");
+                transform.LookAt(targety);
+                isattack = true;
+                StartCoroutine("attacker");
 
-                }
             }
 
         }
-        else
-        {
-            DontMove = false;
-        }
-        
-        if (!DontMove)
-        {
-            animator.SetBool("Move", true);
-            //agent.destination = targety;
-            transform.LookAt(targety);
-            transform.position = Vector3.MoveTowards(gameObject.transform.position, targety, chasespeed * Time.deltaTime);//3번째 값 돌진 속도
-        }
-        else{
-            animator.SetBool("Move", false);
-        }
-
-
 
     }
 
-    void MonsterDamage() //플레이어 스크립트에서 불러옴
-    {
-        Debug.Log("MonsterDamage()");
-
-        if (monsterhp > 1)
-        {
-            monsterhp--;
-        }
-        else
-        {
-            MonsterDie();
-        }
-        Debug.Log(monsterhp);
-    }
-
-    void MonsterDie()
-    {
-        Destroy(gameObject);
-    }
 
     IEnumerator attacker()
     {

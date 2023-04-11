@@ -655,6 +655,9 @@ GameObject:
   - component: {fileID: 7767684346351277265}
   - component: {fileID: 7802172715392571478}
   - component: {fileID: 7802172715392571477}
+  - component: {fileID: 1466790084}
+  - component: {fileID: 1466790083}
+  - component: {fileID: 1466790085}
   m_Layer: 0
   m_Name: Monster_Seonbi
   m_TagString: Monster
@@ -710,12 +713,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 166f92dcb06eaa64da01733a0e12bf10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
+  maxHearth: 3
+  curHearth: 3
   MaxDistance: 5
-  SetY: 2
   chasespeed: 5
+  moveSpeed: 0
+  DebuffCheck: 0
+  StartAttack: 0
+  targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  SetY: 2
   DontMove: 0
   SeonbiBullet: {fileID: 2382716783491538334, guid: 81cdc40eb038d9c439fe3ccfd6bf4cec, type: 3}
   monsterhp: 2
+--- !u!54 &1466790084
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955681456560606827}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!136 &1466790083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955681456560606827}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!195 &1466790085
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6955681456560606827}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 1000
+  m_StoppingDistance: 5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7410024698677637121
 GameObject:
   m_ObjectHideFlags: 0

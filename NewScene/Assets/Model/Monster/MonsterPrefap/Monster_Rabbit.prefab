@@ -940,13 +940,14 @@ GameObject:
   - component: {fileID: 7875025569145635277}
   - component: {fileID: 7875025569145635279}
   - component: {fileID: 7875025569145635272}
+  - component: {fileID: 378713205}
   m_Layer: 0
   m_Name: Monster_Rabbit
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7693009584103412622
 Transform:
   m_ObjectHideFlags: 0
@@ -991,9 +992,9 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 1.0081292
+  m_Direction: 2
+  m_Center: {x: -0.0040646195, y: 0, z: 0}
 --- !u!95 &7875025569145635279
 Animator:
   serializedVersion: 5
@@ -1026,12 +1027,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff4f8d32b5f804478bc3e636d47b492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 0
+  maxHearth: 3
+  curHearth: 3
+  MaxDistance: 2
+  chasespeed: 5
+  moveSpeed: 0
+  DebuffCheck: 0
+  StartAttack: 0
+  targetTransform: {fileID: 0}
+  agent: {fileID: 0}
   attacker_Col: {fileID: 7875025568986392054}
   SetY: 2
-  MaxDistance: 1.5
-  chasespeed: 5
-  Distance: 0
-  monsterhp: 10
+--- !u!195 &378713205
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028113343770036532}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 2000
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7123134163251481929
 GameObject:
   m_ObjectHideFlags: 0
