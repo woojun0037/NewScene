@@ -20,7 +20,6 @@ public class PropertySkill : MonoBehaviour
     void Awake()
     {
         SkillUse = GetComponent<Main_Player>();
-
     }
 
     private void Update()
