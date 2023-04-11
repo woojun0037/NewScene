@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHearth;
-    public int curHearth;
-  
     public int damageToGive = 1;
 
+    public float maxHearth;
+    public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-    public float BackSpeed = -10;
-
     public float moveSpeed;
 
-    public float KnockBackForce;
-    public float KnockBakcTime;
+    public bool DebuffCheck;
+    public bool StartAttack;
 
-    bool StartAttack;
-    bool isHit;
+    private float KnockBackForce = 2f;
+    private float KnockBakcTime;
 
     RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
+
+    private GameObject damageEffect;
+    PropertySkill property;
     Main_Player player;
 
     [SerializeField] GameObject targetPosition;
@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
+        targetPosition = GameObject.FindWithTag("Main_gangrim");
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
     }
 
@@ -50,7 +50,6 @@ public class Enemy : MonoBehaviour
 
     void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
-
         //현재는 플레이어를 쫒다가 레이케스트에 닿으면 공격 시작으로 설정되어있습니다.
         Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.blue, 0.01f);
         //변경
@@ -66,7 +65,7 @@ public class Enemy : MonoBehaviour
             StartAttack = false;
         }
 
-        if(targetTransform == null)
+        if (targetTransform == null)
         {
             return;
         }
@@ -90,31 +89,58 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon" && !isHit)
+        if (other.tag == "Weapon")
         {
-            isHit = true;
-            Vector3 reactVec = transform.position - other.transform.position;
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.back;
-            rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
+            player = other.GetComponent<HitScript>().Player;
+            player.enemy = this;
+            property = player.GetComponent<PropertySkill>();
 
-            HitScript hit;
-            hit = other.GetComponent<HitScript>();
 
-            Gauge.sGauge += hit.damage;
-            curHearth -= hit.damage;
-            
-            Debug.Log("Weapon: " + curHearth);
+            if (player.isAttack)
+            {
+                if (damageEffect == null)
+                {
+                    damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    damageEffect.transform.position = transform.position;
+                }
+                damageEffect.SetActive(false);
+                damageEffect.SetActive(true);
+
+                if (property.Debuff == true)
+                {
+                    this.chasespeed = 1f;
+                    StartCoroutine(GetDebuffCor());
+                }
+
+                if (property.Stun == true)
+                {
+                    this.chasespeed = 0f;
+                    StartCoroutine(GetStunCor());
+                }
+
+                Vector3 reactVec = transform.position - other.transform.position;
+                reactVec = reactVec.normalized;
+                reactVec += Vector3.back;
+                rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
+
+                HitScript hit;
+                hit = other.GetComponent<HitScript>();
+
+                Gauge.sGauge += hit.damage;
+                curHearth -= hit.damage;
+
+                Debug.Log("Weapon: " + curHearth);
+            }
         }
-        else
-        {
-            isHit = false;
-        }
+
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
@@ -122,4 +148,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    IEnumerator GetDebuffCor()
+    {
+        yield return new WaitForSeconds(5.0f);
+        player.E_skillCheck = false;
+        player.F_skillCheck = false;
+        property.Debuff = false;
+        this.chasespeed = 3f;
+    }
+
+    IEnumerator GetStunCor()
+    {
+        yield return new WaitForSeconds(10.0f);
+        player.R_skillCheck = false;
+        player.F_skillCheck = false;
+        property.Stun = false;
+        this.chasespeed = 3f;
+    }
 }

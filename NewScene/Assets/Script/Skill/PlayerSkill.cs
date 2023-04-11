@@ -8,20 +8,29 @@ public class PlayerSkill : MonoBehaviour
 {
 
     private Vector3 mousePos;
+    private Vector3 Dir;
+    private Vector3 DashTarget;
+
     [Header("WindSkill")]
     WindStorm windskill;
+    Main_Player player;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
+    public bool isTest;
+    public bool RainSkillCheck;
+
+    private bool CloudisDelay = true;
+    private bool isDash;
 
     [Header("CloudSkill")]
     public static PlayerSkill Instance;
+
     public TrailRenderer trailEffect;
     public Transform CloudPos;
     public GameObject Cloudprab;
     public GameObject WindSkillPrefab;
-    bool CloudisDelay = true;
 
     [Header("RainDropSkill")]
     private Vector3 posUp;
@@ -36,31 +45,47 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillCool;
     public float maxAbilityDistance;
 
-    public bool isTest;
-    public bool RainSkillCheck;
 
     private void Start()
     {
+        player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
-        
+        Instance = this;
     }
 
     void Update()
     {
-        WindSkill();
+
         CloudSkill();
         RainDropSkill();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.tag == "Platform" && Vector3.Distance(hit.point, transform.position) < 15f)
+                {
+                    player.Anim.SetTrigger("Dash");
+                    DashTarget = hit.point;
+                    Dir = DashTarget - transform.position;
+                    isDash = true;
+                    player.isAttack = true;
+                    Debug.Log(DashTarget);
+                }
+            }
+        }
+        if (isDash)
+        {
+            Dash();
+        }
 
         //비 스킬 이미지 인풋
-        if(isSkillUse)
+        if (isSkillUse)
         {
-           
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity,7))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 if (hit.collider.gameObject != this.gameObject)
                 {
@@ -74,20 +99,24 @@ public class PlayerSkill : MonoBehaviour
             distance = Mathf.Min(distance, maxAbilityDistance);
 
             var newHitPos = transform.position + hitPosDir * distance;
-            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z) + hitPosDir * distance;
+            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y, transform.position.z) + hitPosDir * distance;
             ability2Canvas.transform.position = (newHitPos);
-            ability2Canvas.transform.eulerAngles = Vector3.zero;
         }
     }
 
-    public void WindSkill()
+    public void Dash()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Vector3.Distance(DashTarget, transform.position) > 0.2f)
         {
-            
+            transform.forward = Dir;
+            transform.position = transform.position + Dir * Time.deltaTime * 3f;
+        }
+        else
+        {
+            isDash = false;
+            player.isAttack = false;
         }
     }
-
     public GameObject WindTest()
     {
         GameObject temp = Instantiate(WindSkillPrefab, transform.position, Quaternion.identity);
@@ -117,20 +146,28 @@ public class PlayerSkill : MonoBehaviour
                         transform.LookAt(rayHit.point);
                     }
                 }
-                StartCoroutine(CloudTime());
+                StartCoroutine(CloudTimeCor());
             }
         }
     }
 
     public void RainDropSkill()
     {
-        if (Input.GetKeyDown(KeyCode.F) && isSkillUse)
+
+        if (Input.GetKeyDown(KeyCode.F) && isSkillUse && !RainSkillCheck)
         {
             SkillRange.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
             RainSkillCheck = true;
         }
-        if (Input.GetMouseButton(0) && RainSkillCheck == true)
+        else if (Input.GetKeyDown(KeyCode.F))
+        {
+            SkillRange.GetComponent<Image>().enabled = false;
+            targetCircle.GetComponent<Image>().enabled = false;
+            RainSkillCheck = false;
+        }
+
+        if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
@@ -149,7 +186,7 @@ public class PlayerSkill : MonoBehaviour
                 isSkillUse = false;
                 RainSkill.RainDrop();
                 isTest = true;
-                StartCoroutine(TestCor());
+                StartCoroutine(RainCor());
             }
             else if (isTest)
             {
@@ -160,9 +197,9 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    IEnumerator TestCor()
+    IEnumerator RainCor()
     {
-        while(RainSkillTime <= RainSkillCool)
+        while (RainSkillTime <= RainSkillCool)
         {
             RainSkillTime += Time.deltaTime;
             yield return new WaitForEndOfFrame();
@@ -170,13 +207,13 @@ public class PlayerSkill : MonoBehaviour
         Rainnig();
         isTest = !isTest;
     }
-   
 
-    IEnumerator CloudTime()
+
+    IEnumerator CloudTimeCor()
     {
         GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
         Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
-        CloudRigid.velocity = transform.forward * 50;
+        CloudRigid.velocity = transform.forward * 10;
         Destroy(intantCloud, 2);
         yield return new WaitForSeconds(3f);
         CloudisDelay = true;
