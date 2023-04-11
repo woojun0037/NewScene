@@ -39252,8 +39252,6 @@ GameObject:
   - component: {fileID: 8529088290604995119}
   - component: {fileID: 8529088290604995117}
   - component: {fileID: 8529088290604995116}
-  - component: {fileID: 3989389388287136074}
-  - component: {fileID: 3318083700770588205}
   m_Layer: 0
   m_Name: Explosion_Control
   m_TagString: Untagged
@@ -44125,33 +44123,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!136 &3989389388287136074
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8529088290604995118}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 5.33
-  m_Height: 0.000019999998
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0.000000029802322}
---- !u!114 &3318083700770588205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8529088290604995118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf6a9b8f2b5711e47b308cff3046ee87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagsToCheck: []
-  impactRaidus: 0
-  destroyDelay: 0
-  damage: 0
