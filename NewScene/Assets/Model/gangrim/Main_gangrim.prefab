@@ -2443,8 +2443,8 @@ MonoBehaviour:
   weaponCollider: {fileID: 7101619276036249288}
   currentATKEffect: {fileID: 0}
   RotateSpeed: 10
+  DashSpeed: 5
   Anim: {fileID: 371447735453508158}
-  enemy: {fileID: 0}
   AtkEffect:
   - {fileID: 5036797310264405828, guid: a629c67ec384a4b468035435edffd9f6, type: 3}
   - {fileID: 4751119674105741691, guid: aeb40bf2987016c4d853c6c24ae29331, type: 3}
@@ -2507,8 +2507,6 @@ MonoBehaviour:
   isSkillOn: 0
   isCollision: 0
   isSkillUse: 1
-  isTest: 0
-  RainSkillCheck: 0
   trailEffect: {fileID: 0}
   CloudPos: {fileID: 6074564347478180064}
   Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
@@ -2521,6 +2519,8 @@ MonoBehaviour:
   RainSkillTime: 3
   RainSkillCool: 3
   maxAbilityDistance: 5
+  isTest: 0
+  RainSkillCheck: 0
 --- !u!114 &371447735453508156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,8 +2536,6 @@ MonoBehaviour:
   BuffTime: 6
   DebuffTime: 5
   StunTime: 3
-  SkillUse: {fileID: 0}
-  enemy: {fileID: 0}
   SpeedUp: 0
   Debuff: 0
   Stun: 0
