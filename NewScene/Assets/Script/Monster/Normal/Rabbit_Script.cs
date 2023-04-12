@@ -11,6 +11,9 @@ public class Rabbit_Script : Enemy
     [SerializeField]
     float SetY;
 
+    [SerializeField]
+    float attackDelaytime;
+
     bool isattack;
     bool DontMove;
 
@@ -48,12 +51,19 @@ public class Rabbit_Script : Enemy
 
     protected override void monsterMove()
     {
+        base.monsterMove();
 
         if (!DontMove)
         {
             animator.SetBool("Move", true);
-            base.monsterMove();
+            agent.isStopped = false;
         }
+        else
+        {
+            animator.SetBool("Move", false);
+            agent.isStopped = true;
+        }
+
 
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
@@ -61,7 +71,7 @@ public class Rabbit_Script : Enemy
         //현재 경로에서 목표 지점까지 남아있는 거리
         if (agent.remainingDistance <= 2)
         {
-            if(!first_attack)
+            if (!first_attack)
             {
                 first_attack = true;
             }
@@ -77,6 +87,7 @@ public class Rabbit_Script : Enemy
             }
 
         }
+
     }
 
 
@@ -93,6 +104,7 @@ public class Rabbit_Script : Enemy
         animator.SetBool("Move", false);
         yield return new WaitForSeconds(0.7f);
 
+        yield return new WaitForSeconds(attackDelaytime);
         isattack = false;
         DontMove = false;
 

@@ -433,6 +433,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Rabbit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7693009584103412622, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -476,6 +480,10 @@ PrefabInstance:
     - target: {fileID: 7693009584103412622, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7875025569145635272, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
+      propertyPath: attackDelaytime
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}

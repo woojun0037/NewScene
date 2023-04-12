@@ -40,8 +40,19 @@ public class Seonbi_Script : Enemy
 
     protected override void monsterMove()
     {
-        animator.SetBool("Move", true);
+
         base.monsterMove();
+
+        if (!DontMove) //공격중에는 이동 기능 정지
+        {
+            animator.SetBool("Move", true);
+            agent.isStopped = false;
+        }
+        else
+        {
+            animator.SetBool("Move", false);
+            agent.isStopped = true;
+        }
 
 
         Vector3 targety = targetTransform.position;
@@ -65,16 +76,29 @@ public class Seonbi_Script : Enemy
 
     IEnumerator attacker()
     {
-        Vector3 target_ = transform.position;
-        target_.y = SetY+0.5f;
+        DontMove = true;
 
+        animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.9f);
+
+        Vector3 targety = targetTransform.position;
+        targety.y = SetY;
+
+        Vector3 target_ = transform.position;
+        target_.y = SetY + 0.5f;
+
+        transform.LookAt(targety);
+
         Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
+
         yield return new WaitForSeconds(1.3f);
+
         animator.SetBool("Attack", false);
+
         yield return new WaitForSeconds(0.7f);
         isattack = false;
+        DontMove = false;
     }
 
 }
