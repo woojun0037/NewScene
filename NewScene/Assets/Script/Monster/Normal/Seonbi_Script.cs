@@ -15,7 +15,7 @@ public class Seonbi_Script : Enemy
     bool isattack;
     bool DontMove;
 
-    public Rigidbody SeonbiBullet; 
+    public Rigidbody SeonbiBullet;
 
     public float monsterhp;
     protected override void Awake()

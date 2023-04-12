@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,22 +28,26 @@ public class Enemy : MonoBehaviour
     PropertySkill property;
     Main_Player player;
 
-    [SerializeField] GameObject targetPosition;
-    [SerializeField] Transform targetTransform;
+    public Transform targetTransform;
+    public NavMeshAgent agent = null;
 
     int hitNum;
     float delay;
 
-    void Awake()
+    protected virtual void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         boxCollier = GetComponent<BoxCollider>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
     }
 
-    void Start()
+    protected virtual void Start()
     {
-        targetPosition = GameObject.FindWithTag("Main_gangrim");
+        agent.speed = chasespeed;
+
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
+        agent.enabled = true;
     }
 
     void Update()
@@ -52,42 +57,14 @@ public class Enemy : MonoBehaviour
         NotDamaged();
     }
 
-    void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
+
+    protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
-        //현재는 플레이어를 쫒다가 레이케스트에 닿으면 공격 시작으로 설정되어있습니다.
-        Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.blue, 0.01f);
-        //변경
-        if (Physics.Raycast(transform.position, transform.forward, out hit, MaxDistance))
-        {
-            if (hit.collider.tag == "Main_gangrim")
-            {
-                StartAttack = true;
-            }
-        }
-        else
-        {
-            StartAttack = false;
-        }
-
-        if (targetTransform == null)
-        {
-            return;
-        }
-
-        if (StartAttack) //start attack
-        {
-            transform.LookAt(targetTransform); //LookAt은 player가 y가면 회전해서 나중에 변경
-                                               //몬스터가 움직이지 않음 not move 나중에 패턴에 따라 변경(돌진 등)
-        }
-        else //player chase
-        {
-            transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition.transform.position, chasespeed * Time.deltaTime);
-            transform.LookAt(targetTransform);
-        }
-
+        agent.speed = chasespeed;
+        agent.destination = targetTransform.position;
     }
 
-    void DieMonster()
+    protected void DieMonster()
     {
         if (curHearth < 1)
         {
@@ -95,7 +72,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void NotDamaged()
+    protected void NotDamaged()
     {
         if(hitNum > 0)
         {

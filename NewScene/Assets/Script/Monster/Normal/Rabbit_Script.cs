@@ -6,7 +6,7 @@ public class Rabbit_Script : Enemy
 {
     [SerializeField]
     GameObject attacker_Col;
-    
+
     private Animator animator;
     [SerializeField]
     float SetY;
