@@ -8,6 +8,7 @@ public class BossMonster_Tiger : MonoBehaviour
     [SerializeField] private Main_Player player;
     [SerializeField] private GameObject[] effects;
 
+    [SerializeField] private float TigerHP;
     [SerializeField] private float attackRange;
     [SerializeField] private float moveSpeed;
     [SerializeField] private float attackCoolTime;
@@ -84,6 +85,21 @@ public class BossMonster_Tiger : MonoBehaviour
             isDash = false;
             player.GetDamage(dashAttackDamage);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Weapone")
+        {
+            TigerHP -= 1;
+            StartCoroutine(ColorCheckCor());
+        }
+    }
+
+    IEnumerator ColorCheckCor()
+    {
+
+        yield return null;
     }
 
     private void Move()
