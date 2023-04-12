@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
 
     int hitNum;
     float delay;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
