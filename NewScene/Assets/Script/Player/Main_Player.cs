@@ -39,8 +39,6 @@ public class Main_Player : MonoBehaviour
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
 
-    int hitState;
-    internal int HitState => hitState;
     private void Awake()
     {
         hit = weaponCollider.gameObject.GetComponent<HitScript>();
@@ -48,7 +46,6 @@ public class Main_Player : MonoBehaviour
 
     void Update()
     {
-        AttackInput();
         Skill_E();
         Skill_F();
         Skill_R();
@@ -57,13 +54,18 @@ public class Main_Player : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        AttackInput();
         CalTargetPos();
     }
 
+<<<<<<< HEAD
+=======
     public void OnWeapon(int isOn)
     {
         hit.gameObject.SetActive(isOn == 0 ? false : true);
     }
+
+>>>>>>> Wooju
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;
@@ -75,26 +77,22 @@ public class Main_Player : MonoBehaviour
         isClicks[0] = true;
         isClicks[1] = false;
         isClicks[2] = false;
-        hitState = 0;
     }
 
     private void AttackInput()
     { 
         if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
-            hitState = 1;
             isAttack = true;
             Anim.SetTrigger("isAttack_1");
         }
-        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
-            hitState = 2;
             isAttack = true;
             Anim.SetTrigger("isAttack_2");
         }
-        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
-            hitState = 3;
             isAttack = true;
             Anim.SetTrigger("isAttack_3");
         }
@@ -136,7 +134,6 @@ public class Main_Player : MonoBehaviour
         {
             currentATKEffect = Instantiate(AtkEffect[on_count], transform.position, AtkEffect[on_count].transform.rotation);
         }
-
     }
 
     public void ATK_Effect_Off()
