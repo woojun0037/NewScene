@@ -35,8 +35,7 @@ public class MotionTrail : MonoBehaviour
 
     private void Start()
     {
-        trailRenderer = GetComponent<TrailRenderer>();
-        trailRenderer.colorGradient = trailGradient;
+       
     }
 
     private void OnEnable()

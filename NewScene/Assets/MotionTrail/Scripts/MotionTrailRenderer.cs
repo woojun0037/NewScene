@@ -31,8 +31,9 @@ public class MotionTrailRenderer : MonoBehaviour {
         this.GetComponent<MeshFilter>().mesh = BakedMeshResult; //해당 메쉬필터에 구운 메쉬를 렌더링한다.
         //this.GetComponent<MeshRenderer>().enabled = true;
         
-        for (float e = 0; e < 1.1; e += ValueDetail) //X번 반복한다.
+        for (float e = 0; e < 1.7; e += ValueDetail) //X번 반복한다.
         {
+            Debug.Log(ValueDetail);
             this.GetComponent<MeshRenderer>().material.SetFloat(ValueName, e);
             yield return new WaitForSeconds(ValueTimeDelay); //X초마다 반복
         }
