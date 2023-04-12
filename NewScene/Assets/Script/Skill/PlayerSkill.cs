@@ -56,7 +56,6 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-
         CloudSkill();
         RainDropSkill();
 

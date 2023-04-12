@@ -58,6 +58,14 @@ public class Main_Player : MonoBehaviour
         CalTargetPos();
     }
 
+<<<<<<< HEAD
+=======
+    public void OnWeapon(int isOn)
+    {
+        hit.gameObject.SetActive(isOn == 0 ? false : true);
+    }
+
+>>>>>>> Wooju
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;
