@@ -64,6 +64,7 @@ public class Main_Player : MonoBehaviour
     {
         hit.gameObject.SetActive(isOn == 0 ? false : true);
     }
+
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;

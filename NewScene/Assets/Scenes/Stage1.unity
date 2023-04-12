@@ -45408,13 +45408,14 @@ MonoBehaviour:
   - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
   - {fileID: 280351933351309158, guid: 83b9c63be808fd842aef6fcdbb2fa6e8, type: 3}
   - {fileID: 2603312678546684873, guid: 58aa20a37616a8e4c9d3e35b5fd78fe7, type: 3}
-  TigerHP: 0
+  CurrentTigerHP: 100
+  MaxTigerHP: 100
   attackRange: 10
   moveSpeed: 0.4
   attackCoolTime: 5
   baseAttackDamage: 3
   dashAttackDamage: 10
-  mat: {fileID: 2830159858170750480}
+  mat: {fileID: 2100000, guid: 24fad0223569d9c429dc8b1169e32382, type: 2}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0
