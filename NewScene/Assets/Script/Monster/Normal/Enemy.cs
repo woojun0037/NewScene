@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,26 +27,22 @@ public class Enemy : MonoBehaviour
     PropertySkill property;
     Main_Player player;
 
-    public Transform targetTransform;
-
-    public NavMeshAgent agent = null;
+    [SerializeField] GameObject targetPosition;
+    [SerializeField] Transform targetTransform;
 
     int hitNum;
     float delay;
-    protected virtual void Awake()
+
+    void Awake()
     {
         rigid = GetComponent<Rigidbody>();
         boxCollier = GetComponent<BoxCollider>();
-        agent = GetComponent<NavMeshAgent>();
-        agent.enabled = false;
     }
 
-    protected virtual void Start()
+    void Start()
     {
-        agent.speed = chasespeed;
-
+        targetPosition = GameObject.FindWithTag("Main_gangrim");
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-        agent.enabled = true;
     }
 
     void Update()
@@ -57,22 +52,50 @@ public class Enemy : MonoBehaviour
         NotDamaged();
     }
 
-    protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
+    void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
-        agent.speed = chasespeed;
-        agent.destination = targetTransform.position;
+        //현재는 플레이어를 쫒다가 레이케스트에 닿으면 공격 시작으로 설정되어있습니다.
+        Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.blue, 0.01f);
+        //변경
+        if (Physics.Raycast(transform.position, transform.forward, out hit, MaxDistance))
+        {
+            if (hit.collider.tag == "Main_gangrim")
+            {
+                StartAttack = true;
+            }
+        }
+        else
+        {
+            StartAttack = false;
+        }
+
+        if (targetTransform == null)
+        {
+            return;
+        }
+
+        if (StartAttack) //start attack
+        {
+            transform.LookAt(targetTransform); //LookAt은 player가 y가면 회전해서 나중에 변경
+                                               //몬스터가 움직이지 않음 not move 나중에 패턴에 따라 변경(돌진 등)
+        }
+        else //player chase
+        {
+            transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition.transform.position, chasespeed * Time.deltaTime);
+            transform.LookAt(targetTransform);
+        }
+
     }
 
-    protected void DieMonster()
+    void DieMonster()
     {
         if (curHearth < 1)
         {
-            agent.enabled = false;
             Destroy(gameObject);
         }
     }
 
-    protected void NotDamaged()
+    void NotDamaged()
     {
         if(hitNum > 0)
         {
