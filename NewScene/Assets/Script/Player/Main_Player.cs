@@ -41,6 +41,7 @@ public class Main_Player : MonoBehaviour
 
     int hitState;
     internal int HitState => hitState;
+
     private void Awake()
     {
         hit = weaponCollider.gameObject.GetComponent<HitScript>();
@@ -60,9 +61,14 @@ public class Main_Player : MonoBehaviour
         CalTargetPos();
     }
 
-    public void OnWeapon(int isOn)
+    public void OnWeapon()
     {
-        hit.gameObject.SetActive(isOn == 0 ? false : true);
+        hit.gameObject.SetActive(true);
+    }
+
+    public void OffWeapon()
+    {
+        hit.gameObject.SetActive(false);
     }
     public void SetAnimCheck(int count)
     {
