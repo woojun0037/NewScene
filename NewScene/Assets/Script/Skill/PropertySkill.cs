@@ -11,7 +11,7 @@ public class PropertySkill : MonoBehaviour
 
     public Main_Player SkillUse;
     public Enemy enemy;
-
+    public GameObject motion;
     public float SpeedUp = 1.2f;
 
     public bool Debuff = false;
@@ -34,6 +34,7 @@ public class PropertySkill : MonoBehaviour
     {
         if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
         {
+            motion.gameObject.SetActive(true);
             SkillUse.E_skillCheck = false;
             SkillUse.R_skillCheck = false;
 
@@ -53,7 +54,7 @@ public class PropertySkill : MonoBehaviour
         yield return new WaitForSeconds(BuffTime);
         SkillUse.MoveSpeed = 6f;
         SpeedUp = 1.2f;
-
+        motion.gameObject.SetActive(false);
         SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);

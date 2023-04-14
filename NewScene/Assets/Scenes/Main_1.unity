@@ -12364,7 +12364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1204659915334696, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4711018405348588, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
       propertyPath: m_RootOrder
@@ -13505,6 +13505,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 30e3a54c12bc780438417c3168041ccc, type: 3}
   m_PrefabInstance: {fileID: 695406191}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &695727280 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1204659915334696, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
+  m_PrefabInstance: {fileID: 643108713}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &697086028
 GameObject:
   m_ObjectHideFlags: 0
@@ -13750,7 +13755,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.46105456, g: 0.4811321, b: 0.34344962, a: 1}
+  m_Color: {r: 0.5250979, g: 0.5283019, b: 0.505874, a: 1}
   m_Intensity: 5.56
   m_Range: 10
   m_SpotAngle: 30
@@ -45639,6 +45644,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 371447735453508156, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: motion
+      value: 
+      objectReference: {fileID: 695727280}
     - target: {fileID: 371447735453508158, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 1
