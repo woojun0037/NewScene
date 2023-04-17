@@ -8,12 +8,13 @@ public class Main_Player : MonoBehaviour
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider weaponCollider;
     [SerializeField] GameObject currentATKEffect;
-
     [SerializeField] float RotateSpeed = 10f;
 
     private HitScript hit;
     public Animator Anim;
     public Enemy enemy;
+    public MainCamera mainCamera;
+
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -21,13 +22,11 @@ public class Main_Player : MonoBehaviour
     private bool isMove = false;
 
     public GameObject[] AtkEffect;
+    public bool[] isClicks;
 
     public bool E_skillCheck;
     public bool R_skillCheck;
     public bool F_skillCheck;
-
-    public bool[] isClicks;
-
     public bool isAttack = false;
     public bool attackInputOn;
 
@@ -38,6 +37,8 @@ public class Main_Player : MonoBehaviour
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
+    public float Duration;
+    public float Magnitude;
 
     int hitState;
     internal int HitState => hitState;
@@ -88,18 +89,21 @@ public class Main_Player : MonoBehaviour
     { 
         if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
+            StartCoroutine(mainCamera.Shake(Duration, Magnitude));
             hitState = 1;
             isAttack = true;
             Anim.SetTrigger("isAttack_1");
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
+            //StartCoroutine(mainCamera.Shake(.15f, .4f));
             hitState = 2;
             isAttack = true;
             Anim.SetTrigger("isAttack_2");
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
+            //StartCoroutine(mainCamera.Shake(.15f, .4f));
             hitState = 3;
             isAttack = true;
             Anim.SetTrigger("isAttack_3");
