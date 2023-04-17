@@ -4,26 +4,20 @@ using UnityEngine;
 
 public class Rabbit_Script : Enemy
 {
-    [SerializeField]
-    GameObject attacker_Col;
+    [SerializeField] GameObject attacker_Col;
+    public GameObject ragdoll_obj;
 
+    [SerializeField] float SetY;
+    [SerializeField] float attackDelaytime;
+
+    public ParticleSystem particle_attack;
     private Animator animator;
-    [SerializeField]
-    float SetY;
-
-    [SerializeField]
-    float attackDelaytime;
 
     bool isattack;
     bool DontMove;
 
-    //RaycastHit hit;
-    //[SerializeField]
-    //private float Distance;
-    //bool meetplayer;
-    float time;
-
-    bool first_attack = false; //토끼는 에이전트 문제로 바로 공격함 -> 이를 방지
+    [SerializeField]
+    private float Dist;
 
     protected override void Awake()
     {
@@ -35,19 +29,29 @@ public class Rabbit_Script : Enemy
         base.Start();
         isattack = false;
         DontMove = false;
-        time = 0;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
     }
+    public bool animatordie;
 
-    // Update is called once per frame
     void Update()
     {
+        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
+
         DieMonster();
         monsterMove();
         NotDamaged();
     }
 
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
+            gameObject.SetActive(false);
+            agent.enabled = false;
+        }
+    }
 
     protected override void monsterMove()
     {
@@ -68,22 +72,13 @@ public class Rabbit_Script : Enemy
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        //현재 경로에서 목표 지점까지 남아있는 거리
-        if (agent.remainingDistance <= 2)
+        if (Dist <= 2)
         {
-            if (!first_attack)
+            if (!isattack)
             {
-                first_attack = true;
-            }
-            else
-            {
-                Debug.Log("remainingDistance");
-                if (!isattack)
-                {
-                    transform.LookAt(targety);
-                    isattack = true;
-                    StartCoroutine("attacker");
-                }
+                transform.LookAt(targety);
+                isattack = true;
+                StartCoroutine("attacker");
             }
 
         }
@@ -94,13 +89,18 @@ public class Rabbit_Script : Enemy
 
     IEnumerator attacker()
     {
-        DontMove = true; //공격 중에 이동 정지
-
+        DontMove = true;
         animator.SetBool("Attack", true);
+
         attacker_Col.SetActive(true);
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.9f);
+        particle_attack.Play();
+        yield return new WaitForSeconds(0.4f);
+
         attacker_Col.SetActive(false);
         animator.SetBool("Attack", false);
+        particle_attack.Stop();
+
         animator.SetBool("Move", false);
         yield return new WaitForSeconds(0.7f);
 

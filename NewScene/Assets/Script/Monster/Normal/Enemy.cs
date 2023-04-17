@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    protected void DieMonster()
+    protected virtual void DieMonster()
     {
         if (curHearth < 1)
         {

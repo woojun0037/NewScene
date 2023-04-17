@@ -5,17 +5,15 @@ using UnityEngine;
 
 public class Seonbi_Script : Enemy
 {
-    //private NavMeshAgent agent = null;
     private Animator animator;
 
-    [SerializeField]
-    float SetY;
-    RaycastHit hit;
+    [SerializeField] float SetY;
 
     bool isattack;
     bool DontMove;
 
     public Rigidbody SeonbiBullet;
+    public GameObject ragdoll_obj;
 
     public float monsterhp;
     protected override void Awake()
@@ -29,8 +27,6 @@ public class Seonbi_Script : Enemy
         base.Start();
         animator = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         monsterMove();
@@ -43,7 +39,7 @@ public class Seonbi_Script : Enemy
 
         base.monsterMove();
 
-        if (!DontMove) //공격중에는 이동 기능 정지
+        if (!DontMove)
         {
             animator.SetBool("Move", true);
             agent.isStopped = false;
@@ -54,11 +50,9 @@ public class Seonbi_Script : Enemy
             agent.isStopped = true;
         }
 
-
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        //현재 경로에서 목표 지점까지 남아있는 거리
         if (agent.remainingDistance <= 5)
         {
             if (!isattack)
@@ -68,12 +62,20 @@ public class Seonbi_Script : Enemy
                 StartCoroutine("attacker");
 
             }
-
         }
 
     }
 
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
 
+            gameObject.SetActive(false);
+            agent.enabled = false;
+        }
+    }
     IEnumerator attacker()
     {
         DontMove = true;
