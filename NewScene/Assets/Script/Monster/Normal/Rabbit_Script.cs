@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class Rabbit_Script : Enemy
 {
-    [SerializeField]
-    GameObject attacker_Col;
-    public ParticleSystem particle_attack;
-
-    private Animator animator;
-    [SerializeField]
-    float SetY;
-
-    [SerializeField]
-    float attackDelaytime;
+    [SerializeField] GameObject attacker_Col;
     public GameObject ragdoll_obj;
+
+    [SerializeField] float SetY;
+    [SerializeField] float attackDelaytime;
+
+    public ParticleSystem particle_attack;
+    private Animator animator;
 
     bool isattack;
     bool DontMove;
 
-    //RaycastHit hit;
-    //[SerializeField]
-    //private float Distance;
-    //bool meetplayer;
-    float time;
     [SerializeField]
     private float Dist;
 
@@ -37,13 +29,11 @@ public class Rabbit_Script : Enemy
         base.Start();
         isattack = false;
         DontMove = false;
-        time = 0;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
     }
     public bool animatordie;
 
-    // Update is called once per frame
     void Update()
     {
         Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
@@ -57,13 +47,9 @@ public class Rabbit_Script : Enemy
     {
         if (curHearth < 1)
         {
-            //Destroy(agent);
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-
             gameObject.SetActive(false);
             agent.enabled = false;
-            //animator.applyRootMotion = false;
-            //Destroy(gameObject);
         }
     }
 
@@ -86,17 +72,14 @@ public class Rabbit_Script : Enemy
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        //현재 경로에서 목표 지점까지 남아있는 거리
         if (Dist <= 2)
         {
-            Debug.Log("remainingDistance");
             if (!isattack)
             {
                 transform.LookAt(targety);
                 isattack = true;
                 StartCoroutine("attacker");
             }
-
 
         }
 
@@ -106,8 +89,7 @@ public class Rabbit_Script : Enemy
 
     IEnumerator attacker()
     {
-        DontMove = true; //공격 중에 이동 정지
-
+        DontMove = true;
         animator.SetBool("Attack", true);
 
         attacker_Col.SetActive(true);
