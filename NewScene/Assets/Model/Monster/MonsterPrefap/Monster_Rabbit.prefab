@@ -957,7 +957,7 @@ Transform:
   m_GameObject: {fileID: 7028113343770036532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.2799406, y: 2.279941, z: 2.2799406}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 878848937862898356}
@@ -979,7 +979,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!136 &7875025569145635277
 CapsuleCollider:
@@ -991,10 +991,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.0081292
+  m_Radius: 0.32990158
+  m_Height: 1.0081294
   m_Direction: 2
-  m_Center: {x: -0.0040646195, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &7875025569145635279
 Animator:
   serializedVersion: 5
@@ -1028,8 +1028,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToGive: 0
-  maxHearth: 3
-  curHearth: 3
+  maxHearth: 2
+  curHearth: 2
   MaxDistance: 2
   chasespeed: 5
   moveSpeed: 0
@@ -1040,6 +1040,9 @@ MonoBehaviour:
   attacker_Col: {fileID: 7875025568986392054}
   SetY: 2
   attackDelaytime: 1
+  ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
+  Dist: 0
+  animatordie: 0
 --- !u!195 &378713205
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1049,7 +1052,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7028113343770036532}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

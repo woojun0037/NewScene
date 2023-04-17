@@ -13,6 +13,7 @@ public class Rabbit_Script : Enemy
 
     [SerializeField]
     float attackDelaytime;
+    public GameObject ragdoll_obj;
 
     bool isattack;
     bool DontMove;
@@ -22,8 +23,8 @@ public class Rabbit_Script : Enemy
     //private float Distance;
     //bool meetplayer;
     float time;
-
-    bool first_attack = false; //토끼는 에이전트 문제로 바로 공격함 -> 이를 방지
+    [SerializeField]
+    private float Dist;
 
     protected override void Awake()
     {
@@ -39,15 +40,31 @@ public class Rabbit_Script : Enemy
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
     }
+    public bool animatordie;
 
     // Update is called once per frame
     void Update()
     {
+        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
+
         DieMonster();
         monsterMove();
         NotDamaged();
     }
 
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            //Destroy(agent);
+            GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
+
+            gameObject.SetActive(false);
+            agent.enabled = false;
+            //animator.applyRootMotion = false;
+            //Destroy(gameObject);
+        }
+    }
 
     protected override void monsterMove()
     {
@@ -69,22 +86,16 @@ public class Rabbit_Script : Enemy
         targety.y = SetY;
 
         //현재 경로에서 목표 지점까지 남아있는 거리
-        if (agent.remainingDistance <= 2)
+        if (Dist <= 2)
         {
-            if (!first_attack)
+            Debug.Log("remainingDistance");
+            if (!isattack)
             {
-                first_attack = true;
+                transform.LookAt(targety);
+                isattack = true;
+                StartCoroutine("attacker");
             }
-            else
-            {
-                Debug.Log("remainingDistance");
-                if (!isattack)
-                {
-                    transform.LookAt(targety);
-                    isattack = true;
-                    StartCoroutine("attacker");
-                }
-            }
+
 
         }
 

@@ -16,6 +16,7 @@ public class Seonbi_Script : Enemy
     bool DontMove;
 
     public Rigidbody SeonbiBullet;
+    public GameObject ragdoll_obj;
 
     public float monsterhp;
     protected override void Awake()
@@ -73,7 +74,17 @@ public class Seonbi_Script : Enemy
 
     }
 
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
 
+            gameObject.SetActive(false);
+            agent.enabled = false;
+
+        }
+    }
     IEnumerator attacker()
     {
         DontMove = true;
