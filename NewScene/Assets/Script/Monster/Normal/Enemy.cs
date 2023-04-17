@@ -61,7 +61,9 @@ public class Enemy : MonoBehaviour
     protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
         agent.speed = chasespeed;
-        agent.destination = targetTransform.position;
+        //agent.destination = targetTransform.position;
+        agent.SetDestination(targetTransform.position);
+
     }
 
     protected void DieMonster()
