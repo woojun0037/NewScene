@@ -9,7 +9,8 @@ public class FlyingObj : MonoBehaviour
     public float impactRaidus;
     public float destroyDelay;
     public float damage;
-    private GameObject ImpactFX;
+    public GameObject ImpactFX;
+    Enemy enemy;
 
     void Start()
     {
@@ -18,15 +19,14 @@ public class FlyingObj : MonoBehaviour
 
     private void Update()
     {
-        Destroy(ImpactFX, 2f);
+        Destroy(ImpactFX, 5f);
     }
 
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.tag == "Monster")
-        {
-            Enemy Eny = other.GetComponent<Enemy>();
-            Eny.curHearth -= damage;
-        }
-    }
+    //private void OnTriggerEnter(Collider hit)
+    //{
+    //   if(hit.gameObject.tag == "Monster")
+    //    {
+    //        enemy.curHearth -= damage;
+    //    }
+    //}
 }

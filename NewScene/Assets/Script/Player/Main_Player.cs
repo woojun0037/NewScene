@@ -89,7 +89,6 @@ public class Main_Player : MonoBehaviour
     { 
         if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
-            StartCoroutine(mainCamera.Shake(Duration, Magnitude));
             hitState = 1;
             isAttack = true;
             Anim.SetTrigger("isAttack_1");

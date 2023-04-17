@@ -61,8 +61,8 @@ public class Enemy : MonoBehaviour
     protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
         agent.speed = chasespeed;
-        //agent.destination = targetTransform.position;
-        agent.SetDestination(targetTransform.position);
+        agent.destination = targetTransform.position;
+        //agent.SetDestination(targetTransform.position);
 
     }
 
@@ -89,12 +89,12 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" )
         {
             player = other.GetComponent<HitScript>().Player;
+
             if(player.HitState != hitNum)
-            {
-                //print(name);
+            { 
                 player.enemy = this;
                 property = player.GetComponent<PropertySkill>();
                 hitNum = player.HitState;
@@ -139,7 +139,6 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
-
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);

@@ -10,8 +10,8 @@ public class BlizzardSpawner : MonoBehaviour
     public float destroyDelay;
     public float spawnInterval;
     public float spawnRaius;
-    public float spawnForce;
     public float SpawnTime;
+    public float spawnForce;
     public float spawnIntervalTimer;
 
     public Vector3 spawnOffset;
