@@ -14,7 +14,7 @@ public class RagDollPhysics : MonoBehaviour
         Vector3 dir = transform.position - Player.transform.position;
 
 
-        spineRigidBody.AddForce(dir.normalized * 15000f);
+        spineRigidBody.AddForce(dir.normalized * 10000f);
 
     }
 

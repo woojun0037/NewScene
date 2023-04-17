@@ -39,6 +39,8 @@ public class RagDoll_delete : MonoBehaviour
 
     IEnumerator ObjFadeOut()
     {
+        yield return new WaitForSeconds(2f);
+
         for (int i = 10; i >= 0; i--)
         {
             Debug.Log("ObjFadeOut");

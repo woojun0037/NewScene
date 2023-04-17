@@ -6,6 +6,7 @@ public class Rabbit_Script : Enemy
 {
     [SerializeField]
     GameObject attacker_Col;
+    public ParticleSystem particle_attack;
 
     private Animator animator;
     [SerializeField]
@@ -108,10 +109,16 @@ public class Rabbit_Script : Enemy
         DontMove = true; //공격 중에 이동 정지
 
         animator.SetBool("Attack", true);
+
         attacker_Col.SetActive(true);
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(0.9f);
+        particle_attack.Play();
+        yield return new WaitForSeconds(0.4f);
+
         attacker_Col.SetActive(false);
         animator.SetBool("Attack", false);
+        particle_attack.Stop();
+
         animator.SetBool("Move", false);
         yield return new WaitForSeconds(0.7f);
 
