@@ -94,15 +94,13 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("isAttack_1");
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
-        {
-            //StartCoroutine(mainCamera.Shake(.15f, .4f));
+        {   
             hitState = 2;
             isAttack = true;
             Anim.SetTrigger("isAttack_2");
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
-            //StartCoroutine(mainCamera.Shake(.15f, .4f));
             hitState = 3;
             isAttack = true;
             Anim.SetTrigger("isAttack_3");

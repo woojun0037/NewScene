@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public float MaxDistance;
     public float chasespeed;
     public float moveSpeed;
-
+    
     public bool DebuffCheck;
     public bool StartAttack;
 
@@ -76,10 +76,10 @@ public class Enemy : MonoBehaviour
 
     protected void NotDamaged()
     {
-        if(hitNum > 0)
+        if (hitNum > 0)
         {
             delay += Time.deltaTime;
-            if(delay > 0.1f)
+            if (delay > 0.1f)
             {
                 delay = 0.0f;
                 hitNum = 0;
@@ -89,12 +89,12 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon" )
+        if (other.tag == "Weapon")
         {
             player = other.GetComponent<HitScript>().Player;
 
-            if(player.HitState != hitNum)
-            { 
+            if (player.HitState != hitNum)
+            {
                 player.enemy = this;
                 property = player.GetComponent<PropertySkill>();
                 hitNum = player.HitState;
@@ -139,6 +139,15 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+
+        if(other.tag == "skill")
+        {
+            HitScript hit;
+            hit = other.GetComponent<HitScript>();
+            while(hit != null)
+            curHearth -= hit.damage;
+        }
+
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
@@ -146,6 +155,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);

@@ -9,6 +9,7 @@ public class FlyingObj : MonoBehaviour
     public float impactRaidus;
     public float destroyDelay;
     public float damage;
+    public float DamgeTime;
     public GameObject ImpactFX;
     Enemy enemy;
 
@@ -22,11 +23,11 @@ public class FlyingObj : MonoBehaviour
         Destroy(ImpactFX, 5f);
     }
 
-    //private void OnTriggerEnter(Collider hit)
-    //{
-    //   if(hit.gameObject.tag == "Monster")
-    //    {
-    //        enemy.curHearth -= damage;
-    //    }
-    //}
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.tag == "Monster")
+        {
+            enemy.curHearth -= 1f;
+        }
+    }
 }

@@ -4893,9 +4893,11 @@ GameObject:
   - component: {fileID: 3758474327197876532}
   - component: {fileID: 3758474327197876534}
   - component: {fileID: 3758474327197876533}
+  - component: {fileID: 2298681810106799268}
+  - component: {fileID: 8599593914874117149}
   m_Layer: 0
   m_Name: Indicator_Emissive_01
-  m_TagString: Untagged
+  m_TagString: skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9773,6 +9775,35 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!136 &2298681810106799268
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758474327197876539}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 5.5
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8599593914874117149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3758474327197876539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2baf59f071ab2a64cb61ac965bca1b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  damage: 1
+  isAttack: 0
 --- !u!1 &6203414882084728500
 GameObject:
   m_ObjectHideFlags: 0
@@ -24489,7 +24520,8 @@ MonoBehaviour:
   impactRaidus: 1
   destroyDelay: 1
   damage: 1
-  ImpactFX: {fileID: 0}
+  DamgeTime: 0
+  ImpactFX: {fileID: 8529088288966317368}
 --- !u!1 &8529088289036397602
 GameObject:
   m_ObjectHideFlags: 0
@@ -24501,7 +24533,7 @@ GameObject:
   - component: {fileID: 8529088289036397603}
   - component: {fileID: 8529088289036397601}
   - component: {fileID: 8529088289036397600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Explosion_Ray_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24517,7 +24549,7 @@ Transform:
   m_GameObject: {fileID: 8529088289036397602}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.536613, y: 2.536613, z: 2.536613}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8529088290604995119}
@@ -28178,9 +28210,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -28352,7 +28384,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 2147483647
+      m_Bits: 0
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
