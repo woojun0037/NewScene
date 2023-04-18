@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.3
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: c9fed712afbdb6b49b8528f7cfbae6ee, type: 2}
 --- !u!1001 &7334646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +133,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
       propertyPath: m_Name
       value: TFF_Aspen_Tree_01A_LOD_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
       propertyPath: m_RootOrder
@@ -278,6 +286,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -351,6 +367,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_04A (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
       propertyPath: m_RootOrder
@@ -426,6 +450,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -500,6 +532,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -573,6 +613,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
@@ -1005,6 +1053,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (48)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 30
@@ -1073,6 +1129,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -1147,6 +1211,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
       propertyPath: m_Name
       value: TFF_Birch_Tree_01A (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
       propertyPath: m_RootOrder
@@ -1316,6 +1388,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -1389,6 +1469,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (66)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -1537,6 +1625,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -1723,6 +1819,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
       propertyPath: m_Name
       value: TFF_Aspen_Tree_01A_LOD_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef55eb47f764c494ba6e14d556a6baa3, type: 3}
       propertyPath: m_RootOrder
@@ -2012,6 +2116,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -2117,6 +2229,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2190,6 +2310,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -2482,6 +2610,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -2555,6 +2691,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (46)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -3355,6 +3499,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_04A
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -3416,6 +3568,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -3490,6 +3650,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -3673,6 +3841,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (70)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -3942,6 +4118,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
       value: 18
@@ -4015,6 +4199,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -4295,6 +4487,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 23
@@ -4399,6 +4599,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (78)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -4668,6 +4876,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -4786,6 +5002,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
@@ -4925,6 +5149,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: hongsalmun
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ce90362f467b92448c8ba5c334f2461, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ce90362f467b92448c8ba5c334f2461, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ce90362f467b92448c8ba5c334f2461, type: 3}
 --- !u!4 &1224427010 stripped
@@ -4942,6 +5174,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -5017,6 +5257,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Birch_Tree_01A (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0ce31edef87e40d469349304a7adf799, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -5090,6 +5338,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -5364,6 +5620,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -5680,6 +5944,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (54)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -5815,6 +6087,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -6051,6 +6331,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
       value: 20
@@ -6214,6 +6502,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_04A (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -6287,6 +6583,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -6367,6 +6671,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -6441,6 +6753,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
       value: 24
@@ -6514,6 +6834,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
@@ -6745,6 +7073,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_04A (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 880c96a6f3c1f3548b1c0208a5c8a6f1, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -6819,6 +7155,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Oak_Tree_01C (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ae87e1887eb4fbd4d8766105f5a2819f, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -6892,6 +7236,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -7116,6 +7468,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_Name
       value: TFF_Oak_Tree_01A_LOD_1 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
       propertyPath: m_RootOrder
@@ -7550,6 +7910,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -7623,6 +7991,14 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_Name
       value: TFF_Rock_Medium_06A (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
       propertyPath: m_RootOrder
