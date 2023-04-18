@@ -151,6 +151,16 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
+    public void OnTriggerEnter(Collider Cloud)
+    {
+        if(Cloud.gameObject.tag == "Monster")
+        {
+            Cloud.GetComponent<Enemy>().curHearth -= 2f;
+            Destroy(Cloudprab);
+        }
+        
+    }
+
     public void RainDropSkill()
     {
 

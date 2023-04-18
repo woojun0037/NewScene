@@ -123,12 +123,7 @@ public class Enemy : MonoBehaviour
                         this.chasespeed = 0f;
                         StartCoroutine(GetStunCor());
                     }
-
-                    Vector3 reactVec = transform.position - other.transform.position;
-                    reactVec = reactVec.normalized;
-                    reactVec += Vector3.back;
-                    rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
-
+                    
                     HitScript hit;
                     hit = other.GetComponent<HitScript>();
 
@@ -155,7 +150,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);
