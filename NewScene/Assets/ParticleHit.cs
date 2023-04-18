@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ParticleHit : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Enemy enemy;
+    public void OnTriggerEnter(Collider other)
     {
-        
+        if(other.gameObject.tag == "monster")
+        {
+            StartCoroutine(Hitcor());
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Hitcor()
     {
-        
+        enemy.curHearth -= 1f;
+        yield return new WaitForSeconds(0.5f);
     }
 }

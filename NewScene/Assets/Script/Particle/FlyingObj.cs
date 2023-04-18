@@ -10,11 +10,13 @@ public class FlyingObj : MonoBehaviour
     public float destroyDelay;
     public float damage;
     public float DamgeTime;
+
+    public bool isRain;
     public GameObject ImpactFX;
-    Enemy enemy;
 
     void Start()
     {
+        
         ImpactFX = this.gameObject;
     }
 
@@ -23,11 +25,27 @@ public class FlyingObj : MonoBehaviour
         Destroy(ImpactFX, 5f);
     }
 
-    private void OnParticleCollision(GameObject other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Monster")
         {
+            isRain = true;
+            StartCoroutine(HitCor(other.GetComponent<Enemy>()));
+        }
+    }
+    IEnumerator HitCor(Enemy enemy)
+    {
+        while(isRain)
+        {
+            yield return new WaitForSeconds(0.5f);
             enemy.curHearth -= 1f;
+        }    
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Monster")
+        {
+            isRain = false;
         }
     }
 }
