@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class Seonbi_bullet : MonoBehaviour
 {
-    [SerializeField]
     Transform PlayerPosition;
     Transform thisposition;
-
-    [SerializeField]
     Vector3 aattack;
+
     float time = 0f;
 
     bool playercollider;
@@ -24,7 +22,6 @@ public class Seonbi_bullet : MonoBehaviour
     bool getposition; //정해진 도착
     float random;
 
-    // Start is called before the first frame update
     void Start()
     {
         random = UnityEngine.Random.Range(0, 2); // 0 
@@ -36,24 +33,14 @@ public class Seonbi_bullet : MonoBehaviour
 
         PlayerPosition = GameObject.FindWithTag("Main_gangrim").transform;
         aattack = PlayerPosition.position;
-        //aattack.y = 1;
 
         thisposition = GetComponent<Transform>();
 
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //timer += Time.deltaTime;
-        //오브젝트 회전
-        //objrotation = new Vector3(0f, (Mathf.Cos(timer) * 0.5f + 0.5f) * 180f, 0f);
-        //transform.rotation = Quaternion.Euler(objrotation);
-
-        //transform.rotation = Quaternion.Euler(0, Mathf.Cos(timer) * 0.5f + 0.5f, 0);
-
-
         if (time <= 0.5f&& !rotationonetime)
         {
             if(random == 0)
@@ -75,10 +62,10 @@ public class Seonbi_bullet : MonoBehaviour
         if (transform.position == aattack)
         {
             if (playercollider)
-            { //플레이어와 부딪힘
+            { 
                 getposition = true;
             }
-            else  //튕기는 거 때문에 aattack 포지션에 계속 있게함
+            else  
             {
                 getposition = false;
                 transform.position = aattack;
@@ -92,7 +79,6 @@ public class Seonbi_bullet : MonoBehaviour
         }
         else if(getposition == false)
         {
-            //정해진 포지션으로 이동
             transform.position = Vector3.MoveTowards(gameObject.transform.position, aattack, bulletspeed * Time.deltaTime);
         }
 
@@ -108,10 +94,7 @@ public class Seonbi_bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {
-            //플레이어에 피격 매서드 불러옴
             playercollider = true;
-
-            Debug.Log("player collision");
         }
     }
 
