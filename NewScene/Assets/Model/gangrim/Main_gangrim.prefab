@@ -2443,17 +2443,18 @@ MonoBehaviour:
   weaponCollider: {fileID: 7101619276036249288}
   currentATKEffect: {fileID: 0}
   RotateSpeed: 10
-  DashSpeed: 5
   Anim: {fileID: 371447735453508158}
+  enemy: {fileID: 0}
+  mainCamera: {fileID: 0}
   AtkEffect:
   - {fileID: 5036797310264405828, guid: a629c67ec384a4b468035435edffd9f6, type: 3}
   - {fileID: 4751119674105741691, guid: aeb40bf2987016c4d853c6c24ae29331, type: 3}
   - {fileID: 6946114965888217568, guid: f8c5edd65d4cd5f48adb6ba725b0525b, type: 3}
   - {fileID: 4163931423638228967, guid: 97dc0a9f0ba55e64ea4e107cbc28b3c4, type: 3}
+  isClicks: 000000
   E_skillCheck: 0
   R_skillCheck: 0
   F_skillCheck: 0
-  isClicks: 000000
   isAttack: 0
   attackInputOn: 0
   damage: 1
@@ -2462,6 +2463,8 @@ MonoBehaviour:
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 1
+  Duration: 0
+  Magnitude: 0
 --- !u!54 &6074564347618729281
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2507,6 +2510,8 @@ MonoBehaviour:
   isSkillOn: 0
   isCollision: 0
   isSkillUse: 1
+  isTest: 0
+  RainSkillCheck: 0
   trailEffect: {fileID: 0}
   CloudPos: {fileID: 6074564347478180064}
   Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
@@ -2519,8 +2524,6 @@ MonoBehaviour:
   RainSkillTime: 3
   RainSkillCool: 3
   maxAbilityDistance: 5
-  isTest: 0
-  RainSkillCheck: 0
 --- !u!114 &371447735453508156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2539,9 @@ MonoBehaviour:
   BuffTime: 6
   DebuffTime: 5
   StunTime: 3
+  SkillUse: {fileID: 0}
+  enemy: {fileID: 0}
+  motion: {fileID: 0}
   SpeedUp: 0
   Debuff: 0
   Stun: 0

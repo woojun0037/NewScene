@@ -6,11 +6,17 @@ public class Main_Player : MonoBehaviour
 {
 
     [SerializeField] Vector3 MovePlayer;
-    [SerializeField] Collider weaponCollider;
+
+    [SerializeField] Collider HitBox;
+    [SerializeField] Collider WindBox;
+    //[SerializeField] Collider CloudBox;
+
     [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
 
     private HitScript hit;
+    private WindStorm windOn;
+
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
@@ -45,7 +51,8 @@ public class Main_Player : MonoBehaviour
 
     private void Awake()
     {
-        hit = weaponCollider.gameObject.GetComponent<HitScript>();
+        hit = HitBox.gameObject.GetComponent<HitScript>();
+        windOn = WindBox.gameObject.GetComponent<WindStorm>();
     }
 
     void Update()
@@ -71,6 +78,17 @@ public class Main_Player : MonoBehaviour
     {
         hit.gameObject.SetActive(false);
     }
+
+    public void OnWind()
+    {
+        windOn.gameObject.SetActive(true);
+    }
+
+    public void OffWind()
+    {
+        windOn.gameObject.SetActive(false);
+    }
+
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;

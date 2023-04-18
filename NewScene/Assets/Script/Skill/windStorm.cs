@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class WindStorm : MonoBehaviour
 {
-
+    public Main_Player player;
     ParticleSystem _WindStorm;
     ParticleSystem.Particle[] particles;
 
     void Start()
     {
         _WindStorm = GetComponent<ParticleSystem>();
+        
         particles = new ParticleSystem.Particle[_WindStorm.main.maxParticles];
     }
-
-    //public void WindStormAnim()
-    //{
-    //    WindStorm = GetComponent<ParticleSystem>();
-    //    int num = WindStorm.GetParticles(particles);
-    //}
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Monster")
+        {
+            other.GetComponent<Enemy>().curHearth -= 3f;
+        }
+    }
 
     void Update()
     {

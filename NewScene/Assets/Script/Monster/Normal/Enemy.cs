@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     public bool DebuffCheck;
     public bool StartAttack;
 
-    private float KnockBackForce = 2f;
+    public float KnockBackForce;
     private float KnockBakcTime;
 
     RaycastHit hit;
