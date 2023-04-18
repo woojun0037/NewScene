@@ -153,8 +153,8 @@ public class Enemy : MonoBehaviour
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);
-        player.E_skillCheck = false;
-        player.F_skillCheck = false;
+        player.Q_skillCheck = false;
+        player.R_skillCheck = false;
         property.Debuff = false;
         this.chasespeed = 3f;
     }
@@ -162,8 +162,8 @@ public class Enemy : MonoBehaviour
     IEnumerator GetStunCor()
     {
         yield return new WaitForSeconds(10.0f);
+        player.E_skillCheck = false;
         player.R_skillCheck = false;
-        player.F_skillCheck = false;
         property.Stun = false;
         this.chasespeed = 3f;
     }

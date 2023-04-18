@@ -6,21 +6,19 @@ public class Main_Player : MonoBehaviour
 {
 
     [SerializeField] Vector3 MovePlayer;
-
     [SerializeField] Collider HitBox;
     [SerializeField] Collider WindBox;
-    //[SerializeField] Collider CloudBox;
-
     [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
 
     private HitScript hit;
     private WindStorm windOn;
+    private PropertySkill propertySkill;
 
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
-
+    
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -30,12 +28,13 @@ public class Main_Player : MonoBehaviour
     public GameObject[] AtkEffect;
     public bool[] isClicks;
 
+    public bool Q_skillCheck;
     public bool E_skillCheck;
     public bool R_skillCheck;
-    public bool F_skillCheck;
+
     public bool isAttack = false;
     public bool attackInputOn;
-
+    public bool isTafoon;
     public int damage;
     public int HP;
 
@@ -53,13 +52,14 @@ public class Main_Player : MonoBehaviour
     {
         hit = HitBox.gameObject.GetComponent<HitScript>();
         windOn = WindBox.gameObject.GetComponent<WindStorm>();
+
     }
 
     void Update()
     {
         AttackInput();
+        Skill_Q();
         Skill_E();
-        Skill_F();
         Skill_R();
     }
 
@@ -104,7 +104,7 @@ public class Main_Player : MonoBehaviour
     }
 
     private void AttackInput()
-    { 
+    {
         if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             hitState = 1;
@@ -112,7 +112,7 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("isAttack_1");
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
-        {   
+        {
             hitState = 2;
             isAttack = true;
             Anim.SetTrigger("isAttack_2");
@@ -181,7 +181,7 @@ public class Main_Player : MonoBehaviour
         heading.Normalize();
         heading = heading - player_Move_Input;
 
-        if (player_Move_Input != Vector3.zero && !isAttack)
+        if (player_Move_Input != Vector3.zero && !isAttack && propertySkill.TafoonOn)
         {
             isMove = true;
             AnimationBoolCheck();
@@ -199,13 +199,22 @@ public class Main_Player : MonoBehaviour
         }
     }
 
+    public void Skill_Q()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Anim.SetTrigger("WindSkill");
+            WindSkillUI.windGauge += Time.deltaTime;
+            Q_skillCheck = true;
+        }
+    }
+
     public void Skill_E()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-           Anim.SetTrigger("Skill");
-           WindSkillUI.windGauge += Time.deltaTime;
-           E_skillCheck = true;
+            CloudSkillUI.cloudGauge += Time.deltaTime;
+            E_skillCheck = true;
         }
     }
 
@@ -213,20 +222,11 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-           CloudSkillUI.cloudGauge += Time.deltaTime;
-           R_skillCheck = true;
+            RainSkillUI.rainGauge += Time.deltaTime;
+            R_skillCheck = !R_skillCheck;
         }
     }
 
-    public void Skill_F()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-           RainSkillUI.rainGauge += Time.deltaTime;
-           F_skillCheck = !F_skillCheck;
-        }
-    }
-    
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);

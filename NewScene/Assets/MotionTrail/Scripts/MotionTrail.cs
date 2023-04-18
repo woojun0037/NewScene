@@ -29,10 +29,6 @@ public class MotionTrail : MonoBehaviour
 
     private bool NeedObject;
 
-    public Gradient trailGradient;
-    public Material mat;
-    private TrailRenderer trailRenderer;
-
     private void Start()
     {
        

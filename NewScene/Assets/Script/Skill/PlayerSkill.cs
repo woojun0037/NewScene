@@ -127,15 +127,13 @@ public class PlayerSkill : MonoBehaviour
     public void CloudSkill()
     {
         mousePos = Input.mousePosition;
-        if (Input.GetKeyDown(KeyCode.R))//구름 스킬
+        if (Input.GetKeyDown(KeyCode.E))//구름 스킬
         {
             Invoke("DestroyCloudShoot", 5f);
 
             if (CloudisDelay == true)
             {
                 CloudisDelay = false;
-                Debug.Log("Kecode.R");
-
                 Ray ray = Camera.main.ScreenPointToRay(mousePos);
                 Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
@@ -151,26 +149,16 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public void OnTriggerEnter(Collider Cloud)
-    {
-        if(Cloud.gameObject.tag == "Monster")
-        {
-            Cloud.GetComponent<Enemy>().curHearth -= 2f;
-            Destroy(Cloudprab);
-        }
-        
-    }
-
     public void RainDropSkill()
     {
 
-        if (Input.GetKeyDown(KeyCode.F) && isSkillUse && !RainSkillCheck)
+        if (Input.GetKeyDown(KeyCode.R) && isSkillUse && !RainSkillCheck)
         {
             SkillRange.GetComponent<Image>().enabled = true;
             targetCircle.GetComponent<Image>().enabled = true;
             RainSkillCheck = true;
         }
-        else if (Input.GetKeyDown(KeyCode.F))
+        else if (Input.GetKeyDown(KeyCode.R))
         {
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;

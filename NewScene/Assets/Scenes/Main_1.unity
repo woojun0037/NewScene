@@ -12419,7 +12419,7 @@ PrefabInstance:
     - target: {fileID: 114703204667887330, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
       propertyPath: mat
       value: 
-      objectReference: {fileID: 2100000, guid: 6d8029cb685ea1a469eaddf8b0ae0c1f, type: 2}
+      objectReference: {fileID: 2100000, guid: 2e76f8631b48b3741adf6dd547e382c0, type: 2}
     - target: {fileID: 114703204667887330, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
       propertyPath: ValueName
       value: _ChangeValue
@@ -45958,6 +45958,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 371447735453508156, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: HitBox
+      value: 
+      objectReference: {fileID: 1532644184}
+    - target: {fileID: 371447735453508156, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: motion
       value: 
       objectReference: {fileID: 695727280}
@@ -46053,6 +46057,10 @@ PrefabInstance:
       propertyPath: WindBox
       value: 
       objectReference: {fileID: 1829201002}
+    - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: skilltrail
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6380573484578890494, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_Name
       value: Main_gangrim
