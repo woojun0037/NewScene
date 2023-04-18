@@ -1039,10 +1039,10 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   attacker_Col: {fileID: 7875025568986392054}
-  particle_attack: {fileID: 6440755318279653861}
+  ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
   SetY: 2
   attackDelaytime: 1
-  ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
+  particle_attack: {fileID: 6440755318279653861}
   Dist: 0
   animatordie: 0
 --- !u!195 &378713205
@@ -1150,7 +1150,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5967751492454651251, guid: 92125155cc689af409a082382f9a850e, type: 3}
+  - {fileID: 2100000, guid: 226480a078b7aa045b5a702dc6a4a66a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
