@@ -168,9 +168,10 @@ public class Main_Player : MonoBehaviour
         HP = PlayerHP;
         if (HP < 0)
         {
-            Destroy(gameObject);
+
+            Destroy(gameObject,5f);
         }
-        //사망 애니메이션 추가
+        
     }
 
     public void ATK_Effect_On(int on_count)

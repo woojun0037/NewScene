@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class Seonbi_bullet : MonoBehaviour
 {
-    Transform PlayerPosition;
-    Transform thisposition;
+    [SerializeField] Rigidbody rigidbodythis;
+    private Transform PlayerPosition;
+    private Transform thisposition;
+
     Vector3 aattack;
-
-    float time = 0f;
-
-    bool playercollider;
-
     Vector3 objrotation;
-    bool rotationonetime;
 
-    [SerializeField]
-    float bulletspeed = 20f;
+    public int SeonbiDamageToGive;
+    public float bulletspeed;
 
-    Rigidbody rigidbodythis;
-    bool getposition; //정해진 도착
-    float random;
+    private float random;
+    private float time = 0f;
+
+    private bool rotationonetime;
+    private bool playercollider;
+    private bool getposition; //정해진 도착
 
     void Start()
     {
@@ -95,6 +94,7 @@ public class Seonbi_bullet : MonoBehaviour
         if (collision.gameObject.tag == "Main_gangrim")
         {
             playercollider = true;
+            FindObjectOfType<HealthManager>().HurtPlayer(SeonbiDamageToGive);
         }
     }
 
