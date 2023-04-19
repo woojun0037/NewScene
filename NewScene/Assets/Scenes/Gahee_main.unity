@@ -4751,6 +4751,7 @@ MonoBehaviour:
   moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!1 &230472521 stripped
@@ -8371,6 +8372,7 @@ MonoBehaviour:
   moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!1001 &372970079
@@ -15011,6 +15013,10 @@ PrefabInstance:
     - target: {fileID: 6955681456560606827, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_Name
       value: Monster_Seonbi
+      objectReference: {fileID: 0}
+    - target: {fileID: 6955681456560606827, guid: 64e7092380ae94844b051ab21355356f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7767684346351277265, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_RootOrder
@@ -24040,7 +24046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1114876184
 Transform:
   m_ObjectHideFlags: 0
@@ -26637,6 +26643,7 @@ MonoBehaviour:
   moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!1 &1258879916 stripped
@@ -47830,7 +47837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &919132149037528775
 GameObject:
   m_ObjectHideFlags: 0
@@ -47853,7 +47860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &919132149189567677
 GameObject:
   m_ObjectHideFlags: 0
@@ -47876,7 +47883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &919132149249842525
 GameObject:
   m_ObjectHideFlags: 0
@@ -48005,6 +48012,10 @@ PrefabInstance:
     - target: {fileID: 1369066503263007732, guid: a0325f8fcbf68ac419efb6370b11a57b, type: 3}
       propertyPath: m_Name
       value: Rabbit_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1369066503263007732, guid: a0325f8fcbf68ac419efb6370b11a57b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1369066503263007733, guid: a0325f8fcbf68ac419efb6370b11a57b, type: 3}
       propertyPath: m_RootOrder
@@ -49071,6 +49082,7 @@ MonoBehaviour:
   moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!135 &3469287836559778778
@@ -49166,6 +49178,7 @@ MonoBehaviour:
   moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!135 &3469287837515035044
@@ -49261,6 +49274,7 @@ MonoBehaviour:
   moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
 --- !u!135 &3469287838256136877
@@ -50902,6 +50916,10 @@ PrefabInstance:
     - target: {fileID: 8978335658521126814, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
       propertyPath: m_Name
       value: Monster_Deer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8978335658521126814, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}

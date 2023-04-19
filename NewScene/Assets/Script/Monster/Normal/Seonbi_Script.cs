@@ -16,6 +16,7 @@ public class Seonbi_Script : Enemy
     public GameObject ragdoll_obj;
 
     public float monsterhp;
+    private float Dist;
     protected override void Awake()
     {
         base.Awake();
@@ -36,7 +37,7 @@ public class Seonbi_Script : Enemy
 
     protected override void monsterMove()
     {
-
+        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
         base.monsterMove();
 
         if (!DontMove)
@@ -53,7 +54,7 @@ public class Seonbi_Script : Enemy
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        if (agent.remainingDistance <= 5)
+        if (Dist <= 5)
         {
             if (!isattack)
             {
