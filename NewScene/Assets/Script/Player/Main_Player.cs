@@ -205,7 +205,7 @@ public class Main_Player : MonoBehaviour
         heading.Normalize();
         heading = heading - player_Move_Input;
 
-        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind)
+        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind && hitState == 0)
         {
             isMove = true;
             AnimationBoolCheck();
@@ -234,12 +234,6 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    IEnumerator Skill_Q_Cool()
-    {
-        yield return new WaitForSeconds(2.4f);
-        isWind = false;
-    }
-
     public void Skill_E()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -256,6 +250,11 @@ public class Main_Player : MonoBehaviour
             RainSkillUI.rainGauge += Time.deltaTime;
             R_skillCheck = !R_skillCheck;
         }
+    }
+    IEnumerator Skill_Q_Cool()
+    {
+        yield return new WaitForSeconds(2.4f);
+        isWind = false;
     }
 
     public void GetDamage(float damage)

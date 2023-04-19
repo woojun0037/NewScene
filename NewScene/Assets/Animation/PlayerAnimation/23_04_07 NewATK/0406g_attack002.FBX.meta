@@ -57,27 +57,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.19812824
-        functionName: SetAnimCheck
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 2
-        messageOptions: 0
-      - time: 0.25876337
-        functionName: ATK_Effect_On
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 1
-        messageOptions: 0
-      - time: 0.3967852
-        functionName: ATK_Effect_Off
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.16644563
         functionName: OnWeapon
         data: 
@@ -85,8 +64,29 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.19812824
+        functionName: SetAnimCheck
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
+      - time: 0.248859
+        functionName: ATK_Effect_On
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 1
+        messageOptions: 0
       - time: 0.44827586
         functionName: OffWeapon
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.501096
+        functionName: ATK_Effect_Off
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
