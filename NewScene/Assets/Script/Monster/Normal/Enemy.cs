@@ -70,7 +70,8 @@ public class Enemy : MonoBehaviour
     {
         if (curHearth < 1)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
     }
 
