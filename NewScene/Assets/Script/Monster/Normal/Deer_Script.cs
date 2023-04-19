@@ -38,37 +38,39 @@ public class Deer_Script : Enemy
 
     protected override void monsterMove()
     {
-        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
-
-        base.monsterMove();
-
-        if (!DontMove) //공격중에는 이동 기능 정지
+        if (Player.HP >= 0)
         {
-            animator.SetBool("Move", true);
-            agent.isStopped = false;
-        }
-        else
-        {
-            animator.SetBool("Move", false);
-            agent.isStopped = true;
-        }
+            Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
 
+            base.monsterMove();
 
-        Vector3 targety = targetTransform.position;
-        targety.y = SetY;
-
-        //현재 경로에서 목표 지점까지 남아있는 거리
-        if (Dist <= 5)
-        {
-            if (!isattack)
+            if (!DontMove) //공격중에는 이동 기능 정지
             {
-                //transform.LookAt(targety);
-                isattack = true;
-                StartCoroutine("attacker");
+                animator.SetBool("Move", true);
+                agent.isStopped = false;
+            }
+            else
+            {
+                animator.SetBool("Move", false);
+                agent.isStopped = true;
             }
 
-        }
 
+            Vector3 targety = targetTransform.position;
+            targety.y = SetY;
+
+            //현재 경로에서 목표 지점까지 남아있는 거리
+            if (Dist <= 5)
+            {
+                if (!isattack)
+                {
+                    //transform.LookAt(targety);
+                    isattack = true;
+                    StartCoroutine("attacker");
+                }
+
+            }
+        }
     }
 
     protected override void DieMonster()

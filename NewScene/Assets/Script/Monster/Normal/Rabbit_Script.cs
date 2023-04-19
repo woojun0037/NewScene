@@ -61,29 +61,32 @@ public class Rabbit_Script : Enemy
 
     protected override void monsterMove()
     {
-        base.monsterMove();
-
-        if (!DontMove)
+        if (Player.HP >= 0)
         {
-            animator.SetBool("Move", true);
-            agent.isStopped = false;
-        }
-        else
-        {
-            animator.SetBool("Move", false);
-            agent.isStopped = true;
-        }
+            base.monsterMove();
 
-        Vector3 targety = targetTransform.position;
-        targety.y = SetY;
-
-        if (Dist <= 2)
-        {
-            if (!isattack)
+            if (!DontMove)
             {
-                transform.LookAt(targety);
-                isattack = true;
-                StartCoroutine("attacker");
+                animator.SetBool("Move", true);
+                agent.isStopped = false;
+            }
+            else
+            {
+                animator.SetBool("Move", false);
+                agent.isStopped = true;
+            }
+
+            Vector3 targety = targetTransform.position;
+            targety.y = SetY;
+
+            if (Dist <= 2)
+            {
+                if (!isattack)
+                {
+                    transform.LookAt(targety);
+                    isattack = true;
+                    StartCoroutine("attacker");
+                }
             }
         }
     }

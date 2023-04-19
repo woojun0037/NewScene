@@ -14,7 +14,6 @@ public class Seonbi_Script : Enemy
 
     public Rigidbody SeonbiBullet;
     public GameObject ragdoll_obj;
-    private Main_Player Player;
 
     public float monsterhp;
     private float Dist;
@@ -27,8 +26,6 @@ public class Seonbi_Script : Enemy
     protected override void Start()
     {
         base.Start();
-        Player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
-
         animator = GetComponent<Animator>();
     }
     void Update()
