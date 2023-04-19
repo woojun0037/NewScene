@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WindStorm : MonoBehaviour
-{
-    public Main_Player player;
+{ 
     ParticleSystem _WindStorm;
     ParticleSystem.Particle[] particles;
 

@@ -33,7 +33,6 @@ public class MotionTrailRenderer : MonoBehaviour {
         
         for (float e = 0; e < 1.7; e += ValueDetail) //X번 반복한다.
         {
-            Debug.Log(ValueDetail);
             this.GetComponent<MeshRenderer>().material.SetFloat(ValueName, e);
             yield return new WaitForSeconds(ValueTimeDelay); //X초마다 반복
         }

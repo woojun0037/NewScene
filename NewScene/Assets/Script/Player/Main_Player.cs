@@ -6,13 +6,17 @@ public class Main_Player : MonoBehaviour
 {
 
     [SerializeField] Vector3 MovePlayer;
+
     [SerializeField] Collider HitBox;
     [SerializeField] Collider WindBox;
+    [SerializeField] Collider TafoonBox;
+
     [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
 
     private HitScript hit;
     private WindStorm windOn;
+    private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
 
     public Animator Anim;
@@ -33,8 +37,11 @@ public class Main_Player : MonoBehaviour
     public bool R_skillCheck;
 
     public bool isAttack = false;
+    public bool isWind = false;
+
     public bool attackInputOn;
     public bool isTafoon;
+
     public int damage;
     public int HP;
 
@@ -50,9 +57,10 @@ public class Main_Player : MonoBehaviour
 
     private void Awake()
     {
+        propertySkill = GetComponent<PropertySkill>();
         hit = HitBox.gameObject.GetComponent<HitScript>();
         windOn = WindBox.gameObject.GetComponent<WindStorm>();
-
+        tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
     }
 
     void Update()
@@ -91,12 +99,12 @@ public class Main_Player : MonoBehaviour
 
     public void TafoonON()
     {
-
+        tafoonSkill.gameObject.SetActive(true);
     }
 
     public void TafoonOFF()
     {
-
+        tafoonSkill.gameObject.SetActive(false);
     }
 
     public void SetAnimCheck(int count)
@@ -191,7 +199,7 @@ public class Main_Player : MonoBehaviour
         heading.Normalize();
         heading = heading - player_Move_Input;
 
-        if (player_Move_Input != Vector3.zero && !isAttack && propertySkill.TafoonOn)
+        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind)
         {
             isMove = true;
             AnimationBoolCheck();
@@ -204,7 +212,6 @@ public class Main_Player : MonoBehaviour
         else
         {
             isMove = false;
-
             AnimationBoolCheck();
         }
     }
@@ -216,7 +223,15 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("WindSkill");
             WindSkillUI.windGauge += Time.deltaTime;
             Q_skillCheck = true;
+            isWind = true;
+            StartCoroutine(Skill_Q_Cool());
         }
+    }
+
+    IEnumerator Skill_Q_Cool()
+    {
+        yield return new WaitForSeconds(2.4f);
+        isWind = false;
     }
 
     public void Skill_E()

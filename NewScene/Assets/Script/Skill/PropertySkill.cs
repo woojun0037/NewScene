@@ -16,8 +16,8 @@ public class PropertySkill : MonoBehaviour
 
     public float SpeedUp = 1.2f;
 
-    public bool Tafoon = false;
-    public bool TafoonOn = false;
+    public bool TafoonSpecialMove = false;
+    public bool TafoonSpecial = false;
     public bool Debuff = false;
     public bool Stun = false;
 
@@ -31,16 +31,17 @@ public class PropertySkill : MonoBehaviour
         TafoonSkill();
         IceSkill();
         Thunder();
+        TafoonSkillSpecial();
     }
 
     public void TafoonSkill()
     {
         if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
         {
-            Tafoon = true;
             motion.gameObject.SetActive(true);
             SkillUse.Q_skillCheck = false;
             SkillUse.E_skillCheck = false;
+            TafoonSpecial = true;
 
             SkillUse.MoveSpeed += 5f;
             SpeedUp += 3f;
@@ -49,20 +50,29 @@ public class PropertySkill : MonoBehaviour
             SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
             SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);
 
-            if (Input.GetKeyDown(KeyCode.G) && Tafoon)
-            {
-                TafoonOn = true;
-                SkillUse.Anim.SetTrigger("TafoonSkill");
-            }
             StartCoroutine(TafoonSkillUse());
         }
+    }
+
+    public void TafoonSkillSpecial()
+    {
+        if (Input.GetKeyDown(KeyCode.G) && TafoonSpecial)
+        {
+            StartCoroutine(TafoonAttack());
+        }
+    }
+
+    IEnumerator TafoonAttack()
+    {
+        TafoonSpecialMove = true;
+        SkillUse.Anim.SetTrigger("TafoonSkill");
+        yield return new WaitForSeconds(2.4f);
+        TafoonSpecialMove = false;
     }
 
     IEnumerator TafoonSkillUse()
     {
         yield return new WaitForSeconds(BuffTime);
-        TafoonOn = false;
-        Tafoon = false;
         SkillUse.MoveSpeed = 6f;
         SpeedUp = 1.2f;
 

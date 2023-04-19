@@ -117,6 +117,7 @@ public class PlayerSkill : MonoBehaviour
             player.isAttack = false;
         }
     }
+
     public GameObject WindTest()
     {
         GameObject temp = Instantiate(WindSkillPrefab, transform.position, Quaternion.identity);
@@ -205,7 +206,6 @@ public class PlayerSkill : MonoBehaviour
         Rainnig();
         isTest = !isTest;
     }
-
 
     IEnumerator CloudTimeCor()
     {

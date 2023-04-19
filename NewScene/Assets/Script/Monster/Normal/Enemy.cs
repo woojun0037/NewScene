@@ -34,6 +34,12 @@ public class Enemy : MonoBehaviour
     int hitNum;
     float delay;
 
+    void Update()
+    {
+        DieMonster();
+        monsterMove();
+        NotDamaged();
+    }
     protected virtual void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -49,14 +55,6 @@ public class Enemy : MonoBehaviour
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         agent.enabled = true;
     }
-
-    void Update()
-    {
-        DieMonster();
-        monsterMove();
-        NotDamaged();
-    }
-
 
     protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
     {
@@ -99,6 +97,7 @@ public class Enemy : MonoBehaviour
                 property = player.GetComponent<PropertySkill>();
                 hitNum = player.HitState;
                 delay = 0.0f;
+
                 if (player.isAttack)
                 {
                     if (damageEffect == null)
@@ -129,8 +128,6 @@ public class Enemy : MonoBehaviour
 
                     Gauge.sGauge += hit.damage;
                     curHearth -= hit.damage;
-
-                    Debug.Log("Weapon: " + curHearth);
                 }
             }
         }
