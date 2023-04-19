@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class Seonbi_Script : Enemy
 {
-    [SerializeField] float SetY;
     private Animator animator;
+
+    [SerializeField] float SetY;
+
+    bool isattack;
+    bool DontMove;
 
     public Rigidbody SeonbiBullet;
     public GameObject ragdoll_obj;
 
-    public bool isattack;
-    public bool DontMove;
-
-    public int HPcheck;
     public float monsterhp;
     private float Dist;
-
     protected override void Awake()
     {
         base.Awake();
@@ -39,34 +38,36 @@ public class Seonbi_Script : Enemy
     protected override void monsterMove()
     {
 
-        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
-        base.monsterMove();
-
-        if (!DontMove)
+        if(Player.HP >= 0)
         {
+            Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
+            base.monsterMove();
 
-            animator.SetBool("Move", true);
-            agent.isStopped = false;
-        }
-        else
-        {
-            animator.SetBool("Move", false);
-            agent.isStopped = true;
-        }
-
-        Vector3 targety = targetTransform.position;
-        targety.y = SetY;
-
-        if (Dist <= 5)
-        {
-            if (!isattack)
+            if (!DontMove)
             {
-                transform.LookAt(targety);
-                isattack = true;
-                StartCoroutine("attacker");
+                animator.SetBool("Move", true);
+                agent.isStopped = false;
+            }
+            else
+            {
+                animator.SetBool("Move", false);
+                agent.isStopped = true;
+            }
+
+            Vector3 targety = targetTransform.position;
+            targety.y = SetY;
+
+            if (Dist <= 5)
+            {
+                if (!isattack)
+                {
+                    transform.LookAt(targety);
+                    isattack = true;
+                    StartCoroutine("attacker");
+                }
             }
         }
-
+        
     }
 
     protected override void DieMonster()

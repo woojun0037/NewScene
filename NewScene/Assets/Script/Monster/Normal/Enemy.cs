@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     public Transform targetTransform;
     public NavMeshAgent agent = null;
+    protected Main_Player Player;
 
     int hitNum;
     float delay;
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
+        Player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
         agent.speed = chasespeed;
 
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
