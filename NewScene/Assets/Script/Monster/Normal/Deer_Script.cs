@@ -62,10 +62,9 @@ public class Deer_Script : Enemy
         {
             if (!isattack)
             {
-                transform.LookAt(targety);
+                //transform.LookAt(targety);
                 isattack = true;
                 StartCoroutine("attacker");
-
             }
 
         }
@@ -85,7 +84,8 @@ public class Deer_Script : Enemy
     }
     protected override void GetDamagedAnimation()
     {
-        int random = 1;
+        animator.SetBool("isHit", true);
+        int random;
         random = UnityEngine.Random.Range(1, 3);
         StartCoroutine(damaged_ani(random));
     }
@@ -93,26 +93,33 @@ public class Deer_Script : Enemy
     IEnumerator attacker()
     {
         DontMove = true;
-
-        animator.SetBool("Move", false);
-        animator.SetBool("Attack", true);
-        yield return new WaitForSeconds(0.9f);
+        int random;
+        random = UnityEngine.Random.Range(1, 4);
 
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
+        transform.LookAt(targety);
+
+        animator.SetBool("Move", false);
+
+        animator.SetBool("isAttack", true);
+        animator.SetInteger("Attack", random);
+
+        yield return new WaitForSeconds(1f);
+ 
+        //번개 발사
         Vector3 target_ = transform.position;
         target_.y = SetY + 0.5f;
 
-        transform.LookAt(targety);
-
         //Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
 
-        yield return new WaitForSeconds(1.3f);
+        yield return new WaitForSeconds(1.6f);
 
-        animator.SetBool("Attack", false);
+        animator.SetBool("isAttack", false);
+        animator.SetInteger("Attack", 0);
 
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(2f);
         isattack = false;
         DontMove = false;
     }
@@ -121,6 +128,7 @@ public class Deer_Script : Enemy
     {
         animator.SetInteger("Hit", random);
         yield return new WaitForSeconds(0.6f);
+        animator.SetBool("isHit", false);
         animator.SetInteger("Hit", 0);
     }
 }

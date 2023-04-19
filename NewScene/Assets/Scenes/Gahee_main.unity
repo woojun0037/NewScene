@@ -16394,6 +16394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Seonbi (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6955681456560606827, guid: 64e7092380ae94844b051ab21355356f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7767684346351277265, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -39180,6 +39184,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5866666020077004020, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
+      propertyPath: curHearth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666020077004020, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666020077004020, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
+      propertyPath: maxHearth
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8634143870603476260, guid: 830a1136888b2c1459d2a1b81d7c32e4, type: 3}
       propertyPath: m_RootOrder
       value: 48
