@@ -177,9 +177,15 @@ public class Main_Player : MonoBehaviour
     {
         if (currentATKEffect == null)
         {
-            currentATKEffect = Instantiate(AtkEffect[on_count], transform.position, AtkEffect[on_count].transform.rotation);
-        }
+            Vector3 dir = transform.position;
+            dir.y = 3f;
 
+            currentATKEffect = Instantiate(AtkEffect[on_count],transform);
+            currentATKEffect.transform.position = dir;
+
+            //currentATKEffect.transform.position = new veoctransform.position.y;
+            //currentATKEffect.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+        }
     }
 
     public void ATK_Effect_Off()

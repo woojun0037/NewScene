@@ -192,8 +192,8 @@ Material:
     - _FBRows: 2
     - _FinalOpacityExp: 1
     - _FinalOpacityExp1: 1.125
-    - _FinalOpacityPower: 1
-    - _FinalPower: 15
+    - _FinalOpacityPower: 0.91
+    - _FinalPower: 1.9
     - _MDFOU: 1
     - _MDFOV: 1
     - _MVAnimationSpeed: 15
@@ -274,14 +274,14 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FBMainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
-    - _FinalColor: {r: 0.28627452, g: 0.63529414, b: 1, a: 1}
+    - _FinalColor: {r: 0, g: 0, b: 0, a: 1}
     - _MVMainMaskChannels: {r: 1, g: 0, b: 0, a: 0}
     - _MVMainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
     - _MainMaskChannelsMultiply: {r: 1, g: 1, b: 1, a: 0}
     - _Noise01ScrollSpeedUV: {r: 1, g: 1, b: 0, a: 0}
     - _RampColorTint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &4056407218128450089
+--- !u!114 &4020780623090116278
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,7 +297,7 @@ MonoBehaviour:
   hdPluginSubTargetMaterialVersions:
     m_Keys: []
     m_Values: 
---- !u!114 &5591140945257164006
+--- !u!114 &8913963239100743520
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
