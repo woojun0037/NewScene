@@ -13,7 +13,7 @@ public class Deer_Script : Enemy
     bool isattack;
     bool DontMove;
 
-    public Rigidbody SeonbiBullet;
+    public Rigidbody DeerAttacker;
     public GameObject ragdoll_obj;
     private float Dist;
     protected override void Awake()
@@ -99,25 +99,23 @@ public class Deer_Script : Enemy
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        transform.LookAt(targety);
-
         animator.SetBool("Move", false);
+        transform.LookAt(targety);
 
         animator.SetBool("isAttack", true);
         animator.SetInteger("Attack", random);
 
         yield return new WaitForSeconds(1f);
- 
+
         //번개 발사
-        Vector3 target_ = transform.position;
-        target_.y = SetY + 0.5f;
+        //Vector3 target_ = transform.position;
+        //target_.y = SetY + 0.5f;
 
-        //Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
-
-        yield return new WaitForSeconds(1.6f);
+        //Rigidbody ThrowRockrigid = Instantiate(DeerAttacker, target_, transform.rotation);
 
         animator.SetBool("isAttack", false);
         animator.SetInteger("Attack", 0);
+        yield return new WaitForSeconds(1f);
 
         yield return new WaitForSeconds(2f);
         isattack = false;
