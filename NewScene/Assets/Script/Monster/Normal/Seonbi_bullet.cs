@@ -7,13 +7,14 @@ public class Seonbi_bullet : MonoBehaviour
     [SerializeField] Rigidbody rigidbodythis;
     private Transform PlayerPosition;
     private Transform thisposition;
+    Seonbi_Script seonbi;
 
     Vector3 aattack;
     Vector3 objrotation;
 
     public int SeonbiDamageToGive;
     public float bulletspeed;
-
+    
     private float random;
     private float time = 0f;
 
@@ -27,15 +28,12 @@ public class Seonbi_bullet : MonoBehaviour
         playercollider = false;
         getposition = false;
         rotationonetime = false;
-
+        
         rigidbodythis = GetComponent<Rigidbody>();
-
         PlayerPosition = GameObject.FindWithTag("Main_gangrim").transform;
         aattack = PlayerPosition.position;
 
         thisposition = GetComponent<Transform>();
-
-
     }
 
     void Update()
@@ -80,7 +78,6 @@ public class Seonbi_bullet : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(gameObject.transform.position, aattack, bulletspeed * Time.deltaTime);
         }
-
 
         if (time >= 1.5f)
         {

@@ -11,12 +11,14 @@ public class Seonbi_Script : Enemy
 
     bool isattack;
     bool DontMove;
+    public bool BulletCheck;
 
     public Rigidbody SeonbiBullet;
     public GameObject ragdoll_obj;
 
     public float monsterhp;
     private float Dist;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,7 +40,7 @@ public class Seonbi_Script : Enemy
     protected override void monsterMove()
     {
 
-        if(Player.HP >= 0)
+        if(Player.HP > 0)
         {
             Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
             base.monsterMove();
@@ -92,7 +94,6 @@ public class Seonbi_Script : Enemy
     IEnumerator attacker()
     {
         DontMove = true;
-
         animator.SetBool("Move", false);
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.9f);

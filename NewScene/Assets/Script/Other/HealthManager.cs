@@ -9,7 +9,7 @@ public class HealthManager : MonoBehaviour
     
     void Start()
     {
-        currentHealth = maxHealth;
+        
     }
 
     

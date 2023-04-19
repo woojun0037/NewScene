@@ -166,7 +166,7 @@ public class Main_Player : MonoBehaviour
     public void PlayerHP(int PlayerHP)
     {
         HP = PlayerHP;
-        if (HP < 0)
+        if (HP < 1)
         {
             Anim.SetTrigger("Dead");
             Destroy(gameObject, 5f);  
