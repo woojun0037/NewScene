@@ -53,6 +53,12 @@ public class Rabbit_Script : Enemy
         }
     }
 
+    protected override void GetDamagedAnimation() {
+        int random =1;
+        random = UnityEngine.Random.Range(1, 3);
+        StartCoroutine(damaged_ani(random));
+    }
+
     protected override void monsterMove()
     {
         base.monsterMove();
@@ -68,7 +74,6 @@ public class Rabbit_Script : Enemy
             agent.isStopped = true;
         }
 
-
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
@@ -80,9 +85,7 @@ public class Rabbit_Script : Enemy
                 isattack = true;
                 StartCoroutine("attacker");
             }
-
         }
-
     }
 
 
@@ -110,4 +113,10 @@ public class Rabbit_Script : Enemy
 
     }
 
+    IEnumerator damaged_ani(int random)
+    {
+        animator.SetInteger("Hit", random);
+        yield return new WaitForSeconds(0.6f);
+        animator.SetInteger("Hit", 0);
+    }
 }

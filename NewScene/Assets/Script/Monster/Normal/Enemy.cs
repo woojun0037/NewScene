@@ -86,6 +86,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    protected virtual void GetDamagedAnimation(){ }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Weapon")
@@ -129,6 +131,7 @@ public class Enemy : MonoBehaviour
 
                     Gauge.sGauge += hit.damage;
                     curHearth -= hit.damage;
+                    GetDamagedAnimation();
                 }
             }
         }

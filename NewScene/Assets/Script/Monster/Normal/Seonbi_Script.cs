@@ -61,10 +61,8 @@ public class Seonbi_Script : Enemy
                 transform.LookAt(targety);
                 isattack = true;
                 StartCoroutine("attacker");
-
             }
         }
-
     }
 
     protected override void DieMonster()
@@ -77,6 +75,15 @@ public class Seonbi_Script : Enemy
             agent.enabled = false;
         }
     }
+
+    protected override void GetDamagedAnimation()
+    {
+        int random = 1;
+        random = UnityEngine.Random.Range(1, 3);
+        Debug.Log("random =" + random);
+        StartCoroutine(damaged_ani(random));
+    }
+
     IEnumerator attacker()
     {
         DontMove = true;
@@ -102,6 +109,13 @@ public class Seonbi_Script : Enemy
         yield return new WaitForSeconds(0.7f);
         isattack = false;
         DontMove = false;
+    }
+
+    IEnumerator damaged_ani(int random)
+    {
+        animator.SetInteger("Hit", random);
+        yield return new WaitForSeconds(0.6f);
+        animator.SetInteger("Hit", 0);
     }
 
 }

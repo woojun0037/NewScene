@@ -59,7 +59,7 @@ public class Seonbi_bullet : MonoBehaviour
 
         time += Time.deltaTime;
 
-        if (transform.position == aattack)
+        if (transform.position == aattack && playercollider ==false)
         {
             if (playercollider)
             { 
@@ -77,7 +77,7 @@ public class Seonbi_bullet : MonoBehaviour
               Destroy(gameObject);
             }
         }
-        else if(getposition == false)
+        else if(getposition == false && playercollider == false)
         {
             transform.position = Vector3.MoveTowards(gameObject.transform.position, aattack, bulletspeed * Time.deltaTime);
         }
