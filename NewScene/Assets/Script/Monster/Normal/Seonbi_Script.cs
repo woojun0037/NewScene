@@ -16,6 +16,7 @@ public class Seonbi_Script : Enemy
     public GameObject ragdoll_obj;
 
     public float monsterhp;
+    private float Dist;
     protected override void Awake()
     {
         base.Awake();
@@ -36,7 +37,7 @@ public class Seonbi_Script : Enemy
 
     protected override void monsterMove()
     {
-
+        Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
         base.monsterMove();
 
         if (!DontMove)
@@ -53,17 +54,15 @@ public class Seonbi_Script : Enemy
         Vector3 targety = targetTransform.position;
         targety.y = SetY;
 
-        if (agent.remainingDistance <= 5)
+        if (Dist <= 5)
         {
             if (!isattack)
             {
                 transform.LookAt(targety);
                 isattack = true;
                 StartCoroutine("attacker");
-
             }
         }
-
     }
 
     protected override void DieMonster()
@@ -76,6 +75,15 @@ public class Seonbi_Script : Enemy
             agent.enabled = false;
         }
     }
+
+    protected override void GetDamagedAnimation()
+    {
+        int random = 1;
+        random = UnityEngine.Random.Range(1, 3);
+        Debug.Log("random =" + random);
+        StartCoroutine(damaged_ani(random));
+    }
+
     IEnumerator attacker()
     {
         DontMove = true;
@@ -101,6 +109,13 @@ public class Seonbi_Script : Enemy
         yield return new WaitForSeconds(0.7f);
         isattack = false;
         DontMove = false;
+    }
+
+    IEnumerator damaged_ani(int random)
+    {
+        animator.SetInteger("Hit", random);
+        yield return new WaitForSeconds(0.6f);
+        animator.SetInteger("Hit", 0);
     }
 
 }

@@ -83,6 +83,13 @@ public class Deer_Script : Enemy
 
         }
     }
+    protected override void GetDamagedAnimation()
+    {
+        int random = 1;
+        random = UnityEngine.Random.Range(1, 3);
+        StartCoroutine(damaged_ani(random));
+    }
+
     IEnumerator attacker()
     {
         DontMove = true;
@@ -108,5 +115,12 @@ public class Deer_Script : Enemy
         yield return new WaitForSeconds(0.7f);
         isattack = false;
         DontMove = false;
+    }
+
+    IEnumerator damaged_ani(int random)
+    {
+        animator.SetInteger("Hit", random);
+        yield return new WaitForSeconds(0.6f);
+        animator.SetInteger("Hit", 0);
     }
 }

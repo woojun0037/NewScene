@@ -714,13 +714,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToGive: 0
-  maxHearth: 3
-  curHearth: 3
+  maxHearth: 100
+  curHearth: 100
   MaxDistance: 5
   chasespeed: 5
   moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   SetY: 2
