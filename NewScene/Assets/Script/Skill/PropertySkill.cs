@@ -9,10 +9,11 @@ public class PropertySkill : MonoBehaviour
     [SerializeField] private float DebuffTime = 5f;
     [SerializeField] private float StunTime = 3f;
 
-    private HitScript hit;
     public Main_Player SkillUse;
     public Enemy enemy;
     public GameObject motion;
+    public GameMain TafoonHitBox;
+
     public float SpeedUp = 1.2f;
 
     public bool Tafoon = false;
@@ -23,7 +24,6 @@ public class PropertySkill : MonoBehaviour
     void Awake()
     {
         SkillUse = GetComponent<Main_Player>();
-        hit = HitBox.gameObject.GetComponent<HitScript>();
     }
 
     private void Update()
@@ -96,6 +96,7 @@ public class PropertySkill : MonoBehaviour
             Stun = false;
         }
     }
+
 
     public void StunOn()
     {

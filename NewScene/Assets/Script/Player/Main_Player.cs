@@ -89,6 +89,16 @@ public class Main_Player : MonoBehaviour
         windOn.gameObject.SetActive(false);
     }
 
+    public void TafoonON()
+    {
+
+    }
+
+    public void TafoonOFF()
+    {
+
+    }
+
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;
