@@ -151,6 +151,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);

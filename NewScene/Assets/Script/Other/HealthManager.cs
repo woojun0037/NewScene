@@ -17,12 +17,13 @@ public class HealthManager : MonoBehaviour
     {
        
     }
-
+  
     public void HurtPlayer(int damage)
     {
         currentHealth -= damage;
         FindObjectOfType<Main_Player>().PlayerHP(currentHealth);
     }
+
 
     public void HealPlayer(int healAmount)
     {

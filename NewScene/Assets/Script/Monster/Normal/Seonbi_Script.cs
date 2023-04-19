@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class Seonbi_Script : Enemy
 {
-    private Animator animator;
-
     [SerializeField] float SetY;
-
-    bool isattack;
-    bool DontMove;
+    private Animator animator;
 
     public Rigidbody SeonbiBullet;
     public GameObject ragdoll_obj;
 
+    public bool isattack;
+    public bool DontMove;
+
+    public int HPcheck;
     public float monsterhp;
     private float Dist;
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,11 +38,13 @@ public class Seonbi_Script : Enemy
 
     protected override void monsterMove()
     {
+
         Dist = Vector3.Distance(transform.position, targetTransform.transform.position);
         base.monsterMove();
 
         if (!DontMove)
         {
+
             animator.SetBool("Move", true);
             agent.isStopped = false;
         }
@@ -63,6 +66,7 @@ public class Seonbi_Script : Enemy
                 StartCoroutine("attacker");
             }
         }
+
     }
 
     protected override void DieMonster()

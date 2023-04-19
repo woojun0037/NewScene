@@ -168,8 +168,8 @@ public class Main_Player : MonoBehaviour
         HP = PlayerHP;
         if (HP < 0)
         {
-
-            Destroy(gameObject,5f);
+            Anim.SetTrigger("Dead");
+            Destroy(gameObject, 5f);  
         }
         
     }
