@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public int damageToGive = 1;
+    public float damageToGive = 1;
 
     public float maxHearth;
     public float curHearth;

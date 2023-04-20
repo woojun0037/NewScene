@@ -42,8 +42,8 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
     public bool isTafoon;
 
-    public int damage;
-    public int HP;
+    public float damage;
+    public float HP;
 
     public float MoveSpeed = 6f;
     public float MaxDistance = 1.5f;
@@ -163,7 +163,7 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    public void PlayerHP(int PlayerHP)
+    public void PlayerHP(float PlayerHP)
     {
         HP = PlayerHP;
         if (HP < 1)
@@ -252,6 +252,7 @@ public class Main_Player : MonoBehaviour
             R_skillCheck = !R_skillCheck;
         }
     }
+
     IEnumerator Skill_Q_Cool()
     {
         yield return new WaitForSeconds(2.4f);

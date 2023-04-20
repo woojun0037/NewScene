@@ -12,7 +12,7 @@ public class Seonbi_bullet : MonoBehaviour
     Vector3 aattack;
     Vector3 objrotation;
 
-    public int SeonbiDamageToGive;
+    public float SeonbiDamageToGive;
     public float bulletspeed;
     
     private float random;
@@ -48,8 +48,6 @@ public class Seonbi_bullet : MonoBehaviour
             {
                 rigidbodythis.velocity = thisposition.right * -10;
             }
-            Debug.Log("velocity velocity");
-
             rotationonetime = true;
         }
 

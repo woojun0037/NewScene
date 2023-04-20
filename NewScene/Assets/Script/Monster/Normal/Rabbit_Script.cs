@@ -48,8 +48,8 @@ public class Rabbit_Script : Enemy
         if (curHearth < 1)
         {
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-            gameObject.SetActive(false);
             agent.enabled = false;
+            gameObject.SetActive(false);
         }
     }
 

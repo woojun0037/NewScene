@@ -25,12 +25,12 @@ public class CountDisabledObjects : MonoBehaviour
         }
 
         // 비활성화된 오브젝트의 수를 출력한다
-        Debug.Log("Number of disabled objects: " + count);
+        
 
         if(count == MaxCount)
         {
             gameObject.SetActive(false);   
-            Debug.Log("count == MaxCount");
+            
         }
     }
 
