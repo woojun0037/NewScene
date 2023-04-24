@@ -36,7 +36,7 @@ public class PropertySkill : MonoBehaviour
 
     public void TafoonSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
+        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true && !SkillUse.R_skillCheck)
         {
             motion.gameObject.SetActive(true);
             SkillUse.Q_skillCheck = false;
@@ -64,6 +64,7 @@ public class PropertySkill : MonoBehaviour
 
     IEnumerator TafoonAttack()
     {
+        TafoonSpecial = false;
         TafoonSpecialMove = true;
         SkillUse.Anim.SetTrigger("TafoonSkill");
         yield return new WaitForSeconds(2.4f);

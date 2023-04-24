@@ -37,7 +37,7 @@ public class FlyingObj : MonoBehaviour
     {
         while(isRain)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.8f);
             enemy.curHearth -= 1f;
         }    
     }
