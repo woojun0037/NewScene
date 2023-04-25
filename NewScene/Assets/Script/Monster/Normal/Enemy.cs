@@ -63,7 +63,6 @@ public class Enemy : MonoBehaviour
         agent.speed = chasespeed;
         agent.destination = targetTransform.position;
         //agent.SetDestination(targetTransform.position);
-
     }
 
     protected virtual void DieMonster()

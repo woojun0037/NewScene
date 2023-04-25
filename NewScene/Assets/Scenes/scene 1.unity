@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 44321153}
   - component: {fileID: 44321152}
   - component: {fileID: 44321151}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Terrain
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -26283,6 +26283,10 @@ PrefabInstance:
     - target: {fileID: 6074564347110281605, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6074564347194344120, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074564347194344121, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: m_LocalScale.x
