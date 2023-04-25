@@ -18,9 +18,7 @@ public class HealthManager : MonoBehaviour
        
     }
   
-    public void HurtP
-        
-        (float damage)
+    public void HurtPlayer(float damage)
     {
         currentHealth -= damage;
         FindObjectOfType<Main_Player>().PlayerHP(currentHealth);
