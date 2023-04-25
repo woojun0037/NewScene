@@ -82,10 +82,10 @@ public class PlayerSkill : MonoBehaviour
             Dash();
         }
 
-        //비 스킬 이미지 인풋
         if (isSkillUse)
         {
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.collider.gameObject != this.gameObject)
                 {
@@ -165,7 +165,6 @@ public class PlayerSkill : MonoBehaviour
             targetCircle.GetComponent<Image>().enabled = false;
             RainSkillCheck = false;
         }
-
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
             SkillRange.GetComponent<Image>().enabled = false;

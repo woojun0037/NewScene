@@ -35,8 +35,7 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -169,7 +168,7 @@ Material:
     - _DissolveExp: 8
     - _DissolveExp2: 8
     - _DissolveExpReversed: 8
-    - _DissolveGlowAffectsRamp: 1
+    - _DissolveGlowAffectsRamp: 0.896
     - _DissolveGlowAffectsRamp1: 1
     - _DissolveGlowAmount: 0
     - _DissolveGlowOffset: 0
