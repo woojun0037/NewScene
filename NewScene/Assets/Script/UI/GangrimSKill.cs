@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class GangrimSKill : MonoBehaviour
 {
-    Image windFill;
-    Image cloudFill;
-    Image rainFill;
-    
+    public Image imgCoolTimeWind;
+    public Image imgCoolTimeCloud;
+    public Image imgCoolTimeRain;
+
     float windSkillminGauge = 0.1f;
     float windSkillmaxGauge = 7f;
 
@@ -26,22 +26,37 @@ public class GangrimSKill : MonoBehaviour
     void Start()
     {
         
-        windFill = GetComponent<Image>();
-        windGauge = windSkillmaxGauge;
-
-        cloudFill = GetComponent<Image>();
-        cloudGauge = cloudSkillmaxGauge;
-
-        rainFill = GetComponent<Image>();
-        rainGauge = rainSkillmaxGauge;
     }
 
     void Update()
     {
-        windFill.fillAmount = windGauge / windSkillminGauge;
-
-        cloudFill.fillAmount = cloudGauge / cloudSkillminGauge;
-
-        rainFill.fillAmount = rainGauge / rainSkillminGauge;
+        WindSkillUI();
+        CloudSkillUI();
+        RainSkillUI();
     }
+
+    public void WindSkillUI()
+    {
+        while (windSkillminGauge <= windGauge)
+        {
+            imgCoolTimeWind.fillAmount = windGauge / windSkillminGauge;
+            windSkillminGauge += 0.1f;
+        }
+        imgCoolTimeWind.fillAmount = 0;
+    }
+
+    public void CloudSkillUI()
+    {
+
+        //cloudFill.fillAmount = cloudGauge / cloudSkillminGauge;
+    }
+
+    public void RainSkillUI()
+    {
+
+        //rainFill.fillAmount = rainGauge / rainSkillminGauge;
+    }
+
+
+
 }

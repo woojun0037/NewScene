@@ -18,6 +18,7 @@ public class Main_Player : MonoBehaviour
     private WindStorm windOn;
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
+    private GangrimSKill skillui;
 
     public Animator Anim;
     public Enemy enemy;
@@ -228,9 +229,11 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Anim.SetTrigger("WindSkill");
-            WindSkillUI.windGauge += Time.deltaTime;
+            skillui.WindSkillUI();
+
             Q_skillCheck = true;
             isWind = true;
+
             StartCoroutine(Skill_Q_Cool());
         }
     }
@@ -255,8 +258,8 @@ public class Main_Player : MonoBehaviour
 
     IEnumerator Skill_Q_Cool()
     {
-        yield return new WaitForSeconds(2.4f);
         isWind = false;
+        yield return new WaitForSeconds(2.4f);
     }
 
     public void GetDamage(float damage)

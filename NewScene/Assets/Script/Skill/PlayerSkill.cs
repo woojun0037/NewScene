@@ -11,10 +11,9 @@ public class PlayerSkill : MonoBehaviour
     private Vector3 Dir;
     private Vector3 DashTarget;
 
-    [Header("WindSkill")]
-    WindStorm windskill;
+    //WindStorm windskill;
     Main_Player player;
-
+    
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
@@ -24,7 +23,6 @@ public class PlayerSkill : MonoBehaviour
     private bool CloudisDelay = true;
     private bool isDash;
 
-    [Header("CloudSkill")]
     public static PlayerSkill Instance;
 
     public TrailRenderer trailEffect;
@@ -32,7 +30,6 @@ public class PlayerSkill : MonoBehaviour
     public GameObject Cloudprab;
     public GameObject WindSkillPrefab;
 
-    [Header("RainDropSkill")]
     private Vector3 posUp;
     public Vector3 postion;
 

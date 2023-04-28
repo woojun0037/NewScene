@@ -11407,7 +11407,6 @@ GameObject:
   - component: {fileID: 526502012}
   - component: {fileID: 526502015}
   - component: {fileID: 526502014}
-  - component: {fileID: 526502013}
   m_Layer: 5
   m_Name: imgCoolTimeCloud
   m_TagString: Untagged
@@ -11435,18 +11434,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.800003, y: -0.000061035156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &526502013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 526502011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d06da4707fc9a1645b9c4e25bbd4f451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &526502014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11472,7 +11459,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -12276,7 +12263,6 @@ GameObject:
   - component: {fileID: 576582527}
   - component: {fileID: 576582530}
   - component: {fileID: 576582529}
-  - component: {fileID: 576582528}
   m_Layer: 5
   m_Name: imgCoolTimeWind
   m_TagString: Untagged
@@ -12304,18 +12290,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000091552734, y: -0.000061035156}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &576582528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 576582526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff1dd3cc29d8a74d81a59e1b0599c08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &576582529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12329,7 +12303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+  m_Color: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12340,10 +12314,10 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillMethod: 4
+  m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &576582530
@@ -27063,7 +27037,6 @@ GameObject:
   - component: {fileID: 1337371067}
   - component: {fileID: 1337371070}
   - component: {fileID: 1337371069}
-  - component: {fileID: 1337371068}
   m_Layer: 5
   m_Name: imgCoolTimeRain
   m_TagString: Untagged
@@ -27091,18 +27064,6 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000038146973, y: 1.6000366}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1337371068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337371066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42770e762cff4274fad1c3b6fbc206a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1337371069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27128,7 +27089,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -28423,6 +28384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1420001423}
+  - component: {fileID: 1420001424}
   m_Layer: 5
   m_Name: SkillButtom
   m_TagString: Untagged
@@ -28454,6 +28416,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1420001424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420001422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e09def53c47ffb45ae849c8ec13c641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imgCoolTimeWind: {fileID: 576582529}
+  imgCoolTimeCloud: {fileID: 526502014}
+  imgCoolTimeRain: {fileID: 1337371069}
 --- !u!1 &1424156093
 GameObject:
   m_ObjectHideFlags: 0
