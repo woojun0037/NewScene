@@ -177,6 +177,7 @@ public class BossMonster_Tiger : Boss
             tempPos = targetPos;
             isTarget = true;
         }
+        yield return new WaitForSeconds(0.5f);
 
         Vector3 dir = tempPos - transform.position;
         transform.forward = dir;
@@ -189,8 +190,8 @@ public class BossMonster_Tiger : Boss
             yield return new WaitForFixedUpdate();
         }
 
-
         yield return new WaitForSeconds(0.5f);
+
         isMove = true;
         isDash = false;
     }
@@ -202,10 +203,10 @@ public class BossMonster_Tiger : Boss
         {
             time -= 0.05f;
             yield return new WaitForSeconds(0.01f);
-            if (time > 1f)
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-            else
-                transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
+            //if (time > 1f)
+            //    transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+            //else
+            //    transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
         }
 
         yield return new WaitForSeconds(1f);
