@@ -13,17 +13,21 @@ public class PlayerSkill : MonoBehaviour
 
     //WindStorm windskill;
     Main_Player player;
-    
+
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
     public bool isTest;
+
+    public bool WindSkillCheck;
     public bool RainSkillCheck;
 
     private bool CloudisDelay = true;
     private bool isDash;
 
     public static PlayerSkill Instance;
+
+    public Canvas WindDirection;
 
     public TrailRenderer trailEffect;
     public Transform CloudPos;
@@ -48,6 +52,7 @@ public class PlayerSkill : MonoBehaviour
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
+        WindDirection.enabled = false;
         Instance = this;
     }
 
@@ -56,6 +61,7 @@ public class PlayerSkill : MonoBehaviour
 
         CloudSkill();
         RainDropSkill();
+        WindSkillRange();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -82,6 +88,7 @@ public class PlayerSkill : MonoBehaviour
         if (isSkillUse)
         {
             int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.collider.gameObject != this.gameObject)
@@ -90,6 +97,7 @@ public class PlayerSkill : MonoBehaviour
                     postion = hit.point;
                 }
             }
+
             //비 스킬 이미지 인풋
             var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
             float distance = Vector3.Distance(hit.point, transform.position);
@@ -120,6 +128,28 @@ public class PlayerSkill : MonoBehaviour
         GameObject temp = Instantiate(WindSkillPrefab, transform.position, Quaternion.identity);
         temp.transform.rotation = this.transform.rotation;
         return temp;
+    }
+
+    public void WindSkillRange()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck)
+        {
+            WindDirection.enabled = true;
+            WindSkillCheck = true;
+            isSkillUse = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
+        {
+            WindDirection.enabled = false;
+            WindSkillCheck = false;
+            isSkillUse = true;
+        }
+        if(Input.GetMouseButtonDown(0) && !isSkillUse)
+        {
+            isSkillUse = true;
+            WindDirection.enabled = false;
+            player.Skill_Q();
+        }
     }
 
     public void CloudSkill()

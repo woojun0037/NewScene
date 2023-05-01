@@ -87,7 +87,6 @@ public class Seonbi_Script : Enemy
     {
         int random = 1;
         random = UnityEngine.Random.Range(1, 3);
-        Debug.Log("random =" + random);
         StartCoroutine(damaged_ani(random));
     }
 

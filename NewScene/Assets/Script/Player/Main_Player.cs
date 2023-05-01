@@ -18,12 +18,12 @@ public class Main_Player : MonoBehaviour
     private WindStorm windOn;
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
-    private GangrimSKill skillui;
 
+    public PlayerSkill skill;
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
-    
+
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -45,13 +45,16 @@ public class Main_Player : MonoBehaviour
 
     public float damage;
     public float HP;
-
     public float MoveSpeed = 6f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
     public float addAttackSpeed;
     public float Duration;
     public float Magnitude;
+
+    private float Qcool;
+    private float Ecool;
+    private float Rcool;
 
     int hitState;
     internal int HitState => hitState;
@@ -67,7 +70,7 @@ public class Main_Player : MonoBehaviour
     void Update()
     {
         AttackInput();
-        Skill_Q();
+        
         Skill_E();
         Skill_R();
     }
@@ -155,9 +158,11 @@ public class Main_Player : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-            if (Physics.Raycast(ray, out RaycastHit rayHit))
+            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
+            if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
             {
-                if (rayHit.collider.tag == "Platform" || rayHit.collider.tag == "Monster")
+                if (rayHit.collider.tag == "Platform")
                 {
                     transform.LookAt(rayHit.point);
                 }
@@ -171,7 +176,7 @@ public class Main_Player : MonoBehaviour
         if (HP < 1)
         {
             Anim.SetTrigger("Dead");
-            Destroy(gameObject, 5f);  
+            Destroy(gameObject, 5f);
         }
     }
 
@@ -182,7 +187,7 @@ public class Main_Player : MonoBehaviour
             Vector3 dir = transform.position;
             dir.y = 3f;
 
-            currentATKEffect = Instantiate(AtkEffect[on_count],transform);
+            currentATKEffect = Instantiate(AtkEffect[on_count], transform);
             currentATKEffect.transform.position = dir;
 
             //currentATKEffect.transform.position = new veoctransform.position.y;
@@ -225,25 +230,18 @@ public class Main_Player : MonoBehaviour
     }
 
     public void Skill_Q()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Anim.SetTrigger("WindSkill");
-            //skillui.WindSkillUI();
+    { 
+        Anim.SetTrigger("WindSkill");
 
-            Q_skillCheck = true;
-            isWind = true;
-
-            StartCoroutine(Skill_Q_Cool());
-        }
+        Q_skillCheck = true;
+        StartCoroutine(Skill_Q_Cool());
     }
 
     public void Skill_E()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            CloudSkillUI.cloudGauge += Time.deltaTime;
-            E_skillCheck = true;
+           E_skillCheck = true;
         }
     }
 
@@ -251,21 +249,22 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            RainSkillUI.rainGauge += Time.deltaTime;
-            R_skillCheck = !R_skillCheck;
+           R_skillCheck = !R_skillCheck;
         }
     }
 
     IEnumerator Skill_Q_Cool()
     {
-        isWind = false;
-        yield return new WaitForSeconds(2.4f);
+        while(Qcool < 3)
+        {
+            Qcool += Time.deltaTime;
+        }
+        yield return null;
     }
 
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);
-
     }
 
     private void AnimationBoolCheck()
