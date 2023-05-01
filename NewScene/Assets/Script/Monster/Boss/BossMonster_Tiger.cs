@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossMonster_Tiger : MonoBehaviour
+public class BossMonster_Tiger : Boss
 {
     [SerializeField] private Vector3 targetPos;
-    [SerializeField] private Main_Player player;
     [SerializeField] private GameObject[] effects;
 
     [SerializeField] private float attackRange;
@@ -17,6 +16,8 @@ public class BossMonster_Tiger : MonoBehaviour
     public SkinnedMeshRenderer mat;
 
     private GameObject damageEffect;
+    public GameObject attackcollider;
+
     private Animator anim;
 
     private Vector3 tempPos;
@@ -24,14 +25,20 @@ public class BossMonster_Tiger : MonoBehaviour
     private bool isMove;
     private bool isDash;
 
-    private void Awake()
+    protected override void Awake()
     {
         anim = GetComponent<Animator>();
-
+    }
+    protected override void Start()
+    {
+        player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
     }
 
     private void Update()
     {
+        NotDamaged();
+        DieMonster();
+
         targetPos = player.transform.position;
 
         if (Vector3.Distance(targetPos, transform.position) < attackRange) //보스와 캐릭터의 거리가 attackRange 보다 작고 공격중이 아닐 때
@@ -40,6 +47,8 @@ public class BossMonster_Tiger : MonoBehaviour
             {
                 if (!isAttack)
                 {
+                    transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
                     isAttack = true;
                     anim.SetBool("isWalk", false);
                     BaseAttack();
@@ -49,12 +58,29 @@ public class BossMonster_Tiger : MonoBehaviour
             {
                 if (!isAttack)
                 {
+                    transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
                     isAttack = true;
                     anim.SetBool("isWalk", false);
                     AttackChoice();
                 }
             }
 
+        }
+
+        if (Vector3.Distance(targetPos, transform.position) < 3) //멈춤
+        {
+            isMove = false;
+            anim.SetBool("isWalk", false);
+
+            if (!isAttack)
+            {
+                transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
+                isAttack = true;
+                anim.SetBool("isWalk", false);
+                BaseAttack();
+            }
         }
 
         if (isMove)
@@ -83,6 +109,14 @@ public class BossMonster_Tiger : MonoBehaviour
         {
             isDash = false;
             player.GetDamage(dashAttackDamage);
+        }
+    }
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            gameObject.SetActive(false);
+            anim.SetBool("isDie", true);
         }
     }
 
