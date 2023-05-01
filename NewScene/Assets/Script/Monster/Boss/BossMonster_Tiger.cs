@@ -14,8 +14,6 @@ public class BossMonster_Tiger : Boss
     [SerializeField] private float dashAttackDamage;
 
     public SkinnedMeshRenderer mat;
-
-    private GameObject damageEffect;
     public GameObject attackcollider;
 
     private Animator anim;
@@ -24,6 +22,7 @@ public class BossMonster_Tiger : Boss
     private bool isAttack;
     private bool isMove;
     private bool isDash;
+    private bool isDie;
 
     protected override void Awake()
     {
@@ -36,15 +35,45 @@ public class BossMonster_Tiger : Boss
 
     private void Update()
     {
-        NotDamaged();
-        DieMonster();
-
-        targetPos = player.transform.position;
-
-        if (Vector3.Distance(targetPos, transform.position) < attackRange) //보스와 캐릭터의 거리가 attackRange 보다 작고 공격중이 아닐 때
+        if (player.HP >= 0 && !isDie)
         {
-            if (Vector3.Distance(targetPos, transform.position) < attackRange / 2)
+            NotDamaged();
+            DieMonster();
+
+            targetPos = player.transform.position;
+
+            if (Vector3.Distance(targetPos, transform.position) < attackRange) //보스와 캐릭터의 거리가 attackRange 보다 작고 공격중이 아닐 때
             {
+                if (Vector3.Distance(targetPos, transform.position) < attackRange / 2)
+                {
+                    if (!isAttack)
+                    {
+                        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
+                        isAttack = true;
+                        anim.SetBool("isWalk", false);
+                        BaseAttack();
+                    }
+                }
+                else
+                {
+                    if (!isAttack)
+                    {
+                        transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
+
+                        isAttack = true;
+                        anim.SetBool("isWalk", false);
+                        AttackChoice();
+                    }
+                }
+
+            }
+
+            if (Vector3.Distance(targetPos, transform.position) < 3) //멈춤
+            {
+                isMove = false;
+                anim.SetBool("isWalk", false);
+
                 if (!isAttack)
                 {
                     transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -54,52 +83,26 @@ public class BossMonster_Tiger : Boss
                     BaseAttack();
                 }
             }
-            else
-            {
-                if (!isAttack)
-                {
-                    transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 
-                    isAttack = true;
-                    anim.SetBool("isWalk", false);
-                    AttackChoice();
+            if (isMove)
+            {
+                anim.SetBool("isWalk", isMove);
+                Move();
+            }
+
+            if (isAttack)
+            {
+                if (attackCoolTime >= 0)
+                {
+                    attackCoolTime -= Time.deltaTime;
+                }
+                else
+                {
+                    isAttack = false;
+                    attackCoolTime = 5f;
                 }
             }
 
-        }
-
-        if (Vector3.Distance(targetPos, transform.position) < 3) //멈춤
-        {
-            isMove = false;
-            anim.SetBool("isWalk", false);
-
-            if (!isAttack)
-            {
-                transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
-
-                isAttack = true;
-                anim.SetBool("isWalk", false);
-                BaseAttack();
-            }
-        }
-
-        if (isMove)
-        {
-            anim.SetBool("isWalk", isMove);
-            Move();
-        }
-
-        if (isAttack)
-        {
-            if (attackCoolTime >= 0)
-            {
-                attackCoolTime -= Time.deltaTime;
-            }
-            else
-            {
-                isAttack = false;
-                attackCoolTime = 5f;
-            }
         }
     }
 
@@ -116,7 +119,7 @@ public class BossMonster_Tiger : Boss
         if (curHearth < 1)
         {
             gameObject.SetActive(false);
-            anim.SetBool("isDie", true);
+            isDie = true;
         }
     }
 
@@ -161,8 +164,9 @@ public class BossMonster_Tiger : Boss
 
     private IEnumerator BaseAttackCor()
     {
-
+        attackcollider.SetActive(true);
         yield return new WaitForSeconds(1.8f);
+        attackcollider.SetActive(false);
         isMove = true;
     }
 
