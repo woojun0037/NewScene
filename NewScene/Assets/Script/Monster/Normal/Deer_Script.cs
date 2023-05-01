@@ -13,9 +13,18 @@ public class Deer_Script : Enemy
     bool isattack;
     bool DontMove;
 
-    public Rigidbody DeerAttacker;
+    public GameObject DeerLuncher;
     public GameObject ragdoll_obj;
     private float Dist;
+    float time = 0;
+    private float spawntime = 2;
+    private float current_rosh = 0;
+
+    private float roshspeed = 10f;
+    private bool isrosh = false;
+    bool isdash = false;
+    Vector3 startingPosition;
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,12 +37,18 @@ public class Deer_Script : Enemy
         animator = GetComponent<Animator>();
     }
 
+    public bool one;
     // Update is called once per frame
     void Update()
     {
         monsterMove();
         NotDamaged();
         DieMonster();
+
+        if (isdash)
+        {
+            rosh();
+        }
     }
 
     protected override void monsterMove()
@@ -55,7 +70,6 @@ public class Deer_Script : Enemy
                 agent.isStopped = true;
             }
 
-
             Vector3 targety = targetTransform.position;
             targety.y = SetY;
 
@@ -64,11 +78,11 @@ public class Deer_Script : Enemy
             {
                 if (!isattack)
                 {
+                    randattack();
                     //transform.LookAt(targety);
-                    isattack = true;
-                    StartCoroutine("attacker");
+                    //isattack = true;
+                    //StartCoroutine("attacker");
                 }
-
             }
         }
     }
@@ -94,6 +108,7 @@ public class Deer_Script : Enemy
 
     IEnumerator attacker()
     {
+
         DontMove = true;
         int random;
         random = UnityEngine.Random.Range(1, 4);
@@ -102,24 +117,28 @@ public class Deer_Script : Enemy
         targety.y = SetY;
 
         animator.SetBool("Move", false);
-        transform.LookAt(targety);
+        //transform.LookAt(targety);
 
         animator.SetBool("isAttack", true);
         animator.SetInteger("Attack", random);
 
         yield return new WaitForSeconds(1f);
 
-        //번개 발사
-        //Vector3 target_ = transform.position;
-        //target_.y = SetY + 0.5f;
 
-        //Rigidbody ThrowRockrigid = Instantiate(DeerAttacker, target_, transform.rotation);
+        Vector3 target_ = transform.position;
+        target_.y = SetY + 0.5f;
+
+        Instantiate(DeerLuncher, target_, Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        //transform.LookAt(targety);
+
+
+        yield return new WaitForSeconds(1f);
 
         animator.SetBool("isAttack", false);
         animator.SetInteger("Attack", 0);
-        yield return new WaitForSeconds(1f);
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         isattack = false;
         DontMove = false;
     }
@@ -130,5 +149,68 @@ public class Deer_Script : Enemy
         yield return new WaitForSeconds(0.6f);
         animator.SetBool("isHit", false);
         animator.SetInteger("Hit", 0);
+    }
+
+
+
+    IEnumerator rotation_C()
+    {
+        //Vector3 targetDirection = (targetTransform.position - transform.position).normalized;
+        //Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 100f * Time.deltaTime);
+
+        animator.SetBool("isAttack", true);
+        animator.SetInteger("Attack", 1);
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
+        transform.rotation = Quaternion.Lerp(startRotation, targetRotation, 10f * Time.deltaTime);
+        yield return new WaitForSeconds(3f);
+        animator.SetBool("isAttack", false);
+        animator.SetInteger("Attack", 0);
+    }
+
+    void rosh()
+    {
+
+        if (!isrosh)
+        {
+            animator.SetBool("Move", true);
+            transform.LookAt(targetTransform);
+            startingPosition = targetTransform.position;
+            isrosh = true;
+        }
+
+        if (transform.position == startingPosition) // 돌진 완료
+        {
+            isdash = false;
+            //isrosh = false;
+            animator.SetBool("Move", false);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, startingPosition, roshspeed * Time.deltaTime);
+        }
+
+    }
+
+    void reset()
+    {
+            isrosh = false;
+    }
+
+    private void randattack()
+    {
+        reset();
+        int rand = Random.Range(0, 2); //0 1
+
+        if (rand == 0)
+        {
+            isattack = true;
+            StartCoroutine("attacker");
+        }
+        else if (rand == 1)
+        {
+            isdash = true;
+        }
     }
 }

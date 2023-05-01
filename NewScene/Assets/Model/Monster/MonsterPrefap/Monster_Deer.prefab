@@ -1271,18 +1271,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToGive: 1
-  maxHearth: 2
-  curHearth: 2
+  maxHearth: 10
+  curHearth: 10
   MaxDistance: 5
   chasespeed: 5
   moveSpeed: 5
   DebuffCheck: 0
   StartAttack: 0
+  KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   SetY: 2
-  SeonbiBullet: {fileID: 0}
+  DeerLuncher: {fileID: 3417702529338652534, guid: dce0f4e85aa711b43ba8b564e5b9ec60, type: 3}
   ragdoll_obj: {fileID: 4883376018212455235, guid: 2b0a6afcd98d8964591a80364f2972c7, type: 3}
+  one: 0
 --- !u!195 &5866666020077004021
 NavMeshAgent:
   m_ObjectHideFlags: 0
