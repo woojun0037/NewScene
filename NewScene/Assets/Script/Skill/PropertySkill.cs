@@ -34,7 +34,7 @@ public class PropertySkill : MonoBehaviour
 
     public void TafoonSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true && !SkillUse.R_skillCheck)
+        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
         {
             motion.gameObject.SetActive(true);
             SkillUse.Q_skillCheck = false;

@@ -124,6 +124,7 @@ public class Main_Player : MonoBehaviour
 
     private void AttackInput()
     {
+
         if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             hitState = 1;
@@ -156,7 +157,7 @@ public class Main_Player : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit rayHit))
             {
-                if (rayHit.collider.tag == "Platform")
+                if (rayHit.collider.tag == "Platform" || rayHit.collider.tag == "Monster")
                 {
                     transform.LookAt(rayHit.point);
                 }
@@ -172,7 +173,6 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger("Dead");
             Destroy(gameObject, 5f);  
         }
-        
     }
 
     public void ATK_Effect_On(int on_count)
@@ -229,7 +229,7 @@ public class Main_Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Anim.SetTrigger("WindSkill");
-            skillui.WindSkillUI();
+            //skillui.WindSkillUI();
 
             Q_skillCheck = true;
             isWind = true;
