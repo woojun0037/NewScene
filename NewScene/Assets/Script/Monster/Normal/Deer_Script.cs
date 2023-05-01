@@ -22,7 +22,10 @@ public class Deer_Script : Enemy
 
     private float roshspeed = 10f;
     private bool isrosh = false;
-    bool isdash = false;
+    protected bool isdash = false;
+
+    public ParticleSystem particle_attack;
+
     Vector3 startingPosition;
 
     protected override void Awake()
@@ -100,15 +103,19 @@ public class Deer_Script : Enemy
     }
     protected override void GetDamagedAnimation()
     {
-        animator.SetBool("isHit", true);
-        int random;
-        random = UnityEngine.Random.Range(1, 3);
-        StartCoroutine(damaged_ani(random));
+        if (animator != null)
+        {
+            animator.SetBool("isHit", true);
+
+            int random;
+            random = UnityEngine.Random.Range(1, 3);
+            StartCoroutine(damaged_ani(random));
+        }
+
     }
 
     IEnumerator attacker()
     {
-
         DontMove = true;
         int random;
         random = UnityEngine.Random.Range(1, 4);
@@ -123,7 +130,6 @@ public class Deer_Script : Enemy
         animator.SetInteger("Attack", random);
 
         yield return new WaitForSeconds(1f);
-
 
         Vector3 target_ = transform.position;
         target_.y = SetY + 0.5f;
@@ -151,8 +157,6 @@ public class Deer_Script : Enemy
         animator.SetInteger("Hit", 0);
     }
 
-
-
     IEnumerator rotation_C()
     {
         //Vector3 targetDirection = (targetTransform.position - transform.position).normalized;
@@ -169,11 +173,14 @@ public class Deer_Script : Enemy
         animator.SetInteger("Attack", 0);
     }
 
-    void rosh()
+    protected void rosh()
     {
-
         if (!isrosh)
         {
+            if (particle_attack != null)
+            {
+                particle_attack.Play();
+            }
             animator.SetBool("Move", true);
             transform.LookAt(targetTransform);
             startingPosition = targetTransform.position;
@@ -182,6 +189,7 @@ public class Deer_Script : Enemy
 
         if (transform.position == startingPosition) // 돌진 완료
         {
+            particle_attack.Stop();
             isdash = false;
             //isrosh = false;
             animator.SetBool("Move", false);
@@ -195,7 +203,7 @@ public class Deer_Script : Enemy
 
     void reset()
     {
-            isrosh = false;
+        isrosh = false;
     }
 
     private void randattack()

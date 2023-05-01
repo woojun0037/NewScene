@@ -1215,6 +1215,7 @@ GameObject:
   - component: {fileID: 5866666020077004023}
   - component: {fileID: 5866666020077004022}
   - component: {fileID: 5866666020077004024}
+  - component: {fileID: 88382937}
   m_Layer: 0
   m_Name: Monster_Deer
   m_TagString: Monster
@@ -1235,6 +1236,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1235084831084989470}
+  - {fileID: 6440755317504901793}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1284,6 +1286,7 @@ MonoBehaviour:
   SetY: 2
   DeerLuncher: {fileID: 3417702529338652534, guid: dce0f4e85aa711b43ba8b564e5b9ec60, type: 3}
   ragdoll_obj: {fileID: 4883376018212455235, guid: 2b0a6afcd98d8964591a80364f2972c7, type: 3}
+  particle_attack: {fileID: 6440755317504901795}
   one: 0
 --- !u!195 &5866666020077004021
 NavMeshAgent:
@@ -1350,3 +1353,98 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &88382937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978335658521126814}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10c95226850dbff48b565e165a8be756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToGive: 1
+  maxHearth: 10
+  curHearth: 10
+  MaxDistance: 5
+  chasespeed: 5
+  moveSpeed: 5
+  DebuffCheck: 0
+  StartAttack: 0
+  KnockBackForce: 0
+  targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  SetY: 2
+  DeerLuncher: {fileID: 3417702529338652534, guid: dce0f4e85aa711b43ba8b564e5b9ec60, type: 3}
+  ragdoll_obj: {fileID: 4883376018212455235, guid: 2b0a6afcd98d8964591a80364f2972c7, type: 3}
+  particle_attack: {fileID: 6440755317504901795}
+  one: 0
+--- !u!1001 &8349615308975580149
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8634143870603476260}
+    m_Modifications:
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.703
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.478
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 3079866435702464853, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+      propertyPath: m_Name
+      value: Deer_Effect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+--- !u!4 &6440755317504901793 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3079866435702464852, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+  m_PrefabInstance: {fileID: 8349615308975580149}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6440755317504901795 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3079866435702464854, guid: c6ebd531a157d7c45bd016fb285d4888, type: 3}
+  m_PrefabInstance: {fileID: 8349615308975580149}
+  m_PrefabAsset: {fileID: 0}
