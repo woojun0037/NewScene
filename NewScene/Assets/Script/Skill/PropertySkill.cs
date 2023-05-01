@@ -6,9 +6,7 @@ public class PropertySkill : MonoBehaviour
 {
     [SerializeField] Collider HitBox;
     [SerializeField] private float BuffTime = 6f;
-    [SerializeField] private float DebuffTime = 5f;
-    [SerializeField] private float StunTime = 3f;
-
+    
     public Main_Player SkillUse;
     public Enemy enemy;
     public GameObject motion;
@@ -36,7 +34,7 @@ public class PropertySkill : MonoBehaviour
 
     public void TafoonSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true && !SkillUse.R_skillCheck)
+        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
         {
             motion.gameObject.SetActive(true);
             SkillUse.Q_skillCheck = false;
@@ -96,6 +94,7 @@ public class PropertySkill : MonoBehaviour
         }
     }
 
+
     public void Thunder()
     {
         if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck)
@@ -106,18 +105,5 @@ public class PropertySkill : MonoBehaviour
         {
             Stun = false;
         }
-    }
-
-
-    public void StunOn()
-    {
-        enemy.StartAttack = true;
-        StartCoroutine(ThunderSkillUse());
-    }
-
-    IEnumerator ThunderSkillUse()
-    {
-        yield return new WaitForSeconds(StunTime);
-        Stun = false;
     }
 }

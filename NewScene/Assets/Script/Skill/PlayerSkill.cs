@@ -11,28 +11,29 @@ public class PlayerSkill : MonoBehaviour
     private Vector3 Dir;
     private Vector3 DashTarget;
 
-    [Header("WindSkill")]
-    WindStorm windskill;
+    //WindStorm windskill;
     Main_Player player;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
     public bool isTest;
+
+    public bool WindSkillCheck;
     public bool RainSkillCheck;
 
     private bool CloudisDelay = true;
     private bool isDash;
 
-    [Header("CloudSkill")]
     public static PlayerSkill Instance;
+
+    public Canvas WindDirection;
 
     public TrailRenderer trailEffect;
     public Transform CloudPos;
     public GameObject Cloudprab;
     public GameObject WindSkillPrefab;
 
-    [Header("RainDropSkill")]
     private Vector3 posUp;
     public Vector3 postion;
 
@@ -51,6 +52,7 @@ public class PlayerSkill : MonoBehaviour
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
+        WindDirection.enabled = false;
         Instance = this;
     }
 
@@ -59,6 +61,7 @@ public class PlayerSkill : MonoBehaviour
 
         CloudSkill();
         RainDropSkill();
+        WindSkillRange();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -82,10 +85,11 @@ public class PlayerSkill : MonoBehaviour
             Dash();
         }
 
-        //비 스킬 이미지 인풋
         if (isSkillUse)
         {
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.collider.gameObject != this.gameObject)
                 {
@@ -93,6 +97,7 @@ public class PlayerSkill : MonoBehaviour
                     postion = hit.point;
                 }
             }
+
             //비 스킬 이미지 인풋
             var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
             float distance = Vector3.Distance(hit.point, transform.position);
@@ -123,6 +128,28 @@ public class PlayerSkill : MonoBehaviour
         GameObject temp = Instantiate(WindSkillPrefab, transform.position, Quaternion.identity);
         temp.transform.rotation = this.transform.rotation;
         return temp;
+    }
+
+    public void WindSkillRange()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck)
+        {
+            WindDirection.enabled = true;
+            WindSkillCheck = true;
+            isSkillUse = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
+        {
+            WindDirection.enabled = false;
+            WindSkillCheck = false;
+            isSkillUse = true;
+        }
+        if(Input.GetMouseButtonDown(0) && !isSkillUse)
+        {
+            isSkillUse = true;
+            WindDirection.enabled = false;
+            player.Skill_Q();
+        }
     }
 
     public void CloudSkill()
@@ -165,7 +192,6 @@ public class PlayerSkill : MonoBehaviour
             targetCircle.GetComponent<Image>().enabled = false;
             RainSkillCheck = false;
         }
-
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
             SkillRange.GetComponent<Image>().enabled = false;

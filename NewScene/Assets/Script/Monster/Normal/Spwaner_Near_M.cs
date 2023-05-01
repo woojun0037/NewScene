@@ -4,24 +4,21 @@ using UnityEngine;
 
 public class Spwaner_Near_M : MonoBehaviour //스폰 몬스턴는 죽을때 수치 다시 다 초기화 해줘야함
 {
-    public GameObject MonsterObject; //몬스터 부모 받아옴
-
-    //playerposition
-    [SerializeField]
-    GameObject targetPosition;
-    [SerializeField]
-    Transform targetTransform;
-
-    public float chasespeed;  // chase speed; 나중에 Update말고 FixedUpdate일때 수치 다시 변경
-
-    bool getposition = false;
-    public float movetime; //높이면 endposition자리에 남은 시간만큼 있다 다시 startpositon (높이면 자연스러움)
-
     RaycastHit hit;
+
+    [SerializeField] GameObject targetPosition;
+    [SerializeField] Transform targetTransform;
+
+    
+    public GameObject MonsterObject; //몬스터 부모 받아옴
+    public float chasespeed;  // chase speed; 나중에 Update말고 FixedUpdate일때 수치 다시 변경
+    public float movetime; //높이면 endposition자리에 남은 시간만큼 있다 다시 startpositon (높이면 자연스러움)
     public float MaxDistance; //공격 길이
     public float AttackSpeed; //공격 속력
-    bool StartAttack;
-    bool AttackSuccess;
+
+    private bool getposition;
+    private bool StartAttack;
+    private bool AttackSuccess;
 
     //몬스터 굴
     public bool patternMonsterMove;//몬스터 왔다갔다 관련 bool
@@ -65,21 +62,6 @@ public class Spwaner_Near_M : MonoBehaviour //스폰 몬스턴는 죽을때 수치 다시 다 
         }
         else //몬스터 사망
         {
-            //몬스터 기능 정지
-            //코루틴이나 델타타임 써서 몬스터 쓰러지는 애니메이션이나 파티클있음 좋을듯
-            //MonsterObject.SetActive(false);//오브젝트 풀링용
-
-            //if (spawnermonster) //스폰되는 몬스터 일 경우 - 오브젝트 풀
-            //{
-            //    //Invoke("Destory", 0f); // 파괴
-            //    //MonsterOjectPool.ReturnPool(this.gameObject);
-
-            //    //MonsterObject.SetActive(false);
-            //}
-            //else
-            //{
-            //    //Destroy(MonsterObject);
-            //}
             monsterhp = monsterfirsthp;
 
             NearMonsterDie = false; //이거 안하면 위에꺼 안받아서 안움직임
@@ -183,12 +165,12 @@ public class Spwaner_Near_M : MonoBehaviour //스폰 몬스턴는 죽을때 수치 다시 다 
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Main_gangrim")
-        {
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Main_gangrim")
+    //    {
 
-        }
-    }
+    //    }
+    //}
 
 }

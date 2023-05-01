@@ -24,5 +24,6 @@ public class WindSkillUI : MonoBehaviour
         windFill.fillAmount = Mathf.Sin(windGauge) * 0.5f + 0.5f;
     }
 
+   
     
 }
