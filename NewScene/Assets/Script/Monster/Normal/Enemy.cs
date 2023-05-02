@@ -1,123 +1,173 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHearth;
-    public int curHearth;
-  
-    public int damageToGive = 1;
+    public float damageToGive = 1;
 
+    public float maxHearth;
+    public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-    public float BackSpeed = -10;
-
     public float moveSpeed;
+    
+    public bool DebuffCheck;
+    public bool StartAttack;
 
     public float KnockBackForce;
-    public float KnockBakcTime;
-
-    bool StartAttack;
-    bool isHit;
+    private float KnockBakcTime;
 
     RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
+
+    private GameObject damageEffect;
+    PropertySkill property;
     Main_Player player;
 
-    [SerializeField] GameObject targetPosition;
-    [SerializeField] Transform targetTransform;
+    public Transform targetTransform;
+    public NavMeshAgent agent = null;
+    protected Main_Player Player;
 
-    void Awake()
-    {
-        rigid = GetComponent<Rigidbody>();
-        boxCollier = GetComponent<BoxCollider>();
-    }
-
-    void Start()
-    {
-        targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
-        targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-    }
+    int hitNum;
+    float delay;
 
     void Update()
     {
         DieMonster();
         monsterMove();
+        NotDamaged();
     }
-
-    void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
+    protected virtual void Awake()
     {
-
-        //현재는 플레이어를 쫒다가 레이케스트에 닿으면 공격 시작으로 설정되어있습니다.
-        Debug.DrawRay(transform.position, transform.forward * MaxDistance, Color.blue, 0.01f);
-        //변경
-        if (Physics.Raycast(transform.position, transform.forward, out hit, MaxDistance))
-        {
-            if (hit.collider.tag == "Main_gangrim")
-            {
-                StartAttack = true;
-            }
-        }
-        else
-        {
-            StartAttack = false;
-        }
-
-        if(targetTransform == null)
-        {
-            return;
-        }
-
-        if (StartAttack) //start attack
-        {
-            transform.LookAt(targetTransform); //LookAt은 player가 y가면 회전해서 나중에 변경
-                                               //몬스터가 움직이지 않음 not move 나중에 패턴에 따라 변경(돌진 등)
-        }
-        else //player chase
-        {
-            transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPosition.transform.position, chasespeed * Time.deltaTime);
-            transform.LookAt(targetTransform);
-        }
-
+        rigid = GetComponent<Rigidbody>();
+        boxCollier = GetComponent<BoxCollider>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
     }
-    void DieMonster()
+
+    protected virtual void Start()
+    {
+        Player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
+        agent.speed = chasespeed;
+
+        targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
+        agent.enabled = true;
+    }
+
+    protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
+    {
+        agent.speed = chasespeed;
+        agent.destination = targetTransform.position;
+        //agent.SetDestination(targetTransform.position);
+    }
+
+    protected virtual void DieMonster()
     {
         if (curHearth < 1)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            //Destroy(gameObject);
         }
-
     }
+
+    protected void NotDamaged()
+    {
+        if (hitNum > 0)
+        {
+            delay += Time.deltaTime;
+            if (delay > 0.1f)
+            {
+                delay = 0.0f;
+                hitNum = 0;
+            }
+        }
+    }
+
+    protected virtual void GetDamagedAnimation(){ }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon" && !isHit)
+        if (other.tag == "Weapon")
         {
-            isHit = true;
-            Vector3 reactVec = transform.position - other.transform.position;
-            reactVec = reactVec.normalized;
-            reactVec += Vector3.back;
-            rigid.AddForce(reactVec * KnockBackForce, ForceMode.Impulse);
+            player = other.GetComponent<HitScript>().Player;
 
+            if (player.HitState != hitNum)
+            {
+                player.enemy = this;
+                property = player.GetComponent<PropertySkill>();
+                hitNum = player.HitState;
+                delay = 0.0f;
+
+                if (player.isAttack)
+                {
+                    if (damageEffect == null)
+                    {
+                        damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
+                    }
+                    else
+                    {
+                        damageEffect.transform.position = transform.position;
+                    }
+                    damageEffect.SetActive(false);
+                    damageEffect.SetActive(true);
+
+                    if (property.Debuff == true)
+                    {
+                        this.chasespeed = 1f;
+                        StartCoroutine(GetDebuffCor());
+                    }
+
+                    if (property.Stun == true)
+                    {
+                        this.chasespeed = 0f;
+                        StartCoroutine(GetStunCor());
+                    }
+                    
+                    HitScript hit;
+                    hit = other.GetComponent<HitScript>();
+
+                    Gauge.sGauge += hit.damage;
+                    curHearth -= hit.damage;
+                    GetDamagedAnimation();
+                }
+            }
+        }
+
+        if(other.tag == "skill")
+        {
             HitScript hit;
             hit = other.GetComponent<HitScript>();
-
-            Gauge.sGauge += hit.damage;
+            while(hit != null)
             curHearth -= hit.damage;
-            
-            Debug.Log("Weapon: " + curHearth);
         }
-        else
-        {
-            isHit = false;
-        }
+
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
             Debug.Log("hit to Player");
         }
+    }
+
+    
+    IEnumerator GetDebuffCor()
+    {
+        yield return new WaitForSeconds(5.0f);
+        player.Q_skillCheck = false;
+        player.R_skillCheck = false;
+        property.Debuff = false;
+        this.chasespeed = 3f;
+    }
+
+    IEnumerator GetStunCor()
+    {
+        yield return new WaitForSeconds(10.0f);
+        player.E_skillCheck = false;
+        player.R_skillCheck = false;
+        property.Stun = false;
+        this.chasespeed = 3f;
     }
 }

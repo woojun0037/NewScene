@@ -24,6 +24,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
   - _ENVIRONMENTREFLECTIONS_OFF
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _
   - _EMISSIVE_SIMPLE
@@ -35,11 +36,13 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     IgnoreProjection: False
-    RenderType: Opaque
-  disabledShaderPasses: []
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -206,7 +209,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DstBlend: 0
+    - _DstBlend: 10
     - _EMISSIVE: 0
     - _EnvironmentReflections: 0
     - _Farthest_Distance: 100
@@ -278,14 +281,14 @@ Material:
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _StencilComp: 0
     - _StencilMode: 0
     - _StencilNo: 1
     - _StencilOpFail: 0
     - _StencilOpPass: 0
     - _StepOffset: 0
-    - _Surface: 0
+    - _Surface: 1
     - _TransparentEnabled: 0
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
@@ -303,7 +306,7 @@ Material:
     - _Use_BaseAs1st: 1
     - _WorkflowMode: 1
     - _ZOverDrawMode: 0
-    - _ZWrite: 1
+    - _ZWrite: 0
     - _ZWriteMode: 1
     - _simpleUI: 0
     - _utsTechnique: 0

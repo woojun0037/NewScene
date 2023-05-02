@@ -8,44 +8,44 @@ public class FlyingObj : MonoBehaviour
     public string[] tagsToCheck;
     public float impactRaidus;
     public float destroyDelay;
-    
-    private GameObject ImpactFX;
+    public float damage;
+    public float DamgeTime;
+
+    public bool isRain;
+    public GameObject ImpactFX;
 
     void Start()
     {
-        ImpactFX = this.gameObject;
         
+        ImpactFX = this.gameObject;
     }
 
     private void Update()
     {
-        
+        Destroy(ImpactFX, 5f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (tagsToCheck.Contains(other.tag))
+        if (other.gameObject.tag == "Monster")
         {
-            Collider[] objectsInRnage = Physics.OverlapSphere(transform.position, impactRaidus);
-
-            foreach (Collider col in objectsInRnage)
-            {
-                Rigidbody Monster = col.GetComponent<Rigidbody>();
-
-                if (Monster != null)
-                {
-
-                    Destroy(Monster.gameObject);
-                }
-            }
-
-            ImpactFX.SetActive(true);
-
-            ImpactFX.transform.SetParent(null);
-
-            Destroy(ImpactFX, destroyDelay);
-
-            Destroy(gameObject); 
+            isRain = true;
+            StartCoroutine(HitCor(other.GetComponent<Enemy>()));
+        }
+    }
+    IEnumerator HitCor(Enemy enemy)
+    {
+        while(isRain)
+        {
+            yield return new WaitForSeconds(0.8f);
+            enemy.curHearth -= 1f;
+        }    
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Monster")
+        {
+            isRain = false;
         }
     }
 }

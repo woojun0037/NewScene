@@ -4,107 +4,148 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
-    [SerializeField] Vector3 MovePlayer;
-    [SerializeField] Animator Anim;
-    [SerializeField] Collider weaponCollider;
 
+    [SerializeField] Vector3 MovePlayer;
+
+    [SerializeField] Collider HitBox;
+    [SerializeField] Collider WindBox;
+    [SerializeField] Collider TafoonBox;
+
+    [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
-    [SerializeField] float MoveSpeed = 1f;
-    [SerializeField] float DashSpeed = 5f;
+
+    private HitScript hit;
+    private WindStorm windOn;
+    private TafoonSkillHit tafoonSkill;
+    private PropertySkill propertySkill;
+
+    public PlayerSkill skill;
+    public Animator Anim;
+    public Enemy enemy;
+    public MainCamera mainCamera;
 
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
 
-    bool isMove = false;
-    bool isDelay;
+    private bool isMove = false;
+
+    public GameObject[] AtkEffect;
+    public bool[] isClicks;
+
+    public bool Q_skillCheck;
+    public bool E_skillCheck;
+    public bool R_skillCheck;
+
     public bool isAttack = false;
+    public bool isWind = false;
+
     public bool attackInputOn;
+    public bool isTafoon;
 
-    public int damage;
-    public int HP;
+    public float damage;
+    public float HP;
+    public float MoveSpeed = 6f;
     public float MaxDistance = 1.5f;
-    public float AttackSpeed = 0.5f;
+    public float AttackSpeed = 3f;
+    public float addAttackSpeed;
+    public float Duration;
+    public float Magnitude;
 
-    Queue<int> inputBufferQ = new Queue<int>();
+    private float Qcool;
+    private float Ecool;
+    private float Rcool;
+
+    int hitState;
+    internal int HitState => hitState;
+
+    private void Awake()
+    {
+        propertySkill = GetComponent<PropertySkill>();
+        hit = HitBox.gameObject.GetComponent<HitScript>();
+        windOn = WindBox.gameObject.GetComponent<WindStorm>();
+        tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
+    }
 
     void Update()
     {
-        attackInputOn = Input.GetMouseButtonDown(0);
-
-        AnimatorClipInfo[] clips = Anim.GetCurrentAnimatorClipInfo(0);
-
-        string currAnimName = clips[0].clip.name;
-
-        switch (currAnimName)
-        {
-            case "Idle":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-                }
-                if (Anim.GetBool("isAttack0_to_1") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack0_to_1", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion1":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-                    HitCheck_true_1();
-                }
-                Anim.SetBool("isAttack0_to_1", false);
-                if (Anim.GetBool("isAttack1_to_2") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack1_to_2", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion2":
-                if (attackInputOn)
-                {
-                    inputBufferQ.Enqueue(0);
-                    HitCheck_true_2();
-                }
-                Anim.SetBool("isAttack1_to_2", false);
-                if (Anim.GetBool("isAttack2_to_3") == false && inputBufferQ.Count > 0)
-                {
-                    Anim.SetBool("isAttack2_to_3", true);
-                    inputBufferQ.Dequeue();
-                }
-                break;
-            case "ATKmotion3":
-                HitCheck_true_3();
-                Anim.SetBool("isAttack0_to_1", false);
-                Anim.SetBool("isAttack1_to_2", false);
-                Anim.SetBool("isAttack2_to_3", false);
-
-                inputBufferQ.Clear();
-                break;
-        }
-
-        if (inputBufferQ.Count > 0)
-        {
-            isAttack = true;
-            Anim.SetBool("isAttack", isAttack);
-        }
-        else if (inputBufferQ.Count <= 0)
-        {
-            isAttack = false;
-        }
-
-        Skill();
-
+        AttackInput();
+        
+        Skill_E();
+        Skill_R();
     }
 
     void FixedUpdate()
     {
         Move();
-        Dash();
         CalTargetPos();
-        AnimationBoolCheck();
+    }
+
+    public void OnWeapon()
+    {
+        hit.gameObject.SetActive(true);
+    }
+
+    public void OffWeapon()
+    {
+        hit.gameObject.SetActive(false);
+    }
+
+    public void OnWind()
+    {
+        windOn.gameObject.SetActive(true);
+    }
+
+    public void OffWind()
+    {
+        windOn.gameObject.SetActive(false);
+    }
+
+    public void TafoonON()
+    {
+        tafoonSkill.gameObject.SetActive(true);
+    }
+
+    public void TafoonOFF()
+    {
+        tafoonSkill.gameObject.SetActive(false);
+    }
+
+    public void SetAnimCheck(int count)
+    {
+        isClicks[count] = true;
+    }
+
+    public void GetAnimCheck()
+    {
+        isAttack = false;
+        isClicks[0] = true;
+        isClicks[1] = false;
+        isClicks[2] = false;
+        hitState = 0;
+    }
+
+    private void AttackInput()
+    {
+
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
+        {
+            hitState = 1;
+            isAttack = true;
+            Anim.SetTrigger("isAttack_1");
+        }
+        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
+        {
+            hitState = 2;
+            isAttack = true;
+            Anim.SetTrigger("isAttack_2");
+        }
+        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
+        {
+            hitState = 3;
+            isAttack = true;
+            Anim.SetTrigger("isAttack_3");
+        }
     }
 
     private void CalTargetPos()
@@ -113,10 +154,13 @@ public class Main_Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            mousePos.z = Camera.main.transform.position.z;
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-            if (Physics.Raycast(ray, out RaycastHit rayHit))
+            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
+            if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
             {
                 if (rayHit.collider.tag == "Platform")
                 {
@@ -126,14 +170,34 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    public void PlayerHP(int PlayerHP)
+    public void PlayerHP(float PlayerHP)
     {
         HP = PlayerHP;
-        if (HP < 0)
+        if (HP < 1)
         {
-            Destroy(gameObject);
+            Anim.SetTrigger("Dead");
+            Destroy(gameObject, 5f);
         }
-        //사망 애니메이션 추가
+    }
+
+    public void ATK_Effect_On(int on_count)
+    {
+        if (currentATKEffect == null)
+        {
+            Vector3 dir = transform.position;
+            dir.y = 3f;
+
+            currentATKEffect = Instantiate(AtkEffect[on_count], transform);
+            currentATKEffect.transform.position = dir;
+
+            //currentATKEffect.transform.position = new veoctransform.position.y;
+            //currentATKEffect.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+        }
+    }
+
+    public void ATK_Effect_Off()
+    {
+        Destroy(currentATKEffect);
     }
 
     private void Move()
@@ -146,106 +210,67 @@ public class Main_Player : MonoBehaviour
         heading = Camera.main.transform.forward;
         heading.y = 0;
         heading.Normalize();
-
         heading = heading - player_Move_Input;
 
-        if (player_Move_Input != Vector3.zero && !isAttack)
+        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind && hitState == 0)
         {
             isMove = true;
+            AnimationBoolCheck();
             float angle = Mathf.Atan2(heading.z, heading.x) * Mathf.Rad2Deg * -2;
 
             transform.rotation = Quaternion.Lerp(transform.rotation,
                                  Quaternion.Euler(0, angle, 0), Time.deltaTime * RotateSpeed);
-
             transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
         }
         else
         {
             isMove = false;
+            AnimationBoolCheck();
         }
     }
 
-    private void Dash()
+    public void Skill_Q()
+    { 
+        Anim.SetTrigger("WindSkill");
+
+        Q_skillCheck = true;
+        StartCoroutine(Skill_Q_Cool());
+    }
+
+    public void Skill_E()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (isDelay == false)
-            {
-                isMove = true;
-                transform.position = this.transform.position + new Vector3(0, 0, 1) * Time.deltaTime;
-                StartCoroutine("DashCool");
-                isDelay = true;
-            }
+           E_skillCheck = true;
         }
     }
 
-    public void Skill()
+    public void Skill_R()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            Anim.SetTrigger("Skill");
-            WindSkillUI.windGauge += Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.R))
-        {
-            CloudSkillUI.cloudGauge += Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.F))
-        {
-            RainSkillUI.rainGauge += Time.deltaTime; 
+           R_skillCheck = !R_skillCheck;
         }
     }
 
-    IEnumerator DashCool()
+    IEnumerator Skill_Q_Cool()
     {
-        yield return new WaitForSeconds(0.5f);
-        isDelay = false;
+        while(Qcool < 3)
+        {
+            Qcool += Time.deltaTime;
+        }
+        yield return null;
+    }
+
+    public void GetDamage(float damage)
+    {
+        Debug.Log("Get Damage" + damage);
     }
 
     private void AnimationBoolCheck()
     {
         Anim.SetBool("isMove", isMove);
     }
-
-
-    void HitCheck_true_1()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
-    void HitCheck_true_2()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
-    void HitCheck_true_3()
-    {
-        if (isAttack == true)
-        {
-            weaponCollider.enabled = true;
-        }
-        else
-        {
-            weaponCollider.enabled = false;
-        }
-    }
-
 }
 
 

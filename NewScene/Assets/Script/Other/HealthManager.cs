@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    public int maxHealth;
-    public int currentHealth;
+    public float maxHealth;
+    public float currentHealth;
     
     void Start()
     {
-        currentHealth = maxHealth;
+        
     }
 
     
@@ -17,14 +17,15 @@ public class HealthManager : MonoBehaviour
     {
        
     }
-
-    public void HurtPlayer(int damage)
+  
+    public void HurtPlayer(float damage)
     {
         currentHealth -= damage;
         FindObjectOfType<Main_Player>().PlayerHP(currentHealth);
     }
 
-    public void HealPlayer(int healAmount)
+
+    public void HealPlayer(float healAmount)
     {
         currentHealth += healAmount;
 
