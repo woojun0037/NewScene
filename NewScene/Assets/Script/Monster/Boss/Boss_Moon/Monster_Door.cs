@@ -2,20 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster_Door : MonoBehaviour
+public class Monster_Door : Boss
 {
 
-    public GameObject MonsterObject; //몬스터 부모 받아옴
-    public GameObject targetPosition; //playerposition
     public GameObject SpawnMonsters;
-
 
     public Rigidbody FloorAattackObj; //바닥 장판 스킬
     public GameObject rayobj; 
 
-    public Transform targettransform;
-
-    //몬스터 문 색깔 변경
     Renderer DoorColor;
 
     public enum BossPattern //보스 공격패턴
@@ -27,24 +21,17 @@ public class Monster_Door : MonoBehaviour
     }
     public BossPattern bosspattern;
 
-    [SerializeField]
     private float random;
     private float pastrandom;
-
 
     [SerializeField]
     bool onetime = true;
     [SerializeField]
-    float cooltime; //notion에 정해진 수치는 15초
+    float cooltime; 
     float timer = 0;
     [SerializeField]
     float MonsterYPosition;
-    [SerializeField]
-    float MaxDistance;
-    [SerializeField]
-    float chasespeed;
 
-    //패턴 3 공격 옆으로 밀기
     [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
     public GameObject PatternDoonBullet; //문 분신
     public Rigidbody PatternBullet; //위아래 총알
@@ -76,18 +63,14 @@ public class Monster_Door : MonoBehaviour
     float pattern3Max_X; //전에는 30
 
     RaycastHit hit;
-
-    bool have_targeting;
-    bool Ischase;
-    Vector3 targettrans_every;
     Vector3 ReturnPosition; //돌아가는 위치
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         onetime = false;
-        targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
-        targettransform = GameObject.FindWithTag("Main_gangrim").transform;
+        //targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
+        targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         DoorColor = gameObject.GetComponent<Renderer>();
 
         ReturnPosition = transform.position; //기존 위치
@@ -99,130 +82,117 @@ public class Monster_Door : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //monsterMove();
-        timer += Time.deltaTime;
-
-        if (timer >= cooltime) //쿨 타임 후에 랜덤 스킬
+        if (player.HP >= 0 && !isDie)
         {
-
-            timer = 0;
-            onetime = false;
-        }
+            NotDamaged();
+            DieMonster();
 
 
-        //몬스터 패턴 시작 + 쿨 타임 주기마다 재사용을 위한 초기화 역할
-        if (!onetime) 
-        {
-            //초기화 
-            random = UnityEngine.Random.Range(0, 4); // 0 1 2 3
+            timer += Time.deltaTime;
 
-            if (random == pastrandom)
+            if (timer >= cooltime) //쿨 타임 후에 랜덤 스킬
             {
-                Debug.Log("random == pastrandom");
-                if (random >= 3)//random이 3보다 크거나 같으면 3
-                {
-                    random += -1;
-                    Debug.Log("random == pastrandom + is random > 3");
-                    Debug.Log("random =" + random);
 
+                timer = 0;
+                onetime = false;
+            }
+
+
+            //몬스터 패턴 시작 + 쿨 타임 주기마다 재사용을 위한 초기화 역할
+            if (!onetime)
+            {
+                random = UnityEngine.Random.Range(0, 4);
+
+                if (random == pastrandom)
+                {
+                    if (random >= 3)
+                    {
+                        random += -1;
+                        BossAttack(random);
+                        pastrandom = random;
+                    }
+                    else // 0 1 2
+                    {
+                        random += 1;
+                        BossAttack(random);
+                        pastrandom = random;
+                    }
+                }
+                else
+                {
                     BossAttack(random);
                     pastrandom = random;
                 }
-                else // 0 1 2
-                {
-                    random += 1;
-                    Debug.Log("random == pastrandom + is random 00");
-                    Debug.Log("random =" + random);
 
-                    BossAttack(random);
-                    pastrandom = random;
-                }
+                StartCoroutine("ColorChangeBack"); //$ 1 2 패턴에 필요 //색깔 초기화
+                onetime = true;
+            }
 
 
+            if (ispattern)//보스 옆으로 공격 패턴 Update에서 돌아야되는 조건 패턴 3
+            {
+                StartCoroutine(rightattack());
             }
             else
-            { //
-                Debug.Log("! random == pastrandom");
-                BossAttack(random);
-                pastrandom = random;
+            {
+                //초기화
+                StopCoroutine(rightattack());
+                pattern3_random = UnityEngine.Random.Range(0, 3); // 0 1 2 
+                getready = false;
+                isz = false;//
+                spawnone = false;
             }
 
-
-            StartCoroutine("ColorChangeBack"); //$ 1 2 패턴에 필요 //색깔 초기화
-            onetime = true;
-        }
-        else
-        {
-
-        }
-
-
-        if (ispattern)//보스 옆으로 공격 패턴 Update에서 돌아야되는 조건 패턴 3
-        {
-            StartCoroutine(rightattack());
-        }
-        else
-        {
-            //초기화
-            StopCoroutine(rightattack());
-            pattern3_random = UnityEngine.Random.Range(0, 3); // 0 1 2 
-            getready = false;
-            isz = false;//
-            spawnone = false;
-        }
-
-
-        //Update에서 돌아야되는 패턴 2 내려찍기
-        if (Pattern2Start) 
-        {
-            if (transform.position.y < SetY)
+            //Update에서 돌아야되는 패턴 2 내려찍기
+            if (Pattern2Start)
             {
-                if (!stop)
+                if (transform.position.y < SetY)
                 {
-                    Upready = true;
-                    transform.Translate(0, Time.deltaTime * upspeed, 0);
-                }
-            }
-
-            if (Upready) //플레이어 위치 찾음
-            {
-                Vector3 spawn = targettransform.position;
-                spawn.y = SetY;
-
-                if (!isdown)
-                {
-                    transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
+                    if (!stop)
+                    {
+                        Upready = true;
+                        transform.Translate(0, Time.deltaTime * upspeed, 0);
+                    }
                 }
 
-                //n 초후 내려찍음
-                StartCoroutine("downattack");
-
-            }
-
-            if (readytogetpodition)
-            {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
-                
-                if (transform.position == ReturnPosition)
+                if (Upready) //플레이어 위치 찾음
                 {
-                    Pattern2Start = false;
+                    Vector3 spawn = targetTransform.position;
+                    spawn.y = SetY;
+
+                    if (!isdown)
+                    {
+                        transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
+                    }
+
+                    //n 초후 내려찍음
+                    StartCoroutine("downattack");
+
+                }
+
+                if (readytogetpodition)
+                {
+                    transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
+
+                    if (transform.position == ReturnPosition)
+                    {
+                        Pattern2Start = false;
+                    }
                 }
             }
-        }
-        else
-        {
-            StopCoroutine("downattack");
-            targettransform = GameObject.FindWithTag("Main_gangrim").transform;
-            stop = false;//
-            readytogetpodition = false;
-            Upready = false;
-            isdown = false;//
-            //bullettime = false;//혹시 버그나면 주석해제
-        }
+            else
+            {
+                StopCoroutine("downattack");
+                targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
+                stop = false;//
+                readytogetpodition = false;
+                Upready = false;
+                isdown = false;//
+                               //bullettime = false;//혹시 버그나면 주석해제
+            }
 
+        }
     }
-
 
     void ColorChange(int i) //몬스터 색깔 변경
     {
@@ -282,27 +252,18 @@ public class Monster_Door : MonoBehaviour
                 ColorChange(1);
                 monsterspawn();
 
-                Debug.Log("Boss Monster pattern0");
-
                 break;
             case BossPattern.Pattern_1: //바닥 장판 생성
                 ColorChange(1);
                 FloorAttack();
 
-                Debug.Log("Boss Monster pattern1");
-
-
                 break;
             case BossPattern.Pattern_2: //내려찍기
                 Pattern2Start = true;
 
-
-                Debug.Log("Boss Monster pattern2");
-
                 break;
 
             case BossPattern.Pattern_3: //옆으로 밀기
-                Debug.Log("Boss Monster Pattern_3");
                 ispattern = true;
 
                 break;
@@ -314,8 +275,6 @@ public class Monster_Door : MonoBehaviour
         }
 
     }
-
-
 
     void monsterspawn()
     {
@@ -329,21 +288,11 @@ public class Monster_Door : MonoBehaviour
             StartCoroutine(spawntime(i));
             i++;
         }
-
-
     }
 
     void FloorAttack() //장판 공격
     {
        Rigidbody Floorattacker = Instantiate(FloorAattackObj, transform.position, transform.rotation);
-
-    }
-
-    void ray()
-    {
-        //rayobj.SetActive(true);
-        StartCoroutine(ray_Time());
-
     }
 
 
@@ -453,7 +402,6 @@ public class Monster_Door : MonoBehaviour
                         spawnone = true;
                         GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[1].position, transform.rotation);
                         GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[2].position, transform.rotation);
-
                     }
 
                     break;
@@ -486,7 +434,6 @@ public class Monster_Door : MonoBehaviour
 
     }
 
-
     IEnumerator Pattern3BulletTime_() //패턴 3 총알 위아래
     {
         yield return new WaitForSeconds(0.5f);
@@ -500,8 +447,6 @@ public class Monster_Door : MonoBehaviour
         bullettime = false;
     }
 
-
-
     IEnumerator spawntime(int i)
     {
         yield return new WaitForSeconds(i);
@@ -512,19 +457,11 @@ public class Monster_Door : MonoBehaviour
 
     }
 
-
     IEnumerator ColorChangeBack()
     {
         yield return new WaitForSeconds(cooltime / 1.5f);
         ColorChange(0); //초기화
 
     }
-
-    IEnumerator ray_Time()
-    {
-        yield return new WaitForSeconds(2.5f);
-        //rayobj.SetActive(false);
-    }
-
 
 }

@@ -255,7 +255,7 @@ public class BossMonster_Tiger : Boss
             //    transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         isMove = true;
     }
 
