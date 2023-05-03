@@ -25,6 +25,7 @@ public class Boss : MonoBehaviour
 
     protected int hitNum;
     protected float delay;
+    public bool isDie;
 
     protected virtual void Awake()
     {
@@ -66,7 +67,7 @@ public class Boss : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon")
+        if (other.tag == "Weapon" && !isDie)
         {
             player = other.GetComponent<HitScript>().Player;
 

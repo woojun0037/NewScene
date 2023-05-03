@@ -15,6 +15,7 @@ public class BossMonster_Tiger : Boss
 
     public SkinnedMeshRenderer mat;
     public GameObject attackcollider;
+    public GameObject throwRockObj;
 
     private Animator anim;
 
@@ -22,7 +23,6 @@ public class BossMonster_Tiger : Boss
     private bool isAttack;
     private bool isMove;
     private bool isDash;
-    private bool isDie;
 
     protected override void Awake()
     {
@@ -118,7 +118,8 @@ public class BossMonster_Tiger : Boss
     {
         if (curHearth < 1)
         {
-            gameObject.SetActive(false);
+            anim.SetBool("isDie", true);
+            //gameObject.SetActive(false);
             isDie = true;
         }
     }
@@ -133,12 +134,13 @@ public class BossMonster_Tiger : Boss
     private void AttackChoice()
     {
         isMove = false;
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
         if (rand == 0)
             JumpAttack();
         else if (rand == 1)
-            DashAttack();
-
+            StartCoroutine(RoshAndRosh());
+        else if (rand == 2)
+            RockAttack();
     }
 
     private void BaseAttack()
@@ -160,6 +162,46 @@ public class BossMonster_Tiger : Boss
     {
         StartCoroutine(JumpAttackCor());
         anim.SetTrigger("JumpAttack");
+    }
+
+    private void RockAttack()
+    {
+        StartCoroutine(ThrowRockCor());
+        //anim.SetTrigger("ThrowRock");
+    }
+
+    void ThrowRock() //바위 던지기
+    {
+        Vector3 spawn = player.transform.position;
+        spawn.y = 2;
+        transform.LookAt(spawn); //그 방향 보고 던짐 + 방향 고정
+
+        Vector3 rockpos = transform.position;
+        rockpos.y = 5;
+        GameObject ThrowRockrigid = Instantiate(throwRockObj, rockpos, transform.rotation);
+    }
+
+    private IEnumerator ThrowRockCor()
+    {
+        isMove = false;
+        for (int i = 0; i < 3; i++)
+        {
+            ThrowRock();
+            yield return new WaitForSeconds(1f);
+        }
+        isMove = true;
+    }
+
+
+    private IEnumerator RoshAndRosh()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            DashAttack();
+            yield return new WaitForSeconds(1.8f);
+        }
+        isMove = true;
+
     }
 
     private IEnumerator BaseAttackCor()
@@ -196,7 +238,7 @@ public class BossMonster_Tiger : Boss
 
         yield return new WaitForSeconds(0.5f);
 
-        isMove = true;
+        //isMove = true;
         isDash = false;
     }
 

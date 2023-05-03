@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1537086858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1537086860}
+  - component: {fileID: 1537086859}
+  m_Layer: 9
+  m_Name: AttackCol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1537086860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537086858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3243618537275022694}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1537086859
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537086858}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4167587, y: 2.2281504, z: 1.3950464}
+  m_Center: {x: 0.17338735, y: 1.0359586, z: 0.61312425}
 --- !u!1 &18430840064555309
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,12 +835,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2758583910015567836}
-  m_LocalRotation: {x: -0, y: 0.97652775, z: -0, w: 0.21539202}
+  m_LocalRotation: {x: 0, y: 0.97652775, z: 0, w: 0.2153917}
   m_LocalPosition: {x: -35.71, y: 2.03, z: 59.39}
   m_LocalScale: {x: 2.3868403, y: 2.3868403, z: 2.3868403}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5472690317822176348}
+  - {fileID: 1537086860}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 155.123, z: 0}
@@ -831,8 +877,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d0417591ff74ea9d7773506a0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageToGive: 1
+  maxHearth: 10
+  curHearth: 10
+  MaxDistance: 2
+  chasespeed: 2
+  KnockBackForce: 0
+  targetTransform: {fileID: 0}
+  isDie: 0
   targetPos: {x: 0, y: 0, z: 0}
-  player: {fileID: 0}
   effects:
   - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
   - {fileID: 280351933351309158, guid: 83b9c63be808fd842aef6fcdbb2fa6e8, type: 3}
@@ -843,6 +896,8 @@ MonoBehaviour:
   baseAttackDamage: 3
   dashAttackDamage: 10
   mat: {fileID: 2100000, guid: 24fad0223569d9c429dc8b1169e32382, type: 2}
+  attackcollider: {fileID: 1537086858}
+  throwRockObj: {fileID: 3023035171488457971, guid: 7888364655110224182767e6e84b3e75, type: 3}
 --- !u!54 &8927129567930058526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -867,7 +922,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2758583910015567836}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.68957067
   m_Height: 2.9756365
