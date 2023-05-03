@@ -19,13 +19,14 @@ public class Boss : MonoBehaviour
 
     private GameObject damageEffect;
     protected PropertySkill property;
+    [SerializeField]
     protected Main_Player player;
 
     public Transform targetTransform;
 
     protected int hitNum;
     protected float delay;
-    public bool isDie;
+    protected bool isDie = false;
 
     protected virtual void Awake()
     {

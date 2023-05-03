@@ -68,8 +68,8 @@ public class Monster_Door : Boss
     // Start is called before the first frame update
     protected override void Start()
     {
+        base.Start();
         onetime = false;
-        //targetPosition = GameObject.FindWithTag("Main_gangrim"); //Player 태그를 가진 오브젝트를 찾음
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         DoorColor = gameObject.GetComponent<Renderer>();
 
@@ -167,7 +167,7 @@ public class Monster_Door : Boss
 
                     //n 초후 내려찍음
                     StartCoroutine("downattack");
-
+                    
                 }
 
                 if (readytogetpodition)
