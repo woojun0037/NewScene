@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7369841004788286601}
   - component: {fileID: 4729369020784144451}
   - component: {fileID: 6224974899481914781}
+  - component: {fileID: 1763391401}
   m_Layer: 0
   m_Name: Boss_door
   m_TagString: Untagged
@@ -96,19 +97,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012d4fe627f0f6340a47817daede244f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterObject: {fileID: 6531033515327017366}
-  targetPosition: {fileID: 0}
-  SpawnMonsters: {fileID: 0}
+  damageToGive: 1
+  maxHearth: 10
+  curHearth: 10
+  MaxDistance: 10
+  chasespeed: 10
+  KnockBackForce: 0
+  player: {fileID: 0}
+  targetTransform: {fileID: 0}
+  SpawnMonsters: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
   FloorAattackObj: {fileID: 5929797701696707424, guid: f40c40504099d294ab4206a53d47a171, type: 3}
   rayobj: {fileID: 0}
-  targettransform: {fileID: 0}
   bosspattern: 0
-  random: 0
   onetime: 1
   cooltime: 10
   MonsterYPosition: 2
-  MaxDistance: 10
-  chasespeed: 10
   AttackPosition:
   - {fileID: 0}
   - {fileID: 0}
@@ -120,3 +123,16 @@ MonoBehaviour:
   downspeed: 30
   chasespeed4: 10
   pattern3Max_X: 20
+--- !u!65 &1763391401
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531033515327017366}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0852811, y: 1.4997281, z: 0.34244773}
+  m_Center: {x: 0.00000005960466, y: 0.74986404, z: -0.09874849}
