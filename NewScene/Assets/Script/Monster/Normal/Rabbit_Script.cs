@@ -98,8 +98,8 @@ public class Rabbit_Script : Enemy
         DontMove = true;
         animator.SetBool("Attack", true);
 
-        attacker_Col.SetActive(true);
         yield return new WaitForSeconds(0.9f);
+        attacker_Col.SetActive(true);
         particle_attack.Play();
         yield return new WaitForSeconds(0.4f);
 
