@@ -104,6 +104,10 @@ public class BossMonster_Tiger : Boss
             }
 
         }
+        else
+        {
+            anim.SetBool("isWalk", false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -138,7 +142,7 @@ public class BossMonster_Tiger : Boss
         if (rand == 0)
             JumpAttack();
         else if (rand == 1)
-            StartCoroutine(RoshAndRosh());
+            StartCoroutine(DashAndDash());
         else if (rand == 2)
             RockAttack();
     }
@@ -184,16 +188,16 @@ public class BossMonster_Tiger : Boss
     private IEnumerator ThrowRockCor()
     {
         isMove = false;
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
             ThrowRock();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
         }
         isMove = true;
     }
 
 
-    private IEnumerator RoshAndRosh()
+    private IEnumerator DashAndDash()
     {
         for (int i = 0; i < 2; i++)
         {
@@ -229,7 +233,7 @@ public class BossMonster_Tiger : Boss
         Vector3 dir = tempPos - transform.position;
         transform.forward = dir;
         yield return new WaitForSeconds(0.5f);
-        GameObject effect = Instantiate(effects[2], transform.position, Quaternion.identity);
+        Instantiate(effects[2], transform.position, Quaternion.identity);
         while (time > 0)
         {
             time -= Time.deltaTime;

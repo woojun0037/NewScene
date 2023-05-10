@@ -13,6 +13,7 @@ public class Door_Floor_bullet : MonoBehaviour
     bool startattaack;
     bool isattack;
 
+    public float floorBulletDamage;
     void Start()
     {
         time = 0;
@@ -23,7 +24,7 @@ public class Door_Floor_bullet : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if(time >= 7f) //10초 뒤에 파괴
+        if(time >= 5f) //10초 뒤에 파괴
         {
             Destroy(FloorObj);
         }
@@ -33,13 +34,6 @@ public class Door_Floor_bullet : MonoBehaviour
             if (!isattack)
             {
                 isattack = true;
-                //플레이어 스크립트에 도트딜 매서드 추가후 불러오기
-                ////현재 코루틴 시간이 지날때 마다 매서드 작동
-                //대충 플레이어 데미지 매서드만 있으면 코루틴 시간마다 도트딜 들어옴
-
-                //********************************** 여기에 플레이어 데미지 매서드나 플레이어 체력 관련 들어가면 됨
-                Debug.Log("door floor damage");
-
 
                 StartCoroutine("PlayerAttackTime");
             }
@@ -67,6 +61,7 @@ public class Door_Floor_bullet : MonoBehaviour
 
     IEnumerator PlayerAttackTime()
     {
+        FindObjectOfType<HealthManager>().HurtPlayer(floorBulletDamage);
         yield return new WaitForSeconds(2f); //도트딜 시간
         isattack = false;
     }

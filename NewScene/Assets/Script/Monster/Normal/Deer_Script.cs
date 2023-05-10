@@ -88,6 +88,13 @@ public class Deer_Script : Enemy
                 }
             }
         }
+        else
+        {
+            animator.SetBool("Move", false);
+            animator.SetBool("isAttack", false);
+
+            agent.isStopped = true;
+        }
     }
 
     protected override void DieMonster()
