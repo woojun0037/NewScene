@@ -199,6 +199,7 @@ public class BossMonster_Tiger : Boss
         {
             DashAttack();
             yield return new WaitForSeconds(1.8f);
+            transform.LookAt(player.transform);
         }
         isMove = true;
 
