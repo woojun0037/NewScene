@@ -15078,10 +15078,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Seonbi
       objectReference: {fileID: 0}
-    - target: {fileID: 6955681456560606827, guid: 64e7092380ae94844b051ab21355356f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7767684346351277265, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -15125,10 +15121,6 @@ PrefabInstance:
     - target: {fileID: 7767684346351277265, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802172715392571477, guid: 64e7092380ae94844b051ab21355356f, type: 3}
-      propertyPath: Hp
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64e7092380ae94844b051ab21355356f, type: 3}
@@ -16365,7 +16357,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6955681456560606827, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7767684346351277265, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: m_RootOrder
@@ -17435,6 +17427,10 @@ PrefabInstance:
     - target: {fileID: 2758583910015567836, guid: f3aabccdb0049644cb830bb45adb6791, type: 3}
       propertyPath: m_Name
       value: Boss_Tiger
+      objectReference: {fileID: 0}
+    - target: {fileID: 2758583910015567836, guid: f3aabccdb0049644cb830bb45adb6791, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3243618537275022694, guid: f3aabccdb0049644cb830bb45adb6791, type: 3}
       propertyPath: m_RootOrder
@@ -22569,7 +22565,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1003098675}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -51520,8 +51516,8 @@ MonoBehaviour:
   MaxDistance: 0
   chasespeed: 0
   KnockBackForce: 0
+  player: {fileID: 0}
   targetTransform: {fileID: 0}
-  isDie: 0
   targetPos: {x: 0, y: 0, z: 0}
   effects:
   - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
