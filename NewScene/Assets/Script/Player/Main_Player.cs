@@ -23,7 +23,7 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
-
+   
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -232,15 +232,14 @@ public class Main_Player : MonoBehaviour
     public void Skill_Q()
     { 
         Anim.SetTrigger("WindSkill");
-
         Q_skillCheck = true;
-        StartCoroutine(Skill_Q_Cool());
     }
 
     public void Skill_E()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+           skill.CloudSkill();
            E_skillCheck = true;
         }
     }
@@ -249,19 +248,11 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-           R_skillCheck = !R_skillCheck;
+            R_skillCheck = true;
         }
     }
 
-    IEnumerator Skill_Q_Cool()
-    {
-        while(Qcool < 3)
-        {
-            Qcool += Time.deltaTime;
-        }
-        yield return null;
-    }
-
+    
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);

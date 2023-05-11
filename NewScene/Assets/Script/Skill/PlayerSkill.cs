@@ -13,6 +13,7 @@ public class PlayerSkill : MonoBehaviour
 
     //WindStorm windskill;
     Main_Player player;
+    public GangrimSKill ui;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
@@ -46,7 +47,6 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillCool;
     public float maxAbilityDistance;
 
-
     private void Start()
     {
         player = GetComponent<Main_Player>();
@@ -58,10 +58,9 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-
-        CloudSkill();
-        RainDropSkill();
         WindSkillRange();
+        //CloudSkill();
+        RainDropSkill();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -80,6 +79,7 @@ public class PlayerSkill : MonoBehaviour
                 }
             }
         }
+
         if (isDash)
         {
             Dash();
@@ -144,8 +144,9 @@ public class PlayerSkill : MonoBehaviour
             WindSkillCheck = false;
             isSkillUse = true;
         }
-        if(Input.GetMouseButtonDown(0) && !isSkillUse)
+        if (Input.GetMouseButtonDown(0) && !isSkillUse)
         {
+            ui.WindSkillUI();
             isSkillUse = true;
             WindDirection.enabled = false;
             player.Skill_Q();
@@ -155,26 +156,25 @@ public class PlayerSkill : MonoBehaviour
     public void CloudSkill()
     {
         mousePos = Input.mousePosition;
-        if (Input.GetKeyDown(KeyCode.E))//구름 스킬
+        Invoke("DestroyCloudShoot", 5f);
+        ui.CloudSkillUI();
+
+        if (CloudisDelay == true)
         {
-            Invoke("DestroyCloudShoot", 5f);
+            CloudisDelay = false;
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-            if (CloudisDelay == true)
+            if (Physics.Raycast(ray, out RaycastHit rayHit))
             {
-                CloudisDelay = false;
-                Ray ray = Camera.main.ScreenPointToRay(mousePos);
-                Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-
-                if (Physics.Raycast(ray, out RaycastHit rayHit))
+                if (rayHit.collider.tag == "Platform")
                 {
-                    if (rayHit.collider.tag == "Platform")
-                    {
-                        transform.LookAt(rayHit.point);
-                    }
+                    transform.LookAt(rayHit.point);
                 }
-                StartCoroutine(CloudTimeCor());
             }
+            StartCoroutine(CloudTimeCor());
         }
+
     }
 
     public void RainDropSkill()
@@ -194,6 +194,7 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
+            ui.RainSkillUI();
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;

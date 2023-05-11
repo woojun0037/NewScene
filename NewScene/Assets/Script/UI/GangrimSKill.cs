@@ -10,24 +10,6 @@ public class GangrimSKill : MonoBehaviour
     public Image imgCoolTimeCloud;
     public Image imgCoolTimeRain;
 
-    float windSkillminGauge = 0.1f;
-    float windSkillmaxGauge = 7f;
-
-    float cloudSkillminGauge = 0.1f;
-    float cloudSkillmaxGauge = 5f;
-
-    float rainSkillminGauge = 1f;
-    float rainSkillmaxGauge = 15f;
-
-    public static float windGauge;
-    public static float cloudGauge;
-    public static float rainGauge;
-
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         WindSkillUI();
@@ -37,26 +19,46 @@ public class GangrimSKill : MonoBehaviour
 
     public void WindSkillUI()
     {
-        while (windSkillminGauge <= windGauge)
+        StartCoroutine(WindSkillCoolTimeCor(3f));
+    }
+
+    IEnumerator WindSkillCoolTimeCor(float cool)
+    {
+        while (cool > 0.1f)
         {
-            imgCoolTimeWind.fillAmount = windGauge / windSkillminGauge;
-            windSkillminGauge += 0.1f;
+            cool -= Time.deltaTime;
+            imgCoolTimeWind.fillAmount = (0.1f / cool);
         }
-        imgCoolTimeWind.fillAmount = 0;
+        yield return null;
     }
 
     public void CloudSkillUI()
     {
+        StartCoroutine(CloudSkillCoolTimeCor(3f));
+    }
 
-        //cloudFill.fillAmount = cloudGauge / cloudSkillminGauge;
+    IEnumerator CloudSkillCoolTimeCor(float cool)
+    {
+        while (cool > 0.1f)
+        {
+            cool -= Time.deltaTime;
+            imgCoolTimeCloud.fillAmount = (0.1f / cool);
+        }
+        yield return null;
     }
 
     public void RainSkillUI()
     {
-
-        //rainFill.fillAmount = rainGauge / rainSkillminGauge;
+        StartCoroutine(RainSkillCoolTimeCor(3f));
     }
 
-
-
+    IEnumerator RainSkillCoolTimeCor(float cool)
+    {
+        while (cool > 0.1f)
+        {
+            cool -= Time.deltaTime;
+            imgCoolTimeRain.fillAmount = (0.1f / cool);
+        }
+        yield return null;
+    }
 }
