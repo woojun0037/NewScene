@@ -15,6 +15,7 @@ public class Bat_Script : Enemy
 
     bool isattack;
     bool DontMove;
+    bool isdie;
 
     [SerializeField]
     private float Dist;
@@ -22,6 +23,7 @@ public class Bat_Script : Enemy
     protected override void Awake()
     {
         base.Awake();
+        isdie = false;
     }
 
     protected override void Start()
@@ -47,9 +49,12 @@ public class Bat_Script : Enemy
     {
         if (curHearth < 1)
         {
-            GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-            agent.enabled = false;
-            gameObject.SetActive(false);
+            animator.SetBool("isDie", true);
+            DontMove = false;
+            isdie = true;
+            // GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
+            //agent.enabled = false;
+            //gameObject.SetActive(false);
         }
     }
 
@@ -61,7 +66,7 @@ public class Bat_Script : Enemy
 
     protected override void monsterMove()
     {
-        if (Player.HP >= 0)
+        if (Player.HP >= 0 && isdie != true)
         {
             base.monsterMove();
 
@@ -88,6 +93,10 @@ public class Bat_Script : Enemy
                     StartCoroutine("attacker");
                 }
             }
+            else
+            {
+                animator.SetBool("Attack", false);
+            }
         }
     }
 
@@ -104,7 +113,7 @@ public class Bat_Script : Enemy
         yield return new WaitForSeconds(0.4f);
 
         attacker_Col.SetActive(false);
-        animator.SetBool("Attack", false);
+
         //particle_attack.Stop();
 
         animator.SetBool("Move", false);
