@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7328135734522284700}
   - component: {fileID: 8380457749974720738}
   - component: {fileID: 1310693931811924161}
+  - component: {fileID: 221002582004751095}
+  - component: {fileID: 4826359840940924799}
   m_Layer: 0
   m_Name: Moon_updownBullet
   m_TagString: Untagged
@@ -95,7 +97,7 @@ SphereCollider:
   m_GameObject: {fileID: 4957688778151290679}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
@@ -128,3 +130,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestoryTime: 2
+--- !u!114 &221002582004751095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957688778151290679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a790f111fd394f4bafe859495fb649f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetDamaged: 1
+--- !u!65 &4826359840940924799
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4957688778151290679}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1546426, y: 8.953463, z: 1.335438}
+  m_Center: {x: 0.022409678, y: -0.99450445, z: -0.14148986}

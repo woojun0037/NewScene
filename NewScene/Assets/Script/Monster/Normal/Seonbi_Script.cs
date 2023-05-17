@@ -69,7 +69,14 @@ public class Seonbi_Script : Enemy
                 }
             }
         }
-        
+        else
+        {
+            animator.SetBool("Move", false);
+            animator.SetBool("Attack", false);
+
+            agent.isStopped = true;
+        }
+
     }
 
     protected override void DieMonster()

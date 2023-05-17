@@ -24,13 +24,10 @@ public class Monster_Door : Boss
     private float random;
     private float pastrandom;
 
-    [SerializeField]
-    bool onetime = true;
-    [SerializeField]
-    float cooltime; 
+    [SerializeField] bool onetime = true;
+    [SerializeField] float cooltime; 
     float timer = 0;
-    [SerializeField]
-    float MonsterYPosition;
+    [SerializeField]  float MonsterYPosition;
 
     [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
     public GameObject PatternDoonBullet; //문 분신
@@ -44,14 +41,10 @@ public class Monster_Door : Boss
     bool spawnone;
 
     //패턴 2 공격
-    [SerializeField]
-    float SetY;
-    [SerializeField]
-    float upspeed; //올라가는 속도
-    [SerializeField]
-    float downspeed; //내려가는 속도
-    [SerializeField]
-    float chasespeed4;
+    [SerializeField] float SetY;
+    [SerializeField] float upspeed; //올라가는 속도
+    [SerializeField] float downspeed; //내려가는 속도
+    [SerializeField] float chasespeed4;
     bool isdown;
     bool Upready;
     bool bullettime2;
@@ -59,13 +52,9 @@ public class Monster_Door : Boss
     bool stop;
     bool readytogetpodition;
 
-    [SerializeField]
-    float pattern3Max_X; //전에는 30
-
-    RaycastHit hit;
+    [SerializeField] float pattern3Max_X;
     Vector3 ReturnPosition; //돌아가는 위치
 
-    // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
@@ -79,7 +68,6 @@ public class Monster_Door : Boss
         readytogetpodition = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.HP >= 0 && !isDie)

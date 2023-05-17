@@ -11,15 +11,12 @@ public class Enemy : MonoBehaviour
     public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-    public float moveSpeed;
     
     public bool DebuffCheck;
     public bool StartAttack;
 
     public float KnockBackForce;
     private float KnockBakcTime;
-
-    RaycastHit hit;
 
     Rigidbody rigid;
     BoxCollider boxCollier;
@@ -52,9 +49,9 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         Player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
-        agent.speed = chasespeed;
-
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
+
+        agent.speed = chasespeed;
         agent.enabled = true;
     }
 
