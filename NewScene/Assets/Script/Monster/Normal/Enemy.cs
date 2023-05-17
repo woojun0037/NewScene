@@ -29,8 +29,11 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent = null;
     protected Main_Player Player;
 
+    public bool getTouch;
+
     int hitNum;
     float delay;
+    bool havedelay;
 
     void Update()
     {
@@ -142,10 +145,13 @@ public class Enemy : MonoBehaviour
             curHearth -= hit.damage;
         }
 
-        if (other.gameObject.tag == "Main_gangrim")
+        if (other.gameObject.tag == "Main_gangrim" && !getTouch)
         {
-            FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
-            Debug.Log("hit to Player");
+            if (!havedelay)
+            {
+                StartCoroutine("AttackDelay");
+                havedelay = true;
+            }
         }
     }
 
@@ -166,5 +172,12 @@ public class Enemy : MonoBehaviour
         player.R_skillCheck = false;
         property.Stun = false;
         this.chasespeed = 3f;
+    }
+    IEnumerator AttackDelay() //플레이어가 받는 공격 딜레이
+    {
+        Debug.Log("hit to Player");
+        FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
+        yield return new WaitForSeconds(0.3f);
+        havedelay = false;
     }
 }
