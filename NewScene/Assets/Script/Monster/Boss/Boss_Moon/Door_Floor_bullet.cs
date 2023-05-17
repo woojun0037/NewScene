@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class Door_Floor_bullet : MonoBehaviour
 {
-    //몬스터 문의 장판 공격 총알
-    //플레이어와 접속 시 도트딜
-    //지속시간 15초
     [SerializeField]
     GameObject FloorObj;
     float time;
@@ -19,7 +16,6 @@ public class Door_Floor_bullet : MonoBehaviour
         time = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime;
@@ -34,7 +30,6 @@ public class Door_Floor_bullet : MonoBehaviour
             if (!isattack)
             {
                 isattack = true;
-
                 StartCoroutine("PlayerAttackTime");
             }
 

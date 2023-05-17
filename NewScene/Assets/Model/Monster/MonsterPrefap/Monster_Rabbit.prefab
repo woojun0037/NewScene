@@ -961,7 +961,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 878848937862898356}
-  - {fileID: 7875025568986392053}
   - {fileID: 6440755318279653863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1033,19 +1032,17 @@ MonoBehaviour:
   curHearth: 10
   MaxDistance: 2
   chasespeed: 5
-  moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
-  attacker_Col: {fileID: 7875025568986392054}
+  getTouch: 0
+  attacker_Col: {fileID: 0}
   ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
   SetY: 2
   attackDelaytime: 1
   particle_attack: {fileID: 6440755318279653861}
-  Dist: 0
-  animatordie: 0
 --- !u!195 &378713205
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1375,52 +1372,6 @@ Transform:
   m_Father: {fileID: 2460173406097571682}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7875025568986392054
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7875025568986392053}
-  - component: {fileID: 7875025568986392052}
-  m_Layer: 0
-  m_Name: Attack
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7875025568986392053
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875025568986392054}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7693009584103412622}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7875025568986392052
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7875025568986392054}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.2
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.06, z: 0}
 --- !u!1 &8322117727249079869
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,7 +1478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6440755318203605268, guid: 606b615229ffda548be6ed146a079ada, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6440755318203605268, guid: 606b615229ffda548be6ed146a079ada, type: 3}
       propertyPath: m_LocalPosition.x
