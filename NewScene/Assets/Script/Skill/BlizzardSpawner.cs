@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BlizzardSpawner : MonoBehaviour
 {
-
     public GameObject FlyingObject;
     public float destroyDelay;
     public float spawnInterval;

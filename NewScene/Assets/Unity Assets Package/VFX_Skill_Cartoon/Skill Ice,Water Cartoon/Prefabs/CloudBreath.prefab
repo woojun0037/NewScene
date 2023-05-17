@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2439321859484939992}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3994, y: 0.39888, z: 0.42571685}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1909213209610239043}
@@ -4841,9 +4841,11 @@ GameObject:
   - component: {fileID: 1909213209610239043}
   - component: {fileID: 2160729030041497313}
   - component: {fileID: 4500946787682947048}
+  - component: {fileID: 553132270}
+  - component: {fileID: 1047971869257834915}
   m_Layer: 0
-  m_Name: Eff_Water_Uncommon_Ice breathskill_02
-  m_TagString: Untagged
+  m_Name: CloudBreath
+  m_TagString: skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4856,8 +4858,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4038121563916466951}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6.51}
+  m_LocalScale: {x: 1.8220723, y: 1.2808836, z: 0.07697253}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8944083509417290932}
@@ -5437,7 +5439,7 @@ ParticleSystem:
     randomizeRotationDirection: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 0
+    size3D: 1
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -9646,6 +9648,31 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!65 &553132270
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038121563916466951}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.41, y: 4.8, z: 26.44}
+  m_Center: {x: -0, y: -2.9, z: 12.62}
+--- !u!114 &1047971869257834915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038121563916466951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748ef5de97468074aa7ccade65c2a53a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6543780875621947669
 GameObject:
   m_ObjectHideFlags: 0
@@ -9663,7 +9690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8334650449110651530
 Transform:
   m_ObjectHideFlags: 0
@@ -9673,7 +9700,7 @@ Transform:
   m_GameObject: {fileID: 6543780875621947669}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3994, y: 0.39888, z: 0.42571685}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1909213209610239043}
@@ -14485,7 +14512,7 @@ Transform:
   m_GameObject: {fileID: 6834732271455022485}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3994, y: 0.39888, z: 0.42571685}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1909213209610239043}
@@ -15836,21 +15863,21 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
+          inSlope: 0.12629165
+          outSlope: 0.12629165
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0.25205544
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -19297,7 +19324,7 @@ Transform:
   m_GameObject: {fileID: 9208931069413884069}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3994, y: 0.39888, z: 0.42571685}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1909213209610239043}

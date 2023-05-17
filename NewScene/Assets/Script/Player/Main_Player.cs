@@ -209,7 +209,7 @@ public class Main_Player : MonoBehaviour
         heading.Normalize();
         heading = heading - player_Move_Input;
 
-        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind && hitState == 0)
+        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind && hitState == 0 && !Input.GetKey(KeyCode.E))
         {
             isMove = true;
             AnimationBoolCheck();
@@ -234,7 +234,7 @@ public class Main_Player : MonoBehaviour
 
     public void Skill_E()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
            skill.CloudSkill();
            E_skillCheck = true;

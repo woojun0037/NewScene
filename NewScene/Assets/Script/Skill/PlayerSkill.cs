@@ -31,8 +31,7 @@ public class PlayerSkill : MonoBehaviour
     public Canvas WindDirection;
 
     public TrailRenderer trailEffect;
-    public Transform CloudPos;
-    public GameObject Cloudprab;
+    public GameObject CloudPos;
     public GameObject WindSkillPrefab;
 
     private Vector3 posUp;
@@ -52,6 +51,8 @@ public class PlayerSkill : MonoBehaviour
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
+
+        CloudPos.gameObject.SetActive(false);
         WindDirection.enabled = false;
         Instance = this;
     }
@@ -59,7 +60,7 @@ public class PlayerSkill : MonoBehaviour
     void Update()
     {
         WindSkillRange();
-        //CloudSkill();
+        CloudSkill();
         RainDropSkill();
 
         RaycastHit hit;
@@ -146,7 +147,6 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !isSkillUse)
         {
-            
             isSkillUse = true;
             WindDirection.enabled = false;
             player.Skill_Q();
@@ -155,27 +155,52 @@ public class PlayerSkill : MonoBehaviour
 
     public void CloudSkill()
     {
-        mousePos = Input.mousePosition;
-        Invoke("DestroyCloudShoot", 5f);
-        
+        //mousePos = Input.mousePosition;
+        //Invoke("DestroyCloudShoot", 5f);
 
-        if (CloudisDelay == true)
+        //if (CloudisDelay == true)
+        //{
+        //    CloudisDelay = false;
+        //    float cloudTime = 0;
+
+        //    Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        //    Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+
+        //    if (Physics.Raycast(ray, out RaycastHit rayHit))
+        //    {
+        //        if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.E))
+        //        {
+        //            transform.LookAt(rayHit.point);
+        //            CloudPos.gameObject.SetActive(true);
+        //        }
+        //        else
+        //        {
+        //            CloudPos.gameObject.SetActive(false);
+        //        }
+
+        //        if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
+        //        {
+        //            transform.LookAt(rayHit.point);
+        //            cloudTime += 0.1f;
+        //            CloudPos.gameObject.SetActive(true);
+        //        }
+        //        else if (cloudTime > 3f)
+        //        {
+        //            CloudPos.gameObject.SetActive(false);
+        //            StartCoroutine(CloudTimeCor());
+        //        }
+        //    }
+        //}
+        if(Input.GetKey(KeyCode.E))
         {
-            CloudisDelay = false;
-            Ray ray = Camera.main.ScreenPointToRay(mousePos);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-
-            if (Physics.Raycast(ray, out RaycastHit rayHit))
-            {
-                if (rayHit.collider.tag == "Platform")
-                {
-                    transform.LookAt(rayHit.point);
-                }
-            }
-            StartCoroutine(CloudTimeCor());
+            CloudPos.gameObject.SetActive(true);
         }
-
+        else
+        {
+            CloudPos.gameObject.SetActive(false);
+        }
     }
+
 
     public void RainDropSkill()
     {
@@ -194,7 +219,7 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
-            
+
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;
@@ -236,10 +261,6 @@ public class PlayerSkill : MonoBehaviour
 
     IEnumerator CloudTimeCor()
     {
-        GameObject intantCloud = Instantiate(Cloudprab, CloudPos.position, CloudPos.rotation);
-        Rigidbody CloudRigid = intantCloud.GetComponent<Rigidbody>();
-        CloudRigid.velocity = transform.forward * 10;
-        Destroy(intantCloud, 2);
         yield return new WaitForSeconds(3f);
         CloudisDelay = true;
     }
