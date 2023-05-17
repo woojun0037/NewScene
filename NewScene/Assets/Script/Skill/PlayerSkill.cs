@@ -13,7 +13,7 @@ public class PlayerSkill : MonoBehaviour
 
     //WindStorm windskill;
     Main_Player player;
-    public GangrimSKill ui;
+    public GangrimSkillUi ui;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
@@ -146,7 +146,7 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !isSkillUse)
         {
-            ui.WindSkillUI();
+            
             isSkillUse = true;
             WindDirection.enabled = false;
             player.Skill_Q();
@@ -157,7 +157,7 @@ public class PlayerSkill : MonoBehaviour
     {
         mousePos = Input.mousePosition;
         Invoke("DestroyCloudShoot", 5f);
-        ui.CloudSkillUI();
+        
 
         if (CloudisDelay == true)
         {
@@ -194,7 +194,7 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
-            ui.RainSkillUI();
+            
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;

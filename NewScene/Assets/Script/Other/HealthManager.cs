@@ -21,9 +21,14 @@ public class HealthManager : MonoBehaviour
     public void HurtPlayer(float damage)
     {
         currentHealth -= damage;
-        FindObjectOfType<Main_Player>().PlayerHP(currentHealth);
+        StartCoroutine(HitPlayerCor(currentHealth));
     }
 
+    IEnumerator HitPlayerCor(float damge)
+    { 
+        FindObjectOfType<Main_Player>().PlayerHP(damge);
+        yield return new WaitForSeconds(1.5f);
+    }
 
     public void HealPlayer(float healAmount)
     {
