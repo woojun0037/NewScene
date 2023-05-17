@@ -13,7 +13,7 @@ public class Delete_Bullet___ : MonoBehaviour
 
         if (t > DestoryTime)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             t = 0;
         }
 
