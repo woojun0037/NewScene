@@ -189,9 +189,6 @@ public class Main_Player : MonoBehaviour
 
             currentATKEffect = Instantiate(AtkEffect[on_count], transform);
             currentATKEffect.transform.position = dir;
-
-            //currentATKEffect.transform.position = new veoctransform.position.y;
-            //currentATKEffect.transform.rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
         }
     }
 

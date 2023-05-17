@@ -28578,6 +28578,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 1806763118}
+    - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: HitBox
       value: 
       objectReference: {fileID: 807417160}
@@ -40265,6 +40269,17 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1806763118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+  m_PrefabInstance: {fileID: 1310772309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1806763111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1808306742
 PrefabInstance:
   m_ObjectHideFlags: 0
