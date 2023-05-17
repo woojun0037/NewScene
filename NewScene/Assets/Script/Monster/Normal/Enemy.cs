@@ -144,18 +144,21 @@ public class Enemy : MonoBehaviour
             while(hit != null)
             curHearth -= hit.damage;
         }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.tag == "Main_gangrim" && !getTouch)
         {
             if (!havedelay)
             {
-                StartCoroutine("AttackDelay");
                 havedelay = true;
+                StartCoroutine("AttackDelay");
             }
         }
     }
 
-    
+
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);
@@ -177,7 +180,7 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("hit to Player");
         FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         havedelay = false;
     }
 }

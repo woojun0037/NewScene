@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class Bat_Script : Enemy
 {
-    [SerializeField] GameObject attacker_Col;
-    public GameObject ragdoll_obj;
 
-    [SerializeField] float SetY;
     [SerializeField] float attackDelaytime;
 
-    public ParticleSystem particle_attack;
     private Animator animator;
 
     bool isattack;
     bool DontMove;
     bool isdie;
 
-    [SerializeField]
     private float Dist;
+    float deletetime;
 
     protected override void Awake()
     {
@@ -29,12 +25,12 @@ public class Bat_Script : Enemy
     protected override void Start()
     {
         base.Start();
+        getTouch = true;
         isattack = false;
         DontMove = false;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
     }
-    public bool animatordie;
 
     void Update()
     {
@@ -50,14 +46,18 @@ public class Bat_Script : Enemy
         if (curHearth < 1)
         {
             animator.SetBool("isDie", true);
-            DontMove = false;
+            DontMove = true;
             isdie = true;
-            // GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-            //agent.enabled = false;
-            //gameObject.SetActive(false);
+            agent.enabled = false;
+
+            deletetime += Time.deltaTime;
+
+            if (deletetime >= 5f) 
+            {
+               gameObject.SetActive(false);            
+            }
         }
     }
-
     protected override void GetDamagedAnimation() {
         int random =1;
         random = UnityEngine.Random.Range(1, 3);
@@ -81,20 +81,18 @@ public class Bat_Script : Enemy
                 agent.isStopped = true;
             }
 
-            Vector3 targety = targetTransform.position;
-            targety.y = SetY;
 
-            if (Dist <= 2)
+            if (Dist <= 1)
             {
                 if (!isattack)
                 {
-                    transform.LookAt(targety);
                     isattack = true;
                     StartCoroutine("attacker");
                 }
             }
             else
             {
+                getTouch = true;
                 animator.SetBool("Attack", false);
             }
         }
@@ -106,18 +104,7 @@ public class Bat_Script : Enemy
     {
         DontMove = true;
         animator.SetBool("Attack", true);
-
-        yield return new WaitForSeconds(0.9f);
-        attacker_Col.SetActive(true);
-        //particle_attack.Play();
-        yield return new WaitForSeconds(0.4f);
-
-        attacker_Col.SetActive(false);
-
-        //particle_attack.Stop();
-
-        animator.SetBool("Move", false);
-        yield return new WaitForSeconds(0.7f);
+        getTouch = false;
 
         yield return new WaitForSeconds(attackDelaytime);
         isattack = false;

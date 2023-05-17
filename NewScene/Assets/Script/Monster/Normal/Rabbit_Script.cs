@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Rabbit_Script : Enemy
 {
-    [SerializeField] GameObject attacker_Col;
     public GameObject ragdoll_obj;
 
     [SerializeField] float SetY;
@@ -96,11 +95,9 @@ public class Rabbit_Script : Enemy
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.9f);
         getTouch = false;
-        attacker_Col.SetActive(true);
         particle_attack.Play();
         yield return new WaitForSeconds(0.4f);
         getTouch = true;
-        attacker_Col.SetActive(false);
         animator.SetBool("Attack", false);
         particle_attack.Stop();
         animator.SetBool("Move", false);
