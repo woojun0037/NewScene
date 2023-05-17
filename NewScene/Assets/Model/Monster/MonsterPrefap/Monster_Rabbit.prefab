@@ -1027,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff4f8d32b5f804478bc3e636d47b492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToGive: 10
+  damageToGive: 1
   maxHearth: 10
   curHearth: 10
   MaxDistance: 2
@@ -1038,7 +1038,6 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   getTouch: 0
-  attacker_Col: {fileID: 0}
   ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
   SetY: 2
   attackDelaytime: 1

@@ -7230,10 +7230,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster_Rabbit (21)
       objectReference: {fileID: 0}
-    - target: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7693009584103412622, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -7276,10 +7272,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7693009584103412622, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7875025568986392052, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -22543,6 +22535,56 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: fd47c785ea370ed41b889307dfce6025, type: 3}
+--- !u!1 &1000168149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7907102855022885932, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+  m_PrefabInstance: {fileID: 1291288145}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1000168150
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000168149}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1000168151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000168149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862883fa849585749a600662236ae0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToGive: 1
+  maxHearth: 0
+  curHearth: 0
+  MaxDistance: 0
+  chasespeed: 0
+  DebuffCheck: 0
+  StartAttack: 0
+  KnockBackForce: 0
+  targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  getTouch: 0
 --- !u!1 &1003098675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6380573484578890494, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
@@ -33154,10 +33196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1300605839, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
-      propertyPath: attackDelaytime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm
@@ -38401,9 +38439,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e09def53c47ffb45ae849c8ec13c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imgCoolTimeWind: {fileID: 0}
-  imgCoolTimeCloud: {fileID: 0}
-  imgCoolTimeRain: {fileID: 0}
+  abilityImage1: {fileID: 0}
+  coolDown1: 5
+  WindSKill: 0
+  abilityImage2: {fileID: 0}
+  coolDown2: 3
+  CloudSKill: 0
+  abilityImage3: {fileID: 0}
+  coolDown3: 6
+  RainSkill: 0
 --- !u!114 &1739620131
 MonoBehaviour:
   m_ObjectHideFlags: 0
