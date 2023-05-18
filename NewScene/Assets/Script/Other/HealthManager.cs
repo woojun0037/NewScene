@@ -6,7 +6,8 @@ public class HealthManager : MonoBehaviour
 {
     public float maxHealth;
     public float currentHealth;
-    
+    bool isDamage = false;
+
     void Start()
     {
         
@@ -20,14 +21,20 @@ public class HealthManager : MonoBehaviour
   
     public void HurtPlayer(float damage)
     {
-        currentHealth -= damage;
-        StartCoroutine(HitPlayerCor(currentHealth));
+        if (!isDamage)
+        {
+            isDamage = true;
+            currentHealth -= damage;
+            StartCoroutine(HitPlayerCor(currentHealth));
+        }
+
     }
 
     IEnumerator HitPlayerCor(float damge)
     { 
         FindObjectOfType<Main_Player>().PlayerHP(damge);
         yield return new WaitForSeconds(1.5f);
+        isDamage = false;
     }
 
     public void HealPlayer(float healAmount)

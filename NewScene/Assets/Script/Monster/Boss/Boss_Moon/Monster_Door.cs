@@ -7,8 +7,7 @@ public class Monster_Door : Boss
 
     public GameObject SpawnMonsters;
 
-    public Rigidbody FloorAattackObj; //바닥 장판 스킬
-    public GameObject rayobj; 
+    public GameObject FloorAattackObj; //바닥 장판 스킬
 
     Renderer DoorColor;
 
@@ -31,8 +30,10 @@ public class Monster_Door : Boss
 
     [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
     public GameObject PatternDoonBullet; //문 분신
-    public Rigidbody PatternBullet; //위아래 총알
-    float speed = 20; //임의 20
+    public Rigidbody PatternBullet; //8각 총알
+    public GameObject updownBullet; //위아래 총알
+
+    float speed = 20;
     int pattern3_random;
     bool getready; //AttackPosition 이동 자리에 도착함
     bool isz;
@@ -280,7 +281,7 @@ public class Monster_Door : Boss
 
     void FloorAttack() //장판 공격
     {
-       Rigidbody Floorattacker = Instantiate(FloorAattackObj, transform.position, transform.rotation);
+        FloorAattackObj.SetActive(true);
     }
 
 
@@ -314,33 +315,27 @@ public class Monster_Door : Boss
         }
     }
 
-    IEnumerator BulletTime_() //가짓수 정해지면 배열로 변경  // 내려 찍기 패턴의 총알
+    IEnumerator BulletTime_()
     {
-        yield return new WaitForSeconds(0.2f);
-        //임의라.. 나중에 배열로 넣든지 할듯 // 방향 몇가지??
-        Rigidbody bullet = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet.velocity = new Vector3(0, 0, -1) * 10;
+        yield return new WaitForSeconds(0.5f);
 
-        Rigidbody bullet2 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet2.velocity = new Vector3(-1, 0, -1) * 10;
+        Vector3[] directions = new Vector3[]
+        {
+        new Vector3(0, 0, -1),
+        new Vector3(-1, 0, -1),
+        new Vector3(1, 0, -1),
+        new Vector3(1, 0, 1),
+        new Vector3(-1, 0, 1),
+        new Vector3(-1, 0, 0),
+        new Vector3(0, 0, 1),
+        new Vector3(1, 0, 0)
+        };
 
-        Rigidbody bullet3 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet3.velocity = new Vector3(1, 0, -1) * 10;
-
-        Rigidbody bullet4 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet4.velocity = new Vector3(1, 0, 1) * 10;
-
-        Rigidbody bullet5 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet5.velocity = new Vector3(-1, 0, 1) * 10;
-
-        Rigidbody bullet6 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet6.velocity = new Vector3(-1, 0, 0) * 10;
-
-        Rigidbody bullet7 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet7.velocity = new Vector3(0, 0, 1) * 10;
-
-        Rigidbody bullet8 = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet8.velocity = new Vector3(1, 0, 0) * 10;
+        for (int i = 0; i < directions.Length; i++)
+        {
+            Rigidbody bullet = Instantiate(PatternBullet, transform.position, Quaternion.LookRotation(directions[i] * 90));
+            bullet.velocity = bullet.transform.forward * 10;
+        }
 
         bullettime2 = false;
     }
@@ -424,13 +419,22 @@ public class Monster_Door : Boss
 
     IEnumerator Pattern3BulletTime_() //패턴 3 총알 위아래
     {
+        //yield return new WaitForSeconds(0.5f);
+        Vector3 sety = transform.position;
+        sety.y = transform.position.y + 2;
+        yield return new WaitForSeconds(0.1f);
+        GameObject bullet = Instantiate(updownBullet, sety, transform.rotation);
+
+
         yield return new WaitForSeconds(0.5f);
 
-        Rigidbody bullet = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bullet.velocity = transform.forward * 10;
+        //updownBullet.transform.position = transform.position;
 
-        Rigidbody bulle2t = Instantiate(PatternBullet, transform.position, transform.rotation);
-        bulle2t.velocity = transform.forward * -10;
+        //Rigidbody bullet = Instantiate(updownBullet, transform.position, transform.rotation);
+        //bullet.velocity = transform.forward * 10;
+
+        ////Rigidbody bulle2t = Instantiate(updownBullet, transform.position, transform.rotation);
+        //bulle2t.velocity = transform.forward * -10;
 
         bullettime = false;
     }

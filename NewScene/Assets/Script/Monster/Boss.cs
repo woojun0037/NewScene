@@ -121,15 +121,15 @@ public class Boss : MonoBehaviour
             while (hit != null)
                 curHearth -= hit.damage;
         }
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
-            Debug.Log("hit to Player");
         }
     }
-
-
     IEnumerator GetDebuffCor()
     {
         yield return new WaitForSeconds(5.0f);

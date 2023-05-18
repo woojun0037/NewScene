@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Rabbit_Script : Enemy
 {
-    [SerializeField] GameObject attacker_Col;
     public GameObject ragdoll_obj;
 
     [SerializeField] float SetY;
@@ -13,10 +12,8 @@ public class Rabbit_Script : Enemy
     public ParticleSystem particle_attack;
     private Animator animator;
 
-    bool isattack;
-    bool DontMove;
-
-    [SerializeField]
+    private bool isattack;
+    private bool DontMove;
     private float Dist;
 
     protected override void Awake()
@@ -27,12 +24,12 @@ public class Rabbit_Script : Enemy
     protected override void Start()
     {
         base.Start();
+        getTouch = true;
         isattack = false;
         DontMove = false;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
     }
-    public bool animatordie;
 
     void Update()
     {
@@ -92,25 +89,20 @@ public class Rabbit_Script : Enemy
     }
 
 
-
     IEnumerator attacker()
     {
         DontMove = true;
         animator.SetBool("Attack", true);
-
         yield return new WaitForSeconds(0.9f);
-        attacker_Col.SetActive(true);
+        getTouch = false;
         particle_attack.Play();
         yield return new WaitForSeconds(0.4f);
-
-        attacker_Col.SetActive(false);
+        getTouch = true;
         animator.SetBool("Attack", false);
         particle_attack.Stop();
-
         animator.SetBool("Move", false);
-        yield return new WaitForSeconds(0.7f);
 
-        yield return new WaitForSeconds(attackDelaytime);
+        yield return new WaitForSeconds(attackDelaytime + 0.7f);
         isattack = false;
         DontMove = false;
 
