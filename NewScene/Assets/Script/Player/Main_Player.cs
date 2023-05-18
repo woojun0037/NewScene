@@ -15,7 +15,7 @@ public class Main_Player : MonoBehaviour
     [SerializeField] float RotateSpeed = 10f;
 
     private HitScript hit;
-    private WindStorm windOn;
+    [SerializeField] private WindStorm windOn;
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
 
@@ -63,7 +63,6 @@ public class Main_Player : MonoBehaviour
     {
         propertySkill = GetComponent<PropertySkill>();
         hit = HitBox.gameObject.GetComponent<HitScript>();
-        windOn = WindBox.gameObject.GetComponent<WindStorm>();
         tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
     }
 

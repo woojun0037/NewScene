@@ -126,7 +126,7 @@ public class PlayerSkill : MonoBehaviour
 
     public GameObject WindTest()
     {
-        GameObject temp = Instantiate(WindSkillPrefab, transform.position, Quaternion.identity);
+        GameObject temp = Instantiate(WindSkillPrefab, new Vector3(transform.position.x,transform.position.y+3f, transform.position.z), Quaternion.identity);
         temp.transform.rotation = this.transform.rotation;
         return temp;
     }
