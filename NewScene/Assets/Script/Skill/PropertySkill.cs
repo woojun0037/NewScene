@@ -6,7 +6,7 @@ public class PropertySkill : MonoBehaviour
 {
     [SerializeField] Collider HitBox;
     [SerializeField] private float BuffTime = 6f;
-    
+
     public Main_Player SkillUse;
     public Enemy enemy;
     public GameObject motion;
@@ -26,7 +26,6 @@ public class PropertySkill : MonoBehaviour
 
     private void Update()
     {
-        TafoonSkill();
         IceSkill();
         Thunder();
         TafoonSkillSpecial();
@@ -34,29 +33,31 @@ public class PropertySkill : MonoBehaviour
 
     public void TafoonSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
-        {
-            motion.gameObject.SetActive(true);
-            SkillUse.Q_skillCheck = false;
-            SkillUse.E_skillCheck = false;
-            TafoonSpecial = true;
+        motion.gameObject.SetActive(true);
+        SkillUse.Q_skillCheck = false;
+        SkillUse.E_skillCheck = false;
+        TafoonSpecial = false;
 
-            SkillUse.MoveSpeed += 5f;
-            SpeedUp += 3f;
+        SkillUse.MoveSpeed += 5f;
+        SpeedUp += 3f;
 
-            SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
-            SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
-            SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);
+        SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
+        SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
+        SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);
 
-            StartCoroutine(TafoonSkillUse());
-        }
+        StartCoroutine(TafoonSkillUse());
     }
 
     public void TafoonSkillSpecial()
     {
-        if (Input.GetKeyDown(KeyCode.G) && TafoonSpecial)
+        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
         {
-            StartCoroutine(TafoonAttack());
+            TafoonSpecial = true;
+            if (Input.GetKeyDown(KeyCode.G) && TafoonSpecial)
+            {
+                StartCoroutine(TafoonAttack());
+                TafoonSkill();
+            }
         }
     }
 
