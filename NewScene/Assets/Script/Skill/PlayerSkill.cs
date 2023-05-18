@@ -149,6 +149,7 @@ public class PlayerSkill : MonoBehaviour
         {
             isSkillUse = true;
             WindDirection.enabled = false;
+            WindSkillCheck = false;
             player.Skill_Q();
         }
     }
