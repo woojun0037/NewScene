@@ -113,36 +113,33 @@ public class PropertySkill : MonoBehaviour
                 transform.LookAt(rayHit.point);
                 GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
                 ice.transform.rotation = this.transform.rotation;
+                Destroy(ice, 1f);
             }
         }
     }
 
-     
     public void Thunder()
     {
-        if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck)
+        if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
         {
             Stun = true;
         }
-        else
+        else if(Stun == true)
         {
-            Stun = false;
+
+            StartCoroutine(ThunderCor());
         }
     }
 
-    public void ThunderSkillSpecial()
+    IEnumerator ThunderCor()
     {
-        mousePos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        if (Physics.Raycast(ray, out RaycastHit rayHit))
-        {
-            if (rayHit.collider.tag == "Platform" && Input.GetMouseButtonDown(0) && Debuff == Stun)
-            {
-                transform.LookAt(rayHit.point);
-                GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
-                ice.transform.rotation = this.transform.rotation;
-            }
-        }
+        yield return new WaitForSeconds(3f);
+        Stun = true;
     }
 
+    public void ThunderSkillSpecial(Vector3 transform)
+    {
+        GameObject thunder = Instantiate(TurnderSpecial, transform, Quaternion.identity);
+        
+    }
 }
