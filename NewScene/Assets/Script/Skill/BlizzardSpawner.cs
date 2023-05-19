@@ -22,6 +22,7 @@ public class BlizzardSpawner : MonoBehaviour
     {
         var obj = Instantiate(FlyingObject, RainPos, Quaternion.Euler(new Vector3(-90, 0, 0)));
         var forceDirection = transform.position - (transform.position + spawnOffset);
+        Destroy(obj,destroyDelay);
     }
 }
 

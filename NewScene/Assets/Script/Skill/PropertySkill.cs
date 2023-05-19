@@ -7,10 +7,15 @@ public class PropertySkill : MonoBehaviour
     [SerializeField] Collider HitBox;
     [SerializeField] private float BuffTime = 6f;
 
+    private Vector3 mousePos;
+
     public Main_Player SkillUse;
     public Enemy enemy;
     public GameObject motion;
-    public GameMain TafoonHitBox;
+    public GameObject IceSpecial;
+    public Transform PlayerPos;
+
+    //public GameMain TafoonHitBox;
 
     public float SpeedUp = 1.2f;
 
@@ -29,6 +34,7 @@ public class PropertySkill : MonoBehaviour
         IceSkill();
         Thunder();
         TafoonSkillSpecial();
+        IceSkillSpecial();
     }
 
     public void TafoonSkill()
@@ -95,7 +101,22 @@ public class PropertySkill : MonoBehaviour
         }
     }
 
+    public void IceSkillSpecial()
+    {
+        mousePos = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out RaycastHit rayHit))
+        {
+            if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.H) && Debuff == true)
+            {
+                transform.LookAt(rayHit.point);
+                GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
+                ice.transform.rotation = this.transform.rotation;
+            }
+        }
+    }
 
+     
     public void Thunder()
     {
         if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck)

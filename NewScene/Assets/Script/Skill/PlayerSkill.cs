@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerSkill : MonoBehaviour
 {
 
-    private Vector3 mousePos;
+    public Vector3 mousePos;
     private Vector3 Dir;
     private Vector3 DashTarget;
 
@@ -156,43 +156,44 @@ public class PlayerSkill : MonoBehaviour
 
     public void CloudSkill()
     {
-        //mousePos = Input.mousePosition;
-        //Invoke("DestroyCloudShoot", 5f);
+        mousePos = Input.mousePosition;
+        Invoke("DestroyCloudShoot", 5f);
 
-        //if (CloudisDelay == true)
-        //{
-        //    CloudisDelay = false;
-        //    float cloudTime = 0;
+        if (CloudisDelay == true)
+        {
+            CloudisDelay = false;
+            float cloudTime = 0;
 
-        //    Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        //    Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-        //    if (Physics.Raycast(ray, out RaycastHit rayHit))
-        //    {
-        //        if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.E))
-        //        {
-        //            transform.LookAt(rayHit.point);
-        //            CloudPos.gameObject.SetActive(true);
-        //        }
-        //        else
-        //        {
-        //            CloudPos.gameObject.SetActive(false);
-        //        }
+            if (Physics.Raycast(ray, out RaycastHit rayHit))
+            {
+                if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.E))
+                {
+                    transform.LookAt(rayHit.point);
+                    CloudPos.gameObject.SetActive(true);
+                }
+                else
+                {
+                    CloudPos.gameObject.SetActive(false);
+                }
 
-        //        if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
-        //        {
-        //            transform.LookAt(rayHit.point);
-        //            cloudTime += 0.1f;
-        //            CloudPos.gameObject.SetActive(true);
-        //        }
-        //        else if (cloudTime > 3f)
-        //        {
-        //            CloudPos.gameObject.SetActive(false);
-        //            StartCoroutine(CloudTimeCor());
-        //        }
-        //    }
-        //}
-        if(Input.GetKey(KeyCode.E))
+                if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
+                {
+                    transform.LookAt(rayHit.point);
+                    cloudTime += 0.1f;
+                    CloudPos.gameObject.SetActive(true);
+                }
+                else if (cloudTime > 3f)
+                {
+                    CloudPos.gameObject.SetActive(false);
+                    StartCoroutine(CloudTimeCor());
+                }
+            }
+        }
+
+        if (Input.GetKey(KeyCode.E))
         {
             CloudPos.gameObject.SetActive(true);
         }
@@ -220,6 +221,7 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
+
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;
