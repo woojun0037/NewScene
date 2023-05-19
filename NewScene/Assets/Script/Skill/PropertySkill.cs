@@ -13,6 +13,7 @@ public class PropertySkill : MonoBehaviour
     public Enemy enemy;
     public GameObject motion;
     public GameObject IceSpecial;
+    public GameObject TurnderSpecial;
     public Transform PlayerPos;
 
     //public GameMain TafoonHitBox;
@@ -128,4 +129,20 @@ public class PropertySkill : MonoBehaviour
             Stun = false;
         }
     }
+
+    public void ThunderSkillSpecial()
+    {
+        mousePos = Input.mousePosition;
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        if (Physics.Raycast(ray, out RaycastHit rayHit))
+        {
+            if (rayHit.collider.tag == "Platform" && Input.GetMouseButtonDown(0) && Debuff == Stun)
+            {
+                transform.LookAt(rayHit.point);
+                GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
+                ice.transform.rotation = this.transform.rotation;
+            }
+        }
+    }
+
 }

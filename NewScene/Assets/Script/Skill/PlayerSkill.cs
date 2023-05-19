@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerSkill : MonoBehaviour
 {
 
-    public Vector3 mousePos;
+    public  Vector3 mousePos;
     private Vector3 Dir;
     private Vector3 DashTarget;
 
@@ -202,7 +202,6 @@ public class PlayerSkill : MonoBehaviour
             CloudPos.gameObject.SetActive(false);
         }
     }
-
 
     public void RainDropSkill()
     {
