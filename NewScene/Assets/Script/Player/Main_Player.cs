@@ -14,10 +14,10 @@ public class Main_Player : MonoBehaviour
     [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
 
-    private HitScript hit;
     [SerializeField] private WindStorm windOn;
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
+    private HitScript hit;
 
     public PlayerSkill skill;
     public Animator Anim;
@@ -164,6 +164,11 @@ public class Main_Player : MonoBehaviour
                 if (rayHit.collider.tag == "Platform")
                 {
                     transform.LookAt(rayHit.point);
+                }
+                if(rayHit.collider.tag == "Platform" && propertySkill.Stun == true)
+                {
+                    transform.LookAt(rayHit.point);
+                    propertySkill.ThunderSkillSpecial(rayHit.point);
                 }
             }
         }
