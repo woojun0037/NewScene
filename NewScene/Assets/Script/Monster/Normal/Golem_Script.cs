@@ -6,15 +6,19 @@ public class Golem_Script : Enemy
 {
 
     [SerializeField] float attackDelaytime;
+    [SerializeField] bool miniGolem;
+    [SerializeField] ParticleSystem particle_attack;
 
     private Animator animator;
 
     bool isattack;
     bool DontMove;
     bool isdie;
+    bool isskillattack;
 
     private float Dist;
     float deletetime;
+    float timer;
 
     protected override void Awake()
     {
@@ -87,16 +91,26 @@ public class Golem_Script : Enemy
 
             if (Dist <= MaxDistance)
             {
-                if (!isattack)
+                if (!isattack &&!isskillattack)
                 {
+                    timer = 0;
                     transform.LookAt(targety);
                     isattack = true;
                     StartCoroutine("attacker");
                 }
-            }else if(Dist > MaxDistance + 2f)
+            }
+            else if(Dist > MaxDistance + 3f && !isattack && !miniGolem)
             {
-                animator.SetBool("SkillAttack", true);
-                DontMove = true;
+                timer += Time.deltaTime;
+                if(timer > 3)
+                {
+                    if (!isskillattack)
+                    {
+                        transform.LookAt(targety);
+                        isskillattack = true;
+                        StartCoroutine("skillerattacker");
+                    }
+                }
 
             }
         }
@@ -109,21 +123,40 @@ public class Golem_Script : Enemy
         DontMove = true;
         animator.SetBool("isAttack", true);
         yield return new WaitForSeconds(0.95f); //패는 애니 중간
+        particle_attack.Play();
         getTouch = false;
         animator.SetBool("isAttack", false);
 
         yield return new WaitForSeconds(0.9f); //패는 애니 중간
         getTouch = true;
-
+        particle_attack.Stop();
         yield return new WaitForSeconds(attackDelaytime);
         isattack = false;
-        //DontMove = false;
-
+        timer = 0;
         if (Dist > MaxDistance)
         {
             DontMove = false;
         }
 
+    }
+
+    IEnumerator skillerattacker()
+    {
+
+        animator.SetBool("SkillAttack", true);
+        getTouch = false; //공격
+        DontMove = true;
+        yield return new WaitForSeconds(0.95f); //스킬
+
+        animator.SetBool("SkillAttack", false);
+
+        //공격 종료
+        yield return new WaitForSeconds(attackDelaytime);
+        getTouch = true;
+        isskillattack = false;
+        timer = 0;
+        DontMove = false;
+        
     }
 
     IEnumerator damaged_ani(int random)
