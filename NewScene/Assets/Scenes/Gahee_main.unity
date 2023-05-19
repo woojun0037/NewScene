@@ -4017,6 +4017,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatSwarm (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
       value: 56
@@ -5256,6 +5260,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
@@ -12747,7 +12755,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1614630371}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &567544201
 MonoBehaviour:
@@ -15418,7 +15426,7 @@ PrefabInstance:
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: WindBox
       value: 
-      objectReference: {fileID: 708975492}
+      objectReference: {fileID: 0}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: TafoonBox
       value: 
@@ -15648,24 +15656,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 30e3a54c12bc780438417c3168041ccc, type: 3}
   m_PrefabInstance: {fileID: 705866334}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &708975491 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074564347194344122, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
-  m_PrefabInstance: {fileID: 703983829}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &708975492
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708975491}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0319082, y: 3.693529, z: 1.2914221}
-  m_Center: {x: -0.016312577, y: 1.786764, z: 0.14571278}
 --- !u!1001 &715553668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17873,6 +17863,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
@@ -22413,7 +22407,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1003098676}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &986316945
 MonoBehaviour:
@@ -22750,16 +22744,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToGive: 1
-  maxHearth: 0
-  curHearth: 0
-  MaxDistance: 0
-  chasespeed: 0
+  maxHearth: 10
+  curHearth: 10
+  MaxDistance: 2
+  chasespeed: 2.5
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   getTouch: 0
+  attackDelaytime: 3
+--- !u!136 &1000168154
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000168149}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &1003098675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6380573484578890494, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
@@ -23586,7 +23595,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1003098676}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1049480954
 BoxCollider:
@@ -23623,6 +23632,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
@@ -23708,24 +23721,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
---- !u!1 &1055215675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074564347194344122, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
-  m_PrefabInstance: {fileID: 1510024498}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1055215676
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055215675}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0319082, y: 3.693529, z: 1.2914221}
-  m_Center: {x: -0.016312577, y: 1.786764, z: 0.14571278}
 --- !u!1 &1055280584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 12067aa4e2b2f924da1cec9eb911ce5b, type: 3}
@@ -24492,7 +24487,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1614630371}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1080429172
 MonoBehaviour:
@@ -24745,6 +24740,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
@@ -26927,6 +26926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatSwarm (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
       value: 59
@@ -29075,8 +29078,20 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.824564
+      value: -6.23
       objectReference: {fileID: 0}
     - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29084,7 +29099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.6319742
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29120,7 +29135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7907102855022885932, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
@@ -31593,6 +31608,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
@@ -34444,7 +34463,7 @@ PrefabInstance:
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: WindBox
       value: 
-      objectReference: {fileID: 1055215676}
+      objectReference: {fileID: 0}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: TafoonBox
       value: 
@@ -40546,6 +40565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BatSwarm (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
       value: 57
@@ -43439,6 +43462,10 @@ PrefabInstance:
     - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_Name
       value: BatSwarm (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8281534270123629674, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8765758759508182736, guid: 92ed4924bfbd3e4418f6d50bc5401282, type: 3}
       propertyPath: m_RootOrder
