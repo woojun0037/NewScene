@@ -16,7 +16,6 @@ public class FlyingObj : MonoBehaviour
 
     void Start()
     {
-        
         ImpactFX = this.gameObject;
     }
 

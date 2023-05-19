@@ -6,6 +6,7 @@ using UnityEngine;
 public class BlizzardSpawner : MonoBehaviour
 {
     public GameObject FlyingObject;
+
     public float destroyDelay;
     public float spawnInterval;
     public float spawnRaius;
@@ -19,7 +20,7 @@ public class BlizzardSpawner : MonoBehaviour
 
     public void RainDrop()
     {
-        var obj = Instantiate(FlyingObject, RainPos, Quaternion.identity);
+        var obj = Instantiate(FlyingObject, RainPos, Quaternion.Euler(new Vector3(-90, 0, 0)));
         var forceDirection = transform.position - (transform.position + spawnOffset);
     }
 }

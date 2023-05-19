@@ -220,7 +220,6 @@ public class PlayerSkill : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
         {
-
             SkillRange.GetComponent<Image>().enabled = false;
             targetCircle.GetComponent<Image>().enabled = false;
             isSkillOn = true;
