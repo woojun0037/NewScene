@@ -2293,6 +2293,7 @@ MonoBehaviour:
   getTouch: 0
   attackDelaytime: 3
   miniGolem: 0
+  particle_attack: {fileID: 1900196827751956172}
 --- !u!1 &7985378093648610307
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,6 +2552,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7417565525786355350}
     m_Modifications:
+    - target: {fileID: 4446881544415556208, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4451991637562304570, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452076920165763398, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452095260993615592, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452231898687280636, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452338612546848744, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452689579686058814, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452864196495869186, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4541612600673081310, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2601,12 +2634,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4543363509677188820, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
 --- !u!4 &1770233742125047892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4541612600673081310, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
+  m_PrefabInstance: {fileID: 2852518732709279626}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1900196827751956172 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4452076920165763398, guid: 569c48483149dfd4cb29e3520bb6b6b5, type: 3}
   m_PrefabInstance: {fileID: 2852518732709279626}
   m_PrefabAsset: {fileID: 0}
