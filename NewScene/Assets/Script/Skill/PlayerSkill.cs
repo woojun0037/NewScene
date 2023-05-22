@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerSkill : MonoBehaviour
 {
 
-    public  Vector3 mousePos;
+    public Vector3 mousePos;
     private Vector3 Dir;
     private Vector3 DashTarget;
 
@@ -126,7 +126,7 @@ public class PlayerSkill : MonoBehaviour
 
     public GameObject WindTest()
     {
-        GameObject temp = Instantiate(WindSkillPrefab, new Vector3(transform.position.x,transform.position.y+3f, transform.position.z), Quaternion.identity);
+        GameObject temp = Instantiate(WindSkillPrefab, new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Quaternion.identity);
         temp.transform.rotation = this.transform.rotation;
         return temp;
     }
@@ -157,50 +157,24 @@ public class PlayerSkill : MonoBehaviour
     public void CloudSkill()
     {
         mousePos = Input.mousePosition;
-        Invoke("DestroyCloudShoot", 5f);
 
-        if (CloudisDelay == true)
+        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+        int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
+        if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
         {
-            CloudisDelay = false;
-            float cloudTime = 0;
-
-            Ray ray = Camera.main.ScreenPointToRay(mousePos);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-
-            if (Physics.Raycast(ray, out RaycastHit rayHit))
+            if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
             {
-                if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.E))
-                {
-                    transform.LookAt(rayHit.point);
-                    CloudPos.gameObject.SetActive(true);
-                }
-                else
-                {
-                    CloudPos.gameObject.SetActive(false);
-                }
-
-                if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
-                {
-                    transform.LookAt(rayHit.point);
-                    cloudTime += 0.1f;
-                    CloudPos.gameObject.SetActive(true);
-                }
-                else if (cloudTime > 3f)
-                {
-                    CloudPos.gameObject.SetActive(false);
-                    StartCoroutine(CloudTimeCor());
-                }
+                transform.LookAt(rayHit.point);
+                CloudPos.gameObject.SetActive(true);
+            }
+            else
+            {
+                CloudPos.gameObject.SetActive(false);
             }
         }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            CloudPos.gameObject.SetActive(true);
-        }
-        else
-        {
-            CloudPos.gameObject.SetActive(false);
-        }
     }
 
     public void RainDropSkill()
@@ -259,11 +233,4 @@ public class PlayerSkill : MonoBehaviour
         Rainnig();
         isTest = !isTest;
     }
-
-    IEnumerator CloudTimeCor()
-    {
-        yield return new WaitForSeconds(3f);
-        CloudisDelay = true;
-    }
-
 }

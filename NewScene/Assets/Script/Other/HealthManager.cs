@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    public Image HPbar;
     public float maxHealth;
     public float currentHealth;
     bool isDamage = false;
@@ -25,7 +27,9 @@ public class HealthManager : MonoBehaviour
         {
             isDamage = true;
             currentHealth -= damage;
+            HPbar.fillAmount = currentHealth / maxHealth;
             StartCoroutine(HitPlayerCor(currentHealth));
+
         }
 
     }

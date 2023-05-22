@@ -180,8 +180,13 @@ public class Main_Player : MonoBehaviour
         if (HP < 1)
         {
             Anim.SetTrigger("Dead");
-            Destroy(gameObject, 5f);
+            
         }
+    }
+
+    public void PlayerDead()
+    {
+        this.gameObject.SetActive(false);
     }
 
     public void ATK_Effect_On(int on_count)
@@ -240,7 +245,6 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-           skill.CloudSkill();
            E_skillCheck = true;
         }
     }
@@ -253,7 +257,6 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);

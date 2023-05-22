@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class potion : MonoBehaviour
+public class Potion : MonoBehaviour
 {
     public int value;
 

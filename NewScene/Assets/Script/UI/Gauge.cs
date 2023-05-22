@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
-    Image GaugePill;
+    public Image Dark_gauge;
 
     public float minGauge = 1f;
     public float maxGauge = 30f;
@@ -14,13 +14,13 @@ public class Gauge : MonoBehaviour
 
     void Start()
     {
-        GaugePill = GetComponent<Image>();
+        Dark_gauge = GetComponent<Image>();
         sGauge = minGauge;
     }
 
     
     void Update()
     {
-        GaugePill.fillAmount = sGauge / maxGauge;
+        Dark_gauge.fillAmount = sGauge / maxGauge;
     }
 }
