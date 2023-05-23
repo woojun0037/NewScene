@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int currentPotion;
+    public float currentPotion;
 
     void Start()
     {
@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        
+
     }
 
-    public void AddPotion(int PotionAdd)
+    public void AddPotion(float PotionAdd)
     {
-        currentPotion += PotionAdd;
+        while (0 < PotionAdd)
+            currentPotion += Time.deltaTime;
     }
 }
