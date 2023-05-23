@@ -10,6 +10,7 @@ public class Golem_Script : Enemy
     [SerializeField] ParticleSystem particle_attack;
 
     private Animator animator;
+    public GameObject RockBullet;
 
     bool isattack;
     bool DontMove;
@@ -148,10 +149,15 @@ public class Golem_Script : Enemy
         DontMove = true;
         yield return new WaitForSeconds(0.95f); //스킬
 
+        RockBullet.transform.position = targetTransform.position;
+        RockBullet.SetActive(true);
+
         animator.SetBool("SkillAttack", false);
 
         //공격 종료
         yield return new WaitForSeconds(attackDelaytime);
+        RockBullet.SetActive(false);
+
         getTouch = true;
         isskillattack = false;
         timer = 0;
