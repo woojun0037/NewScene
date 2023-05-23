@@ -54,11 +54,16 @@ public class Enemy : MonoBehaviour
         Player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
 
+        Vector3 targety = targetTransform.position;
+        targety.y = transform.position.y;
+
+        transform.LookAt(targety);
+
         agent.speed = chasespeed;
         agent.enabled = true;
     }
 
-    protected virtual void monsterMove() //스폰된 몬스터는 플레이어를 계속 쫒음
+    protected virtual void monsterMove()
     {
         agent.speed = chasespeed;
         agent.destination = targetTransform.position;
