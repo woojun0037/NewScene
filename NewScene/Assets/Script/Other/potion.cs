@@ -6,6 +6,10 @@ public class Potion : MonoBehaviour
 {
     public int value;
 
+    public GameObject HPitem;
+    public GameObject respwan;
+    public GameObject dark;
+
     public GameObject PotionPickUpEffect;
 
     // Start is called before the first frame update
@@ -26,7 +30,7 @@ public class Potion : MonoBehaviour
         {
             FindObjectOfType<GameManager>().AddPotion(value);
             Instantiate(PotionPickUpEffect, transform.position, transform.rotation); 
-            Destroy(gameObject);
+            //Destroy(hp);
         }
     }
 }
