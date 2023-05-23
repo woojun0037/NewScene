@@ -135,11 +135,13 @@ public class GangrimSkillUi : MonoBehaviour
         {
             uiKeys[0] = key;
             uiImages[0].sprite = spriteDictionary[key];
+            uiImages[0].enabled = true;
         }
         else if(uiKeys[1] == "0")
         {
             uiKeys[1] = key;
             uiImages[1].sprite = spriteDictionary[key];
+            uiImages[1].enabled = true;
         }
         else if (uiKeys[0] != "0" && uiKeys[1] != "0")
         {
@@ -147,6 +149,7 @@ public class GangrimSkillUi : MonoBehaviour
             uiKeys[1] = "0";
             uiImages[0].sprite = spriteDictionary[key];
             uiImages[1].sprite = null;
+            uiImages[1].enabled = false;
         }
     }
 
