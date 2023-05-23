@@ -14,16 +14,18 @@ public class PlayerSkill : MonoBehaviour
     //WindStorm windskill;
     Main_Player player;
     public GangrimSkillUi ui;
+    
 
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
+
     public bool isTest;
 
-    public bool WindSkillCheck;
-    public bool RainSkillCheck;
+    public bool WindSkillCheck = false;
+    public bool RainSkillCheck = false;
+    public bool CloudSkillCheck = false;    
 
-    private bool CloudisDelay = true;
     private bool isDash;
 
     public static PlayerSkill Instance;
@@ -137,6 +139,7 @@ public class PlayerSkill : MonoBehaviour
         {
             WindDirection.enabled = true;
             WindSkillCheck = true;
+            ui.CurrentSkillUI("wind");
             isSkillUse = false;
         }
         else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
@@ -164,14 +167,16 @@ public class PlayerSkill : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
         {
-            if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E))
+            if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E) && !CloudSkillCheck)
             {
                 transform.LookAt(rayHit.point);
                 CloudPos.gameObject.SetActive(true);
+                ui.CurrentSkillUI("cloud");
             }
             else
             {
                 CloudPos.gameObject.SetActive(false);
+                StartCoroutine(CloudCor());
             }
         }
 
@@ -200,6 +205,7 @@ public class PlayerSkill : MonoBehaviour
             isSkillOn = true;
             RainSkillCheck = false;
             Rainnig();
+            ui.CurrentSkillUI("rain");
         }
     }
 
@@ -232,5 +238,11 @@ public class PlayerSkill : MonoBehaviour
         }
         Rainnig();
         isTest = !isTest;
+    }
+
+    IEnumerator CloudCor()
+    {
+        CloudSkillCheck = false;
+        yield return new WaitForSeconds(3.0f);
     }
 }

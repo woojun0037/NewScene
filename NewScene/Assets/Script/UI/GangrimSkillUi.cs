@@ -12,13 +12,12 @@ public class GangrimSkillUi : MonoBehaviour
     public PlayerSkill playerSkillCheck;
     public PropertySkill PropertySkillCheck;
 
-    public bool LWindC;
-    public bool LCloudC;
-    public bool LRainC;
+    public Dictionary<string, Sprite> spriteDictionary;
+    [Header("SkillUseCheck")]
+    public Image[] uiImages;
+    public Sprite[] uiSprites;
+    public string[] uiKeys;
 
-    public bool RWindC;
-    public bool RCloudC;
-    public bool RRainC;
 
     [Header("WindSKill")]
     public Image abilityImage1;
@@ -46,15 +45,13 @@ public class GangrimSkillUi : MonoBehaviour
     public GameObject DARKPILL_item;
     public KeyCode DarkPillItem__itemkey;
 
-    [Header("SkillUseList")]
-    [Header("Left")]
-    public GameObject LeftWindUsing;
-    public GameObject LeftCloudUsing;
-    public GameObject LeftRainUsing;
-    [Header("Right")]
-    public GameObject RightWindUsing;
-    public GameObject RightCloudUsing;
-    public GameObject RightRainUsing;
+    private void Awake()
+    {
+        spriteDictionary = new Dictionary<string, Sprite>();
+        spriteDictionary.Add("wind", uiSprites[0]);
+        spriteDictionary.Add("rain", uiSprites[1]);
+        spriteDictionary.Add("cloud", uiSprites[2]);
+    }
 
     void Start()
     {
@@ -69,8 +66,6 @@ public class GangrimSkillUi : MonoBehaviour
         CloudSKillAbilty();
         RainSkillAbilty();
         ItemUse();
-        //LeftUseSkill();
-        //RightUseSkill();
     }
 
     public void WindSKillAbilty()
@@ -130,77 +125,30 @@ public class GangrimSkillUi : MonoBehaviour
             }
         }
     }
-    //public void LeftUseSkill()
-    //{
-    //    if (playerSkillCheck.WindSkillCheck && LWindC)
-    //    {
-    //        LeftWindUsing.SetActive(true);
-    //        RWindC = false;
-    //    }
-    //    else if (playerSkillCheck.E_skillCheck || playerSkillCheck.R_skillCheck)
-    //    {
-    //        LeftWindUsing.SetActive(false);
-    //        RWindC = true;
-    //    }
 
-    //    if (playerSkillCheck.E_skillCheck && LCloudC)
-    //    {
-    //        LeftCloudUsing.SetActive(true);
-    //        LCloudC = false;
-    //    }
-    //    else if (playerSkillCheck.WindSkillCheck || playerSkillCheck.R_skillCheck)
-    //    {
-    //        LeftCloudUsing.SetActive(false);
-    //        RCloudC = true;
-    //    }
+    public void CurrentSkillUI(string key)
+    {
+        if (uiKeys[0] == key) return;
+        if (uiKeys[1] == key) return;
 
-    //    if (playerSkillCheck.R_skillCheck && LRainC)
-    //    {
-    //        LeftRainUsing.SetActive(true);
-    //        RRainC = false;
-    //    }
-    //    else if (playerSkillCheck.WindSkillCheck || playerSkillCheck.E_skillCheck)
-    //    {
-    //        LeftRainUsing.SetActive(false);
-    //        RRainC = true;
-    //    }
-    //}
-
-    //void RightUseSkill()
-    //{
-    //    if (playerSkillCheck.Q_skillCheck && RWindC)
-    //    {
-    //        RightWindUsing.SetActive(true);
-    //        LWindC = false;
-    //    }
-    //    else if (playerSkillCheck.E_skillCheck || playerSkillCheck.R_skillCheck)
-    //    {
-    //        LeftWindUsing.SetActive(false);
-    //        LWindC = true;
-    //    }
-
-    //    if (playerSkillCheck.E_skillCheck && RCloudC)
-    //    {
-    //        RightCloudUsing.SetActive(true);
-    //        LCloudC = false;
-    //    }
-    //    else if (playerSkillCheck.Q_skillCheck || playerSkillCheck.R_skillCheck)
-    //    {
-    //        LeftCloudUsing.SetActive(false);
-    //        LCloudC = true;
-    //    }
-
-    //    if (playerSkillCheck.R_skillCheck && RRainC)
-    //    {
-    //        LeftRainUsing.SetActive(true);
-    //        LRainC = false;
-    //    }
-    //    else if (playerSkillCheck.Q_skillCheck || playerSkillCheck.E_skillCheck)
-    //    {
-    //        LeftRainUsing.SetActive(false);
-    //        LRainC = true;
-    //    }
-    //}
+        if (uiKeys[0] == "0")
+        {
+            uiKeys[0] = key;
+            uiImages[0].sprite = spriteDictionary[key];
+        }
+        else if(uiKeys[1] == "0")
+        {
+            uiKeys[1] = key;
+            uiImages[1].sprite = spriteDictionary[key];
+        }
+        else if (uiKeys[0] != "0" && uiKeys[1] != "0")
+        {
+            uiKeys[0] = key;
+            uiKeys[1] = "0";
+            uiImages[0].sprite = spriteDictionary[key];
+            uiImages[1].sprite = null;
+        }
+    }
 
     void ItemUse()
     {
