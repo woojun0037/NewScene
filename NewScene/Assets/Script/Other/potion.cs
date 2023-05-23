@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    public float Healvalue;
+    public int value;
 
-    public GameManager Manager;
+    public GameObject HPitem;
+    public GameObject respwan;
+    public GameObject dark;
+
     public GameObject PotionPickUpEffect;
 
-    public void HPpotion()
+    // Start is called before the first frame update
+    void Start()
     {
-        Manager.AddPotion(Healvalue);
-        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
+        
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Main_gangrim")
+        if(other.tag == "Main_gangrim")
         {
-            HPpotion();
+            FindObjectOfType<GameManager>().AddPotion(value);
+            Instantiate(PotionPickUpEffect, transform.position, transform.rotation); 
+            //Destroy(hp);
         }
-        
     }
 }
