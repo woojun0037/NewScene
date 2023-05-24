@@ -108,7 +108,7 @@ public class Seonbi_Script : Enemy
         targety.y = SetY;
 
         Vector3 target_ = transform.position;
-        target_.y = SetY + 0.5f;
+        target_.y = transform.position.y;
 
         transform.LookAt(targety);
 

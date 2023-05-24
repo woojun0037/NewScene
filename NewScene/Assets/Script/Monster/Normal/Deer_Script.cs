@@ -80,12 +80,7 @@ public class Deer_Script : Enemy
             if (Dist <= 5)
             {
                 if (!isattack)
-                {
                     randattack();
-                    //transform.LookAt(targety);
-                    //isattack = true;
-                    //StartCoroutine("attacker");
-                }
             }
         }
         else
@@ -127,8 +122,8 @@ public class Deer_Script : Enemy
         int random;
         random = UnityEngine.Random.Range(1, 4);
 
-        Vector3 targety = targetTransform.position;
-        targety.y = SetY;
+        //Vector3 targety = targetTransform.position;
+        //targety.y = SetY;
 
         animator.SetBool("Move", false);
         //transform.LookAt(targety);
@@ -139,7 +134,7 @@ public class Deer_Script : Enemy
         yield return new WaitForSeconds(1f);
 
         Vector3 target_ = transform.position;
-        target_.y = SetY + 0.5f;
+        target_.y = transform.position.y;
 
         Instantiate(DeerLuncher, target_, Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
@@ -164,21 +159,6 @@ public class Deer_Script : Enemy
         animator.SetInteger("Hit", 0);
     }
 
-    IEnumerator rotation_C()
-    {
-        //Vector3 targetDirection = (targetTransform.position - transform.position).normalized;
-        //Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 100f * Time.deltaTime);
-
-        animator.SetBool("isAttack", true);
-        animator.SetInteger("Attack", 1);
-        Quaternion startRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
-        transform.rotation = Quaternion.Lerp(startRotation, targetRotation, 10f * Time.deltaTime);
-        yield return new WaitForSeconds(3f);
-        animator.SetBool("isAttack", false);
-        animator.SetInteger("Attack", 0);
-    }
 
     protected void rosh()
     {
