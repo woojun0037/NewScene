@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17832999, g: 0.22328693, b: 0.30531895, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8594,6 +8594,10 @@ PrefabInstance:
       propertyPath: SpawnMonsters
       value: 
       objectReference: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
+    - target: {fileID: 6224974899481914781, guid: 6001bce37ee3ff14db43d22f1d574afe, type: 3}
+      propertyPath: pattern3Max_Z
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6224974899481914781, guid: 6001bce37ee3ff14db43d22f1d574afe, type: 3}
       propertyPath: updownBullet2
       value: 

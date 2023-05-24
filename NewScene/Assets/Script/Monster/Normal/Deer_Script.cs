@@ -174,8 +174,9 @@ public class Deer_Script : Enemy
             isrosh = true;
         }
 
-        if (transform.position == startingPosition) // 돌진 완료
+        if (Vector3.Distance(transform.position, startingPosition) < 1)
         {
+            DontMove = true;
             particle_attack.Stop();
             isdash = false;
             //isrosh = false;

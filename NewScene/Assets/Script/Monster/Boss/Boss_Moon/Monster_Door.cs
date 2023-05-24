@@ -337,7 +337,7 @@ public class Monster_Door : Boss
         else
         {
             getready = true;
-            yield return new WaitForSeconds(0f);
+            yield return new WaitForSeconds(1f);
 
             if (transform.position.z <= pattern3Max_Z && !isz && getready) //x 축 좌표
             {
