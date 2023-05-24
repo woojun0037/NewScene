@@ -49,8 +49,8 @@ public class GangrimSkillUi : MonoBehaviour
     {
         spriteDictionary = new Dictionary<string, Sprite>();
         spriteDictionary.Add("wind", uiSprites[0]);
-        spriteDictionary.Add("rain", uiSprites[1]);
-        spriteDictionary.Add("cloud", uiSprites[2]);
+        spriteDictionary.Add("cloud", uiSprites[1]);
+        spriteDictionary.Add("rain", uiSprites[2]);
     }
 
     void Start()

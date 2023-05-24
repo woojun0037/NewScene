@@ -48,8 +48,7 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  stringTagMap: {}
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
@@ -300,7 +299,7 @@ Material:
     - _CustomColorMaskChannels1: {r: 1, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _FinalColor: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+    - _FinalColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
     - _MainMaskChannelsMultiply: {r: 1, g: 0, b: 0, a: 0}
     - _Noise01ScrollSpeedUV: {r: 1, g: 1, b: 0, a: 0}
     - _RampColorTint: {r: 1, g: 1, b: 1, a: 1}
