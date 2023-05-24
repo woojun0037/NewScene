@@ -18,7 +18,6 @@ public class GangrimSkillUi : MonoBehaviour
     public Sprite[] uiSprites;
     public string[] uiKeys;
 
-
     [Header("WindSKill")]
     public Image abilityImage1;
     public float coolDown1 = 5;
@@ -40,10 +39,15 @@ public class GangrimSkillUi : MonoBehaviour
     [Header("ItemList")]
     public GameObject HP_item;
     public KeyCode HP_itemKey;
+    public bool HPitemOn = false;
+
     public GameObject RESPWAN_item;
     public KeyCode Respwan_ItemKey;
+    public bool RESPWAN_itemOn = false;
+
     public GameObject DARKPILL_item;
     public KeyCode DarkPillItem__itemkey;
+    public bool DarkPillItemOn = false;
 
     private void Awake()
     {
@@ -155,18 +159,18 @@ public class GangrimSkillUi : MonoBehaviour
 
     void ItemUse()
     {
-        if(Input.GetKey(HP_itemKey))
+        if(Input.GetKey(HP_itemKey) && HPitemOn)
         {
             StartCoroutine(HPitemCor());
         }
         
-        if(Input.GetKey(Respwan_ItemKey))
+        if(Input.GetKey(Respwan_ItemKey) && RESPWAN_itemOn)
         {
             player.gameObject.SetActive(true);
             RESPWAN_item.SetActive(false);
         }
 
-        if(Input.GetKey(DarkPillItem__itemkey))
+        if(Input.GetKey(DarkPillItem__itemkey) && DarkPillItemOn)
         {
             StartCoroutine(DarkPillCor());
         }
@@ -179,6 +183,7 @@ public class GangrimSkillUi : MonoBehaviour
            curHp.currentHealth += 0.1f;
            yield return new WaitForEndOfFrame();
         }
+        HPitemOn = false;
         HP_item.SetActive(false);
     }
 
@@ -189,6 +194,7 @@ public class GangrimSkillUi : MonoBehaviour
             Gauge.sGauge += 0.1f;
             yield return new WaitForEndOfFrame();
         }
+        DarkPillItemOn = false;
         DARKPILL_item.SetActive(false);
     }
 

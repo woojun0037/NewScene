@@ -12985,10 +12985,13 @@ MonoBehaviour:
   RainSkill: 114
   HP_item: {fileID: 1630638158}
   HP_itemKey: 257
+  HPitemOn: 0
   RESPWAN_item: {fileID: 914091794}
   Respwan_ItemKey: 258
+  RESPWAN_itemOn: 0
   DARKPILL_item: {fileID: 1370652103}
   DarkPillItem__itemkey: 259
+  DarkPillItemOn: 0
 --- !u!1 &507684347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1204659915334696, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}
@@ -17724,6 +17727,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7493531473331976358, guid: 5bca24f8e407b8242921215d6d5e0e14, type: 3}
   m_PrefabInstance: {fileID: 2591700065930176849}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &757453406
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200618441}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.46347272
+  m_Center: {x: 0.0004686266, y: -0.00035634646, z: 0.20264061}
 --- !u!1 &757611695
 GameObject:
   m_ObjectHideFlags: 0
@@ -27798,6 +27814,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2121341272865490174, guid: 5bfb78c0ec8c3654cb171470ccc18fe6, type: 3}
   m_PrefabInstance: {fileID: 535376562424343444}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1220181158
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819234684}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.13
+  m_Center: {x: -0.006876051, y: 0.03323523, z: 0.14608036}
 --- !u!4 &1220574970 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bc683acbcead9fe40ab0fe9f5eff74d3, type: 3}
@@ -29965,6 +29994,10 @@ PrefabInstance:
       propertyPath: skilltrail
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: potionItems
+      value: 
+      objectReference: {fileID: 1929598663}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: AtkEffect.Array.data[0]
       value: 
@@ -42996,6 +43029,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8102791186625872731, guid: 799e097ca3f6eb5469ce9d8377efce7f, type: 3}
   m_PrefabInstance: {fileID: 8331568070984776930}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &1846236127
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770336458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.43693215
+  m_Center: {x: 0.24966508, y: 0.000000029802333, z: 0.28956112}
 --- !u!1001 &1849308806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44725,10 +44771,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d5b5a3315ddd4f8f5f505d5158b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 500474465}
   HPitem: {fileID: 200618441}
   respwan: {fileID: 819234684}
   dark: {fileID: 1770336458}
-  PotionPickUpEffect: {fileID: 0}
+  PotionPickUpEffect: {fileID: 579054356116611238, guid: 99c4f46ae62f9c54ab5ede37db1dacf6, type: 3}
 --- !u!1001 &1931301597
 PrefabInstance:
   m_ObjectHideFlags: 0

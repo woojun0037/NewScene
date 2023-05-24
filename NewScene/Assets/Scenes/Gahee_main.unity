@@ -4846,6 +4846,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!1 &230472521 stripped
 GameObject:
@@ -8400,7 +8401,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -8726,6 +8728,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!1001 &372970079
 PrefabInstance:
@@ -10283,8 +10286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8371bbe4003364a8bded9c5c7b1eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dark_gauge: {fileID: 0}
+  skill: {fileID: 0}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!114 &431397179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22614,8 +22620,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1003098677}
-  damage: 1
   isAttack: 0
+  damage: 1
+  HitGauge: 1
 --- !u!65 &986316946
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24400,6 +24407,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
   attackDelaytime: 3
   miniGolem: 1
@@ -24683,8 +24691,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1614630372}
-  damage: 1
   isAttack: 0
+  damage: 1
+  HitGauge: 1
 --- !u!65 &1080429173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25187,7 +25196,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -28526,6 +28536,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!1 &1258879916 stripped
 GameObject:
@@ -32737,7 +32748,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -39447,6 +39459,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e09def53c47ffb45ae849c8ec13c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHp: {fileID: 0}
+  DarkPill: {fileID: 0}
+  player: {fileID: 0}
+  playerSkillCheck: {fileID: 0}
+  PropertySkillCheck: {fileID: 0}
+  uiImages: []
+  uiSprites: []
+  uiKeys: []
   abilityImage1: {fileID: 0}
   coolDown1: 5
   WindSKill: 0
@@ -39456,6 +39476,15 @@ MonoBehaviour:
   abilityImage3: {fileID: 0}
   coolDown3: 6
   RainSkill: 0
+  HP_item: {fileID: 0}
+  HP_itemKey: 0
+  HPitemOn: 0
+  RESPWAN_item: {fileID: 0}
+  Respwan_ItemKey: 0
+  RESPWAN_itemOn: 0
+  DARKPILL_item: {fileID: 0}
+  DarkPillItem__itemkey: 0
+  DarkPillItemOn: 0
 --- !u!114 &1739620131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47432,6 +47461,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
   attackDelaytime: 3
   miniGolem: 1
@@ -50052,7 +50082,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d5b5a3315ddd4f8f5f505d5158b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
+  ui: {fileID: 0}
+  HPitem: {fileID: 0}
+  respwan: {fileID: 0}
+  dark: {fileID: 0}
   PotionPickUpEffect: {fileID: 5518159324561009837, guid: 768cee42780a388438dcdb1690aa942b, type: 3}
 --- !u!4 &2147030202 stripped
 Transform:
@@ -51840,6 +51873,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!135 &3469287836559778778
 SphereCollider:
@@ -51936,6 +51970,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!135 &3469287837515035044
 SphereCollider:
@@ -52032,6 +52067,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
 --- !u!135 &3469287838256136877
 SphereCollider:

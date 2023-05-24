@@ -4329,12 +4329,13 @@ MonoBehaviour:
   curHearth: 5
   MaxDistance: 0
   chasespeed: 0
-  moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!1001 &231842433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7583,12 +7584,13 @@ MonoBehaviour:
   curHearth: 5
   MaxDistance: 0
   chasespeed: 0
-  moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!1001 &372970079
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15852,7 +15854,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652359948966}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &802305479
 MonoBehaviour:
@@ -24334,12 +24336,13 @@ MonoBehaviour:
   curHearth: 5
   MaxDistance: 0
   chasespeed: 0
-  moveSpeed: 0
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!1 &1258879916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 238788a73439dbb438b0806b82b82daa, type: 3}
@@ -26141,7 +26144,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -29974,7 +29978,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 543450652359948966}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1532644183
 MonoBehaviour:
@@ -29989,8 +29993,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 115793828}
-  damage: 1
   isAttack: 0
+  damage: 1
+  HitGauge: 1
 --- !u!65 &1532644184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31867,7 +31872,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -33400,8 +33406,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8371bbe4003364a8bded9c5c7b1eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dark_gauge: {fileID: 0}
+  skill: {fileID: 0}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!114 &1721092208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33814,7 +33823,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -35490,24 +35500,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: d700ad11607eb9a449e35d35941a7d1b, type: 3}
---- !u!1 &1829200997 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074564347194344122, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
-  m_PrefabInstance: {fileID: 6074564347734508258}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1829201002
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1829200997}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0319082, y: 3.693529, z: 1.2914221}
-  m_Center: {x: -0.016312577, y: 1.786764, z: 0.14571278}
 --- !u!1001 &1831627935
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38994,6 +38986,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e09def53c47ffb45ae849c8ec13c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHp: {fileID: 0}
+  DarkPill: {fileID: 0}
+  player: {fileID: 0}
+  playerSkillCheck: {fileID: 0}
+  PropertySkillCheck: {fileID: 0}
+  uiImages: []
+  uiSprites: []
+  uiKeys: []
+  abilityImage1: {fileID: 0}
+  coolDown1: 5
+  WindSKill: 0
+  abilityImage2: {fileID: 0}
+  coolDown2: 3
+  CloudSKill: 0
+  abilityImage3: {fileID: 0}
+  coolDown3: 6
+  RainSkill: 0
+  HP_item: {fileID: 0}
+  HP_itemKey: 0
+  HPitemOn: 0
+  RESPWAN_item: {fileID: 0}
+  Respwan_ItemKey: 0
+  RESPWAN_itemOn: 0
+  DARKPILL_item: {fileID: 0}
+  DarkPillItem__itemkey: 0
+  DarkPillItemOn: 0
 --- !u!1 &1971502703
 GameObject:
   m_ObjectHideFlags: 0
@@ -43014,7 +43032,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d5b5a3315ddd4f8f5f505d5158b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
+  ui: {fileID: 0}
+  HPitem: {fileID: 0}
+  respwan: {fileID: 0}
+  dark: {fileID: 0}
   PotionPickUpEffect: {fileID: 5518159324561009837, guid: 768cee42780a388438dcdb1690aa942b, type: 3}
 --- !u!4 &2147030202 stripped
 Transform:
@@ -44798,12 +44819,13 @@ MonoBehaviour:
   curHearth: 100
   MaxDistance: 1
   chasespeed: 3
-  moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!135 &3469287836559778778
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -44894,12 +44916,13 @@ MonoBehaviour:
   curHearth: 100
   MaxDistance: 1
   chasespeed: 3
-  moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!135 &3469287837515035044
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -44990,12 +45013,13 @@ MonoBehaviour:
   curHearth: 100
   MaxDistance: 1
   chasespeed: 3
-  moveSpeed: 3
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
 --- !u!135 &3469287838256136877
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -45841,8 +45865,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d0417591ff74ea9d7773506a0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {x: 0, y: 0, z: 0}
+  damageToGive: 1
+  maxHearth: 0
+  curHearth: 0
+  MaxDistance: 0
+  chasespeed: 0
+  KnockBackForce: 0
   player: {fileID: 115793828}
+  targetTransform: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
   effects:
   - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
   - {fileID: 280351933351309158, guid: 83b9c63be808fd842aef6fcdbb2fa6e8, type: 3}
@@ -45853,6 +45884,8 @@ MonoBehaviour:
   baseAttackDamage: 3
   dashAttackDamage: 10
   mat: {fileID: 2100000, guid: 24fad0223569d9c429dc8b1169e32382, type: 2}
+  attackcollider: {fileID: 0}
+  throwRockObj: {fileID: 0}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46111,7 +46144,7 @@ PrefabInstance:
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: WindBox
       value: 
-      objectReference: {fileID: 1829201002}
+      objectReference: {fileID: 0}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: TafoonBox
       value: 

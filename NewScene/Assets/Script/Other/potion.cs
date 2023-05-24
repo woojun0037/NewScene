@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour
 {
-    public int value;
-
+    public GangrimSkillUi ui;
+   
     public GameObject HPitem;
     public GameObject respwan;
     public GameObject dark;
-
     public GameObject PotionPickUpEffect;
 
     // Start is called before the first frame update
@@ -18,32 +17,43 @@ public class Potion : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        HP();
-        ReSpwan();
-        darkitem();
-    }
-
-
-
     public void HP()
     {
-        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
-        Destroy(HPitem);
+        Instantiate(PotionPickUpEffect, HPitem.transform.position, HPitem.transform.rotation);
     }
 
     public void ReSpwan()
     {
-        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
-        Destroy(respwan);
+        Instantiate(PotionPickUpEffect, respwan.transform.position, respwan.transform.rotation);
     }
 
-    public void darkitem()
+    public void Darkitem()
     {
-        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
-        Destroy(dark);
+        Instantiate(PotionPickUpEffect, dark.transform.position, dark.transform.rotation);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Main_gangrim")
+        {
+            if(gameObject == HPitem)
+            {
+                HP();
+                ui.HP_item.SetActive(true);
+                ui.HPitemOn = true;
+            }
+            if(gameObject == respwan)
+            {
+                ReSpwan();
+                ui.RESPWAN_item.SetActive(true);
+                ui.RESPWAN_itemOn = true;
+            }
+            if(gameObject == dark)
+            {
+                Darkitem();
+                ui.DARKPILL_item.SetActive(true);
+                ui.DarkPillItemOn = true;
+            }
+        }
+    }
 }

@@ -599,21 +599,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
-  Anim: {fileID: 5866666020565131484}
-  weaponCollider: {fileID: 3946056032647828522}
+  HitBox: {fileID: 0}
+  WindBox: {fileID: 0}
+  TafoonBox: {fileID: 0}
+  currentATKEffect: {fileID: 0}
   RotateSpeed: 10
-  MoveSpeed: 10
-  DashSpeed: 5
+  windOn: {fileID: 0}
+  heal: {fileID: 0}
+  skill: {fileID: 0}
+  Anim: {fileID: 5866666020565131484}
+  enemy: {fileID: 0}
+  mainCamera: {fileID: 0}
+  AtkEffect: []
+  isClicks: 
+  Q_skillCheck: 0
   E_skillCheck: 0
   R_skillCheck: 0
-  F_skillCheck: 0
   isAttack: 0
+  isWind: 0
   attackInputOn: 0
+  isTafoon: 0
   damage: 10
   HP: 100
+  MoveSpeed: 10
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 0
+  Duration: 0
+  Magnitude: 0
 --- !u!1 &116476014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,6 +2041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430a8046fce2814ca3751730437980f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPbar: {fileID: 0}
   maxHealth: 5
   currentHealth: 0
 --- !u!114 &697086032
@@ -3421,7 +3435,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4132,7 +4147,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -4597,21 +4613,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d0417591ff74ea9d7773506a0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 338057500}
-  MonsterObject: {fileID: 1706830806}
-  targetPosition: {fileID: 919132148356489244}
-  targettransform: {fileID: 543450652359948966}
-  BossPatternTime: 6
-  chasespeed: 2
-  Boss_Skill_1: {fileID: 1457255269688624759, guid: 6ff6575d4ce964e4bad47054b4f29e4b, type: 3}
-  Boss_Skill_2: {fileID: 5585128518484842410, guid: 4f89b5ab805d76049ba34039413511c7, type: 3}
-  random: 0
-  attacktime: 0
-  MonsterYPosition: 2
-  BossHp: 1000
-  Boss_2Page_Pattern: 0
+  damageToGive: 1
+  maxHearth: 0
+  curHearth: 0
   MaxDistance: 5
-  bosspattern: 0
+  chasespeed: 2
+  KnockBackForce: 0
+  player: {fileID: 0}
+  targetTransform: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  effects: []
+  attackRange: 0
+  moveSpeed: 0
+  attackCoolTime: 0
+  baseAttackDamage: 0
+  dashAttackDamage: 0
+  mat: {fileID: 338057500}
+  attackcollider: {fileID: 0}
+  throwRockObj: {fileID: 0}
 --- !u!136 &1706830809
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4760,8 +4779,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8371bbe4003364a8bded9c5c7b1eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dark_gauge: {fileID: 0}
+  skill: {fileID: 0}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!114 &1721092208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4897,7 +4919,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -5908,15 +5931,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FlyingObject: {fileID: 367779128467859420, guid: 1688e51f3bbee9844955bf68221bcbde, type: 3}
-  amount: 5000
   destroyDelay: 3
   spawnInterval: 0.01
   spawnRaius: 0
-  spawnForce: 5
   SpawnTime: 0
+  spawnForce: 5
+  spawnIntervalTimer: 0
   spawnOffset: {x: 0, y: 5, z: 0}
   RainPos: {x: 0, y: 0, z: 0}
-  spawnIntervalTimer: 0
 --- !u!1 &2067745297
 GameObject:
   m_ObjectHideFlags: 0
@@ -6242,7 +6264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d5b5a3315ddd4f8f5f505d5158b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 1
+  ui: {fileID: 0}
+  HPitem: {fileID: 0}
+  respwan: {fileID: 0}
+  dark: {fileID: 0}
   PotionPickUpEffect: {fileID: 5518159324561009837, guid: 768cee42780a388438dcdb1690aa942b, type: 3}
 --- !u!4 &13508027776474367
 Transform:
@@ -8842,7 +8867,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2baf59f071ab2a64cb61ac965bca1b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  isAttack: 0
   damage: 5
+  HitGauge: 1
 --- !u!4 &3957359560873417178
 Transform:
   m_ObjectHideFlags: 0
@@ -10100,21 +10128,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc5d0417591ff74ea9d7773506a0561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mat: {fileID: 2830159858170750480}
-  MonsterObject: {fileID: 919132147740633952}
-  targetPosition: {fileID: 919132148356489244}
-  targettransform: {fileID: 543450652359948966}
-  BossPatternTime: 6
-  chasespeed: 2
-  Boss_Skill_1: {fileID: 1457255269688624759, guid: 6ff6575d4ce964e4bad47054b4f29e4b, type: 3}
-  Boss_Skill_2: {fileID: 5585128518484842410, guid: 4f89b5ab805d76049ba34039413511c7, type: 3}
-  random: 0
-  attacktime: 0
-  MonsterYPosition: 2
-  BossHp: 1000
-  Boss_2Page_Pattern: 0
+  damageToGive: 1
+  maxHearth: 0
+  curHearth: 0
   MaxDistance: 2.5
-  bosspattern: 0
+  chasespeed: 2
+  KnockBackForce: 0
+  player: {fileID: 0}
+  targetTransform: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  effects: []
+  attackRange: 0
+  moveSpeed: 0
+  attackCoolTime: 0
+  baseAttackDamage: 0
+  dashAttackDamage: 0
+  mat: {fileID: 2830159858170750480}
+  attackcollider: {fileID: 0}
+  throwRockObj: {fileID: 0}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10219,12 +10250,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0, z: 0}
+  ui: {fileID: 0}
+  gauge: {fileID: 0}
+  hitScript: {fileID: 0}
   isSkillOn: 0
   isCollision: 0
   isSkillUse: 1
+  isTest: 0
+  WindSkillCheck: 0
+  RainSkillCheck: 0
+  CloudSkillCheck: 0
+  DarkSkillUse: 0
+  WindDirection: {fileID: 0}
   trailEffect: {fileID: 0}
   CloudPos: {fileID: 256328194}
-  Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
   WindSkillPrefab: {fileID: 7231915265385764020, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
   postion: {x: 0, y: 0, z: 0}
   RainSkill: {fileID: 2067220298}
@@ -10234,8 +10274,7 @@ MonoBehaviour:
   RainSkillTime: 1
   RainSkillCool: 5
   maxAbilityDistance: 5
-  isTest: 0
-  RainSkillCheck: 0
+  DarkSkill: 0
 --- !u!1 &5892388282118999773
 GameObject:
   m_ObjectHideFlags: 0

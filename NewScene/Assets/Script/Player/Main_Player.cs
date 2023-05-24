@@ -24,9 +24,7 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
-    public Potion potionItems;
-    public GangrimSkillUi ui;
-
+   
     private Vector3 mousePos;
     private Vector3 player_Move_Input;
     private Vector3 heading;
@@ -263,23 +261,6 @@ public class Main_Player : MonoBehaviour
     public void GetDamage(float damage)
     {
         Debug.Log("Get Damage" + damage);
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject == potionItems.HPitem)
-        {
-            ui.HP_item.SetActive(true);
-        }
-        if (other.gameObject == potionItems.respwan)
-        {
-            ui.RESPWAN_item.SetActive(true);
-        }
-        if(other.gameObject == potionItems.dark)
-        {
-            ui.DARKPILL_item.SetActive(true);
-        }
     }
 
     private void AnimationBoolCheck()

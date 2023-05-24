@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17757882, g: 0.2223225, b: 0.30451846, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1378,7 +1378,7 @@ PrefabInstance:
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: WindBox
       value: 
-      objectReference: {fileID: 1045972598}
+      objectReference: {fileID: 0}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: TafoonBox
       value: 
@@ -1548,7 +1548,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2158,6 +2159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430a8046fce2814ca3751730437980f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPbar: {fileID: 0}
   maxHealth: 5
   currentHealth: 0
 --- !u!114 &429430749
@@ -2721,8 +2723,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8371bbe4003364a8bded9c5c7b1eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dark_gauge: {fileID: 0}
+  skill: {fileID: 0}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!114 &543753079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3424,7 +3429,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1274241263}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &673068798
 MonoBehaviour:
@@ -6522,7 +6527,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1274241263}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1038554691
 MonoBehaviour:
@@ -6537,8 +6542,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1274241264}
-  damage: 1
   isAttack: 0
+  damage: 1
+  HitGauge: 1
 --- !u!65 &1038554692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6594,24 +6600,6 @@ Transform:
   m_Father: {fileID: 1704112520}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1045972597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6074564347194344122, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
-  m_PrefabInstance: {fileID: 308857196}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1045972598
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045972597}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0319082, y: 3.693529, z: 1.2914221}
-  m_Center: {x: -0.016312577, y: 1.786764, z: 0.14571278}
 --- !u!1001 &1050033239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7990,7 +7978,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -9719,7 +9708,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -12298,6 +12288,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e09def53c47ffb45ae849c8ec13c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curHp: {fileID: 0}
+  DarkPill: {fileID: 0}
+  player: {fileID: 0}
+  playerSkillCheck: {fileID: 0}
+  PropertySkillCheck: {fileID: 0}
+  uiImages: []
+  uiSprites: []
+  uiKeys: []
+  abilityImage1: {fileID: 0}
+  coolDown1: 5
+  WindSKill: 0
+  abilityImage2: {fileID: 0}
+  coolDown2: 3
+  CloudSKill: 0
+  abilityImage3: {fileID: 0}
+  coolDown3: 6
+  RainSkill: 0
+  HP_item: {fileID: 0}
+  HP_itemKey: 0
+  HPitemOn: 0
+  RESPWAN_item: {fileID: 0}
+  Respwan_ItemKey: 0
+  RESPWAN_itemOn: 0
+  DARKPILL_item: {fileID: 0}
+  DarkPillItem__itemkey: 0
+  DarkPillItemOn: 0
 --- !u!114 &2144515305
 MonoBehaviour:
   m_ObjectHideFlags: 0

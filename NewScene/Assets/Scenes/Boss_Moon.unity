@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -651,7 +651,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1101,8 +1102,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  damage: 5
   isAttack: 0
+  damage: 5
+  HitGauge: 1
 --- !u!4 &202080386
 Transform:
   m_ObjectHideFlags: 0
@@ -1607,8 +1609,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8371bbe4003364a8bded9c5c7b1eaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Dark_gauge: {fileID: 0}
+  skill: {fileID: 0}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!114 &418686885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1863,7 +1868,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2495,6 +2501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430a8046fce2814ca3751730437980f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPbar: {fileID: 0}
   maxHealth: 5
   currentHealth: 0
 --- !u!114 &618741523
@@ -3104,16 +3111,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17e1d2f8ed7d1f84ca8b91ddde2a0a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0, z: 0}
+  ui: {fileID: 0}
+  gauge: {fileID: 0}
+  hitScript: {fileID: 0}
   isSkillOn: 0
   isCollision: 0
   isSkillUse: 1
   isTest: 0
   WindSkillCheck: 0
   RainSkillCheck: 0
+  CloudSkillCheck: 0
+  DarkSkillUse: 0
   WindDirection: {fileID: 0}
   trailEffect: {fileID: 0}
   CloudPos: {fileID: 677124211}
-  Cloudprab: {fileID: 8454258566895425498, guid: 573d2f58b8c65f942943d967cd9913f8, type: 3}
   WindSkillPrefab: {fileID: 7231915265385764020, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
   postion: {x: 0, y: 0, z: 0}
   RainSkill: {fileID: 327801513}
@@ -3123,6 +3135,7 @@ MonoBehaviour:
   RainSkillTime: 1
   RainSkillCool: 5
   maxAbilityDistance: 5
+  DarkSkill: 0
 --- !u!136 &915960906
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3171,6 +3184,8 @@ MonoBehaviour:
   TafoonBox: {fileID: 0}
   currentATKEffect: {fileID: 0}
   RotateSpeed: 10
+  windOn: {fileID: 0}
+  heal: {fileID: 0}
   skill: {fileID: 0}
   Anim: {fileID: 915960909}
   enemy: {fileID: 0}
@@ -4067,7 +4082,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
