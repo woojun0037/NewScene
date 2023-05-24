@@ -6,6 +6,7 @@ public class Bat_Script : Enemy
 {
 
     [SerializeField] float attackDelaytime;
+    Vector3 currentpos;
 
     private Animator animator;
 
@@ -30,6 +31,8 @@ public class Bat_Script : Enemy
         DontMove = false;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
+
+        currentpos = transform.position;
     }
 
     void Update()
@@ -66,7 +69,7 @@ public class Bat_Script : Enemy
 
     protected override void monsterMove()
     {
-        if (Player.HP >= 0 && isdie != true)
+        if (Dist < 7 && Player.HP >= 0 && isdie != true)
         {
             base.monsterMove();
 
@@ -95,6 +98,12 @@ public class Bat_Script : Enemy
                 getTouch = true;
                 animator.SetBool("Attack", false);
             }
+        }
+        else
+        {
+            agent.destination = currentpos;
+            if(Vector3.Distance(transform.position, currentpos) < 1)
+            animator.SetBool("Move", false);
         }
     }
 

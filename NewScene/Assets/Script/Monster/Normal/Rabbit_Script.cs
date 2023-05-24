@@ -29,6 +29,11 @@ public class Rabbit_Script : Enemy
         DontMove = false;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
+
+        Vector3 targety = targetTransform.position;
+        targety.y = transform.position.y;
+
+        transform.LookAt(targety);
     }
 
     void Update()

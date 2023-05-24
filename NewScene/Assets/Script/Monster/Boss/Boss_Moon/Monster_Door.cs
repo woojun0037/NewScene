@@ -53,7 +53,7 @@ public class Monster_Door : Boss
     bool stop;
     bool readytogetpodition;
 
-    [SerializeField] float pattern3Max_X;
+    [SerializeField] float pattern3Max_Z;
     Vector3 ReturnPosition; //돌아가는 위치
 
     protected override void Start()
@@ -188,24 +188,16 @@ public class Monster_Door : Boss
         if(i == 1)
         {
             if (DoorColor.material.color != Color.magenta)
-            {
                 DoorColor.material.color = Color.magenta;
-            }
             else
-            {
                 DoorColor.material.color = Color.white;
-            }
         }
         else if(i ==2)
         {
             if (DoorColor.material.color != Color.black)
-            {
                 DoorColor.material.color = Color.black;
-            }
             else
-            {
                 DoorColor.material.color = Color.white;
-            }
         }
         else
         {
@@ -218,21 +210,13 @@ public class Monster_Door : Boss
     {
 
         if (random == 0)
-        {
             bosspattern = BossPattern.Pattern_0;
-        }
         else if (random == 1)
-        {
             bosspattern = BossPattern.Pattern_1;
-        }
         else if (random == 2)
-        {
             bosspattern = BossPattern.Pattern_2;
-        }
         else if (random == 3)
-        {
             bosspattern = BossPattern.Pattern_3;
-        }
 
         //0 몬스터 생성
         switch (bosspattern) //초기화
@@ -353,9 +337,9 @@ public class Monster_Door : Boss
         else
         {
             getready = true;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0f);
 
-            if (transform.position.z <= pattern3Max_X && !isz && getready) //x 축 좌표
+            if (transform.position.z <= pattern3Max_Z && !isz && getready) //x 축 좌표
             {
                 transform.Translate(-1 * speed * Time.deltaTime, 0, 0); //돌아가 있는데 축 때문에 -1이동
 
@@ -367,6 +351,7 @@ public class Monster_Door : Boss
             }
             else //원래 자리로 돌아감
             {
+                Debug.Log("Back");
                 StopCoroutine(Pattern3BulletTime_());
                 isz = true;
                 transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, Time.deltaTime * speed / 2 * 5);
@@ -425,16 +410,7 @@ public class Monster_Door : Boss
         yield return new WaitForSeconds(0.1f);
         GameObject bullet = Instantiate(updownBullet, sety, transform.rotation);
 
-
         yield return new WaitForSeconds(0.5f);
-
-        //updownBullet.transform.position = transform.position;
-
-        //Rigidbody bullet = Instantiate(updownBullet, transform.position, transform.rotation);
-        //bullet.velocity = transform.forward * 10;
-
-        ////Rigidbody bulle2t = Instantiate(updownBullet, transform.position, transform.rotation);
-        //bulle2t.velocity = transform.forward * -10;
 
         bullettime = false;
     }
@@ -446,14 +422,12 @@ public class Monster_Door : Boss
         spawn.y = 0f;
 
         GameObject monsterspawns = Instantiate(SpawnMonsters, spawn, transform.rotation);
-
     }
 
     IEnumerator ColorChangeBack()
     {
         yield return new WaitForSeconds(cooltime / 1.5f);
         ColorChange(0); //초기화
-
     }
 
 }
