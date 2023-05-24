@@ -41,13 +41,14 @@ public class HealthManager : MonoBehaviour
         isDamage = false;
     }
 
-    public void HealPlayer(float healAmount)
+    public void HealPlayer()
     {
-        currentHealth += healAmount;
+        StartCoroutine(HealCor());
+    }
 
-        if(currentHealth > maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+    IEnumerator HealCor()
+    {
+
+        yield return null;
     }
 }

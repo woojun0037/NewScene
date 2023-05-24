@@ -14,18 +14,19 @@ public class PlayerSkill : MonoBehaviour
     //WindStorm windskill;
     Main_Player player;
     public GangrimSkillUi ui;
-    
+    public Gauge gauge;
+
+    public HitScript hitScript;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
     public bool isSkillUse = true;
-
     public bool isTest;
 
     public bool WindSkillCheck = false;
     public bool RainSkillCheck = false;
-    public bool CloudSkillCheck = false;    
-
+    public bool CloudSkillCheck = false;
+    public bool DarkSkillUse = false;
     private bool isDash;
 
     public static PlayerSkill Instance;
@@ -47,13 +48,13 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillTime;
     public float RainSkillCool;
     public float maxAbilityDistance;
+    public float DarkSkill;
 
     private void Start()
     {
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
-
         CloudPos.gameObject.SetActive(false);
         WindDirection.enabled = false;
         Instance = this;
@@ -64,7 +65,7 @@ public class PlayerSkill : MonoBehaviour
         WindSkillRange();
         CloudSkill();
         RainDropSkill();
-
+        DarknessSKill();
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetKeyDown(KeyCode.Space))
@@ -206,6 +207,24 @@ public class PlayerSkill : MonoBehaviour
             RainSkillCheck = false;
             Rainnig();
             ui.CurrentSkillUI("rain");
+        }
+    }
+
+    public void DarknessSKill()
+    {
+        if (Input.GetMouseButtonDown(1) && Gauge.sGauge >= gauge.maxGauge && !DarkSkillUse)
+        {
+            DarkSkillUse = true;
+            DarkSkill = 10f;
+            gauge.dark_gauge_check = true;
+            hitScript.damage = 10;
+            gauge.CorStart();
+        }
+
+        if (!gauge.dark_gauge_check)
+        {
+            hitScript.damage = 1;
+            DarkSkillUse = false;
         }
     }
 

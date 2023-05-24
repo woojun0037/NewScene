@@ -15,22 +15,35 @@ public class Potion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        HP();
+        ReSpwan();
+        darkitem();
     }
 
-    private void OnTriggerEnter(Collider other)
+
+
+    public void HP()
     {
-        if(other.tag == "Main_gangrim")
-        {
-            FindObjectOfType<GameManager>().AddPotion(value);
-            Instantiate(PotionPickUpEffect, transform.position, transform.rotation); 
-            //Destroy(hp);
-        }
+        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
+        Destroy(HPitem);
     }
+
+    public void ReSpwan()
+    {
+        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
+        Destroy(respwan);
+    }
+
+    public void darkitem()
+    {
+        Instantiate(PotionPickUpEffect, transform.position, transform.rotation);
+        Destroy(dark);
+    }
+
 }

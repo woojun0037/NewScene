@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     public Transform targetTransform;
     public NavMeshAgent agent = null;
+    [SerializeField] protected PlayerSkill playerSkill;
     protected Main_Player Player;
 
     public bool getTouch;
@@ -94,7 +95,7 @@ public class Enemy : MonoBehaviour
         if (other.tag == "Weapon")
         {
             player = other.GetComponent<HitScript>().Player;
-
+            playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
             if (player.HitState != hitNum)
             {
                 player.enemy = this;
@@ -130,7 +131,13 @@ public class Enemy : MonoBehaviour
                     HitScript hit;
                     hit = other.GetComponent<HitScript>();
 
-                    Gauge.sGauge += hit.damage;
+                    if (!playerSkill.DarkSkillUse)
+                    { 
+                        if(Gauge.sGauge < 30)
+                            Gauge.sGauge += hit.HitGauge;
+
+                        Gauge.Test();
+                    }
                     curHearth -= hit.damage;
                     GetDamagedAnimation();
                 }

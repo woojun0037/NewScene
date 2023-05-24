@@ -5116,6 +5116,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 30e3a54c12bc780438417c3168041ccc, type: 3}
   m_PrefabInstance: {fileID: 199335928}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &200618441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7833324909879697948, guid: 5bca24f8e407b8242921215d6d5e0e14, type: 3}
+  m_PrefabInstance: {fileID: 2591700065930176849}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &202258533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18791,8 +18796,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1806763113}
-  damage: 1
   isAttack: 0
+  damage: 1
+  HitGauge: 1
 --- !u!65 &807417160
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18940,6 +18946,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816738977}
   m_CullTransparentMesh: 1
+--- !u!1 &819234684 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1601966491739463236, guid: 5bfb78c0ec8c3654cb171470ccc18fe6, type: 3}
+  m_PrefabInstance: {fileID: 535376562424343444}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &826242267
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24427,8 +24438,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dark_gauge: {fileID: 1060345860}
+  skill: {fileID: 1806763118}
   minGauge: 1
   maxGauge: 30
+  dark_gauge_check: 0
 --- !u!1001 &1063856173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29713,6 +29726,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 500474465}
     - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: gauge
+      value: 
+      objectReference: {fileID: 1060345862}
+    - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: CloudPos
       value: 
       objectReference: {fileID: 553132266}
@@ -29721,9 +29738,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4038121563916466951, guid: a6c6b690a12b3104280a378d75ae12e6, type: 3}
     - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: DarkSkill
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: RainSkill
       value: 
       objectReference: {fileID: 1208136739}
+    - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: hitScript
+      value: 
+      objectReference: {fileID: 807417159}
     - target: {fileID: 371447735453508159, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: WindDirection
       value: 
@@ -29908,6 +29933,10 @@ PrefabInstance:
       propertyPath: HP
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 500474465}
     - target: {fileID: 6074564347618729286, guid: 0bd5c5c29037d7e4e9de9db8caf4b0e5, type: 3}
       propertyPath: skill
       value: 
@@ -41040,6 +41069,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 30e3a54c12bc780438417c3168041ccc, type: 3}
   m_PrefabInstance: {fileID: 1763074187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1770336458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8879186465904400865, guid: 799e097ca3f6eb5469ce9d8377efce7f, type: 3}
+  m_PrefabInstance: {fileID: 8331568070984776930}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1772267843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44691,6 +44725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 346d5b5a3315ddd4f8f5f505d5158b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HPitem: {fileID: 200618441}
+  respwan: {fileID: 819234684}
+  dark: {fileID: 1770336458}
+  PotionPickUpEffect: {fileID: 0}
 --- !u!1001 &1931301597
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46368,6 +46406,10 @@ PrefabInstance:
       propertyPath: maxHearth
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7802172715392571477, guid: 64e7092380ae94844b051ab21355356f, type: 3}
+      propertyPath: playerSkill
+      value: 
+      objectReference: {fileID: 1806763118}
     - target: {fileID: 7802172715392571477, guid: 64e7092380ae94844b051ab21355356f, type: 3}
       propertyPath: damageToGive
       value: 1

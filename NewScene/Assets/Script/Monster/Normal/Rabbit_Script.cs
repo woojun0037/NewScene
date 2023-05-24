@@ -88,7 +88,6 @@ public class Rabbit_Script : Enemy
         }
     }
 
-
     IEnumerator attacker()
     {
         DontMove = true;

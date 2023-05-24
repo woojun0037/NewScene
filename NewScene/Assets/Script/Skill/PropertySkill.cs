@@ -60,7 +60,7 @@ public class PropertySkill : MonoBehaviour
         if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
         {
             TafoonSpecial = true;
-            if (Input.GetKeyDown(KeyCode.G) && TafoonSpecial)
+            if (Input.GetKeyDown(KeyCode.F) && TafoonSpecial)
             {
                 StartCoroutine(TafoonAttack());
                 TafoonSkill();
@@ -108,7 +108,7 @@ public class PropertySkill : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePos);
         if (Physics.Raycast(ray, out RaycastHit rayHit))
         {
-            if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.H) && Debuff == true)
+            if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.G) && Debuff == true)
             {
                 transform.LookAt(rayHit.point);
                 GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
