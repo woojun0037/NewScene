@@ -30,6 +30,7 @@ public class Main_Player : MonoBehaviour
     private Vector3 heading;
 
     private bool isMove = false;
+    private bool isBack = false;
 
     public GameObject[] AtkEffect;
     public bool[] isClicks;
@@ -47,6 +48,7 @@ public class Main_Player : MonoBehaviour
     public float damage;
     public float HP;
     public float MoveSpeed = 6f;
+    public float BackStep = 2f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
     public float addAttackSpeed;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5248693803594047975
+--- !u!1 &8573171012089471917
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5248693803594047976}
-  - component: {fileID: 5248693803594047977}
-  - component: {fileID: 5248693803594047978}
-  - component: {fileID: 5248693803594047983}
-  - component: {fileID: 5248693803594047982}
+  - component: {fileID: 9057254729850337559}
+  - component: {fileID: 5340722310929954482}
+  - component: {fileID: 7924921289824486008}
+  - component: {fileID: 9105325805348001137}
+  - component: {fileID: 9105325805348001100}
   m_Layer: 0
-  m_Name: Hay_Red
-  m_TagString: Monster
+  m_Name: dark
+  m_TagString: Darkitem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5248693803594047976
+--- !u!4 &9057254729850337559
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248693803594047975}
-  m_LocalRotation: {x: -0, y: 0.9997792, z: -0, w: -0.021011641}
-  m_LocalPosition: {x: -11.74, y: 0, z: -50.510002}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_GameObject: {fileID: 8573171012089471917}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -33.192, y: 2.778, z: -3.81}
+  m_LocalScale: {x: 0.9151188, y: 0.9151188, z: 0.9151188}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 182.408, z: 0}
---- !u!33 &5248693803594047977
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5340722310929954482
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248693803594047975}
-  m_Mesh: {fileID: 975045209116396408, guid: 8b4771980736e964082e17c303861f3b, type: 3}
---- !u!23 &5248693803594047978
+  m_GameObject: {fileID: 8573171012089471917}
+  m_Mesh: {fileID: -4728887496425296429, guid: 65baf5604973e404abc7ffc73b8f0731, type: 3}
+--- !u!23 &7924921289824486008
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248693803594047975}
+  m_GameObject: {fileID: 8573171012089471917}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0735934c74f3ef64892ae9cd5b83201b, type: 2}
+  - {fileID: 2100000, guid: 1385407391f44a6478e7d84e0af72859, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,33 +85,30 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5248693803594047983
-CapsuleCollider:
+--- !u!135 &9105325805348001137
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248693803594047975}
+  m_GameObject: {fileID: 8573171012089471917}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.05
-  m_Height: 0.35
-  m_Direction: 1
-  m_Center: {x: -0.000000074505806, y: 0.15938601, z: -0.0000000018626451}
---- !u!54 &5248693803594047982
-Rigidbody:
+  serializedVersion: 2
+  m_Radius: 0.43693215
+  m_Center: {x: 0.24966508, y: 0.000000029802333, z: 0.28956112}
+--- !u!114 &9105325805348001100
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248693803594047975}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
+  m_GameObject: {fileID: 8573171012089471917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f487f0f14ad69c479c442331f871fd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ui: {fileID: 0}
+  DarkPotionPickUpEffect: {fileID: 2529372625209848246, guid: 24d82f634521808479e54dd4d856e61e, type: 3}

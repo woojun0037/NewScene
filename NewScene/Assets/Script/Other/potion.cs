@@ -31,29 +31,4 @@ public class Potion : MonoBehaviour
     {
         Instantiate(PotionPickUpEffect, dark.transform.position, dark.transform.rotation);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Main_gangrim")
-        {
-            if(gameObject == HPitem)
-            {
-                HP();
-                ui.HP_item.SetActive(true);
-                ui.HPitemOn = true;
-            }
-            if(gameObject == respwan)
-            {
-                ReSpwan();
-                ui.RESPWAN_item.SetActive(true);
-                ui.RESPWAN_itemOn = true;
-            }
-            if(gameObject == dark)
-            {
-                Darkitem();
-                ui.DARKPILL_item.SetActive(true);
-                ui.DarkPillItemOn = true;
-            }
-        }
-    }
 }
