@@ -66,6 +66,7 @@ public class PlayerSkill : MonoBehaviour
         CloudSkill();
         RainDropSkill();
         DarknessSKill();
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetKeyDown(KeyCode.Space))
