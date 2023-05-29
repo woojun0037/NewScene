@@ -48,8 +48,8 @@ public class Deer_Bullet_Launcher : MonoBehaviour
 
         if(spawnedObj == lightObjectes)
         {
-            gameObject.SetActive(false);
-
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 

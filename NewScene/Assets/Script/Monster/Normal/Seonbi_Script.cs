@@ -86,7 +86,7 @@ public class Seonbi_Script : Enemy
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
 
             gameObject.SetActive(false);
-            agent.enabled = false;
+            OnDisable();
         }
     }
 

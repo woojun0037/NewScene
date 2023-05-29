@@ -9,7 +9,7 @@ public class Monster_KnockBack : MonoBehaviour
 
     [SerializeField]
     Rigidbody monsterRigidbody;
-    GameObject Player;
+    [SerializeField] GameObject Player;
 
     private void Start()
     {

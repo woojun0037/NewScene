@@ -50,7 +50,7 @@ public class Rabbit_Script : Enemy
         if (curHearth < 1)
         {
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-            agent.enabled = false;
+            //OnDisable();
             gameObject.SetActive(false);
         }
     }
@@ -70,12 +70,14 @@ public class Rabbit_Script : Enemy
             if (!DontMove)
             {
                 animator.SetBool("Move", true);
+                if(agent !=null)
                 agent.isStopped = false;
             }
             else
             {
                 animator.SetBool("Move", false);
-                agent.isStopped = true;
+                if (agent != null)
+                    agent.isStopped = true;
             }
 
             Vector3 targety = targetTransform.position;

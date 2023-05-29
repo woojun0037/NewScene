@@ -13,6 +13,7 @@ public class Deer_Script : Enemy
     bool isattack;
     bool DontMove;
 
+    public float attackCoolTime;
     public GameObject DeerLuncher;
     public GameObject ragdoll_obj;
     private float Dist;
@@ -25,9 +26,10 @@ public class Deer_Script : Enemy
     protected bool isdash = false;
 
     public ParticleSystem particle_attack;
+    public EmissionIntensityController emissionController;
 
     Vector3 startingPosition;
-
+    public Renderer deerMaterial;
     protected override void Awake()
     {
         base.Awake();
@@ -36,6 +38,7 @@ public class Deer_Script : Enemy
 
     protected override void Start()
     {
+        emissionController = GetComponent<EmissionIntensityController>();
         base.Start();
         animator = GetComponent<Animator>();
     }
@@ -99,7 +102,7 @@ public class Deer_Script : Enemy
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
 
             gameObject.SetActive(false);
-            agent.enabled = false;
+            OnDisable();
 
         }
     }
@@ -122,17 +125,14 @@ public class Deer_Script : Enemy
         int random;
         random = UnityEngine.Random.Range(1, 4);
 
-        //Vector3 targety = targetTransform.position;
-        //targety.y = SetY;
 
         animator.SetBool("Move", false);
-        //transform.LookAt(targety);
 
         animator.SetBool("isAttack", true);
         animator.SetInteger("Attack", random);
 
         yield return new WaitForSeconds(1f);
-
+        emissionController.EmssionMaxMin();
         Vector3 target_ = transform.position;
         target_.y = transform.position.y;
 
@@ -147,6 +147,9 @@ public class Deer_Script : Enemy
         animator.SetInteger("Attack", 0);
 
         yield return new WaitForSeconds(3f);
+
+
+        yield return new WaitForSeconds(attackCoolTime);
         isattack = false;
         DontMove = false;
     }
@@ -179,6 +182,7 @@ public class Deer_Script : Enemy
             DontMove = true;
             particle_attack.Stop();
             isdash = false;
+            isattack = false;
             //isrosh = false;
             animator.SetBool("Move", false);
         }
@@ -188,6 +192,8 @@ public class Deer_Script : Enemy
         }
 
     }
+
+
 
     void reset()
     {
@@ -206,7 +212,26 @@ public class Deer_Script : Enemy
         }
         else if (rand == 1)
         {
+            isattack = true;
             isdash = true;
         }
     }
+
+    IEnumerator SmoothLookAtPlayer()
+    {
+        while (true)
+        {
+            Vector3 targetDirection = Player.transform.position - transform.position;
+            targetDirection.y = 0f; // 상하 방향의 회전을 고려하지 않음
+
+            if (targetDirection != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 10);
+            }
+
+            yield return null;
+        }
+    }
+
 }

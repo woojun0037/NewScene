@@ -66,15 +66,19 @@ public class Enemy : MonoBehaviour
 
     protected virtual void monsterMove()
     {
-        agent.speed = chasespeed;
-        agent.destination = targetTransform.position;
-        //agent.SetDestination(targetTransform.position);
+        if(agent != null)
+        {
+            agent.speed = chasespeed;
+            agent.destination = targetTransform.position;
+            //agent.SetDestination(targetTransform.position);
+        }
     }
 
     protected virtual void DieMonster()
     {
         if (curHearth < 1)
         {
+            OnDisable();
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
@@ -90,6 +94,16 @@ public class Enemy : MonoBehaviour
                 delay = 0.0f;
                 hitNum = 0;
             }
+        }
+    }
+
+    public void OnDisable()
+    {
+        if (agent != null)
+        {
+            //agent.ResetPath(); 
+            agent.enabled = false;
+            agent = null; 
         }
     }
 
