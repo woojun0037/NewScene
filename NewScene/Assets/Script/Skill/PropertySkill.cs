@@ -28,6 +28,7 @@ public class PropertySkill : MonoBehaviour
     void Awake()
     {
         SkillUse = GetComponent<Main_Player>();
+        motion = GameObject.Find("MotionTrailParent").transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -111,11 +112,17 @@ public class PropertySkill : MonoBehaviour
             if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.G) && Debuff == true)
             {
                 transform.LookAt(rayHit.point);
-                GameObject ice = Instantiate(IceSpecial, PlayerPos.position, Quaternion.identity);
-                ice.transform.rotation = this.transform.rotation;
-                Destroy(ice, 1f);
+                IceSpecial.transform.rotation = this.transform.rotation;
+                IceSpecial.SetActive(true);
+                StartCoroutine(IceSetActive());
             }
         }
+    }
+
+    private IEnumerator IceSetActive()
+    {
+        yield return new WaitForSeconds(1f);
+        IceSpecial.SetActive(false);
     }
 
     public void Thunder()
@@ -123,10 +130,8 @@ public class PropertySkill : MonoBehaviour
         if (SkillUse.E_skillCheck == true && SkillUse.R_skillCheck == true)
         {
             Stun = true;
-        }
-        else if(Stun == true)
-        {
-
+            SkillUse.E_skillCheck = false;
+            SkillUse.R_skillCheck = false;
             StartCoroutine(ThunderCor());
         }
     }
@@ -134,12 +139,15 @@ public class PropertySkill : MonoBehaviour
     IEnumerator ThunderCor()
     {
         yield return new WaitForSeconds(3f);
-        Stun = true;
+        Stun = false;
+        TurnderSpecial.SetActive(false);
     }
 
     public void ThunderSkillSpecial(Vector3 transform)
     {
-        GameObject thunder = Instantiate(TurnderSpecial, transform, Quaternion.identity);
-        
+        TurnderSpecial.transform.position = transform;
+        TurnderSpecial.SetActive(false);
+        TurnderSpecial.SetActive(true);
+
     }
 }

@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Golem_Script : Enemy
 {
+    public GameObject RockBullet;
+    public GameObject GolemObj;
 
     [SerializeField] float attackDelaytime;
     [SerializeField] bool miniGolem;
     [SerializeField] ParticleSystem particle_attack;
 
     private Animator animator;
-    public GameObject RockBullet;
 
     bool isattack;
     bool DontMove;
@@ -59,7 +60,7 @@ public class Golem_Script : Enemy
 
             if (deletetime >= 5f)
             {
-                gameObject.SetActive(false);
+                GolemObj.gameObject.SetActive(false);
             }
         }
     }
@@ -92,7 +93,7 @@ public class Golem_Script : Enemy
 
             if (Dist <= MaxDistance)
             {
-                if (!isattack &&!isskillattack)
+                if (!isattack && !isskillattack)
                 {
                     timer = 0;
                     transform.LookAt(targety);
@@ -100,10 +101,10 @@ public class Golem_Script : Enemy
                     StartCoroutine("attacker");
                 }
             }
-            else if(Dist > MaxDistance + 3f && !isattack && !miniGolem)
+            else if (Dist > MaxDistance + 3f && !isattack && !miniGolem)
             {
                 timer += Time.deltaTime;
-                if(timer > 3)
+                if (timer > 3)
                 {
                     if (!isskillattack)
                     {
@@ -162,7 +163,7 @@ public class Golem_Script : Enemy
         isskillattack = false;
         timer = 0;
         DontMove = false;
-        
+
     }
 
     IEnumerator damaged_ani(int random)

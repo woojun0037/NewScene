@@ -7,6 +7,17 @@ public class WindStorm : MonoBehaviour
     ParticleSystem _WindStorm;
     ParticleSystem.Particle[] particles;
 
+    private void OnEnable()
+    {
+        StartCoroutine(SetActive());
+    }
+
+    private IEnumerator SetActive()
+    {
+        yield return new WaitForSeconds(1f);
+        this.gameObject.SetActive(false);
+    }
+
     void Start()
     {
         _WindStorm = GetComponent<ParticleSystem>();
