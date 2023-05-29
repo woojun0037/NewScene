@@ -10,7 +10,7 @@ public class Main_Player : MonoBehaviour
     [SerializeField] Collider WindBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
-    [SerializeField] float RotateSpeed = 10f;
+
     [SerializeField] private WindStorm windOn;
 
     private TafoonSkillHit tafoonSkill;
@@ -21,13 +21,11 @@ public class Main_Player : MonoBehaviour
     public PlayerSkill skill;
     public Animator Anim;
     public Enemy enemy;
-    public MainCamera mainCamera;
     public CameraMovemant cam;
 
     private Vector3 mousePos;
-    
+
     private bool isMove = false;
-    private bool isBack = false;
 
     public GameObject[] AtkEffect;
     public bool[] isClicks;
@@ -44,17 +42,15 @@ public class Main_Player : MonoBehaviour
 
     public float damage;
     public float HP;
+
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
+
     public float addAttackSpeed;
     public float Duration;
     public float Magnitude;
-
-    private float Qcool;
-    private float Ecool;
-    private float Rcool;
 
     int hitState;
     internal int HitState => hitState;
@@ -64,6 +60,12 @@ public class Main_Player : MonoBehaviour
         propertySkill = GetComponent<PropertySkill>();
         hit = HitBox.gameObject.GetComponent<HitScript>();
         tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
+        cam = FindObjectOfType<CameraMovemant>();
+    }
+
+    private void Start()
+    {
+       
     }
 
     void Update()
@@ -76,6 +78,7 @@ public class Main_Player : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        Around();
         CalTargetPos();
     }
 
@@ -164,7 +167,7 @@ public class Main_Player : MonoBehaviour
                 {
                     transform.LookAt(rayHit.point);
                 }
-                if(rayHit.collider.tag == "Platform" && propertySkill.Stun == true)
+                if (rayHit.collider.tag == "Platform" && propertySkill.Stun == true)
                 {
                     transform.LookAt(rayHit.point);
                     propertySkill.ThunderSkillSpecial(rayHit.point);
@@ -179,7 +182,7 @@ public class Main_Player : MonoBehaviour
         if (HP < 1)
         {
             Anim.SetTrigger("Dead");
-            
+
         }
     }
 
@@ -209,11 +212,39 @@ public class Main_Player : MonoBehaviour
 
     private void Move()
     {
-        
+        float moveDirX = Input.GetAxisRaw("Horizontal");
+        float moveDirZ = Input.GetAxisRaw("Vertical");
+       
+        Vector3 moveHorizontal = transform.right * moveDirX;
+        Vector3 moveVertical = transform.forward * moveDirZ;
+
+        if(moveDirZ != 0)
+        {
+            transform.position += moveVertical * MoveSpeed * Time.deltaTime;
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if(moveDirX != 0)
+        {
+            transform.position += moveHorizontal * MoveSpeed * Time.deltaTime;
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else
+        {
+            isMove = false;
+            AnimationBoolCheck();
+        }
+    }
+
+    private void Around()
+    {
+        Vector3 playerRotate = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1));
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
     }
 
     public void Skill_Q()
-    { 
+    {
         Anim.SetTrigger("WindSkill");
         Q_skillCheck = true;
     }
@@ -222,7 +253,7 @@ public class Main_Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-           E_skillCheck = true;
+            E_skillCheck = true;
         }
     }
 
@@ -240,7 +271,7 @@ public class Main_Player : MonoBehaviour
     }
 
     private void AnimationBoolCheck()
-    {
-        Anim.SetBool("isMove", isMove);
+    { 
+       Anim.SetBool("isMove", isMove);
     }
 }
