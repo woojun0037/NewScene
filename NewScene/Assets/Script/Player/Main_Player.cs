@@ -199,14 +199,16 @@ public class Main_Player : MonoBehaviour
             Vector3 dir = transform.position;
             dir.y = transform.position.y + 1.5f;
 
-            currentATKEffect = Instantiate(AtkEffect[on_count], transform);
+            currentATKEffect = AtkEffect[on_count];
             currentATKEffect.transform.position = dir;
+            currentATKEffect.SetActive(true);
         }
     }
 
     public void ATK_Effect_Off()
     {
-        Destroy(currentATKEffect);
+        currentATKEffect.SetActive(false);
+        currentATKEffect = null;
     }
 
     private void Move()

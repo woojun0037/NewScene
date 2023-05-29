@@ -51,6 +51,7 @@ public class PlayerSkill : MonoBehaviour
 
     private void Start()
     {
+        gauge = FindObjectOfType<Gauge>();
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
