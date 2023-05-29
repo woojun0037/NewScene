@@ -177,7 +177,7 @@ public class BossMonster_Tiger : Boss
     void ThrowRock() //바위 던지기
     {
         Vector3 spawn = player.transform.position;
-        spawn.y = 2;
+        spawn.y = transform.position.y;
         transform.LookAt(spawn); //그 방향 보고 던짐 + 방향 고정
 
         Vector3 rockpos = transform.position;
@@ -266,7 +266,7 @@ public class BossMonster_Tiger : Boss
 
     public void EffectSpawn(int index)
     {
-        GameObject temp = Instantiate(effects[index], new Vector3(transform.position.x, 3f, transform.position.z), Quaternion.identity);
+        GameObject temp = Instantiate(effects[index], new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
         if (index == 1)
         {
             Vector3 dir = tempPos - transform.position;

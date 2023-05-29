@@ -941,6 +941,7 @@ GameObject:
   - component: {fileID: 7875025569145635279}
   - component: {fileID: 7875025569145635272}
   - component: {fileID: 378713205}
+  - component: {fileID: 3092332976965217026}
   m_Layer: 6
   m_Name: Monster_Rabbit
   m_TagString: Monster
@@ -1037,6 +1038,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
   ragdoll_obj: {fileID: 1946494057627922847, guid: 22eee7b113f135b4e9c7b26de9d5b186, type: 3}
   SetY: 2
@@ -1064,6 +1066,21 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
+--- !u!114 &3092332976965217026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028113343770036532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6b44d1a002a4647a8dc50bceb80d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDuration: 0.5
+  knockbackForce: 1000
+  monsterRigidbody: {fileID: 0}
 --- !u!1 &7123134163251481929
 GameObject:
   m_ObjectHideFlags: 0
