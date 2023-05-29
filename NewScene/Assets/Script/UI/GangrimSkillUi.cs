@@ -6,6 +6,8 @@ using TMPro;
 
 public class GangrimSkillUi : MonoBehaviour
 {
+    public static GangrimSkillUi instance;
+
     public HealthManager curHp;
     public Gauge DarkPill;
     public GameObject player;
@@ -51,10 +53,26 @@ public class GangrimSkillUi : MonoBehaviour
 
     private void Awake()
     {
-        spriteDictionary = new Dictionary<string, Sprite>();
-        spriteDictionary.Add("wind", uiSprites[0]);
-        spriteDictionary.Add("cloud", uiSprites[1]);
-        spriteDictionary.Add("rain", uiSprites[2]);
+        if(instance == null)
+        {
+            instance = this;
+            playerSkillCheck = FindObjectOfType<PlayerSkill>();
+            player = playerSkillCheck.gameObject;
+            PropertySkillCheck = player.GetComponent<PropertySkill>();
+            curHp = FindObjectOfType<HealthManager>();
+            DarkPill.skill = playerSkillCheck;
+
+            spriteDictionary = new Dictionary<string, Sprite>();
+            spriteDictionary.Add("wind", uiSprites[0]);
+            spriteDictionary.Add("cloud", uiSprites[1]);
+            spriteDictionary.Add("rain", uiSprites[2]);
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+        
     }
 
     void Start()

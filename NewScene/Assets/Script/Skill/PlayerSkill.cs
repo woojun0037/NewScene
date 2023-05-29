@@ -13,9 +13,8 @@ public class PlayerSkill : MonoBehaviour
 
     //WindStorm windskill;
     Main_Player player;
-    public GangrimSkillUi ui;
     public Gauge gauge;
-
+    public GameObject FlyingObject;
     public HitScript hitScript;
 
     public bool isSkillOn = false;
@@ -39,8 +38,8 @@ public class PlayerSkill : MonoBehaviour
 
     private Vector3 posUp;
     public Vector3 postion;
+    public Vector3 RainPos;
 
-    [SerializeField] private BlizzardSpawner RainSkill;
     public Canvas ability2Canvas;
     public Image targetCircle;
     public Image SkillRange;
@@ -109,7 +108,7 @@ public class PlayerSkill : MonoBehaviour
             distance = Mathf.Min(distance, maxAbilityDistance);
 
             var newHitPos = transform.position + hitPosDir * distance;
-            RainSkill.RainPos = new Vector3(transform.position.x, transform.position.y, transform.position.z) + hitPosDir * distance;
+            RainPos = new Vector3(transform.position.x, transform.position.y, transform.position.z) + hitPosDir * distance;
             ability2Canvas.transform.position = (newHitPos);
         }
     }
@@ -128,11 +127,11 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public GameObject WindTest()
+    public void WindTest()
     {
-        GameObject temp = Instantiate(WindSkillPrefab, new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z), Quaternion.identity);
-        temp.transform.rotation = this.transform.rotation;
-        return temp;
+        WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
+        WindSkillPrefab.transform.rotation = this.transform.rotation;
+        WindSkillPrefab.SetActive(true);
     }
 
     public void WindSkillRange()
@@ -141,7 +140,7 @@ public class PlayerSkill : MonoBehaviour
         {
             WindDirection.enabled = true;
             WindSkillCheck = true;
-            ui.CurrentSkillUI("wind");
+            GangrimSkillUi.instance.CurrentSkillUI("wind");
             isSkillUse = false;
         }
         else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
@@ -173,7 +172,7 @@ public class PlayerSkill : MonoBehaviour
             {
                 transform.LookAt(rayHit.point);
                 CloudPos.gameObject.SetActive(true);
-                ui.CurrentSkillUI("cloud");
+                GangrimSkillUi.instance.CurrentSkillUI("cloud");
             }
             else
             {
@@ -207,7 +206,7 @@ public class PlayerSkill : MonoBehaviour
             isSkillOn = true;
             RainSkillCheck = false;
             Rainnig();
-            ui.CurrentSkillUI("rain");
+            GangrimSkillUi.instance.CurrentSkillUI("rain");
         }
     }
 
@@ -236,7 +235,10 @@ public class PlayerSkill : MonoBehaviour
             if (!isTest)
             {
                 isSkillUse = false;
-                RainSkill.RainDrop();
+                FlyingObject.SetActive(true);
+                FlyingObject.transform.position = RainPos;
+                FlyingObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+                StartCoroutine(RainActive());
                 isTest = true;
                 StartCoroutine(RainCor());
             }
@@ -247,6 +249,12 @@ public class PlayerSkill : MonoBehaviour
                 RainSkillTime = 0;
             }
         }
+    }
+
+    private IEnumerator RainActive()
+    {
+        yield return new WaitForSeconds(3f);
+        FlyingObject.SetActive(false);
     }
 
     IEnumerator RainCor()
