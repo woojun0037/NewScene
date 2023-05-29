@@ -28,11 +28,14 @@ public class CameraMovemant : MonoBehaviour
 
         dirNomarized = realCamera.localPosition.normalized;
         finalDistance = realCamera.localPosition.magnitude;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
-        rotX += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        rotX += -(Input.GetAxis("Mouse Y")) * sensitivity * Time.deltaTime;
         rotY += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
         rotX = Mathf.Clamp(rotX, -clampAngle, clampAngle);
