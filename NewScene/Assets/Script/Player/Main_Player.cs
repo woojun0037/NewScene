@@ -197,7 +197,7 @@ public class Main_Player : MonoBehaviour
         if (currentATKEffect == null)
         {
             Vector3 dir = transform.position;
-            dir.y = 3f;
+            dir.y = transform.position.y + 1.5f;
 
             currentATKEffect = Instantiate(AtkEffect[on_count], transform);
             currentATKEffect.transform.position = dir;

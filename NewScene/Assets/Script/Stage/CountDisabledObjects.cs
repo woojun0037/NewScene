@@ -5,14 +5,14 @@ using UnityEngine;
 public class CountDisabledObjects : MonoBehaviour
 {
     public int MaxCount;
-
+    int count = 0;
     private void Start()
     {
         MaxCount = transform.childCount;
     }
     private void Update()
     {
-        int count = 0;
+
 
         // 부모 오브젝트의 모든 자식 오브젝트를 순회하면서
         foreach (Transform child in transform)
