@@ -7,43 +7,47 @@ using UnityEngine.UI;
 public class PlayerSkill : MonoBehaviour
 {
 
+    public static PlayerSkill Instance;
     public Vector3 mousePos;
     private Vector3 Dir;
     private Vector3 DashTarget;
 
-    //WindStorm windskill;
     Main_Player player;
+    [Header("Script")]
     public Gauge gauge;
-    public GameObject FlyingObject;
     public HitScript hitScript;
 
+    [Header("SkillCheck1")]
     public bool isSkillOn = false;
-    public bool isCollision = false;
     public bool isSkillUse = true;
     public bool isTest;
 
-    public bool WindSkillCheck = false;
+    [Header("SkillCheck2")]
     public bool RainSkillCheck = false;
-    public bool CloudSkillCheck = false;
+    public bool WindSkillCheck = false;
     public bool DarkSkillUse = false;
+    public bool CloudSkillCheck = false;
     private bool isDash;
 
-    public static PlayerSkill Instance;
-
-    public Canvas WindDirection;
-
+    [Header("GameObject")]
     public TrailRenderer trailEffect;
+    public GameObject FlyingObject;
     public GameObject CloudPos;
     public GameObject WindSkillPrefab;
+    public GameObject WindHitBox;
 
-    private Vector3 posUp;
+    [Header("position")]
+    public Vector3 posUp;
     public Vector3 postion;
     public Vector3 RainPos;
 
+    [Header("UI")]
+    public Canvas WindDirection;
     public Canvas ability2Canvas;
     public Image targetCircle;
     public Image SkillRange;
 
+    [Header("SkillTime")]
     public float RainSkillTime;
     public float RainSkillCool;
     public float maxAbilityDistance;
@@ -133,6 +137,16 @@ public class PlayerSkill : MonoBehaviour
         WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
         WindSkillPrefab.transform.rotation = this.transform.rotation;
         WindSkillPrefab.SetActive(true);
+
+        WindHitBox.SetActive(true);
+        StartCoroutine(WindHitBoxCor());
+    }
+
+    IEnumerator WindHitBoxCor()
+    {
+        WindHitBox.SetActive(false);
+        yield return null;
+
     }
 
     public void WindSkillRange()

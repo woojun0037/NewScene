@@ -9,12 +9,13 @@ public class PropertySkill : MonoBehaviour
 
     private Vector3 mousePos;
 
+    public Transform PlayerPos;
     public Main_Player SkillUse;
     public Enemy enemy;
+
     public GameObject motion;
     public GameObject IceSpecial;
     public GameObject TurnderSpecial;
-    public Transform PlayerPos;
 
     //public GameMain TafoonHitBox;
 
