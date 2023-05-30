@@ -16,7 +16,6 @@ public class Seonbi_Script : Enemy
     public Rigidbody SeonbiBullet;
     public GameObject ragdoll_obj;
 
-    public float monsterhp;
     private float Dist;
 
     protected override void Awake()
@@ -57,7 +56,7 @@ public class Seonbi_Script : Enemy
             }
 
             Vector3 targety = targetTransform.position;
-            targety.y = SetY;
+            targety.y = 0;
 
             if (Dist <= 5)
             {
@@ -105,7 +104,7 @@ public class Seonbi_Script : Enemy
         yield return new WaitForSeconds(0.9f);
 
         Vector3 targety = targetTransform.position;
-        targety.y = SetY;
+        targety.y = 0;
 
         Vector3 target_ = transform.position;
         target_.y = transform.position.y;

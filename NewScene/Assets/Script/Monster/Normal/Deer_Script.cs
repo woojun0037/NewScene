@@ -6,10 +6,6 @@ public class Deer_Script : Enemy
 {
     private Animator animator;
 
-    [SerializeField]
-    float SetY;
-    RaycastHit hit;
-
     bool isattack;
     bool DontMove;
 
@@ -17,9 +13,6 @@ public class Deer_Script : Enemy
     public GameObject DeerLuncher;
     public GameObject ragdoll_obj;
     private float Dist;
-    float time = 0;
-    private float spawntime = 2;
-    private float current_rosh = 0;
 
     private float roshspeed = 10f;
     private bool isrosh = false;
@@ -30,6 +23,7 @@ public class Deer_Script : Enemy
 
     Vector3 startingPosition;
     public Renderer deerMaterial;
+
     protected override void Awake()
     {
         base.Awake();
@@ -43,8 +37,6 @@ public class Deer_Script : Enemy
         animator = GetComponent<Animator>();
     }
 
-    public bool one;
-    // Update is called once per frame
     void Update()
     {
         monsterMove();
@@ -75,9 +67,6 @@ public class Deer_Script : Enemy
                 animator.SetBool("Move", false);
                 agent.isStopped = true;
             }
-
-            Vector3 targety = targetTransform.position;
-            targety.y = SetY;
 
             //현재 경로에서 목표 지점까지 남아있는 거리
             if (Dist <= 5)
@@ -140,15 +129,12 @@ public class Deer_Script : Enemy
         yield return new WaitForSeconds(0.5f);
         //transform.LookAt(targety);
 
-
         yield return new WaitForSeconds(1f);
 
         animator.SetBool("isAttack", false);
         animator.SetInteger("Attack", 0);
 
         yield return new WaitForSeconds(3f);
-
-
         yield return new WaitForSeconds(attackCoolTime);
         isattack = false;
         DontMove = false;
@@ -183,7 +169,6 @@ public class Deer_Script : Enemy
             particle_attack.Stop();
             isdash = false;
             isattack = false;
-            //isrosh = false;
             animator.SetBool("Move", false);
         }
         else
