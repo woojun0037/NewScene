@@ -16,7 +16,7 @@ public class BossMonster_Tiger : Boss
     public SkinnedMeshRenderer mat;
     public GameObject attackcollider;
     public GameObject throwRockObj;
-
+     public GameObject SlashObj;
     private Animator anim;
 
     private Vector3 tempPos;
@@ -52,7 +52,7 @@ public class BossMonster_Tiger : Boss
 
                         isAttack = true;
                         anim.SetBool("isWalk", false);
-                        BaseAttack();
+                        CloseAttackChoice();
                     }
                 }
                 else
@@ -143,8 +143,19 @@ public class BossMonster_Tiger : Boss
         else if (rand == 1)
             StartCoroutine(DashAndDash());
         else if (rand == 2)
-            RockAttack();
+            SlashAttack();
     }
+
+    private void CloseAttackChoice()
+    {
+        isMove = false;
+        int rand = Random.Range(0, 2);
+        if (rand == 0)
+            BaseAttack();
+        else if (rand == 1)
+            JumpAttack();
+    }
+
 
     private void BaseAttack()
     {
@@ -156,6 +167,7 @@ public class BossMonster_Tiger : Boss
 
     private void SlashAttack()
     {
+        StartCoroutine(SlashAttackCor());
         anim.SetTrigger("SlashAttack");
     }
     private void DashAttack()
@@ -210,6 +222,14 @@ public class BossMonster_Tiger : Boss
         }
         isMove = true;
 
+    }
+    private IEnumerator SlashAttackCor()
+    {
+        isMove = false;
+
+        GameObject spawnSlashObject = Instantiate(SlashObj, transform.position, transform.rotation);
+
+        yield return new WaitForSeconds(5f);
     }
 
     private IEnumerator BaseAttackCor()

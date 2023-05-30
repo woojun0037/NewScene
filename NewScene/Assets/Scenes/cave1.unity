@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2501099372869160486, guid: 8e23ffe7ab756b74eb8e0842841248bf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4868172155458260937, guid: 8e23ffe7ab756b74eb8e0842841248bf, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -181,6 +177,10 @@ PrefabInstance:
     - target: {fileID: 4868172155458260942, guid: 8e23ffe7ab756b74eb8e0842841248bf, type: 3}
       propertyPath: m_Name
       value: Monster_Golem_cave
+      objectReference: {fileID: 0}
+    - target: {fileID: 4868172155458260942, guid: 8e23ffe7ab756b74eb8e0842841248bf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e23ffe7ab756b74eb8e0842841248bf, type: 3}

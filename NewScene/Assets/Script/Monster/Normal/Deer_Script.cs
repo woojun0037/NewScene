@@ -151,6 +151,8 @@ public class Deer_Script : Enemy
 
     protected void rosh()
     {
+        DontMove = true;
+
         if (!isrosh)
         {
             if (particle_attack != null)
@@ -167,10 +169,10 @@ public class Deer_Script : Enemy
 
         if (Vector3.Distance(transform.position, startingPosition) < 1)
         {
-            DontMove = true;
             particle_attack.Stop();
             isdash = false;
             isattack = false;
+            DontMove = false;
             animator.SetBool("Move", false);
         }
         else
