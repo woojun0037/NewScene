@@ -160,6 +160,7 @@ public class Deer_Script : Enemy
             animator.SetBool("Move", true);
             transform.LookAt(targetTransform);
             startingPosition = targetTransform.position;
+            startingPosition.y = 0;
             isrosh = true;
         }
 

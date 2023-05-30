@@ -16,6 +16,7 @@ public class Damage_Bullet : MonoBehaviour
         if (GetColliderTime)
         {
             objectCollider = GetComponent<Collider>();
+            objectCollider.enabled = true;
             StartCoroutine(ActivateCollider());
         }
     }
@@ -23,6 +24,14 @@ public class Damage_Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other) 
     {
         if (other.gameObject.tag == "Main_gangrim")
+        {
+            FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Main_gangrim")
         {
             FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
         }

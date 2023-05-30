@@ -123,7 +123,6 @@ public class BossMonster_Tiger : Boss
         if (curHearth < 1)
         {
             anim.SetBool("isDie", true);
-            //gameObject.SetActive(false);
             isDie = true;
         }
     }
@@ -155,6 +154,10 @@ public class BossMonster_Tiger : Boss
         anim.SetTrigger("BaseAttack");
     }
 
+    private void SlashAttack()
+    {
+        anim.SetTrigger("SlashAttack");
+    }
     private void DashAttack()
     {
         isDash = true;
@@ -181,7 +184,7 @@ public class BossMonster_Tiger : Boss
         transform.LookAt(spawn); //그 방향 보고 던짐 + 방향 고정
 
         Vector3 rockpos = transform.position;
-        rockpos.y = 5;
+        rockpos.y = transform.position.y +5f;
         GameObject ThrowRockrigid = Instantiate(throwRockObj, rockpos, transform.rotation);
     }
 

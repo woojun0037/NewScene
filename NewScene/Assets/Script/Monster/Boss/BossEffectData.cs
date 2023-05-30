@@ -12,6 +12,9 @@ public class BossEffectData : MonoBehaviour
 
     [SerializeField] private Vector3[] range_transform;
 
+    [SerializeField] float MaxRockYpos = 30;
+    [SerializeField] float MinRockYpos = 0;
+
     private void Awake()
     {
         if(index == 0)
@@ -45,7 +48,7 @@ public class BossEffectData : MonoBehaviour
             jumpAttack_range[i].SetActive(true);
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
 
         for (int i = 0; i < range_transform.Length; i++)
         {
@@ -60,15 +63,15 @@ public class BossEffectData : MonoBehaviour
 
     private IEnumerator JumpAttack()
     {
-        float count = 15;
-        while(count > 5)
+        float MaxRockYpos = 30;
+        while(MaxRockYpos > MinRockYpos)
         {
-            count -= 0.2f;
+            MaxRockYpos -= 0.2f;
             yield return new WaitForSeconds(0.005f);
             for(int i = 0; i < jumpAttack_effect.Length; i++)
             {
                 jumpAttack_effect[i].SetActive(true);
-                jumpAttack_effect[i].transform.position = new Vector3(range_transform[i].x,  count, range_transform[i].z);
+                jumpAttack_effect[i].transform.position = new Vector3(range_transform[i].x, MaxRockYpos, range_transform[i].z);
             }
         }
 
@@ -77,7 +80,7 @@ public class BossEffectData : MonoBehaviour
             jumpEffect[i].transform.position = new Vector3(jumpAttack_effect[i].transform.position.x, 1f, jumpAttack_effect[i].transform.position.z);
             jumpEffect[i].SetActive(true);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         Destroy(this.gameObject);
     }
