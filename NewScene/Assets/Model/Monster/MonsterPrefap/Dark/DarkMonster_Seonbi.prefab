@@ -15408,17 +15408,17 @@ GameObject:
   m_Component:
   - component: {fileID: 8593456889690221708}
   - component: {fileID: 8126937941588516875}
-  - component: {fileID: 8126937941588516872}
   - component: {fileID: 2057665919904270489}
   - component: {fileID: 2057665919904270494}
   - component: {fileID: 2057665919904270488}
+  - component: {fileID: 6283498930796185226}
   m_Layer: 0
   m_Name: DarkMonster_Seonbi
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8593456889690221708
 Transform:
   m_ObjectHideFlags: 0
@@ -15426,7 +15426,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8937893937153979958}
-  m_LocalRotation: {x: -0, y: 0.58974344, z: -0, w: 0.8075907}
+  m_LocalRotation: {x: 0, y: 0.5897462, z: 0, w: 0.8075887}
   m_LocalPosition: {x: -13.303, y: 2, z: -1.368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15456,35 +15456,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &8126937941588516872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8937893937153979958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 166f92dcb06eaa64da01733a0e12bf10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageToGive: 1
-  maxHearth: 10
-  curHearth: 10
-  MaxDistance: 5
-  chasespeed: 5
-  DebuffCheck: 0
-  StartAttack: 0
-  KnockBackForce: 0
-  targetTransform: {fileID: 0}
-  agent: {fileID: 0}
-  playerSkill: {fileID: 0}
-  getTouch: 0
-  SetY: 2
-  BulletCheck: 0
-  SeonbiBullet: {fileID: 2382716783491538334, guid: 81cdc40eb038d9c439fe3ccfd6bf4cec, type: 3}
-  ragdoll_obj: {fileID: 2867554655623387056, guid: 63cac2fa8f8f58b4f96d2a4ca9506162, type: 3}
-  monsterhp: 2
 --- !u!54 &2057665919904270489
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15537,6 +15508,34 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6283498930796185226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8937893937153979958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ff8089a90bc63643965a5ca5b40d761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToGive: 1
+  maxHearth: 10
+  curHearth: 10
+  MaxDistance: 5
+  chasespeed: 5
+  DebuffCheck: 0
+  StartAttack: 0
+  KnockBackForce: 0
+  targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
+  SetY: 2
+  BulletCheck: 0
+  SeonbiBullet: {fileID: 2382716783491538334, guid: 81cdc40eb038d9c439fe3ccfd6bf4cec, type: 3}
+  ragdoll_obj: {fileID: 2867554655623387056, guid: 63cac2fa8f8f58b4f96d2a4ca9506162, type: 3}
 --- !u!1001 &2057665920448741322
 PrefabInstance:
   m_ObjectHideFlags: 0
