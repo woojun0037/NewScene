@@ -14,9 +14,11 @@ public class PlayerSkill : MonoBehaviour
     //WindStorm windskill;
     Main_Player player;
     public Gauge gauge;
+
     public GameObject FlyingObject;
+    public GameObject check;
+
     public HitScript hitScript;
-    public CameraShaker Shaker;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
@@ -135,7 +137,6 @@ public class PlayerSkill : MonoBehaviour
         WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
         WindSkillPrefab.transform.rotation = this.transform.rotation;
         WindSkillPrefab.SetActive(true);
-        
     }
 
     public void WindSkillRange()

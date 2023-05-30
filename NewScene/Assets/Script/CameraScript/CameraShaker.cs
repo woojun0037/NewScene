@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
+    public WindSkillHitCheck skill;
     public float shakeTime = 1.0f;
     public float shakeSpeed = 2.0f;
     public float shakeAmount = 1.0f;
@@ -24,7 +25,10 @@ public class CameraShaker : MonoBehaviour
 
     public void ShakeInput()
     {
-        StartCoroutine(Shake());   
+        if(skill.HitCheck)
+        {
+            StartCoroutine(Shake());
+        }
     }
 
     IEnumerator Shake()
@@ -38,10 +42,10 @@ public class CameraShaker : MonoBehaviour
             cam.localPosition = Vector3.Lerp(cam.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
 
             yield return null;
-
+            skill.HitCheck = false;
             elapsedTime += Time.deltaTime;
         }
-
+        
         cam.localPosition = originPosition;
     }
 }
