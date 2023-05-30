@@ -50,8 +50,9 @@ public class Rabbit_Script : Enemy
         if (curHearth < 1)
         {
             GameObject ThrowRockrigid = Instantiate(ragdoll_obj, transform.position, transform.rotation);
-            //OnDisable();
+
             gameObject.SetActive(false);
+            OnDisable();
         }
     }
 
