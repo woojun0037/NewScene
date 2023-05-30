@@ -1234,8 +1234,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.8
+  m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3110994067348648090
@@ -1260,6 +1260,7 @@ MonoBehaviour:
   KnockBackForce: 0
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
+  playerSkill: {fileID: 0}
   getTouch: 0
   attackDelaytime: 0
 --- !u!195 &3110994067348648068
@@ -1271,10 +1272,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 6467612261956257663}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 60
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -1283,7 +1284,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &6496596651068132068
 GameObject:
   m_ObjectHideFlags: 0

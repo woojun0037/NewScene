@@ -51,7 +51,7 @@ public class Bat_Script : Enemy
             animator.SetBool("isDie", true);
             DontMove = true;
             isdie = true;
-            agent.enabled = false;
+            OnDisable();
 
             deletetime += Time.deltaTime;
 
@@ -101,12 +101,14 @@ public class Bat_Script : Enemy
         }
         else
         {
-            agent.destination = currentpos;
-            if(Vector3.Distance(transform.position, currentpos) < 1)
+            if(agent != null)
+            {
+                agent.destination = currentpos;
+            }
+            if (Vector3.Distance(transform.position, currentpos) < 1)
             animator.SetBool("Move", false);
         }
     }
-
 
 
     IEnumerator attacker()

@@ -31,6 +31,9 @@ public class Golem_Script : Enemy
     protected override void Start()
     {
         base.Start();
+        if(GolemObj == null)
+        GolemObj = gameObject;
+
         getTouch = true;
         isattack = false;
         DontMove = false;
@@ -54,7 +57,7 @@ public class Golem_Script : Enemy
             animator.SetBool("isDie", true);
             DontMove = true;
             isdie = true;
-            agent.enabled = false;
+            OnDisable();
 
             deletetime += Time.deltaTime;
 

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868172155458260937}
   m_Layer: 0
-  m_Name: Monster_Golem
+  m_Name: Monster_Golem_cave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,10 +177,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4868172155458260937}
     m_Modifications:
+    - target: {fileID: 1000168150, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_Radius
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1000168151, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: RockBullet
       value: 
       objectReference: {fileID: 2501099372869160486}
+    - target: {fileID: 5510483733647441396, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a790125ff94ee71478e0962bddb5a776, type: 2}
+    - target: {fileID: 5510483733647441396, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53e0c68771102cd49a46b13cfb282a5d, type: 2}
     - target: {fileID: 7417565525786355350, guid: 55963238c4b373240bcf2781dfcdd51e, type: 3}
       propertyPath: m_RootOrder
       value: 1
