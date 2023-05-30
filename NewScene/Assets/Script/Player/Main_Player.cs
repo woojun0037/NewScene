@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
-
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
     [SerializeField] Collider WindBox;
@@ -36,7 +35,6 @@ public class Main_Player : MonoBehaviour
 
     public bool isAttack = false;
     public bool isWind = false;
-
     public bool attackInputOn;
     public bool isTafoon;
 
@@ -52,34 +50,25 @@ public class Main_Player : MonoBehaviour
     public float Duration;
     public float Magnitude;
 
-    int hitState;
+    private int hitState;
     internal int HitState => hitState;
 
     private void Awake()
     {
-        propertySkill = GetComponent<PropertySkill>();
+        propertySkill = GetComponent<PropertySkill>(); //GetComponent보단 public으로 
         hit = HitBox.gameObject.GetComponent<HitScript>();
         tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
         cam = FindObjectOfType<CameraMovemant>();
     }
 
-    private void Start()
-    {
-       
-    }
-
     void Update()
     {
+        CalTargetPos();
         AttackInput();
         Around();
         Move();
         Skill_E();
         Skill_R();
-    }
-
-    void FixedUpdate()
-    {
-        CalTargetPos();
     }
 
     public void OnWeapon()
@@ -133,19 +122,22 @@ public class Main_Player : MonoBehaviour
         {
             hitState = 1;
             isAttack = true;
-            Anim.SetTrigger("isAttack_1");
+            string Attack1 = "isAttack_1";
+            Anim.SetTrigger(Attack1);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
             hitState = 2;
             isAttack = true;
-            Anim.SetTrigger("isAttack_2");
+            string Attack2 = "isAttack_2";
+            Anim.SetTrigger(Attack2);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
             hitState = 3;
             isAttack = true;
-            Anim.SetTrigger("isAttack_3");
+            string Attack3 = "isAttack_3";
+            Anim.SetTrigger(Attack3);
         }
     }
 
@@ -159,15 +151,16 @@ public class Main_Player : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+            string Platform = "Platform";
+            int layerMask = 1 << LayerMask.NameToLayer(Platform);
 
             if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
             {
-                if (rayHit.collider.tag == "Platform")
+                if (rayHit.collider.tag == Platform)
                 {
                     transform.LookAt(rayHit.point);
                 }
-                if (rayHit.collider.tag == "Platform" && propertySkill.Stun == true)
+                if (rayHit.collider.tag == Platform && propertySkill.Stun == true)
                 {
                     transform.LookAt(rayHit.point);
                     propertySkill.ThunderSkillSpecial(rayHit.point);
@@ -181,8 +174,8 @@ public class Main_Player : MonoBehaviour
         HP = PlayerHP;
         if (HP < 1)
         {
-            Anim.SetTrigger("Dead");
-
+            string Dead = "Dead";
+            Anim.SetTrigger(Dead);
         }
     }
 
@@ -212,33 +205,36 @@ public class Main_Player : MonoBehaviour
 
     private void Move()
     {
-        float moveDirX = Input.GetAxisRaw("Horizontal");
-        float moveDirZ = Input.GetAxisRaw("Vertical");
+        string Horizontal = "Horizontal";
+        float moveDirX = Input.GetAxisRaw(Horizontal);
+
+        string Vertical = "Vertical";
+        float moveDirZ = Input.GetAxisRaw(Vertical);
 
         //Vector3 moveHorizontal = transform.right * moveDirX;
         //Vector3 moveVertical = transform.forward * moveDirZ;
 
         if (moveDirZ == 1)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
+            transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);//vector는 걍 다 new다, 좌표가 매번 업데이트 되기 때문에 미리 만들어진거면 뚝뚝 끊김
             isMove = true;
             AnimationBoolCheck();
         }
         else if(moveDirZ == -1)
         {
-            transform.Translate(Vector3.back * Time.deltaTime * MoveSpeed);
+            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
         else if(moveDirX == 1)
         {
-            transform.Translate(Vector3.right * Time.deltaTime * MoveSpeed);
+            transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
         else if(moveDirX == -1)
         {
-            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed);
+            transform.Translate(UtillScript.Left * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
@@ -251,13 +247,14 @@ public class Main_Player : MonoBehaviour
 
     private void Around()
     {
-        Vector3 playerRotate = Vector3.Scale(cam.transform.forward, new Vector3(1, 0, 1));
+        Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
     }
 
     public void Skill_Q()
     {
-        Anim.SetTrigger("WindSkill");
+        string windSkill = "WindSkill";
+        Anim.SetTrigger(windSkill);
         Q_skillCheck = true;
     }
 
@@ -283,7 +280,8 @@ public class Main_Player : MonoBehaviour
     }
 
     private void AnimationBoolCheck()
-    { 
-       Anim.SetBool("isMove", isMove);
+    {
+       string Move = "isMove";
+       Anim.SetBool(Move, isMove);
     }
 }
