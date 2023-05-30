@@ -135,7 +135,6 @@ public class PlayerSkill : MonoBehaviour
         WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
         WindSkillPrefab.transform.rotation = this.transform.rotation;
         WindSkillPrefab.SetActive(true);
-        
     }
 
     public void WindSkillRange()

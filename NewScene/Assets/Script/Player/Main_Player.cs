@@ -218,7 +218,31 @@ public class Main_Player : MonoBehaviour
         //Vector3 moveHorizontal = transform.right * moveDirX;
         //Vector3 moveVertical = transform.forward * moveDirZ;
 
-        if (moveDirZ == 1)
+        if (moveDirX == 1 && moveDirZ == 1)
+        {
+            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if (moveDirX == 1 && moveDirZ == -1)
+        {
+            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if (moveDirX == -1 && moveDirZ == 1)
+        {
+            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if (moveDirX == -1 && moveDirZ == -1)
+        {
+            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if (moveDirZ == 1)
         {
             transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
             isMove = true;
