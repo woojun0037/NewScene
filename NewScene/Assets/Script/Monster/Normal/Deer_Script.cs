@@ -20,7 +20,7 @@ public class Deer_Script : Enemy
 
     public ParticleSystem particle_attack;
     public EmissionIntensityController emissionController;
-
+    [SerializeField]
     Vector3 startingPosition;
     public Renderer deerMaterial;
 
@@ -160,7 +160,8 @@ public class Deer_Script : Enemy
             animator.SetBool("Move", true);
             transform.LookAt(targetTransform);
             startingPosition = targetTransform.position;
-            startingPosition.y = 0;
+            //startingPosition.y = 0;
+
             isrosh = true;
         }
 
