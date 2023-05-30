@@ -16,6 +16,7 @@ public class PlayerSkill : MonoBehaviour
     public Gauge gauge;
     public GameObject FlyingObject;
     public HitScript hitScript;
+    public CameraShaker Shaker;
 
     public bool isSkillOn = false;
     public bool isCollision = false;
@@ -35,8 +36,9 @@ public class PlayerSkill : MonoBehaviour
     public TrailRenderer trailEffect;
     public GameObject CloudPos;
     public GameObject WindSkillPrefab;
+    public GameObject WindHitBox;
 
-    private Vector3 posUp;
+    public Vector3 posUp;
     public Vector3 postion;
     public Vector3 RainPos;
 
@@ -133,6 +135,7 @@ public class PlayerSkill : MonoBehaviour
         WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
         WindSkillPrefab.transform.rotation = this.transform.rotation;
         WindSkillPrefab.SetActive(true);
+        
     }
 
     public void WindSkillRange()
