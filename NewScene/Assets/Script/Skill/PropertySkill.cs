@@ -12,7 +12,7 @@ public class PropertySkill : MonoBehaviour
     public Transform PlayerPos;
     public Main_Player SkillUse;
     public Enemy enemy;
-
+    public GameObject icepos;
     public GameObject motion;
     public GameObject IceSpecial;
     public GameObject TurnderSpecial;
@@ -106,23 +106,23 @@ public class PropertySkill : MonoBehaviour
 
     public void IceSkillSpecial()
     {
-        mousePos = Input.mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        if (Physics.Raycast(ray, out RaycastHit rayHit))
+        //mousePos = Input.mousePosition;
+        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        //if (Physics.Raycast(ray, out RaycastHit rayHit))
+
+        if (Input.GetKeyDown(KeyCode.G) && Debuff == true)
         {
-            if (rayHit.collider.tag == "Platform" && Input.GetKeyDown(KeyCode.G) && Debuff == true)
-            {
-                transform.LookAt(rayHit.point);
-                IceSpecial.transform.rotation = this.transform.rotation;
-                IceSpecial.SetActive(true);
-                StartCoroutine(IceSetActive());
-            }
+            Debuff = false;
+            IceSpecial.transform.position = icepos.transform.position;
+            IceSpecial.transform.rotation = icepos.transform.rotation;
+            IceSpecial.SetActive(true);
+            StartCoroutine(IceSetActive());
         }
     }
 
     private IEnumerator IceSetActive()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         IceSpecial.SetActive(false);
     }
 

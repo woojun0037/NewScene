@@ -167,7 +167,8 @@ public class Enemy : MonoBehaviour
         {
             HitScript hit;
             hit = other.GetComponent<HitScript>();
-            while(hit != null)
+            
+            while (hit != null)
             curHearth -= hit.damage;
         }
     }

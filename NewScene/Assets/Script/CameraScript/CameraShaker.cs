@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    public WindSkillHitCheck skill;
-    public float shakeTime = 1.0f;
-    public float shakeSpeed = 2.0f;
+    private Transform cam;
+    public PlayerSkill skill;
+    public float shakeTime = 0.3f;
+    public float shakeSpeed = 1.0f;
     public float shakeAmount = 1.0f;
 
-    private Transform cam;
 
     // Start is called before the first frame update
     void Start()
@@ -25,27 +25,25 @@ public class CameraShaker : MonoBehaviour
 
     public void ShakeInput()
     {
-        if(skill.HitCheck)
+        if(skill.isShake)
         {
-            StartCoroutine(Shake());
+            StartCoroutine(Shake());      
         }
     }
 
     IEnumerator Shake()
     {
+        yield return new WaitForSeconds(1.2f);
         Vector3 originPosition = cam.localPosition;
         float elapsedTime = 0.0f;
-
         while (elapsedTime < shakeTime)
         {
             Vector3 randomPoint = originPosition + Random.insideUnitSphere * shakeAmount;
             cam.localPosition = Vector3.Lerp(cam.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
-
-            yield return null;
-            skill.HitCheck = false;
             elapsedTime += Time.deltaTime;
+            skill.isShake = false;
+            yield return null;
         }
-        
         cam.localPosition = originPosition;
     }
 }

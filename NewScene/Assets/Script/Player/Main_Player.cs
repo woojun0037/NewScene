@@ -6,11 +6,8 @@ public class Main_Player : MonoBehaviour
 {
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
-    [SerializeField] Collider WindBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
-
-    [SerializeField] private WindStorm windOn;
 
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
@@ -21,11 +18,11 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public CameraMovemant cam;
-
     private Vector3 mousePos;
 
     private bool isMove = false;
 
+    public GameObject windHitBox;
     public GameObject[] AtkEffect;
     public bool[] isClicks;
 
@@ -38,9 +35,13 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
     public bool isTafoon;
 
+    public bool isDash = true;
+    public bool Right;
+    public bool Left;
+    public bool Back;
+
     public float damage;
     public float HP;
-
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
@@ -58,6 +59,7 @@ public class Main_Player : MonoBehaviour
         propertySkill = GetComponent<PropertySkill>(); //GetComponent보단 public으로 
         hit = HitBox.gameObject.GetComponent<HitScript>();
         tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
+
         cam = FindObjectOfType<CameraMovemant>();
     }
 
@@ -67,6 +69,7 @@ public class Main_Player : MonoBehaviour
         AttackInput();
         Around();
         Move();
+        Dash();
         Skill_E();
         Skill_R();
     }
@@ -83,12 +86,12 @@ public class Main_Player : MonoBehaviour
 
     public void OnWind()
     {
-        windOn.gameObject.SetActive(true);
+        windHitBox.gameObject.SetActive(true);
     }
 
     public void OffWind()
     {
-        windOn.gameObject.SetActive(false);
+        windHitBox.gameObject.SetActive(false);
     }
 
     public void TafoonON()
@@ -244,12 +247,6 @@ public class Main_Player : MonoBehaviour
             isMove = true;
             AnimationBoolCheck();
         }
-        else if(moveDirZ == -1)
-        {
-            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
-            isMove = true;
-            AnimationBoolCheck();
-        }
         else if(moveDirX == 1)
         {
             transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
@@ -267,6 +264,35 @@ public class Main_Player : MonoBehaviour
             isMove = false;
             AnimationBoolCheck();
         }
+
+        if(moveDirZ == -1)
+        {
+            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
+            Back = true;
+            Anim.SetBool("BackWard", Back);
+        }
+        else
+        {
+            Back = false;
+            Anim.SetBool("BackWard", Back);
+        }
+
+    }
+
+    public void Dash()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Anim.SetTrigger("isDash");
+            isDash = false;
+            StartCoroutine(DashCor());
+        }
+    }
+
+    IEnumerator DashCor()
+    {
+        isDash = true;
+        yield return new WaitForSeconds(1f);
     }
 
     private void Around()

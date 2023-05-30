@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class WindSkillHitCheck : MonoBehaviour
 {
-    public bool HitCheck = false;
-
     public void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Monster")
+        if (other.gameObject.tag == "Monster")
         {
-            HitCheck = true;
+            other.GetComponent<Enemy>().curHearth -= 3f;
         }
     }
 }
