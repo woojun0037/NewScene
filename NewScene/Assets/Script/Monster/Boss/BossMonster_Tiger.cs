@@ -149,11 +149,13 @@ public class BossMonster_Tiger : Boss
     private void CloseAttackChoice()
     {
         isMove = false;
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
         if (rand == 0)
             BaseAttack();
         else if (rand == 1)
             JumpAttack();
+        else if (rand == 2)
+            SlashAttack();
     }
 
 
