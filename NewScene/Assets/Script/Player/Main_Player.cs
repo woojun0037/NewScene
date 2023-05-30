@@ -6,15 +6,13 @@ public class Main_Player : MonoBehaviour
 {
 
     [SerializeField] Vector3 MovePlayer;
-
     [SerializeField] Collider HitBox;
     [SerializeField] Collider WindBox;
     [SerializeField] Collider TafoonBox;
-
     [SerializeField] GameObject currentATKEffect;
     [SerializeField] float RotateSpeed = 10f;
-
     [SerializeField] private WindStorm windOn;
+
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
     private HitScript hit;
@@ -24,11 +22,10 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public MainCamera mainCamera;
-   
-    private Vector3 mousePos;
-    private Vector3 player_Move_Input;
-    private Vector3 heading;
+    public CameraMovemant cam;
 
+    private Vector3 mousePos;
+    
     private bool isMove = false;
     private bool isBack = false;
 
@@ -72,7 +69,6 @@ public class Main_Player : MonoBehaviour
     void Update()
     {
         AttackInput();
-        
         Skill_E();
         Skill_R();
     }
@@ -199,43 +195,21 @@ public class Main_Player : MonoBehaviour
             Vector3 dir = transform.position;
             dir.y = transform.position.y + 1.5f;
 
-            currentATKEffect = Instantiate(AtkEffect[on_count], transform);
+            currentATKEffect = AtkEffect[on_count];
             currentATKEffect.transform.position = dir;
+            currentATKEffect.SetActive(true);
         }
     }
 
     public void ATK_Effect_Off()
     {
-        Destroy(currentATKEffect);
+        currentATKEffect.SetActive(false);
+        currentATKEffect = null;
     }
 
     private void Move()
     {
-        // 입력값을 Vector3에 저장
-        player_Move_Input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        player_Move_Input.Normalize();
-
-        // 카메라의 Forward를 가져옴
-        heading = Camera.main.transform.forward;
-        heading.y = 0;
-        heading.Normalize();
-        heading = heading - player_Move_Input;
-
-        if (player_Move_Input != Vector3.zero && !isAttack && !propertySkill.TafoonSpecialMove && !isWind && hitState == 0 && !Input.GetKey(KeyCode.E))
-        {
-            isMove = true;
-            AnimationBoolCheck();
-            float angle = Mathf.Atan2(heading.z, heading.x) * Mathf.Rad2Deg * -2;
-
-            transform.rotation = Quaternion.Lerp(transform.rotation,
-                                 Quaternion.Euler(0, angle, 0), Time.deltaTime * RotateSpeed);
-            transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
-        }
-        else
-        {
-            isMove = false;
-            AnimationBoolCheck();
-        }
+        
     }
 
     public void Skill_Q()
