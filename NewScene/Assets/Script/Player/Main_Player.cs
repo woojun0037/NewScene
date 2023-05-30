@@ -36,7 +36,7 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
     public bool isTafoon;
 
-    public bool isDash;
+    public bool isDash = true;
     public bool Right;
     public bool Left;
     public bool Back;
@@ -219,25 +219,25 @@ public class Main_Player : MonoBehaviour
 
         if (moveDirX == 1 && moveDirZ == 1)
         {
-            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed/2);
+            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == 1 && moveDirZ == -1)
         {
-            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed/2);
+            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == 1)
         {
-            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed/2);
+            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == -1)
         {
-            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed/2);
+            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
@@ -281,18 +281,18 @@ public class Main_Player : MonoBehaviour
 
     public void Dash()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && isDash)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Anim.SetTrigger("isDash");
             isDash = false;
-            StartCoroutine(DashCor()); 
+            StartCoroutine(DashCor());
         }
     }
 
     IEnumerator DashCor()
     {
-        yield return new WaitForSeconds(0.5f);
         isDash = true;
+        yield return new WaitForSeconds(1f);
     }
 
     private void Around()
