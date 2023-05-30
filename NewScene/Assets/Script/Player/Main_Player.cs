@@ -71,14 +71,14 @@ public class Main_Player : MonoBehaviour
     void Update()
     {
         AttackInput();
+        Around();
+        Move();
         Skill_E();
         Skill_R();
     }
 
     void FixedUpdate()
     {
-        Move();
-        Around();
         CalTargetPos();
     }
 
@@ -214,19 +214,31 @@ public class Main_Player : MonoBehaviour
     {
         float moveDirX = Input.GetAxisRaw("Horizontal");
         float moveDirZ = Input.GetAxisRaw("Vertical");
-       
-        Vector3 moveHorizontal = transform.right * moveDirX;
-        Vector3 moveVertical = transform.forward * moveDirZ;
 
-        if(moveDirZ != 0)
+        //Vector3 moveHorizontal = transform.right * moveDirX;
+        //Vector3 moveVertical = transform.forward * moveDirZ;
+
+        if (moveDirZ == 1)
         {
-            transform.position += moveVertical * MoveSpeed * Time.deltaTime;
+            transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
-        else if(moveDirX != 0)
+        else if(moveDirZ == -1)
         {
-            transform.position += moveHorizontal * MoveSpeed * Time.deltaTime;
+            transform.Translate(Vector3.back * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if(moveDirX == 1)
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * MoveSpeed);
+            isMove = true;
+            AnimationBoolCheck();
+        }
+        else if(moveDirX == -1)
+        {
+            transform.Translate(Vector3.left * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
