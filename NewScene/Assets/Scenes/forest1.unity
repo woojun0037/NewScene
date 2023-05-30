@@ -14619,6 +14619,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b36d29c36c37746bb894fbbe627a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &882598784 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3161639582371749069, guid: 9372314e87a13de4a969eabc636439be, type: 3}
+  m_PrefabInstance: {fileID: 882598781}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5430a8046fce2814ca3751730437980f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &884172459
 GameObject:
   m_ObjectHideFlags: 0
@@ -20703,7 +20714,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbe5bc78971def4b8b7239135768452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitCheck: 0
 --- !u!1001 &1356972970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35728,9 +35738,11 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0, z: 0}
   gauge: {fileID: 1806436276}
   hitScript: {fileID: 829197618342783858}
+  shaker: {fileID: 4242145175599065656}
   isSkillOn: 0
   isSkillUse: 1
   isTest: 0
+  isShake: 0
   RainSkillCheck: 0
   WindSkillCheck: 0
   DarkSkillUse: 0
@@ -35739,7 +35751,6 @@ MonoBehaviour:
   FlyingObject: {fileID: 647881405}
   CloudPos: {fileID: 1390471048}
   WindSkillPrefab: {fileID: 1833753913}
-  WindHitBox: {fileID: 1348564302}
   posUp: {x: 0, y: 0, z: 0}
   postion: {x: 0, y: 0, z: 0}
   RainPos: {x: 0, y: 0, z: 0}
@@ -37221,7 +37232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d03c11d66e9dde439901b3aa8205ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skill: {fileID: 1348564306}
+  skill: {fileID: 1055605278664233021}
   shakeTime: 1
   shakeSpeed: 2
   shakeAmount: 1
@@ -38841,11 +38852,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
   HitBox: {fileID: 829197618342783857}
-  WindBox: {fileID: 0}
+  WindBox: {fileID: 1348564305}
   TafoonBox: {fileID: 829197618501493957}
   currentATKEffect: {fileID: 0}
-  windOn: {fileID: 0}
-  heal: {fileID: 0}
+  heal: {fileID: 882598784}
   skill: {fileID: 1055605278664233021}
   Anim: {fileID: 1055605278664233020}
   enemy: {fileID: 0}

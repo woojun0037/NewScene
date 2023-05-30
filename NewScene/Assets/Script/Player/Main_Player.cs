@@ -10,8 +10,6 @@ public class Main_Player : MonoBehaviour
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
 
-    [SerializeField] private WindStorm windOn;
-
     private TafoonSkillHit tafoonSkill;
     private PropertySkill propertySkill;
     private HitScript hit;
@@ -38,9 +36,13 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
     public bool isTafoon;
 
+    public bool isDash;
+    public bool Right;
+    public bool Left;
+    public bool Back;
+
     public float damage;
     public float HP;
-
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
@@ -67,6 +69,7 @@ public class Main_Player : MonoBehaviour
         AttackInput();
         Around();
         Move();
+        Dash();
         Skill_E();
         Skill_R();
     }
@@ -83,12 +86,12 @@ public class Main_Player : MonoBehaviour
 
     public void OnWind()
     {
-        windOn.gameObject.SetActive(true);
+        WindBox.gameObject.SetActive(true);
     }
 
     public void OffWind()
     {
-        windOn.gameObject.SetActive(false);
+        WindBox.gameObject.SetActive(false);
     }
 
     public void TafoonON()
@@ -216,37 +219,31 @@ public class Main_Player : MonoBehaviour
 
         if (moveDirX == 1 && moveDirZ == 1)
         {
-            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
+            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed/2);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == 1 && moveDirZ == -1)
         {
-            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
+            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed/2);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == 1)
         {
-            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
+            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed/2);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == -1)
         {
-            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
+            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed/2);
             isMove = true;
             AnimationBoolCheck();
         }
         else if (moveDirZ == 1)
         {
             transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);//vector´Â °Á ´Ù new´Ù, ÁÂÇ¥°¡ ¸Å¹ø ¾÷µ¥ÀÌÆ® µÇ±â ¶§¹®¿¡ ¹Ì¸® ¸¸µé¾îÁø°Å¸é ¶Ò¶Ò ²÷±è
-            isMove = true;
-            AnimationBoolCheck();
-        }
-        else if(moveDirZ == -1)
-        {
-            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
             isMove = true;
             AnimationBoolCheck();
         }
@@ -267,6 +264,35 @@ public class Main_Player : MonoBehaviour
             isMove = false;
             AnimationBoolCheck();
         }
+
+        if(moveDirZ == -1)
+        {
+            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
+            Back = true;
+            Anim.SetBool("BackWard", Back);
+        }
+        else
+        {
+            Back = false;
+            Anim.SetBool("BackWard", Back);
+        }
+
+    }
+
+    public void Dash()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && isDash)
+        {
+            Anim.SetTrigger("isDash");
+            isDash = false;
+            StartCoroutine(DashCor()); 
+        }
+    }
+
+    IEnumerator DashCor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isDash = true;
     }
 
     private void Around()
