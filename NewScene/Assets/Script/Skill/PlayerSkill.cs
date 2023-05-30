@@ -161,7 +161,7 @@ public class PlayerSkill : MonoBehaviour
             WindDirection.enabled = false;
             WindSkillCheck = false;
             isShake = true;
-            shaker.ShakeInput();
+            //shaker.ShakeInput();
             player.Skill_Q();
         }
     }
