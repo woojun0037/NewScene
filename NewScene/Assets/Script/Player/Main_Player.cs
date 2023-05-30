@@ -6,7 +6,6 @@ public class Main_Player : MonoBehaviour
 {
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
-    [SerializeField] Collider WindBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
 
@@ -19,11 +18,11 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public CameraMovemant cam;
-
     private Vector3 mousePos;
 
     private bool isMove = false;
 
+    public GameObject windHitBox;
     public GameObject[] AtkEffect;
     public bool[] isClicks;
 
@@ -60,6 +59,7 @@ public class Main_Player : MonoBehaviour
         propertySkill = GetComponent<PropertySkill>(); //GetComponent보단 public으로 
         hit = HitBox.gameObject.GetComponent<HitScript>();
         tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
+
         cam = FindObjectOfType<CameraMovemant>();
     }
 
@@ -86,12 +86,12 @@ public class Main_Player : MonoBehaviour
 
     public void OnWind()
     {
-        WindBox.gameObject.SetActive(true);
+        windHitBox.gameObject.SetActive(true);
     }
 
     public void OffWind()
     {
-        WindBox.gameObject.SetActive(false);
+        windHitBox.gameObject.SetActive(false);
     }
 
     public void TafoonON()

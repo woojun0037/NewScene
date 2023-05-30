@@ -176,7 +176,7 @@ public class PlayerSkill : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
         {
-            if (rayHit.collider.tag == "Platform" && Input.GetKey(KeyCode.E) && !CloudSkillCheck)
+            if (Input.GetKey(KeyCode.E) && !CloudSkillCheck)
             {
                 transform.LookAt(rayHit.point);
                 CloudPos.gameObject.SetActive(true);
