@@ -193,8 +193,9 @@ public class GangrimSkillUi : MonoBehaviour
     {
         while(curHp.currentHealth < curHp.maxHealth)
         {
-           curHp.currentHealth += 0.1f;
-           yield return new WaitForEndOfFrame();
+            curHp.currentHealth += Time.deltaTime;
+            
+            yield return null;
         }
         HPitemOn = false;
         HP_item.SetActive(false);
@@ -210,6 +211,4 @@ public class GangrimSkillUi : MonoBehaviour
         DarkPillItemOn = false;
         DARKPILL_item.SetActive(false);
     }
-
-    
 }

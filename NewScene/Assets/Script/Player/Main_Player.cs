@@ -18,9 +18,12 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public CameraMovemant cam;
+
     private Vector3 mousePos;
+    private Vector3 player_Move_Input;
 
     private bool isMove = false;
+    private bool isBack = false;
 
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
@@ -30,15 +33,13 @@ public class Main_Player : MonoBehaviour
     public bool E_skillCheck;
     public bool R_skillCheck;
 
-    public bool isAttack = false;
-    public bool isWind = false;
     public bool attackInputOn;
+
+    public bool isAttack = false;
+    public bool isDash = true;
+    public bool isWind = false;
     public bool isTafoon;
 
-    public bool isDash = true;
-    public bool Right;
-    public bool Left;
-    public bool Back;
 
     public float damage;
     public float HP;
@@ -56,13 +57,14 @@ public class Main_Player : MonoBehaviour
 
     void Update()
     {
-        CalTargetPos();
-        AttackInput();
-        Around();
+        //CalTargetPos();
         Move();
+        AttackInput();
         Dash();
+        AnimationBoolCheck();
         Skill_E();
         Skill_R();
+        Around();
     }
 
     public void OnWeapon()
@@ -135,33 +137,33 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    private void CalTargetPos()
-    {
-        mousePos = Input.mousePosition;
+    //private void CalTargetPos()
+    //{
+    //    mousePos = Input.mousePosition;
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            mousePos.z = Camera.main.transform.position.z;
-            Ray ray = Camera.main.ScreenPointToRay(mousePos);
-            Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+    //    if (Input.GetMouseButtonDown(0))
+    //    {
+    //        mousePos.z = Camera.main.transform.position.z;
+    //        Ray ray = Camera.main.ScreenPointToRay(mousePos);
+    //        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
 
-            string Platform = "Platform";
-            int layerMask = 1 << LayerMask.NameToLayer(Platform);
+    //        string Platform = "Platform";
+    //        int layerMask = 1 << LayerMask.NameToLayer(Platform);
 
-            if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
-            {
-                if (rayHit.collider.tag == Platform)
-                {
-                    transform.LookAt(rayHit.point);
-                }
-                if (rayHit.collider.tag == Platform && propertySkill.Stun == true)
-                {
-                    transform.LookAt(rayHit.point);
-                    propertySkill.ThunderSkillSpecial(rayHit.point);
-                }
-            }
-        }
-    }
+    //        if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
+    //        {
+    //            if (rayHit.collider.tag == Platform)
+    //            {
+    //                transform.LookAt(rayHit.point);
+    //            }
+    //            if (rayHit.collider.tag == Platform && propertySkill.Stun == true)
+    //            {
+    //                transform.LookAt(rayHit.point);
+    //                propertySkill.ThunderSkillSpecial(rayHit.point);
+    //            }
+    //        }
+    //    }
+    //}
 
     public void PlayerHP(float PlayerHP)
     {
@@ -170,12 +172,8 @@ public class Main_Player : MonoBehaviour
         {
             string Dead = "Dead";
             Anim.SetTrigger(Dead);
+            this.gameObject.SetActive(false);
         }
-    }
-
-    public void PlayerDead()
-    {
-        this.gameObject.SetActive(false);
     }
 
     public void ATK_Effect_On(int on_count)
@@ -205,74 +203,55 @@ public class Main_Player : MonoBehaviour
         string Vertical = "Vertical";
         float moveDirZ = Input.GetAxisRaw(Vertical);
 
-        //Vector3 moveHorizontal = transform.right * moveDirX;
-        //Vector3 moveVertical = transform.forward * moveDirZ;
-
         if (moveDirX == 1 && moveDirZ == 1)
         {
             transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
         else if (moveDirX == 1 && moveDirZ == -1)
         {
             transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == 1)
         {
             transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
         else if (moveDirX == -1 && moveDirZ == -1)
         {
             transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
         else if (moveDirZ == 1)
         {
-            transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);//vector´Â °Á ´Ù new´Ù, ÁÂÇ¥°¡ ¸Å¹ø ¾÷µ¥ÀÌÆ® µÇ±â ¶§¹®¿¡ ¹Ì¸® ¸¸µé¾îÁø°Å¸é ¶Ò¶Ò ²÷±è
+            transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
-        else if(moveDirX == 1)
+        else if (moveDirZ == -1)
+        {
+            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
+            isMove = true;
+        }
+        else if (moveDirX == 1)
         {
             transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
-        else if(moveDirX == -1)
+        else if (moveDirX == -1)
         {
             transform.Translate(UtillScript.Left * Time.deltaTime * MoveSpeed);
             isMove = true;
-            AnimationBoolCheck();
         }
         else
         {
             isMove = false;
-            AnimationBoolCheck();
         }
-
-        if(moveDirZ == -1)
-        {
-            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
-            Back = true;
-            Anim.SetBool("BackWard", Back);
-        }
-        else
-        {
-            Back = false;
-            Anim.SetBool("BackWard", Back);
-        }
-
     }
 
     public void Dash()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Anim.SetTrigger("isDash");
             isDash = false;
@@ -322,7 +301,7 @@ public class Main_Player : MonoBehaviour
 
     private void AnimationBoolCheck()
     {
-       string Move = "isMove";
-       Anim.SetBool(Move, isMove);
+        string Move = "isMove";
+        Anim.SetBool(Move, isMove);
     }
 }

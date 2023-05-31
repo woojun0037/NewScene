@@ -100,10 +100,6 @@ public class PropertySkill : MonoBehaviour
 
     public void IceSkillSpecial()
     {
-        //mousePos = Input.mousePosition;
-        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        //if (Physics.Raycast(ray, out RaycastHit rayHit))
-
         if (Input.GetKeyDown(KeyCode.G) && Debuff == true)
         {
             Debuff = false;
