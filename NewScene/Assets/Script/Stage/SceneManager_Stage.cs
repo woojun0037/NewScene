@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 
@@ -31,6 +32,8 @@ public class SceneManager_Stage : MonoBehaviour
     {
         if (other.gameObject.tag == "Main_gangrim")
         {
+            NavMeshAgent nav = other.transform.GetComponent<NavMeshAgent>();
+            nav.enabled = false;
             LoadNextScene();
         }
 
