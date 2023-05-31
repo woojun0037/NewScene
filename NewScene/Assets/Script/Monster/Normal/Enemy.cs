@@ -13,8 +13,11 @@ public class Enemy : MonoBehaviour
    
     public bool DebuffCheck;
     public bool StartAttack;
-
+    
     public float KnockBackForce;
+
+    public GameObject skillHitEffect;
+    
     protected float KnockBakcTime;
 
     protected Rigidbody rigid;
@@ -165,8 +168,33 @@ public class Enemy : MonoBehaviour
 
         if(other.tag == "skill")
         {
+            float _damage = other.GetComponent<SkillHit>().damage;
+            curHearth -= _damage;
 
-            curHearth -= 3; //test
+            GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
+            hitEffect.transform.position = this.transform.position;
+            hitEffect.SetActive(true);
+        }
+
+        if(other.tag == "dotSkill")
+        {
+            float _damage = other.GetComponent<SkillHit>().damage;
+            StartCoroutine(DotCheck(_damage));
+            GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
+            hitEffect.transform.position = this.transform.position;
+            hitEffect.SetActive(true);
+        }
+    }
+
+
+    private IEnumerator DotCheck(float damage = 0)
+    {
+        float time = 0;
+        while(time < 3)
+        {
+            curHearth -= damage;
+            yield return new WaitForSeconds(1f);
+            time++;
         }
     }
     

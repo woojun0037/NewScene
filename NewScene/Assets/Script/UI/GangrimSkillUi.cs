@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GangrimSkillUi : MonoBehaviour
@@ -13,6 +15,8 @@ public class GangrimSkillUi : MonoBehaviour
     public PlayerSkill playerSkillCheck;
     public PropertySkill PropertySkillCheck;
     public Main_Player main;
+
+    public GameObject option;
 
     public Dictionary<string, Sprite> spriteDictionary;
     [Header("SkillUseCheck")]
@@ -51,6 +55,8 @@ public class GangrimSkillUi : MonoBehaviour
     public KeyCode DarkPillItem__itemkey;
     public bool DarkPillItemOn = false;
 
+    public bool isOption;
+
     private void Awake()
     {
         if(instance == null)
@@ -80,10 +86,47 @@ public class GangrimSkillUi : MonoBehaviour
 
     void Update()
     {
+        Option();
+
         WindSKillAbilty();
         CloudSKillAbilty();
         RainSkillAbilty();
         ItemUse();
+    }
+
+    private void Option()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            isOption = !isOption;
+
+            if(isOption)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+
+            }
+            else
+            {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
+            option.SetActive(isOption);
+        }
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
+
+    public void GameTitle()
+    {
+        isOption = !isOption;
+        option.SetActive(isOption);
+
+        SceneManager.LoadScene("Title");
     }
 
     public void WindSKillAbilty()

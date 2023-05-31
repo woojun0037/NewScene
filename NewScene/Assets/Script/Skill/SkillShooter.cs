@@ -13,6 +13,5 @@ public class SkillShooter : MonoBehaviour
         var direction = new Vector3(0, 0, 10);
         var CloudSkillShot = ObjectPool.GetObject();
         CloudSkillShot.transform.position = transform.position + direction.normalized;
-        CloudSkillShot.CloudSkill();
     }
 }

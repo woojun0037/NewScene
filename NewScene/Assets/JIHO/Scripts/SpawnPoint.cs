@@ -17,7 +17,7 @@ public class SpawnPoint : MonoBehaviour
             cam.transform.position = this.transform.position;
             player.transform.position = this.transform.position;
             isSpawn = true;
-            nav = player.transform.GetComponent<NavMeshAgent>();
+            nav = player.transform.GetComponent<NavMeshAgent>(); 
             nav.enabled = true;
         }
     }
