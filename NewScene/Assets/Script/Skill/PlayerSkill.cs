@@ -19,7 +19,6 @@ public class PlayerSkill : MonoBehaviour
     [Header("SkillCheck1")]
     public bool isSkillOn = false;
     public bool isSkillUse = true;
-    public bool isTest;
     public bool isShake = false;
 
     [Header("SkillCheck2")]
@@ -49,6 +48,9 @@ public class PlayerSkill : MonoBehaviour
     [Header("SkillTime")]
     public float RainSkillTime;
     public float RainSkillCool;
+    public float WindSkillTime;
+    public float WindSkillCool;
+
     public float maxAbilityDistance;
     public float DarkSkill;
 
@@ -101,7 +103,7 @@ public class PlayerSkill : MonoBehaviour
             {
                 if (hit.collider.gameObject != this.gameObject)
                 {
-                    posUp = new Vector3(hit.point.x, 0, hit.point.z);
+                    posUp = new Vector3(hit.point.x, 2, hit.point.z);
                     postion = hit.point;
                 }
             }
@@ -112,7 +114,7 @@ public class PlayerSkill : MonoBehaviour
             distance = Mathf.Min(distance, maxAbilityDistance);
 
             var newHitPos = transform.position + hitPosDir * distance;
-            RainPos = new Vector3(transform.position.x, transform.position.y, transform.position.z) + hitPosDir * distance;
+            RainPos = posUp;
             ability2Canvas.transform.position = (newHitPos);
         }
     }
@@ -140,7 +142,9 @@ public class PlayerSkill : MonoBehaviour
 
     public void WindSkillRange()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck)
+        if (WindSkillTime > 0) return;
+
+        if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck && WindSkillTime <= 0)
         {
             WindDirection.enabled = true;
             WindSkillCheck = true;
@@ -153,15 +157,28 @@ public class PlayerSkill : MonoBehaviour
             WindSkillCheck = false;
             isSkillUse = true;
         }
-        if (Input.GetMouseButtonDown(0) && !isSkillUse)
+        
+        if (Input.GetMouseButtonDown(0) && !isSkillUse && WindSkillCheck)
         {
             isSkillUse = true;
             WindDirection.enabled = false;
             WindSkillCheck = false;
             isShake = true;
             player.Skill_Q();
+            StartCoroutine(QskillCoolDown());
         }
     }
+
+    private IEnumerator QskillCoolDown()
+    {
+        WindSkillTime = WindSkillCool;
+        while (WindSkillTime > 0)
+        {
+            WindSkillTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
 
     public void CloudSkill()
     {
@@ -190,6 +207,7 @@ public class PlayerSkill : MonoBehaviour
 
     public void RainDropSkill()
     {
+        if (RainSkillTime > 0) return;
 
         if (Input.GetKeyDown(KeyCode.R) && isSkillUse && !RainSkillCheck)
         {
@@ -239,21 +257,14 @@ public class PlayerSkill : MonoBehaviour
     {
         if (isSkillOn == true)
         {
-            if (!isTest)
+            if (RainSkillTime <= 0)
             {
                 isSkillUse = false;
                 FlyingObject.SetActive(true);
                 FlyingObject.transform.position = RainPos;
                 FlyingObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
                 StartCoroutine(RainActive());
-                isTest = true;
                 StartCoroutine(RainCor());
-            }
-            else if (isTest)
-            {
-                isSkillUse = true;
-                isSkillOn = false;
-                RainSkillTime = 0;
             }
         }
     }
@@ -266,13 +277,14 @@ public class PlayerSkill : MonoBehaviour
 
     IEnumerator RainCor()
     {
-        while (RainSkillTime <= RainSkillCool)
+        RainSkillTime = RainSkillCool;
+        while (RainSkillTime >= 0)
         {
-            RainSkillTime += Time.deltaTime;
+            RainSkillTime -= Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        Rainnig();
-        isTest = !isTest;
+        isSkillUse = true;
+        isSkillOn = false;
     }
 
     IEnumerator CloudCor()

@@ -11,10 +11,12 @@ public class HPitem : MonoBehaviour
     {
         if (other.tag == "Main_gangrim")
         {
+            ui = FindObjectOfType<GangrimSkillUi>();
             GameObject effect =Instantiate(HPPotionPickUpEffect, transform.position, transform.rotation);
-            Destroy(gameObject);
             Destroy(effect, 1f);
+            ui.HPitemOn = true;
             ui.HP_item.SetActive(true);
+            Destroy(gameObject);
         }
     }
 }

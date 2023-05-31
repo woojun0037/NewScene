@@ -12,6 +12,7 @@ public class GangrimSkillUi : MonoBehaviour
     public GameObject player;
     public PlayerSkill playerSkillCheck;
     public PropertySkill PropertySkillCheck;
+    public Main_Player main;
 
     public Dictionary<string, Sprite> spriteDictionary;
     [Header("SkillUseCheck")]
@@ -87,22 +88,24 @@ public class GangrimSkillUi : MonoBehaviour
 
     public void WindSKillAbilty()
     {
-        if (Input.GetKey(WindSKill) && isWindSKillCoolDown == false)
-        {
-            isWindSKillCoolDown = true;
-            abilityImage1.fillAmount = 1;
-        }
+        abilityImage1.fillAmount = playerSkillCheck.WindSkillTime / playerSkillCheck.WindSkillCool;
 
-        if (isWindSKillCoolDown)
-        {
-            abilityImage1.fillAmount -= 1 / coolDown1 * Time.deltaTime;
+        //if (Input.GetKey(WindSKill) && isWindSKillCoolDown == false)
+        //{
+        //    isWindSKillCoolDown = true;
+        //    abilityImage1.fillAmount = 1;
+        //}
 
-            if (abilityImage1.fillAmount <= 0)
-            {
-                abilityImage1.fillAmount = 0;
-                isWindSKillCoolDown = false;
-            }
-        }
+        //if (isWindSKillCoolDown)
+        //{
+        //    abilityImage1.fillAmount -= 1 / coolDown1 * Time.deltaTime;
+
+        //    if (abilityImage1.fillAmount <= 0)
+        //    {
+        //        abilityImage1.fillAmount = 0;
+        //        isWindSKillCoolDown = false;
+        //    }
+        //}
     }
     public void CloudSKillAbilty()
     {
@@ -125,22 +128,23 @@ public class GangrimSkillUi : MonoBehaviour
     }
     public void RainSkillAbilty()
     {
-        if (Input.GetKey(RainSkill) && isRainSkillCoolDown == false)
-        {
-            isRainSkillCoolDown = true;
-            abilityImage3.fillAmount = 1;
-        }
+        abilityImage3.fillAmount = playerSkillCheck.RainSkillTime / playerSkillCheck.RainSkillCool;
+        //if (Input.GetKey(RainSkill) && isRainSkillCoolDown == false)
+        //{
+        //    isRainSkillCoolDown = true;
+        //    abilityImage3.fillAmount = 1;
+        //}
 
-        if (isRainSkillCoolDown)
-        {
-            abilityImage3.fillAmount -= 1 / coolDown3 * Time.deltaTime;
+        //if (isRainSkillCoolDown)
+        //{
+        //    abilityImage3.fillAmount -= 1 / coolDown3 * Time.deltaTime;
 
-            if (abilityImage3.fillAmount <= 0)
-            {
-                abilityImage3.fillAmount = 0;
-                isRainSkillCoolDown = false;
-            }
-        }
+        //    if (abilityImage3.fillAmount <= 0)
+        //    {
+        //        abilityImage3.fillAmount = 0;
+        //        isRainSkillCoolDown = false;
+        //    }
+        //}
     }
 
     public void CurrentSkillUI(string key)
@@ -191,23 +195,32 @@ public class GangrimSkillUi : MonoBehaviour
 
     IEnumerator HPitemCor()
     {
+        Debug.Log("체력 회복" + curHp.currentHealth);
+        if (main == null) main = FindObjectOfType<Main_Player>();
+
         while(curHp.currentHealth < curHp.maxHealth)
         {
             curHp.currentHealth += Time.deltaTime;
-            
+            curHp.HPbar.fillAmount = curHp.currentHealth / curHp.maxHealth;
+
             yield return null;
         }
+        main.HP = curHp.currentHealth;
+        Debug.Log("체력 회복" + curHp.currentHealth);
         HPitemOn = false;
         HP_item.SetActive(false);
     }
 
     IEnumerator DarkPillCor()
     {
+        Debug.Log("다크 회복" + Gauge.sGauge);
+
         while(Gauge.sGauge < DarkPill.maxGauge)
         {
             Gauge.sGauge += 0.1f;
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("다크 회복" + Gauge.sGauge);
         DarkPillItemOn = false;
         DARKPILL_item.SetActive(false);
     }
