@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
+    public static Main_Player instance;
+
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
     [SerializeField] Collider TafoonBox;
@@ -54,6 +56,19 @@ public class Main_Player : MonoBehaviour
 
     private int hitState;
     internal int HitState => hitState;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Update()
     {

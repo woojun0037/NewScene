@@ -29,4 +29,15 @@ public class SoundManager : MonoBehaviour
 
         Destroy(go, clip.length);
     }
+
+    public AudioSource SFXPlayLoop(string sfxName, AudioClip clip)
+    {
+        GameObject go = new GameObject(sfxName + "Sound");
+        AudioSource audioSource = go.AddComponent<AudioSource>();
+        audioSource.clip = clip;
+        audioSource.loop = true; // 루프 재생 설정
+        audioSource.Play();
+
+        return audioSource;
+    }
 }
