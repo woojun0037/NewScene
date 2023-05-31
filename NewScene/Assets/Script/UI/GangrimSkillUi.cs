@@ -88,22 +88,24 @@ public class GangrimSkillUi : MonoBehaviour
 
     public void WindSKillAbilty()
     {
-        if (Input.GetKey(WindSKill) && isWindSKillCoolDown == false)
-        {
-            isWindSKillCoolDown = true;
-            abilityImage1.fillAmount = 1;
-        }
+        abilityImage1.fillAmount = playerSkillCheck.WindSkillTime / playerSkillCheck.WindSkillCool;
 
-        if (isWindSKillCoolDown)
-        {
-            abilityImage1.fillAmount -= 1 / coolDown1 * Time.deltaTime;
+        //if (Input.GetKey(WindSKill) && isWindSKillCoolDown == false)
+        //{
+        //    isWindSKillCoolDown = true;
+        //    abilityImage1.fillAmount = 1;
+        //}
 
-            if (abilityImage1.fillAmount <= 0)
-            {
-                abilityImage1.fillAmount = 0;
-                isWindSKillCoolDown = false;
-            }
-        }
+        //if (isWindSKillCoolDown)
+        //{
+        //    abilityImage1.fillAmount -= 1 / coolDown1 * Time.deltaTime;
+
+        //    if (abilityImage1.fillAmount <= 0)
+        //    {
+        //        abilityImage1.fillAmount = 0;
+        //        isWindSKillCoolDown = false;
+        //    }
+        //}
     }
     public void CloudSKillAbilty()
     {
@@ -126,22 +128,23 @@ public class GangrimSkillUi : MonoBehaviour
     }
     public void RainSkillAbilty()
     {
-        if (Input.GetKey(RainSkill) && isRainSkillCoolDown == false)
-        {
-            isRainSkillCoolDown = true;
-            abilityImage3.fillAmount = 1;
-        }
+        abilityImage3.fillAmount = playerSkillCheck.RainSkillTime / playerSkillCheck.RainSkillCool;
+        //if (Input.GetKey(RainSkill) && isRainSkillCoolDown == false)
+        //{
+        //    isRainSkillCoolDown = true;
+        //    abilityImage3.fillAmount = 1;
+        //}
 
-        if (isRainSkillCoolDown)
-        {
-            abilityImage3.fillAmount -= 1 / coolDown3 * Time.deltaTime;
+        //if (isRainSkillCoolDown)
+        //{
+        //    abilityImage3.fillAmount -= 1 / coolDown3 * Time.deltaTime;
 
-            if (abilityImage3.fillAmount <= 0)
-            {
-                abilityImage3.fillAmount = 0;
-                isRainSkillCoolDown = false;
-            }
-        }
+        //    if (abilityImage3.fillAmount <= 0)
+        //    {
+        //        abilityImage3.fillAmount = 0;
+        //        isRainSkillCoolDown = false;
+        //    }
+        //}
     }
 
     public void CurrentSkillUI(string key)

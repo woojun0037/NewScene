@@ -99,8 +99,8 @@ public class PropertySkill : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G) && Debuff == true)
         {
             Debuff = false;
-            IceSpecial.transform.position = icepos.transform.position;
-            IceSpecial.transform.rotation = icepos.transform.rotation;
+            IceSpecial.transform.position = new Vector3(this.transform.position.x, 2f, this.transform.position.z);
+            IceSpecial.transform.forward = SkillUse.transform.forward;
             IceSpecial.SetActive(true);
             StartCoroutine(IceSetActive());
         }
