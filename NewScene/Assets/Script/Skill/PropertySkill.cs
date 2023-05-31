@@ -122,7 +122,7 @@ public class PropertySkill : MonoBehaviour
 
     private IEnumerator IceSetActive()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         IceSpecial.SetActive(false);
     }
 

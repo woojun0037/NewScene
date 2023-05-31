@@ -10,5 +10,9 @@ public class WindSkillHitCheck : MonoBehaviour
         {
             other.GetComponent<Enemy>().curHearth -= 3f;
         }
+        else
+        {
+            other.GetComponent<Boss>().curHearth -= 3f;
+        }
     }
 }
