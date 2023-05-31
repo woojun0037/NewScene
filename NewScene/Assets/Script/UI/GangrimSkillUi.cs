@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class GangrimSkillUi : MonoBehaviour
 {
@@ -56,10 +55,6 @@ public class GangrimSkillUi : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            playerSkillCheck = FindObjectOfType<PlayerSkill>();
-            player = playerSkillCheck.gameObject;
-            PropertySkillCheck = player.GetComponent<PropertySkill>();
-            curHp = FindObjectOfType<HealthManager>();
             DarkPill.skill = playerSkillCheck;
 
             spriteDictionary = new Dictionary<string, Sprite>();

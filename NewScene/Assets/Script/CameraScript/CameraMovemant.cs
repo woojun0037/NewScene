@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraMovemant : MonoBehaviour
 {
+    public static CameraMovemant instance;
+
     public Transform objectTofollow;
     public float followSpeed;
     public float sensitivity;
@@ -20,6 +22,19 @@ public class CameraMovemant : MonoBehaviour
     public float maxDistance;
     public float finalDistance;
     public float smoothness;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     void Start()
     {

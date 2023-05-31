@@ -10,17 +10,6 @@ public class HealthManager : MonoBehaviour
     public float currentHealth;
     bool isDamage = false;
 
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-       
-    }
-  
     public void HurtPlayer(float damage)
     {
         if (!isDamage)

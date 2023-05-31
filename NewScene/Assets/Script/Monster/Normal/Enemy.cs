@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -165,11 +164,8 @@ public class Enemy : MonoBehaviour
 
         if(other.tag == "skill")
         {
-            HitScript hit;
-            hit = other.GetComponent<HitScript>();
-            
-            while (hit != null)
-            curHearth -= hit.damage;
+
+            curHearth -= 3; //test
         }
     }
 

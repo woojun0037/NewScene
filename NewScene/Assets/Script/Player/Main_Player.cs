@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Main_Player : MonoBehaviour
 {
+    public static Main_Player instance;
+
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
 
-    private TafoonSkillHit tafoonSkill;
-    private PropertySkill propertySkill;
-    private HitScript hit;
+    public TafoonSkillHit tafoonSkill;
+    public PropertySkill propertySkill;
+    public HitScript hit;
 
     public HealthManager heal;
     public PlayerSkill skill;
@@ -56,11 +58,16 @@ public class Main_Player : MonoBehaviour
 
     private void Awake()
     {
-        propertySkill = GetComponent<PropertySkill>(); //GetComponent보단 public으로 
-        hit = HitBox.gameObject.GetComponent<HitScript>();
-        tafoonSkill = TafoonBox.gameObject.GetComponent<TafoonSkillHit>();
-
-        cam = FindObjectOfType<CameraMovemant>();
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     void Update()

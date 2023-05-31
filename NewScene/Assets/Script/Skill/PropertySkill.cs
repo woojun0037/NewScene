@@ -26,12 +26,6 @@ public class PropertySkill : MonoBehaviour
     public bool Debuff = false;
     public bool Stun = false;
 
-    void Awake()
-    {
-        SkillUse = GetComponent<Main_Player>();
-        motion = GameObject.Find("MotionTrailParent").transform.GetChild(0).gameObject;
-    }
-
     private void Update()
     {
         IceSkill();

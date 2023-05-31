@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Gauge : MonoBehaviour
 {
+    public static Gauge instance;
+
     public Image Dark_gauge;
     public PlayerSkill skill;
     public float minGauge = 1f;
@@ -13,15 +15,28 @@ public class Gauge : MonoBehaviour
 
     public static float sGauge;
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
         Dark_gauge = GetComponent<Image>();
-        sGauge = minGauge;
     }
 
     
     void Update()
     {
+        minGauge = sGauge;
         DarkSkillsystem();
     }
 
