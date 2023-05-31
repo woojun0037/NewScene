@@ -5,12 +5,12 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     public float damageToGive = 1;
-
+    
     public float maxHearth;
     public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-    
+   
     public bool DebuffCheck;
     public bool StartAttack;
 
@@ -114,6 +114,7 @@ public class Enemy : MonoBehaviour
         {
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
+
             if (player.HitState != hitNum)
             {
                 player.enemy = this;
@@ -168,7 +169,7 @@ public class Enemy : MonoBehaviour
             curHearth -= 3; //test
         }
     }
-
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Main_gangrim" && !getTouch)

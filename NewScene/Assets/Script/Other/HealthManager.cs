@@ -22,22 +22,11 @@ public class HealthManager : MonoBehaviour
         }
 
     }
-
+   
     IEnumerator HitPlayerCor(float damge)
     { 
         FindObjectOfType<Main_Player>().PlayerHP(damge);
         yield return new WaitForSeconds(1.5f);
         isDamage = false;
-    }
-
-    public void HealPlayer()
-    {
-        StartCoroutine(HealCor());
-    }
-
-    IEnumerator HealCor()
-    {
-
-        yield return null;
     }
 }

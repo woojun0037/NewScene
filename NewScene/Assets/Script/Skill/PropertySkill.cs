@@ -7,8 +7,6 @@ public class PropertySkill : MonoBehaviour
     [SerializeField] Collider HitBox;
     [SerializeField] private float BuffTime = 6f;
 
-    private Vector3 mousePos;
-
     public Transform PlayerPos;
     public Main_Player SkillUse;
     public Enemy enemy;
@@ -16,8 +14,6 @@ public class PropertySkill : MonoBehaviour
     public GameObject motion;
     public GameObject IceSpecial;
     public GameObject TurnderSpecial;
-
-    //public GameMain TafoonHitBox;
 
     public float SpeedUp = 1.2f;
 
@@ -100,10 +96,6 @@ public class PropertySkill : MonoBehaviour
 
     public void IceSkillSpecial()
     {
-        //mousePos = Input.mousePosition;
-        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        //if (Physics.Raycast(ray, out RaycastHit rayHit))
-
         if (Input.GetKeyDown(KeyCode.G) && Debuff == true)
         {
             Debuff = false;
@@ -143,6 +135,5 @@ public class PropertySkill : MonoBehaviour
         TurnderSpecial.transform.position = transform;
         TurnderSpecial.SetActive(false);
         TurnderSpecial.SetActive(true);
-
     }
 }
