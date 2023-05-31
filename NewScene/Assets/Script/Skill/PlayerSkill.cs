@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerSkill : MonoBehaviour
 {
-
     public static PlayerSkill Instance;
     public Vector3 mousePos;
     private Vector3 Dir;
@@ -16,7 +15,6 @@ public class PlayerSkill : MonoBehaviour
     [Header("Script")]
     public Gauge gauge;
     public HitScript hitScript;
-    public CameraShaker shaker;
 
     [Header("SkillCheck1")]
     public bool isSkillOn = false;
@@ -32,10 +30,10 @@ public class PlayerSkill : MonoBehaviour
     private bool isDash;
 
     [Header("GameObject")]
-    public TrailRenderer trailEffect;
     public GameObject FlyingObject;
     public GameObject CloudPos;
     public GameObject WindSkillPrefab;
+    public GameObject DarkSkillEffect;
    
     [Header("position")]
     public Vector3 posUp;
@@ -161,7 +159,6 @@ public class PlayerSkill : MonoBehaviour
             WindDirection.enabled = false;
             WindSkillCheck = false;
             isShake = true;
-            //shaker.ShakeInput();
             player.Skill_Q();
         }
     }
@@ -222,8 +219,9 @@ public class PlayerSkill : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && Gauge.sGauge >= gauge.maxGauge && !DarkSkillUse)
         {
-            DarkSkillUse = true;
             DarkSkill = 10f;
+            DarkSkillEffect.SetActive(true);
+            DarkSkillUse = true;
             gauge.dark_gauge_check = true;
             hitScript.damage = 10;
             gauge.CorStart();
@@ -232,6 +230,7 @@ public class PlayerSkill : MonoBehaviour
         if (!gauge.dark_gauge_check)
         {
             hitScript.damage = 1;
+            DarkSkillEffect.SetActive(false);
             DarkSkillUse = false;
         }
     }

@@ -23,19 +23,6 @@ public class CameraMovemant : MonoBehaviour
     public float finalDistance;
     public float smoothness;
 
-    //private void Awake()
-    //{
-    //    if(instance == null)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(this.gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-    //}
-
     void Start()
     {
         rotX = transform.localRotation.eulerAngles.x;
