@@ -137,34 +137,6 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    //private void CalTargetPos()
-    //{
-    //    mousePos = Input.mousePosition;
-
-    //    if (Input.GetMouseButtonDown(0))
-    //    {
-    //        mousePos.z = Camera.main.transform.position.z;
-    //        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-    //        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-
-    //        string Platform = "Platform";
-    //        int layerMask = 1 << LayerMask.NameToLayer(Platform);
-
-    //        if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
-    //        {
-    //            if (rayHit.collider.tag == Platform)
-    //            {
-    //                transform.LookAt(rayHit.point);
-    //            }
-    //            if (rayHit.collider.tag == Platform && propertySkill.Stun == true)
-    //            {
-    //                transform.LookAt(rayHit.point);
-    //                propertySkill.ThunderSkillSpecial(rayHit.point);
-    //            }
-    //        }
-    //    }
-    //}
-
     public void PlayerHP(float PlayerHP)
     {
         HP = PlayerHP;
