@@ -11,9 +11,12 @@ public class Darkitem : MonoBehaviour
     {
         if (other.tag == "Main_gangrim")
         {
-            Instantiate(DarkPotionPickUpEffect, transform.position, transform.rotation);
-            Destroy(gameObject);
+            ui = FindObjectOfType<GangrimSkillUi>();
+            GameObject effect = Instantiate(DarkPotionPickUpEffect, transform.position, transform.rotation);
+            Destroy(effect, 1f);
+            ui.DarkPillItemOn = true;
             ui.DARKPILL_item.SetActive(true);
+            Destroy(gameObject);
         }
     }
 }

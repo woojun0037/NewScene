@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3678666266550952554}
   - component: {fileID: 7444412734327216812}
   - component: {fileID: 7444412734327216787}
+  - component: {fileID: 744042639}
   m_Layer: 0
   m_Name: hp
   m_TagString: HPitem
@@ -27,16 +28,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2886177386453582783}
-  m_LocalRotation: {x: -0.7071068, y: 0.000000061817246, z: 0.000000061817246, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -74.26, y: 2.8, z: -18.92}
   m_LocalScale: {x: 0.83206, y: 0.83206004, z: 0.83206004}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7444412734836980227}
   - {fileID: 7444412735706348764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1506955672957982368
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -114,6 +115,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui: {fileID: 0}
   HPPotionPickUpEffect: {fileID: 2529372625209848246, guid: 24d82f634521808479e54dd4d856e61e, type: 3}
+--- !u!95 &744042639
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2886177386453582783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 96806703d389a6e42ae46b36f94811d6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &7444412734836980226
 GameObject:
   m_ObjectHideFlags: 0

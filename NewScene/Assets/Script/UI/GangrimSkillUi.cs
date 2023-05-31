@@ -12,6 +12,7 @@ public class GangrimSkillUi : MonoBehaviour
     public GameObject player;
     public PlayerSkill playerSkillCheck;
     public PropertySkill PropertySkillCheck;
+    public Main_Player main;
 
     public Dictionary<string, Sprite> spriteDictionary;
     [Header("SkillUseCheck")]
@@ -191,23 +192,32 @@ public class GangrimSkillUi : MonoBehaviour
 
     IEnumerator HPitemCor()
     {
+        Debug.Log("체력 회복" + curHp.currentHealth);
+        if (main == null) main = FindObjectOfType<Main_Player>();
+
         while(curHp.currentHealth < curHp.maxHealth)
         {
             curHp.currentHealth += Time.deltaTime;
-            
+            curHp.HPbar.fillAmount = curHp.currentHealth / curHp.maxHealth;
+
             yield return null;
         }
+        main.HP = curHp.currentHealth;
+        Debug.Log("체력 회복" + curHp.currentHealth);
         HPitemOn = false;
         HP_item.SetActive(false);
     }
 
     IEnumerator DarkPillCor()
     {
+        Debug.Log("다크 회복" + Gauge.sGauge);
+
         while(Gauge.sGauge < DarkPill.maxGauge)
         {
             Gauge.sGauge += 0.1f;
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("다크 회복" + Gauge.sGauge);
         DarkPillItemOn = false;
         DARKPILL_item.SetActive(false);
     }
