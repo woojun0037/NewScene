@@ -34617,6 +34617,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 73415632957439861, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
+      propertyPath: avoidancePriority
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 73415632957439861, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
+      propertyPath: m_ObstacleAvoidanceType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 73415633552239063, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -34716,6 +34724,10 @@ PrefabInstance:
     - target: {fileID: 6451559188286804575, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
       propertyPath: m_Name
       value: Main_gangrim2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451559188286804575, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b5420271f23b294d9910e6ce38c0848, type: 3}
