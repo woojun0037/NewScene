@@ -15,14 +15,14 @@ public class Enemy : MonoBehaviour
     public bool StartAttack;
 
     public float KnockBackForce;
-    private float KnockBakcTime;
+    protected float KnockBakcTime;
 
-    Rigidbody rigid;
-    BoxCollider boxCollier;
+    protected Rigidbody rigid;
+    protected BoxCollider boxCollier;
 
-    private GameObject damageEffect;
-    PropertySkill property;
-    Main_Player player;
+    protected GameObject damageEffect;
+    protected PropertySkill property;
+    protected Main_Player player;
 
     public Transform targetTransform;
     public NavMeshAgent agent = null;
@@ -31,9 +31,9 @@ public class Enemy : MonoBehaviour
 
     public bool getTouch;
 
-    int hitNum;
-    float delay;
-    bool havedelay;
+    protected int hitNum;
+    protected float delay;
+    protected bool havedelay;
 
     void Update()
     {

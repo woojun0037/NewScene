@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class Boss : Enemy
 {
-    Rigidbody rigid;
-    BoxCollider boxCollier;
-
-    private GameObject damageEffect;
-    protected PropertySkill property;
-    [SerializeField] protected Main_Player player;
-
-
-    protected int hitNum;
-    protected float delay;
     protected bool isDie = false;
 
     protected override void Awake()
