@@ -30,7 +30,7 @@ public class PlayerSkill : MonoBehaviour
 
     [Header("GameObject")]
     public GameObject FlyingObject;
-    public GameObject CloudPos;
+    public GameObject Tornado;
     public GameObject WindSkillPrefab;
     public GameObject DarkSkillEffect;
    
@@ -50,6 +50,9 @@ public class PlayerSkill : MonoBehaviour
     public float RainSkillCool;
     public float WindSkillTime;
     public float WindSkillCool;
+    public float TornadoSkillTime;
+    public float TornadoSkillCool;
+
 
     public float maxAbilityDistance;
     public float DarkSkill;
@@ -60,7 +63,6 @@ public class PlayerSkill : MonoBehaviour
         player = GetComponent<Main_Player>();
         targetCircle.GetComponent<Image>().enabled = false;
         SkillRange.GetComponent<Image>().enabled = false;
-        CloudPos.gameObject.SetActive(false);
         WindDirection.enabled = false;
         Instance = this;
     }
@@ -68,7 +70,7 @@ public class PlayerSkill : MonoBehaviour
     void Update()
     {
         WindSkillRange();
-        CloudSkill();
+        TornadoSkill();
         RainDropSkill();
         DarknessSKill();
 
@@ -180,29 +182,47 @@ public class PlayerSkill : MonoBehaviour
     }
 
 
-    public void CloudSkill()
+    public void TornadoSkill()
     {
-        mousePos = Input.mousePosition;
-
-        Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-        int layerMask = 1 << LayerMask.NameToLayer("Platform");
-
-        if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
+        if(Input.GetKeyDown(KeyCode.E) && TornadoSkillTime <= 0)
         {
-            if (Input.GetKey(KeyCode.E) && !CloudSkillCheck)
-            {
-                transform.LookAt(rayHit.point);
-                CloudPos.gameObject.SetActive(true);
-                GangrimSkillUi.instance.CurrentSkillUI("cloud");
-            }
-            else
-            {
-                CloudPos.gameObject.SetActive(false);
-                StartCoroutine(CloudCor());
-            }
+            Tornado.transform.position = this.transform.position;
+            Tornado.SetActive(true);
+            StartCoroutine(ESkillCoolDown());
         }
 
+
+        //mousePos = Input.mousePosition;
+
+        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
+        //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
+        //int layerMask = 1 << LayerMask.NameToLayer("Platform");
+
+        //if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
+        //{
+        //    if (Input.GetKey(KeyCode.E) && !CloudSkillCheck)
+        //    {
+        //        transform.LookAt(rayHit.point);
+        //        CloudPos.gameObject.SetActive(true);
+        //        GangrimSkillUi.instance.CurrentSkillUI("cloud");
+        //    }
+        //    else
+        //    {
+        //        CloudPos.gameObject.SetActive(false);
+        //        StartCoroutine(CloudCor());
+        //    }
+        //}
+
+    }
+
+    private IEnumerator ESkillCoolDown()
+    {
+        TornadoSkillTime = TornadoSkillCool;
+        while (TornadoSkillTime > 0)
+        {
+            TornadoSkillTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     public void RainDropSkill()

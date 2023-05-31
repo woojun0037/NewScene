@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8515578832020971059}
   - component: {fileID: 5825813776187410736}
+  - component: {fileID: -7943196354689880886}
   - component: {fileID: 5495773675931886903}
   m_Layer: 0
   m_Name: SkillHitEffect2
@@ -17,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8515578832020971059
 Transform:
   m_ObjectHideFlags: 0
@@ -4815,6 +4816,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &-7943196354689880886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4601717381511449403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2795dd7bbdf1f4e429f6e868cab06f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!199 &5495773675931886903
 ParticleSystemRenderer:
   serializedVersion: 6

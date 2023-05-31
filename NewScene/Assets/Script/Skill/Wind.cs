@@ -25,14 +25,6 @@ public class Wind : MonoBehaviour
         particles = new ParticleSystem.Particle[_WindStorm.main.maxParticles];
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Monster")
-        {
-            other.GetComponent<Enemy>().curHearth -= 3f;
-        }
-    }
-
     void Update()
     {
         int num = _WindStorm.GetParticles(particles);
