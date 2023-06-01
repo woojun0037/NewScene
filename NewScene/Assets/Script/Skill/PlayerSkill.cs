@@ -69,10 +69,13 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        WindSkillRange();
-        TornadoSkill();
-        RainDropSkill();
-        DarknessSKill();
+        if(!player.isAttack)
+        {
+            WindSkill();
+            TornadoSkill();
+            DarknessSKill();
+            RainSkill();
+        }
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -97,28 +100,28 @@ public class PlayerSkill : MonoBehaviour
             Dash();
         }
 
-        if (isSkillUse)
-        {
-            int layerMask = 1 << LayerMask.NameToLayer("Platform");
+        //if (isSkillUse)
+        //{
+        //    int layerMask = 1 << LayerMask.NameToLayer("Platform");
 
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-            {
-                if (hit.collider.gameObject != this.gameObject)
-                {
-                    posUp = new Vector3(hit.point.x, 2, hit.point.z);
-                    postion = hit.point;
-                }
-            }
+        //    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        //    {
+        //        if (hit.collider.gameObject != this.gameObject)
+        //        {
+        //            posUp = new Vector3(hit.point.x, 2, hit.point.z);
+        //            postion = hit.point;
+        //        }
+        //    }
 
-            //비 스킬 이미지 인풋
-            var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
-            float distance = Vector3.Distance(hit.point, transform.position);
-            distance = Mathf.Min(distance, maxAbilityDistance);
+        //    비 스킬 이미지 인풋
+        //    var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
+        //    float distance = Vector3.Distance(hit.point, transform.position);
+        //    distance = Mathf.Min(distance, maxAbilityDistance);
 
-            var newHitPos = transform.position + hitPosDir * distance;
-            RainPos = posUp;
-            ability2Canvas.transform.position = (newHitPos);
-        }
+        //    var newHitPos = transform.position + hitPosDir * distance;
+        //    RainPos = posUp;
+        //    ability2Canvas.transform.position = (newHitPos);
+        //}
     }
 
     public void Dash()
@@ -135,39 +138,61 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public void WindTest()
-    {
-        WindSkillPrefab.transform.position = new Vector3(transform.position.x, transform.position.y + 3f, transform.position.z);
-        WindSkillPrefab.transform.rotation = this.transform.rotation;
-        WindSkillPrefab.SetActive(true);
-    }
-
     public void WindSkillRange()
     {
-        if (WindSkillTime > 0) return;
+        //if (WindSkillTime > 0) return;
 
-        if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck && WindSkillTime <= 0)
-        {
-            WindDirection.enabled = true;
-            WindSkillCheck = true;
-            GangrimSkillUi.instance.CurrentSkillUI("wind");
-            isSkillUse = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
-        {
-            WindDirection.enabled = false;
-            WindSkillCheck = false;
-            isSkillUse = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck && WindSkillTime <= 0)
+        //{
+        //    WindDirection.enabled = true;
+        //    WindSkillCheck = true;
+            
+        //    isSkillUse = false;
+        //}
+        //else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
+        //{
+        //    WindDirection.enabled = false;
+        //    WindSkillCheck = false;
+        //    isSkillUse = true;
+        //}
         
-        if (Input.GetMouseButtonDown(0) && !isSkillUse && WindSkillCheck)
+        //if (Input.GetMouseButtonDown(0) && !isSkillUse && WindSkillCheck)
+        //{
+        //    GangrimSkillUi.instance.CurrentSkillUI("wind");
+        //    player.isAttack = true;
+        //    isSkillUse = true;
+        //    player.Skill_Q();
+        //    StartCoroutine(QskillCoolDown());
+        //}
+    }
+
+    
+
+    public void WindSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && WindSkillTime <= 0)
         {
-            isSkillUse = true;
-            WindDirection.enabled = false;
-            WindSkillCheck = false;
-            isShake = true;
-            player.Skill_Q();
+            GangrimSkillUi.instance.windDot.DORestart();
+            GangrimSkillUi.instance.CurrentSkillUI("wind");
+            player.isAttack = true;
+            player.Anim.SetTrigger("WindSkill");
             StartCoroutine(QskillCoolDown());
+        }
+    }
+
+    public void WindActive(int a = 0)
+    {
+        if (a == 0)
+        {
+            WindSkillPrefab.transform.position = this.transform.position;
+            WindSkillPrefab.transform.forward = this.transform.forward;
+
+            WindSkillPrefab.SetActive(true);
+        }
+        else
+        {
+            WindSkillPrefab.SetActive(false);
+            player.isAttack = false;
         }
     }
 
@@ -181,38 +206,16 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-
     public void TornadoSkill()
     {
         if(Input.GetKeyDown(KeyCode.E) && TornadoSkillTime <= 0)
         {
+            GangrimSkillUi.instance.tornadoDot.DORestart();
+            GangrimSkillUi.instance.CurrentSkillUI("tornado");
             Tornado.transform.position = this.transform.position;
             Tornado.SetActive(true);
             StartCoroutine(ESkillCoolDown());
         }
-
-
-        //mousePos = Input.mousePosition;
-
-        //Ray ray = Camera.main.ScreenPointToRay(mousePos);
-        //Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red);
-        //int layerMask = 1 << LayerMask.NameToLayer("Platform");
-
-        //if (Physics.Raycast(ray, out RaycastHit rayHit, Mathf.Infinity, layerMask))
-        //{
-        //    if (Input.GetKey(KeyCode.E) && !CloudSkillCheck)
-        //    {
-        //        transform.LookAt(rayHit.point);
-        //        CloudPos.gameObject.SetActive(true);
-        //        GangrimSkillUi.instance.CurrentSkillUI("cloud");
-        //    }
-        //    else
-        //    {
-        //        CloudPos.gameObject.SetActive(false);
-        //        StartCoroutine(CloudCor());
-        //    }
-        //}
-
     }
 
     private IEnumerator ESkillCoolDown()
@@ -225,31 +228,33 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
-    public void RainDropSkill()
+    public void RainSkill()
     {
-        if (RainSkillTime > 0) return;
-
-        if (Input.GetKeyDown(KeyCode.R) && isSkillUse && !RainSkillCheck)
+        if (Input.GetKeyDown(KeyCode.R) && RainSkillTime <= 0)
         {
-            SkillRange.GetComponent<Image>().enabled = true;
-            targetCircle.GetComponent<Image>().enabled = true;
-            RainSkillCheck = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.R))
-        {
-            SkillRange.GetComponent<Image>().enabled = false;
-            targetCircle.GetComponent<Image>().enabled = false;
-            RainSkillCheck = false;
-        }
-        if (Input.GetMouseButtonDown(0) && RainSkillCheck == true)
-        {
-
-            SkillRange.GetComponent<Image>().enabled = false;
-            targetCircle.GetComponent<Image>().enabled = false;
-            isSkillOn = true;
-            RainSkillCheck = false;
-            Rainnig();
+            GangrimSkillUi.instance.rainDot.DORestart();
             GangrimSkillUi.instance.CurrentSkillUI("rain");
+            FlyingObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+            FlyingObject.transform.position = this.transform.position + this.transform.forward * 5;
+            FlyingObject.SetActive(true);
+            StartCoroutine(RainActive());
+            StartCoroutine(RSkillCoolDown());
+        }
+    }
+
+    private IEnumerator RainActive()
+    {
+        yield return new WaitForSeconds(3f);
+        FlyingObject.SetActive(false);
+    }
+
+    private IEnumerator RSkillCoolDown()
+    {
+        RainSkillTime = RainSkillCool;
+        while (RainSkillTime > 0)
+        {
+            RainSkillTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
         }
     }
 
@@ -271,45 +276,5 @@ public class PlayerSkill : MonoBehaviour
             DarkSkillEffect.SetActive(false);
             DarkSkillUse = false;
         }
-    }
-
-    void Rainnig()
-    {
-        if (isSkillOn == true)
-        {
-            if (RainSkillTime <= 0)
-            {
-                isSkillUse = false;
-                FlyingObject.SetActive(true);
-                FlyingObject.transform.position = RainPos;
-                FlyingObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
-                StartCoroutine(RainActive());
-                StartCoroutine(RainCor());
-            }
-        }
-    }
-
-    private IEnumerator RainActive()
-    {
-        yield return new WaitForSeconds(3f);
-        FlyingObject.SetActive(false);
-    }
-
-    IEnumerator RainCor()
-    {
-        RainSkillTime = RainSkillCool;
-        while (RainSkillTime >= 0)
-        {
-            RainSkillTime -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }
-        isSkillUse = true;
-        isSkillOn = false;
-    }
-
-    IEnumerator CloudCor()
-    {
-        CloudSkillCheck = false;
-        yield return new WaitForSeconds(3.0f);
     }
 }

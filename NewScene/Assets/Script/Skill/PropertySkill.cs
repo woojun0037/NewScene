@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PropertySkill : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PropertySkill : MonoBehaviour
 
     public Transform PlayerPos;
     public Main_Player SkillUse;
+    public GangrimSkillUi skillUi;
     public Enemy enemy;
     public GameObject icepos;
     public GameObject motion;
@@ -24,49 +26,42 @@ public class PropertySkill : MonoBehaviour
 
     private void Update()
     {
-        IceSkill();
-        Thunder();
-        TafoonSkillSpecial();
-        IceSkillSpecial();
+        if(!SkillUse.isAttack) SpecialSkill();
     }
 
     public void TafoonSkill()
     {
-        motion.gameObject.SetActive(true);
-        SkillUse.Q_skillCheck = false;
-        SkillUse.E_skillCheck = false;
-        TafoonSpecial = false;
+        SkillUse.isAttack = true;
+        SkillUse.Anim.SetTrigger("TafoonSkill");
+    }
 
+    public void TafoonSkillMotion()
+    {
+        motion.gameObject.SetActive(true);
         SkillUse.MoveSpeed += 5f;
         SpeedUp += 3f;
 
         SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);
-
         StartCoroutine(TafoonSkillUse());
     }
 
-    public void TafoonSkillSpecial()
+    public void SpecialSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.E_skillCheck == true)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            TafoonSpecial = true;
-            if (Input.GetKeyDown(KeyCode.F) && TafoonSpecial)
+            if ((skillUi.uiKeys[0] == "wind" && skillUi.uiKeys[1] == "tornado") || (skillUi.uiKeys[0] == "tornado" && skillUi.uiKeys[1] == "wind"))
             {
-                StartCoroutine(TafoonAttack());
                 TafoonSkill();
+                skillUi.SkillUiInit();
+            }
+            else if ((skillUi.uiKeys[0] == "wind" && skillUi.uiKeys[1] == "rain") || (skillUi.uiKeys[0] == "rain" && skillUi.uiKeys[1] == "wind"))
+            {
+                IceSkill();
+                skillUi.SkillUiInit();
             }
         }
-    }
-
-    IEnumerator TafoonAttack()
-    {
-        TafoonSpecial = false;
-        TafoonSpecialMove = true;
-        SkillUse.Anim.SetTrigger("TafoonSkill");
-        yield return new WaitForSeconds(2.4f);
-        TafoonSpecialMove = false;
     }
 
     IEnumerator TafoonSkillUse()
@@ -80,35 +75,20 @@ public class PropertySkill : MonoBehaviour
         SkillUse.Anim.SetFloat("AttackSpeed_1", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_2", SpeedUp);
         SkillUse.Anim.SetFloat("AttackSpeed_3", SpeedUp);
+        SkillUse.isAttack = false;
     }
 
     public void IceSkill()
     {
-        if (SkillUse.Q_skillCheck == true && SkillUse.R_skillCheck == true)
-        {
-            Debuff = true;
-        }
-        else
-        {
-            Debuff = false;
-        }
-    }
-
-    public void IceSkillSpecial()
-    {
-        if (Input.GetKeyDown(KeyCode.G) && Debuff == true)
-        {
-            Debuff = false;
-            IceSpecial.transform.position = new Vector3(this.transform.position.x, 1, this.transform.position.z);
-            IceSpecial.transform.forward = SkillUse.transform.forward;
-            IceSpecial.SetActive(true);
-            StartCoroutine(IceSetActive());
-        }
+        IceSpecial.transform.position = new Vector3(this.transform.position.x, 1, this.transform.position.z);
+        IceSpecial.transform.forward = SkillUse.transform.forward;
+        IceSpecial.SetActive(true);
+        StartCoroutine(IceSetActive());
     }
 
     private IEnumerator IceSetActive()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         IceSpecial.SetActive(false);
     }
 
