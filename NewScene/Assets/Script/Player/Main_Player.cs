@@ -25,7 +25,6 @@ public class Main_Player : MonoBehaviour
     private Vector3 player_Move_Input;
 
     private bool isMove = false;
-    private bool isBack = false;
 
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
@@ -38,8 +37,6 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
 
     public bool isAttack = false;
-    public bool isDash = true;
-    public bool isWind = false;
     public bool isTafoon;
 
 
@@ -75,7 +72,6 @@ public class Main_Player : MonoBehaviour
         //CalTargetPos();
         Move();
         AttackInput();
-        Dash();
         AnimationBoolCheck();
         Around();
     }
@@ -240,22 +236,7 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    public void Dash()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Anim.SetTrigger("isDash");
-            isDash = false;
-            StartCoroutine(DashCor());
-        }
-    }
-
-    IEnumerator DashCor()
-    {
-        isDash = true;
-        yield return new WaitForSeconds(1f);
-    }
-
+   
     private void Around()
     {
         Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));

@@ -52,6 +52,9 @@ public class PlayerSkill : MonoBehaviour
     public float WindSkillCool;
     public float TornadoSkillTime;
     public float TornadoSkillCool;
+    public float DashSkillTime;
+    public float DashSkillCool;
+
 
 
     public float maxAbilityDistance;
@@ -75,31 +78,28 @@ public class PlayerSkill : MonoBehaviour
             TornadoSkill();
             DarknessSKill();
             RainSkill();
-        }
-
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                if (hit.collider.tag == "Platform" && Vector3.Distance(hit.point, transform.position) < 15f)
-                {
-                    player.Anim.SetTrigger("Dash");
-                    DashTarget = hit.point;
-                    Dir = DashTarget - transform.position;
-                    isDash = true;
-                    player.isAttack = true;
-                    Debug.Log(DashTarget);
-                }
-            }
-        }
-
-        if (isDash)
-        {
             Dash();
         }
 
+        //RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        //    {
+        //        if (hit.collider.tag == "Platform" && Vector3.Distance(hit.point, transform.position) < 15f)
+        //        {
+        //            player.Anim.SetTrigger("Dash");
+        //            DashTarget = hit.point;
+        //            Dir = DashTarget - transform.position;
+        //            isDash = true;
+        //            player.isAttack = true;
+        //            Debug.Log(DashTarget);
+        //        }
+        //    }
+        //}
+
+        
         //if (isSkillUse)
         //{
         //    int layerMask = 1 << LayerMask.NameToLayer("Platform");
@@ -126,47 +126,36 @@ public class PlayerSkill : MonoBehaviour
 
     public void Dash()
     {
-        if (Vector3.Distance(DashTarget, transform.position) > 0.2f)
+        if (Input.GetKeyDown(KeyCode.Space) && DashSkillTime <= 0)
         {
-            transform.forward = Dir;
-            transform.position = transform.position + Dir * Time.deltaTime * 3f;
-        }
-        else
-        {
-            isDash = false;
-            player.isAttack = false;
+            player.Anim.SetTrigger("isDash");
+            GangrimSkillUi.instance.dashDot.DORestart();
+            StartCoroutine(DashCor());
+            StartCoroutine(SpaceSkillCoolDown());
         }
     }
 
-    public void WindSkillRange()
+    private IEnumerator DashCor()
     {
-        //if (WindSkillTime > 0) return;
+        Vector3 forward = this.transform.forward;
+        Vector3 startPos = this.transform.position;
 
-        //if (Input.GetKeyDown(KeyCode.Q) && isSkillUse && !WindSkillCheck && WindSkillTime <= 0)
-        //{
-        //    WindDirection.enabled = true;
-        //    WindSkillCheck = true;
-            
-        //    isSkillUse = false;
-        //}
-        //else if (Input.GetKeyDown(KeyCode.Q) && !isSkillUse)
-        //{
-        //    WindDirection.enabled = false;
-        //    WindSkillCheck = false;
-        //    isSkillUse = true;
-        //}
-        
-        //if (Input.GetMouseButtonDown(0) && !isSkillUse && WindSkillCheck)
-        //{
-        //    GangrimSkillUi.instance.CurrentSkillUI("wind");
-        //    player.isAttack = true;
-        //    isSkillUse = true;
-        //    player.Skill_Q();
-        //    StartCoroutine(QskillCoolDown());
-        //}
+        while(Vector3.Distance(startPos, transform.position) < 2)
+        {
+            this.transform.position += forward.normalized * 3f * Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
     }
 
-    
+    private IEnumerator SpaceSkillCoolDown()
+    {
+        DashSkillTime = DashSkillCool;
+        while (DashSkillTime > 0)
+        {
+            DashSkillTime -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
     public void WindSkill()
     {

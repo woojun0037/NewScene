@@ -20,11 +20,13 @@ public class GangrimSkillUi : MonoBehaviour
     public DOTweenAnimation windDot;
     public DOTweenAnimation tornadoDot;
     public DOTweenAnimation rainDot;
+    public DOTweenAnimation dashDot;
 
     public DOTweenAnimation leftDot;
     public DOTweenAnimation rightDot;
 
 
+    public Image dashHide;
 
     public GameObject option;
 
@@ -94,6 +96,7 @@ public class GangrimSkillUi : MonoBehaviour
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
         abilityImage3.fillAmount = 0;
+        dashHide.fillAmount = 0;
     }
 
     void Update()
@@ -108,6 +111,7 @@ public class GangrimSkillUi : MonoBehaviour
         abilityImage1.fillAmount = playerSkillCheck.WindSkillTime / playerSkillCheck.WindSkillCool;
         abilityImage2.fillAmount = playerSkillCheck.TornadoSkillTime / playerSkillCheck.TornadoSkillCool;
         abilityImage3.fillAmount = playerSkillCheck.RainSkillTime / playerSkillCheck.RainSkillCool;
+        dashHide.fillAmount = playerSkillCheck.DashSkillTime / playerSkillCheck.DashSkillCool;
     }
 
 
