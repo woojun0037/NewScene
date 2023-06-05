@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,14 +17,27 @@ public class GangrimSkillUi : MonoBehaviour
     public PropertySkill PropertySkillCheck;
     public Main_Player main;
 
+    public DOTweenAnimation windDot;
+    public DOTweenAnimation tornadoDot;
+    public DOTweenAnimation rainDot;
+    public DOTweenAnimation dashDot;
+
+    public DOTweenAnimation leftDot;
+    public DOTweenAnimation rightDot;
+
+
+    public Image dashHide;
+
     public GameObject option;
+
+    public GameObject skillKey;
 
     public Dictionary<string, Sprite> spriteDictionary;
     [Header("SkillUseCheck")]
     public Image[] uiImages;
     public Sprite[] uiSprites;
     public string[] uiKeys;
-
+    
     [Header("WindSKill")]
     public Image abilityImage1;
     public float coolDown1 = 5;
@@ -66,7 +80,7 @@ public class GangrimSkillUi : MonoBehaviour
 
             spriteDictionary = new Dictionary<string, Sprite>();
             spriteDictionary.Add("wind", uiSprites[0]);
-            spriteDictionary.Add("cloud", uiSprites[1]);
+            spriteDictionary.Add("tornado", uiSprites[1]);
             spriteDictionary.Add("rain", uiSprites[2]);
             DontDestroyOnLoad(this.gameObject);
         }
@@ -82,17 +96,24 @@ public class GangrimSkillUi : MonoBehaviour
         abilityImage1.fillAmount = 0;
         abilityImage2.fillAmount = 0;
         abilityImage3.fillAmount = 0;
+        dashHide.fillAmount = 0;
     }
 
     void Update()
     {
         Option();
-
-        WindSKillAbilty();
-        CloudSKillAbilty();
-        RainSkillAbilty();
+        CoolTimeUpdate();
         ItemUse();
     }
+
+    public void CoolTimeUpdate()
+    {
+        abilityImage1.fillAmount = playerSkillCheck.WindSkillTime / playerSkillCheck.WindSkillCool;
+        abilityImage2.fillAmount = playerSkillCheck.TornadoSkillTime / playerSkillCheck.TornadoSkillCool;
+        abilityImage3.fillAmount = playerSkillCheck.RainSkillTime / playerSkillCheck.RainSkillCool;
+        dashHide.fillAmount = playerSkillCheck.DashSkillTime / playerSkillCheck.DashSkillCool;
+    }
+
 
     private void Option()
     {
@@ -129,65 +150,12 @@ public class GangrimSkillUi : MonoBehaviour
         SceneManager.LoadScene("Title");
     }
 
-    public void WindSKillAbilty()
+    public void SkillUiInit()
     {
-        abilityImage1.fillAmount = playerSkillCheck.WindSkillTime / playerSkillCheck.WindSkillCool;
-
-        //if (Input.GetKey(WindSKill) && isWindSKillCoolDown == false)
-        //{
-        //    isWindSKillCoolDown = true;
-        //    abilityImage1.fillAmount = 1;
-        //}
-
-        //if (isWindSKillCoolDown)
-        //{
-        //    abilityImage1.fillAmount -= 1 / coolDown1 * Time.deltaTime;
-
-        //    if (abilityImage1.fillAmount <= 0)
-        //    {
-        //        abilityImage1.fillAmount = 0;
-        //        isWindSKillCoolDown = false;
-        //    }
-        //}
-    }
-    public void CloudSKillAbilty()
-    {
-        if (Input.GetKey(CloudSKill) && isCloudSKillCoolDown == false)
-        {
-            isCloudSKillCoolDown = true;
-            abilityImage2.fillAmount = 1;
-        }
-
-        if (isCloudSKillCoolDown)
-        {
-            abilityImage2.fillAmount -= 1 / coolDown2 * Time.deltaTime;
-
-            if (abilityImage2.fillAmount <= 0)
-            {
-                abilityImage2.fillAmount = 0;
-                isCloudSKillCoolDown = false;
-            }
-        }
-    }
-    public void RainSkillAbilty()
-    {
-        abilityImage3.fillAmount = playerSkillCheck.RainSkillTime / playerSkillCheck.RainSkillCool;
-        //if (Input.GetKey(RainSkill) && isRainSkillCoolDown == false)
-        //{
-        //    isRainSkillCoolDown = true;
-        //    abilityImage3.fillAmount = 1;
-        //}
-
-        //if (isRainSkillCoolDown)
-        //{
-        //    abilityImage3.fillAmount -= 1 / coolDown3 * Time.deltaTime;
-
-        //    if (abilityImage3.fillAmount <= 0)
-        //    {
-        //        abilityImage3.fillAmount = 0;
-        //        isRainSkillCoolDown = false;
-        //    }
-        //}
+        leftDot.DORestart();
+        leftDot.tween.OnComplete(() => { uiKeys[0] = "0"; uiImages[0].sprite = null; uiImages[0].enabled = false; });
+        rightDot.DORestart();
+        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; uiImages[1].sprite = null; uiImages[1].enabled = false; skillKey.SetActive(false); });
     }
 
     public void CurrentSkillUI(string key)
@@ -206,6 +174,7 @@ public class GangrimSkillUi : MonoBehaviour
             uiKeys[1] = key;
             uiImages[1].sprite = spriteDictionary[key];
             uiImages[1].enabled = true;
+            if (uiKeys[0] == "wind" || uiKeys[1] == "wind") skillKey.SetActive(true);
         }
         else if (uiKeys[0] != "0" && uiKeys[1] != "0")
         {

@@ -25,7 +25,6 @@ public class Main_Player : MonoBehaviour
     private Vector3 player_Move_Input;
 
     private bool isMove = false;
-    private bool isBack = false;
 
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
@@ -38,8 +37,6 @@ public class Main_Player : MonoBehaviour
     public bool attackInputOn;
 
     public bool isAttack = false;
-    public bool isDash = true;
-    public bool isWind = false;
     public bool isTafoon;
 
 
@@ -75,10 +72,7 @@ public class Main_Player : MonoBehaviour
         //CalTargetPos();
         Move();
         AttackInput();
-        Dash();
         AnimationBoolCheck();
-        Skill_E();
-        Skill_R();
         Around();
     }
 
@@ -123,6 +117,9 @@ public class Main_Player : MonoBehaviour
         isClicks[0] = true;
         isClicks[1] = false;
         isClicks[2] = false;
+        Anim.ResetTrigger("isAttack_1");
+        Anim.ResetTrigger("isAttack_2");
+        Anim.ResetTrigger("isAttack_3");
         hitState = 0;
     }
 
@@ -190,95 +187,60 @@ public class Main_Player : MonoBehaviour
         string Vertical = "Vertical";
         float moveDirZ = Input.GetAxisRaw(Vertical);
 
-        if (moveDirX == 1 && moveDirZ == 1)
+        if (!isAttack)
         {
-            transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirX == 1 && moveDirZ == -1)
-        {
-            transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirX == -1 && moveDirZ == 1)
-        {
-            transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirX == -1 && moveDirZ == -1)
-        {
-            transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirZ == 1)
-        {
-            transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirZ == -1)
-        {
-            transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirX == 1)
-        {
-            transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else if (moveDirX == -1)
-        {
-            transform.Translate(UtillScript.Left * Time.deltaTime * MoveSpeed);
-            isMove = true;
-        }
-        else
-        {
-            isMove = false;
-        }
-    }
-
-    public void Dash()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Anim.SetTrigger("isDash");
-            isDash = false;
-            StartCoroutine(DashCor());
+            if (moveDirX == 1 && moveDirZ == 1)
+            {
+                transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirX == 1 && moveDirZ == -1)
+            {
+                transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirX == -1 && moveDirZ == 1)
+            {
+                transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirX == -1 && moveDirZ == -1)
+            {
+                transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirZ == 1)
+            {
+                transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirZ == -1)
+            {
+                transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirX == 1)
+            {
+                transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else if (moveDirX == -1)
+            {
+                transform.Translate(UtillScript.Left * Time.deltaTime * MoveSpeed);
+                isMove = true;
+            }
+            else
+            {
+                isMove = false;
+            }
         }
     }
 
-    IEnumerator DashCor()
-    {
-        isDash = true;
-        yield return new WaitForSeconds(1f);
-    }
-
+   
     private void Around()
     {
         Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
-    }
-
-    public void Skill_Q()
-    {
-        string windSkill = "WindSkill";
-        Anim.SetTrigger(windSkill);
-        Q_skillCheck = true;
-    }
-
-    public void Skill_E()
-    {
-        if (Input.GetKey(KeyCode.E))
-        {
-            E_skillCheck = true;
-        }
-    }
-
-    public void Skill_R()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            R_skillCheck = true;
-        }
     }
 
     public void GetDamage(float damage)
