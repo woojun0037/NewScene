@@ -21,10 +21,8 @@ public class Main_Player : MonoBehaviour
     public Enemy enemy;
     public CameraMovemant cam;
 
-    private Vector3 mousePos;
-    private Vector3 player_Move_Input;
-
-    private bool isMove = false;
+    public bool isMove = false;
+    private bool isBackWard = false;
 
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
@@ -69,7 +67,6 @@ public class Main_Player : MonoBehaviour
 
     void Update()
     {
-        //CalTargetPos();
         Move();
         AttackInput();
         AnimationBoolCheck();
@@ -181,58 +178,71 @@ public class Main_Player : MonoBehaviour
 
     private void Move()
     {
-        string Horizontal = "Horizontal";
-        float moveDirX = Input.GetAxisRaw(Horizontal);
-
-        string Vertical = "Vertical";
-        float moveDirZ = Input.GetAxisRaw(Vertical);
-
         if (!isAttack)
         {
-            if (moveDirX == 1 && moveDirZ == 1)
+            string Horizontal = "Horizontal";
+            float moveDirX = Input.GetAxisRaw(Horizontal);
+
+            string Vertical = "Vertical";
+            float moveDirZ = Input.GetAxisRaw(Vertical);
+            transform.Translate(MoveSpeed * Time.deltaTime * new Vector3(moveDirX, 0f, moveDirZ).normalized);
+            if(moveDirZ == 1)
             {
-                transform.Translate((Vector3.right + Vector3.forward) * Time.deltaTime * MoveSpeed);
                 isMove = true;
+                //if()
             }
-            else if (moveDirX == 1 && moveDirZ == -1)
-            {
-                transform.Translate((Vector3.right + Vector3.back) * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirX == -1 && moveDirZ == 1)
-            {
-                transform.Translate((Vector3.left + Vector3.forward) * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirX == -1 && moveDirZ == -1)
-            {
-                transform.Translate((Vector3.left + Vector3.back) * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirZ == 1)
-            {
-                transform.Translate(UtillScript.Forward * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirZ == -1)
-            {
-                transform.Translate(UtillScript.Back * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirX == 1)
-            {
-                transform.Translate(UtillScript.Right * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else if (moveDirX == -1)
-            {
-                transform.Translate(UtillScript.Left * Time.deltaTime * MoveSpeed);
-                isMove = true;
-            }
-            else
-            {
-                isMove = false;
-            }
+            
+            //if (moveDirZ == 1)//앞
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Forward.normalized);
+            //    isMove = true;
+            //    isBackWard = false;
+            //}
+            //if (moveDirX == 1 && moveDirZ == 1)//오른쪽 앞 대각
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Right + UtillScript.Forward).normalized);
+            //    isMove = true;
+            //    isBackWard = false;
+            //}
+            //if (moveDirX == -1 && moveDirZ == 1)//왼쪽 앞 대각
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Left + UtillScript.Forward).normalized);
+            //    isMove = true;
+            //    isBackWard = false;
+            //}
+            //if (moveDirX == 1 && moveDirZ == -1)//오른쪽 뒤 대각
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Right + UtillScript.Back).normalized);
+            //    isBackWard = true;
+            //    isMove = false;
+            //}
+            //if (moveDirX == -1 && moveDirZ == -1)//왼쪽 뒤 대각
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Left + UtillScript.Back).normalized);
+            //    isBackWard = true;
+            //    isMove = false;
+            //}
+            //else if (moveDirX == 1)//오른쪽
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Right.normalized);
+            //    isMove = true;
+            //}
+            //else if (moveDirX == -1)//왼쪽
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Left.normalized);
+            //    isMove = true;
+            //}
+            //else if (moveDirZ == -1)//뒤
+            //{
+            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Back.normalized);
+            //    isBackWard = true;
+            //    isMove = false;
+            //}
+            //else
+            //{
+            //    isMove = false;
+            //    isBackWard = false;
+            //}
         }
     }
 
@@ -252,5 +262,7 @@ public class Main_Player : MonoBehaviour
     {
         string Move = "isMove";
         Anim.SetBool(Move, isMove);
+        string BackWard = "isBackWard";
+        Anim.SetBool(BackWard, isBackWard);
     }
 }

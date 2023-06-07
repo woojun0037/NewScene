@@ -2721,6 +2721,16 @@ MonoBehaviour:
   player: {fileID: 886175432}
   playerSkillCheck: {fileID: 886175437}
   PropertySkillCheck: {fileID: 886175433}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages:
   - {fileID: 710998396}
   - {fileID: 2141492677}
@@ -2749,6 +2759,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 118756922}
   DarkPillItem__itemkey: 259
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!114 &311104973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9101,6 +9112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &915394057
 GameObject:
   m_ObjectHideFlags: 0
@@ -19471,6 +19483,16 @@ MonoBehaviour:
   player: {fileID: 1810457727}
   playerSkillCheck: {fileID: 1810457732}
   PropertySkillCheck: {fileID: 1810457728}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages:
   - {fileID: 887452799}
   - {fileID: 1429072075}
@@ -19499,6 +19521,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 809717519}
   DarkPillItem__itemkey: 259
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!114 &1953727019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21209,6 +21232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &2079189031
 GameObject:
   m_ObjectHideFlags: 0

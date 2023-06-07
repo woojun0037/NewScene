@@ -11488,6 +11488,16 @@ MonoBehaviour:
   player: {fileID: 1990588966}
   playerSkillCheck: {fileID: 1990588971}
   PropertySkillCheck: {fileID: 1990588967}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages:
   - {fileID: 773488482}
   - {fileID: 529111218}
@@ -11516,6 +11526,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 2016413112}
   DarkPillItem__itemkey: 259
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!114 &904110728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23510,6 +23521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1001 &1840941020
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3112,28 +3112,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePos: {x: 0, y: 0, z: 0}
-  ui: {fileID: 0}
   gauge: {fileID: 0}
   hitScript: {fileID: 0}
   isSkillOn: 0
-  isCollision: 0
   isSkillUse: 1
-  isTest: 0
-  WindSkillCheck: 0
+  isShake: 0
   RainSkillCheck: 0
-  CloudSkillCheck: 0
+  WindSkillCheck: 0
   DarkSkillUse: 0
-  WindDirection: {fileID: 0}
-  trailEffect: {fileID: 0}
-  CloudPos: {fileID: 677124211}
+  CloudSkillCheck: 0
+  FlyingObject: {fileID: 0}
+  Tornado: {fileID: 0}
   WindSkillPrefab: {fileID: 7231915265385764020, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
+  DarkSkillEffect: {fileID: 0}
+  posUp: {x: 0, y: 0, z: 0}
   postion: {x: 0, y: 0, z: 0}
-  RainSkill: {fileID: 327801513}
+  RainPos: {x: 0, y: 0, z: 0}
+  WindDirection: {fileID: 0}
   ability2Canvas: {fileID: 47927074}
   targetCircle: {fileID: 2006208401}
   SkillRange: {fileID: 1983615694}
   RainSkillTime: 1
   RainSkillCool: 5
+  WindSkillTime: 0
+  WindSkillCool: 0
+  TornadoSkillTime: 0
+  TornadoSkillCool: 0
+  DashSkillTime: 0
+  DashSkillCool: 0
   maxAbilityDistance: 5
   DarkSkill: 0
 --- !u!136 &915960906
@@ -3180,28 +3186,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
   HitBox: {fileID: 0}
-  WindBox: {fileID: 0}
   TafoonBox: {fileID: 0}
   currentATKEffect: {fileID: 0}
-  RotateSpeed: 10
-  windOn: {fileID: 0}
+  tafoonSkill: {fileID: 0}
+  propertySkill: {fileID: 0}
+  hit: {fileID: 0}
   heal: {fileID: 0}
   skill: {fileID: 0}
   Anim: {fileID: 915960909}
   enemy: {fileID: 0}
-  mainCamera: {fileID: 0}
+  cam: {fileID: 0}
+  isMove: 0
+  windHitBox: {fileID: 0}
   AtkEffect: []
   isClicks: 
   Q_skillCheck: 0
   E_skillCheck: 0
   R_skillCheck: 0
-  isAttack: 0
-  isWind: 0
   attackInputOn: 0
+  isAttack: 0
   isTafoon: 0
   damage: 10
   HP: 100
   MoveSpeed: 10
+  BackStep: 2
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 0

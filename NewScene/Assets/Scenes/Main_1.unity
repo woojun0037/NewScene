@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2193,6 +2193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d03c11d66e9dde439901b3aa8205ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  shakeTime: 0.3
+  shakeSpeed: 1
+  shakeAmount: 1
 --- !u!1001 &112381642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4332,6 +4336,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -7587,6 +7592,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -15868,6 +15874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!65 &802305480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15893,6 +15900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1001 &808399086
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24339,6 +24347,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 2
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -38991,6 +39000,16 @@ MonoBehaviour:
   player: {fileID: 0}
   playerSkillCheck: {fileID: 0}
   PropertySkillCheck: {fileID: 0}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages: []
   uiSprites: []
   uiKeys: []
@@ -39012,6 +39031,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 0}
   DarkPillItem__itemkey: 0
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!1 &1971502703
 GameObject:
   m_ObjectHideFlags: 0
@@ -44822,6 +44842,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -44919,6 +44940,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -45016,6 +45038,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   KnockBackForce: 0.5
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
   agent: {fileID: 0}
   playerSkill: {fileID: 0}
@@ -45870,9 +45893,14 @@ MonoBehaviour:
   curHearth: 0
   MaxDistance: 0
   chasespeed: 0
+  DebuffCheck: 0
+  StartAttack: 0
   KnockBackForce: 0
-  player: {fileID: 115793828}
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
   targetPos: {x: 0, y: 0, z: 0}
   effects:
   - {fileID: 9206715328296046540, guid: 4535a8573c0e6064c97743baec5c27d2, type: 3}
@@ -45886,6 +45914,7 @@ MonoBehaviour:
   mat: {fileID: 2100000, guid: 24fad0223569d9c429dc8b1169e32382, type: 2}
   attackcollider: {fileID: 0}
   throwRockObj: {fileID: 0}
+  SlashObj: {fileID: 0}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0

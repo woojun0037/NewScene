@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2095,6 +2095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1001 &91882601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12844,6 +12845,16 @@ MonoBehaviour:
   player: {fileID: 1806763111}
   playerSkillCheck: {fileID: 1806763118}
   PropertySkillCheck: {fileID: 1806763120}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages:
   - {fileID: 1179294151}
   - {fileID: 582653440}
@@ -12872,6 +12883,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 1370652103}
   DarkPillItem__itemkey: 259
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!1 &507684347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1204659915334696, guid: 8afde97fb8209f946a65b4540bf4b391, type: 3}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09671548, g: 0.21786425, b: 0.36861145, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -600,28 +600,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
   HitBox: {fileID: 0}
-  WindBox: {fileID: 0}
   TafoonBox: {fileID: 0}
   currentATKEffect: {fileID: 0}
-  RotateSpeed: 10
-  windOn: {fileID: 0}
+  tafoonSkill: {fileID: 0}
+  propertySkill: {fileID: 0}
+  hit: {fileID: 0}
   heal: {fileID: 0}
   skill: {fileID: 0}
   Anim: {fileID: 5866666020565131484}
   enemy: {fileID: 0}
-  mainCamera: {fileID: 0}
+  cam: {fileID: 0}
+  isMove: 0
+  windHitBox: {fileID: 0}
   AtkEffect: []
   isClicks: 
   Q_skillCheck: 0
   E_skillCheck: 0
   R_skillCheck: 0
-  isAttack: 0
-  isWind: 0
   attackInputOn: 0
+  isAttack: 0
   isTafoon: 0
   damage: 10
   HP: 100
   MoveSpeed: 10
+  BackStep: 2
   MaxDistance: 1.5
   AttackSpeed: 0.5
   addAttackSpeed: 0
@@ -4618,9 +4620,14 @@ MonoBehaviour:
   curHearth: 0
   MaxDistance: 5
   chasespeed: 2
+  DebuffCheck: 0
+  StartAttack: 0
   KnockBackForce: 0
-  player: {fileID: 0}
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
   targetPos: {x: 0, y: 0, z: 0}
   effects: []
   attackRange: 0
@@ -4631,6 +4638,7 @@ MonoBehaviour:
   mat: {fileID: 338057500}
   attackcollider: {fileID: 0}
   throwRockObj: {fileID: 0}
+  SlashObj: {fileID: 0}
 --- !u!136 &1706830809
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10133,9 +10141,14 @@ MonoBehaviour:
   curHearth: 0
   MaxDistance: 2.5
   chasespeed: 2
+  DebuffCheck: 0
+  StartAttack: 0
   KnockBackForce: 0
-  player: {fileID: 0}
+  skillHitEffect: {fileID: 0}
   targetTransform: {fileID: 0}
+  agent: {fileID: 0}
+  playerSkill: {fileID: 0}
+  getTouch: 0
   targetPos: {x: 0, y: 0, z: 0}
   effects: []
   attackRange: 0
@@ -10146,6 +10159,7 @@ MonoBehaviour:
   mat: {fileID: 2830159858170750480}
   attackcollider: {fileID: 0}
   throwRockObj: {fileID: 0}
+  SlashObj: {fileID: 0}
 --- !u!54 &5866666020109118370
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10251,28 +10265,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePos: {x: 0, y: 0, z: 0}
-  ui: {fileID: 0}
   gauge: {fileID: 0}
   hitScript: {fileID: 0}
   isSkillOn: 0
-  isCollision: 0
   isSkillUse: 1
-  isTest: 0
-  WindSkillCheck: 0
+  isShake: 0
   RainSkillCheck: 0
-  CloudSkillCheck: 0
+  WindSkillCheck: 0
   DarkSkillUse: 0
-  WindDirection: {fileID: 0}
-  trailEffect: {fileID: 0}
-  CloudPos: {fileID: 256328194}
+  CloudSkillCheck: 0
+  FlyingObject: {fileID: 0}
+  Tornado: {fileID: 0}
   WindSkillPrefab: {fileID: 7231915265385764020, guid: b933a6d45f4d99a4790ce1760324ba53, type: 3}
+  DarkSkillEffect: {fileID: 0}
+  posUp: {x: 0, y: 0, z: 0}
   postion: {x: 0, y: 0, z: 0}
-  RainSkill: {fileID: 2067220298}
+  RainPos: {x: 0, y: 0, z: 0}
+  WindDirection: {fileID: 0}
   ability2Canvas: {fileID: 1361499690}
   targetCircle: {fileID: 624235369}
   SkillRange: {fileID: 2012300569}
   RainSkillTime: 1
   RainSkillCool: 5
+  WindSkillTime: 0
+  WindSkillCool: 0
+  TornadoSkillTime: 0
+  TornadoSkillCool: 0
+  DashSkillTime: 0
+  DashSkillCool: 0
   maxAbilityDistance: 5
   DarkSkill: 0
 --- !u!1 &5892388282118999773

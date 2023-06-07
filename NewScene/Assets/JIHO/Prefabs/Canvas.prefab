@@ -356,6 +356,16 @@ MonoBehaviour:
   player: {fileID: 0}
   playerSkillCheck: {fileID: 0}
   PropertySkillCheck: {fileID: 0}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages:
   - {fileID: 6986639244792725802}
   - {fileID: 6986639244480718411}
@@ -384,6 +394,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 6986639243435585939}
   DarkPillItem__itemkey: 259
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!1 &6986639243504454162
 GameObject:
   m_ObjectHideFlags: 0

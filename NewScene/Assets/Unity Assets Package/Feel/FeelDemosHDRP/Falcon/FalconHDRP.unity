@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2035111234}
-  m_IndirectSpecularColor: {r: 113.64674, g: 59.042725, b: 50.85949, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -658,9 +658,43 @@ MonoBehaviour:
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
   DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
   DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlay: 1
   CanPlayWhileAlreadyPlaying: 1
   ChanceToPlay: 100
   FeedbacksIntensity: 1
@@ -680,6 +714,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
@@ -730,6 +770,7 @@ MonoBehaviour:
   MinPitch: 1
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}
+  Priority: 128
 --- !u!114 &103955376
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -12249,9 +12290,43 @@ MonoBehaviour:
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
   DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
   DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlay: 1
   CanPlayWhileAlreadyPlaying: 1
   ChanceToPlay: 100
   FeedbacksIntensity: 1
@@ -12271,6 +12346,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
@@ -18584,9 +18665,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92a948b1d89a964dad3e880ab3b9712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -18641,9 +18725,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ed30f22b4748a44bc7862a66f01f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -18733,9 +18820,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f7ebe879e82aa489329e54525c43ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -18790,9 +18880,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e91560821f43e47a56cefccaf584cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.8
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19016,9 +19109,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519fc1b1af1286148b6fbb86b4ef2eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.8
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19136,9 +19232,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf1b6f8b44acf042a0f2bed486492e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19193,9 +19292,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b9fc554bc35094d9e423683c81474e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19250,9 +19352,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa659f9a4e4d1ac44942408d91a6d90c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19342,9 +19447,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cacc4f51dca0d494dabb441565c23f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19399,9 +19507,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f88b719c3eddc45be16396a493f8d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.2
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -19456,9 +19567,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e96efc928fc8848b7698b3703f9f02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChannelMode: 0
   Channel: 0
+  MMChannelDefinition: {fileID: 0}
   ShakeDuration: 0.8
   PlayOnAwake: 0
+  PermanentShake: 0
   Interruptible: 1
   AlwaysResetTargetValuesAfterShake: 0
   CooldownBetweenShakes: 0
@@ -30135,6 +30249,7 @@ MonoBehaviour:
   FollowScaleMode: 1
   FollowScaleSpeed: 10
   UpdateMode: 0
+  DisableSelfOnSetActiveFalse: 0
   UseMinimumDistanceBeforeFollow: 0
   MinimumDistanceBeforeFollow: 1
   UseMaximumDistance: 0
@@ -46503,6 +46618,7 @@ MonoBehaviour:
   taaMotionVectorRejection: 0
   taaAntiHistoryRinging: 0
   taaBaseBlendFactor: 0.875
+  taaJitterScale: 1
   physicalParameters:
     m_Iso: 200
     m_ShutterSpeed: 0.005
@@ -52686,9 +52802,43 @@ MonoBehaviour:
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
   DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
   DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlay: 1
   CanPlayWhileAlreadyPlaying: 1
   ChanceToPlay: 100
   FeedbacksIntensity: 1
@@ -52708,6 +52858,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0
@@ -52758,6 +52914,7 @@ MonoBehaviour:
   MinPitch: 1
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}
+  Priority: 128
 --- !u!114 &1521030698
 MonoBehaviour:
   m_ObjectHideFlags: 2
@@ -56791,9 +56948,43 @@ MonoBehaviour:
   ForceTimescaleMode: 0
   ForcedTimescaleMode: 1
   DurationMultiplier: 1
+  RandomizeDuration: 0
+  RandomDurationMultiplier: {x: 0.5, y: 1.5}
   DisplayFullDurationDetails: 0
+  PlayerTimescaleMode: 1
+  OnlyPlayIfWithinRange: 0
+  RangeCenter: {fileID: 0}
+  RangeDistance: 5
+  UseRangeFalloff: 0
+  RangeFalloff:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RemapRangeFalloff: {x: 0, y: 1}
+  IgnoreRangeEvents: 0
   CooldownDuration: 0
   InitialDelay: 0
+  CanPlay: 1
   CanPlayWhileAlreadyPlaying: 1
   ChanceToPlay: 100
   FeedbacksIntensity: 1
@@ -56813,6 +57004,12 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRestoreInitialValues:
+      m_PersistentCalls:
+        m_Calls: []
+    OnSkipToTheEnd:
       m_PersistentCalls:
         m_Calls: []
   DebugActive: 0

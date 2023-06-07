@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!65 &436954610
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2611,17 +2612,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovePlayer: {x: 0, y: 0, z: 0}
   HitBox: {fileID: 276900422}
-  WindBox: {fileID: 0}
   TafoonBox: {fileID: 436954610}
   currentATKEffect: {fileID: 0}
-  RotateSpeed: 10
-  windOn: {fileID: 0}
+  tafoonSkill: {fileID: 0}
+  propertySkill: {fileID: 0}
+  hit: {fileID: 0}
   heal: {fileID: 0}
   skill: {fileID: 371447735453508159}
   Anim: {fileID: 371447735453508158}
   enemy: {fileID: 0}
-  mainCamera: {fileID: 0}
   cam: {fileID: 0}
+  isMove: 0
+  windHitBox: {fileID: 0}
   AtkEffect:
   - {fileID: 1548688597887237798, guid: c16826ef1d2e2b74cb41c75814aa3065, type: 3}
   - {fileID: 1548688597887237798, guid: 69d0384afaa17194382213bb3109e660, type: 3}
@@ -2631,9 +2633,8 @@ MonoBehaviour:
   Q_skillCheck: 0
   E_skillCheck: 0
   R_skillCheck: 0
-  isAttack: 0
-  isWind: 0
   attackInputOn: 0
+  isAttack: 0
   isTafoon: 0
   damage: 5
   HP: 1000
@@ -2687,28 +2688,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mousePos: {x: 0, y: 0, z: 0}
-  ui: {fileID: 0}
   gauge: {fileID: 0}
   hitScript: {fileID: 276900421}
   isSkillOn: 0
-  isCollision: 0
   isSkillUse: 1
-  isTest: 0
-  WindSkillCheck: 0
+  isShake: 0
   RainSkillCheck: 0
-  CloudSkillCheck: 0
+  WindSkillCheck: 0
   DarkSkillUse: 0
-  WindDirection: {fileID: 936691729746658091}
-  trailEffect: {fileID: 0}
-  CloudPos: {fileID: 4038121562323302784}
+  CloudSkillCheck: 0
+  FlyingObject: {fileID: 0}
+  Tornado: {fileID: 0}
   WindSkillPrefab: {fileID: 4042854669437934927, guid: 31131de7f2871a2448274cf71dc093a0, type: 3}
+  DarkSkillEffect: {fileID: 0}
+  posUp: {x: 0, y: 0, z: 0}
   postion: {x: 0, y: 0, z: 0}
-  RainSkill: {fileID: 0}
+  RainPos: {x: 0, y: 0, z: 0}
+  WindDirection: {fileID: 936691729746658091}
   ability2Canvas: {fileID: 6074564346373018824}
   targetCircle: {fileID: 6074564347110281611}
   SkillRange: {fileID: 6074564345722210299}
   RainSkillTime: 3
   RainSkillCool: 3
+  WindSkillTime: 0
+  WindSkillCool: 0
+  TornadoSkillTime: 0
+  TornadoSkillCool: 0
+  DashSkillTime: 0
+  DashSkillCool: 0
   maxAbilityDistance: 5
   DarkSkill: 10
 --- !u!114 &371447735453508156
@@ -2725,12 +2732,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitBox: {fileID: 276900422}
   BuffTime: 6
+  PlayerPos: {fileID: 6036944921677117508}
   SkillUse: {fileID: 0}
+  skillUi: {fileID: 0}
   enemy: {fileID: 0}
+  icepos: {fileID: 0}
   motion: {fileID: 0}
   IceSpecial: {fileID: 5232703000195832242, guid: ef051cf30d6d17e44aa20317a8753445, type: 3}
   TurnderSpecial: {fileID: 8701147866703565420, guid: 4ec9290cb6d69944a9efd8fccfdf13a5, type: 3}
-  PlayerPos: {fileID: 6036944921677117508}
   SpeedUp: 0
   TafoonSpecialMove: 0
   TafoonSpecial: 0
@@ -3698,11 +3707,6 @@ PrefabInstance:
 --- !u!4 &1909213207952162500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1909213209610239043, guid: a6c6b690a12b3104280a378d75ae12e6, type: 3}
-  m_PrefabInstance: {fileID: 1664467591}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4038121562323302784 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4038121563916466951, guid: a6c6b690a12b3104280a378d75ae12e6, type: 3}
   m_PrefabInstance: {fileID: 1664467591}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1903429275

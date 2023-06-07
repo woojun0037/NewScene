@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17757882, g: 0.2223225, b: 0.30451846, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3443,6 +3443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!65 &673068799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3468,6 +3469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39747c2904d986c42b163325a355afd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1001 &683364485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3997,6 +3999,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d03c11d66e9dde439901b3aa8205ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skill: {fileID: 0}
+  shakeTime: 0.3
+  shakeSpeed: 1
+  shakeAmount: 1
 --- !u!4 &719839593
 Transform:
   m_ObjectHideFlags: 0
@@ -12293,6 +12299,16 @@ MonoBehaviour:
   player: {fileID: 0}
   playerSkillCheck: {fileID: 0}
   PropertySkillCheck: {fileID: 0}
+  main: {fileID: 0}
+  windDot: {fileID: 0}
+  tornadoDot: {fileID: 0}
+  rainDot: {fileID: 0}
+  dashDot: {fileID: 0}
+  leftDot: {fileID: 0}
+  rightDot: {fileID: 0}
+  dashHide: {fileID: 0}
+  option: {fileID: 0}
+  skillKey: {fileID: 0}
   uiImages: []
   uiSprites: []
   uiKeys: []
@@ -12314,6 +12330,7 @@ MonoBehaviour:
   DARKPILL_item: {fileID: 0}
   DarkPillItem__itemkey: 0
   DarkPillItemOn: 0
+  isOption: 0
 --- !u!114 &2144515305
 MonoBehaviour:
   m_ObjectHideFlags: 0
