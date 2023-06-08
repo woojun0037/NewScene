@@ -19401,6 +19401,10 @@ GameObject:
   - component: {fileID: 517543888172493470}
   - component: {fileID: 8117168038852364410}
   - component: {fileID: 6004590125700952265}
+  - component: {fileID: 567420153}
+  - component: {fileID: 567420150}
+  - component: {fileID: 567420151}
+  - component: {fileID: 567420152}
   m_Layer: 0
   m_Name: "Eff_Fire_Common_FireballSkill_01\u200B  Cartoon   "
   m_TagString: Untagged
@@ -19415,7 +19419,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5337905985522618565}
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 9.998084, y: 0, z: 0.900053}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24208,6 +24212,60 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!65 &567420153
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337905985522618565}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.42, y: 1, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &567420150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337905985522618565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5f17760dff5cb94a92792941151981b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestoryTime: 5
+--- !u!114 &567420151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337905985522618565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58d5744c591d1a42bda28d62d8e1ce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &567420152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5337905985522618565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a790f111fd394f4bafe859495fb649f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GetDamaged: 1
+  activationDelay: 0.5
+  objectCollider: {fileID: 0}
+  GetColliderTime: 0
 --- !u!1 &5397375533389391703
 GameObject:
   m_ObjectHideFlags: 0

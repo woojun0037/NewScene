@@ -11,7 +11,9 @@ public class AddForward : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Main_gangrim").transform;
-
+        Vector3 pos = player.transform.position;
+        //pos.y = transform.position.y;
+        transform.LookAt(pos);
         moveDirection = (player.transform.position - gameObject.transform.position).normalized;
     }
 
