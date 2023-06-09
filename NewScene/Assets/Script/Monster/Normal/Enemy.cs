@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] protected PlayerSkill playerSkill;
     [SerializeField] protected float damageToGive;
+    [SerializeField] private string Hit1;
+    [SerializeField] private string Hit2;
 
     public int CriticalCount;
 
@@ -117,7 +119,10 @@ public class Enemy : MonoBehaviour
         {
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
-            
+
+            SoundManager.instance.PlaySE(Hit1);
+            SoundManager.instance.PlaySE(Hit2);
+
             if (player.HitState != hitNum)
             {
                 player.enemy = this;

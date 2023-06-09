@@ -5,47 +5,48 @@ using UnityEngine;
 public class Main_Player : MonoBehaviour
 {
     public static Main_Player instance;
+    public Enemy enemy;
 
+    [Header("Player 정보")]
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
-
-    public TafoonSkillHit tafoonSkill;
-    public PropertySkill propertySkill;
-    public HitScript hit;
-
     public HealthManager heal;
-    public PlayerSkill skill;
+    public HitScript hit;
     public Animator Anim;
-    public Enemy enemy;
-    public CameraMovemant cam;
-    public SoundManager sound;
 
-    public bool isMove = false;
-    private bool isBackWard = false;
+    [Header("Sound")]
+    [SerializeField] private string AttackSound1;
+    [SerializeField] private string AttackSound2;//사운드
 
+    [Header("Skill")]
+    public TafoonSkillHit tafoonSkill;
+    public PlayerSkill skill;
+    public PropertySkill propertySkill;
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
-    public bool[] isClicks;
 
+    [Header("cam")]
+    public CameraMovemant cam;
+
+    [Header("BoolCheck")]
+    public bool[] isClicks;
+    public bool isMove = false;
     public bool Q_skillCheck;
     public bool E_skillCheck;
     public bool R_skillCheck;
-
     public bool attackInputOn;
-
     public bool isAttack = false;
     public bool isTafoon;
 
-
+    [Header("PlayerStats")]
     public float damage;
     public float HP;
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
-
     public float addAttackSpeed;
     public float Duration;
     public float Magnitude;
@@ -132,6 +133,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack1 = "isAttack_1";
             Anim.SetTrigger(Attack1);
+            SoundManager.instance.PlaySE(AttackSound1);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
@@ -139,6 +141,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack2 = "isAttack_2";
             Anim.SetTrigger(Attack2);
+            SoundManager.instance.PlaySE(AttackSound2);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
@@ -146,6 +149,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack3 = "isAttack_3";
             Anim.SetTrigger(Attack3);
+            SoundManager.instance.PlaySE(AttackSound1);
         }
     }
 
@@ -199,8 +203,6 @@ public class Main_Player : MonoBehaviour
             else
             {
                 isMove = false;
-                
-
             }
         }
     }
