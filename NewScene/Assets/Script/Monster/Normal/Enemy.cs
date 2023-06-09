@@ -4,8 +4,11 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float damageToGive = 1;
-    
+    [SerializeField] protected PlayerSkill playerSkill;
+    [SerializeField] protected float damageToGive;
+
+    public int CriticalCount;
+
     public float maxHearth;
     public float curHearth;
     public float MaxDistance;
@@ -13,13 +16,12 @@ public class Enemy : MonoBehaviour
    
     public bool DebuffCheck;
     public bool StartAttack;
+    public bool getTouch;
     
     public float KnockBackForce;
-
-    public GameObject skillHitEffect;
-    
     protected float KnockBakcTime;
 
+    protected Main_Player Player;
     protected Rigidbody rigid;
     protected BoxCollider boxCollier;
 
@@ -27,12 +29,9 @@ public class Enemy : MonoBehaviour
     protected PropertySkill property;
     protected Main_Player player;
 
-    public Transform targetTransform;
     public NavMeshAgent agent = null;
-    [SerializeField] protected PlayerSkill playerSkill;
-    protected Main_Player Player;
-
-    public bool getTouch;
+    public Transform targetTransform;
+    public GameObject skillHitEffect;
 
     protected int hitNum;
     protected float delay;
@@ -44,6 +43,7 @@ public class Enemy : MonoBehaviour
         monsterMove();
         NotDamaged();
     }
+
     protected virtual void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -197,19 +197,6 @@ public class Enemy : MonoBehaviour
             time++;
         }
     }
-    
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.tag == "Main_gangrim" && !getTouch)
-        {
-            if (!havedelay)
-            {
-                havedelay = true;
-                StartCoroutine("AttackDelay");
-            }
-        }
-    }
-
 
     IEnumerator GetDebuffCor()
     {
@@ -227,12 +214,5 @@ public class Enemy : MonoBehaviour
         player.R_skillCheck = false;
         property.Stun = false;
         this.chasespeed = 3f;
-    }
-    IEnumerator AttackDelay() //플레이어가 받는 공격 딜레이
-    {
-        Debug.Log("hit to Player");
-        FindObjectOfType<HealthManager>().HurtPlayer(damageToGive);
-        yield return new WaitForSeconds(1f);
-        havedelay = false;
     }
 }

@@ -72,7 +72,7 @@ public class PlayerSkill : MonoBehaviour
 
     void Update()
     {
-        if(!player.isAttack)
+        if (!player.isAttack)
         {
             WindSkill();
             TornadoSkill();
@@ -80,48 +80,6 @@ public class PlayerSkill : MonoBehaviour
             RainSkill();
             Dash();
         }
-
-        //RaycastHit hit;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        //    {
-        //        if (hit.collider.tag == "Platform" && Vector3.Distance(hit.point, transform.position) < 15f)
-        //        {
-        //            player.Anim.SetTrigger("Dash");
-        //            DashTarget = hit.point;
-        //            Dir = DashTarget - transform.position;
-        //            isDash = true;
-        //            player.isAttack = true;
-        //            Debug.Log(DashTarget);
-        //        }
-        //    }
-        //}
-
-        
-        //if (isSkillUse)
-        //{
-        //    int layerMask = 1 << LayerMask.NameToLayer("Platform");
-
-        //    if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-        //    {
-        //        if (hit.collider.gameObject != this.gameObject)
-        //        {
-        //            posUp = new Vector3(hit.point.x, 2, hit.point.z);
-        //            postion = hit.point;
-        //        }
-        //    }
-
-        //    비 스킬 이미지 인풋
-        //    var hitPosDir = (new Vector3(hit.point.x, 2, hit.point.z) - transform.position).normalized;
-        //    float distance = Vector3.Distance(hit.point, transform.position);
-        //    distance = Mathf.Min(distance, maxAbilityDistance);
-
-        //    var newHitPos = transform.position + hitPosDir * distance;
-        //    RainPos = posUp;
-        //    ability2Canvas.transform.position = (newHitPos);
-        //}
     }
 
     public void Dash()

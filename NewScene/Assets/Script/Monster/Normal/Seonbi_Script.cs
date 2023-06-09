@@ -6,7 +6,6 @@ using UnityEngine;
 public class Seonbi_Script : Enemy
 {
     private Animator animator;
-
     [SerializeField] float SetY;
 
     bool isattack;
@@ -21,6 +20,7 @@ public class Seonbi_Script : Enemy
     protected override void Awake()
     {
         base.Awake();
+        damageToGive = 5;
         isattack = false;
     }
 
@@ -112,7 +112,8 @@ public class Seonbi_Script : Enemy
         transform.LookAt(targety);
 
         Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
-
+        Seonbi_bullet bullet = ThrowRockrigid.GetComponent<Seonbi_bullet>();
+        bullet.SeonbiDamageToGive = damageToGive;
         yield return new WaitForSeconds(1.3f);
 
         animator.SetBool("Attack", false);
