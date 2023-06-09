@@ -20,6 +20,7 @@ public class Main_Player : MonoBehaviour
     public Animator Anim;
     public Enemy enemy;
     public CameraMovemant cam;
+    public SoundManager sound;
 
     public bool isMove = false;
     private bool isBackWard = false;
@@ -115,6 +116,7 @@ public class Main_Player : MonoBehaviour
         isClicks[0] = true;
         isClicks[1] = false;
         isClicks[2] = false;
+
         Anim.ResetTrigger("isAttack_1");
         Anim.ResetTrigger("isAttack_2");
         Anim.ResetTrigger("isAttack_3");
@@ -192,10 +194,13 @@ public class Main_Player : MonoBehaviour
             if(moveDirZ == 1 || moveDirZ == -1 || moveDirX == 1 || moveDirX == -1)
             {
                 isMove = true;
+                
             }
             else
             {
                 isMove = false;
+                
+
             }
         }
     }

@@ -117,7 +117,7 @@ public class Enemy : MonoBehaviour
         {
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
-
+            
             if (player.HitState != hitNum)
             {
                 player.enemy = this;
