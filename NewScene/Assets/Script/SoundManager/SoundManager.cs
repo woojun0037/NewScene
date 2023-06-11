@@ -2,42 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Sound
+{
+    public string name;
+    public AudioClip clip;
+}
+
 public class SoundManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public static SoundManager Instance;
-    private void Awake()
-    {
-        if(Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(Instance);
+    static public SoundManager instance;
 
+    public AudioSource[] audioSourcesEffects;
+    public AudioSource audioSourceBgm;
+
+    public string[] PlaySoundName;
+
+    public Sound[] effectSounds;
+    public Sound[] bgmSounds;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
-    public void SFXPlay(string sfxName, AudioClip clip)
+    public void PlaySE(string _name)
     {
-        GameObject go = new GameObject(sfxName + "Sound");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.Play();
-
-        Destroy(go, clip.length);
+        for(int i = 0; i < effectSounds.Length; i++)
+        {
+            if(_name == effectSounds[i].name)
+            {
+                for (int j = 0; j < audioSourcesEffects.Length; j++)
+                {
+                    if (!audioSourcesEffects[j].isPlaying)
+                    {
+                        PlaySoundName[j] = effectSounds[i].name;
+                        audioSourcesEffects[j].clip = effectSounds[i].clip;
+                        audioSourcesEffects[j].Play();
+                        return;
+                    }
+                }
+                Debug.Log("모든 가용 AudioSource가 사용중입니다");
+                return;
+            }
+        }
+        Debug.Log(_name + "사운드가 SoundManager에 등록되지 않았습니다.");
     }
 
-    public AudioSource SFXPlayLoop(string sfxName, AudioClip clip)
+    public void StopAllSE()
     {
-        GameObject go = new GameObject(sfxName + "Sound");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        audioSource.clip = clip;
-        audioSource.loop = true; // 루프 재생 설정
-        audioSource.Play();
+        for(int i=0; i < audioSourcesEffects.Length; i++)
+        {
+            audioSourcesEffects[i].Stop();
+        }
+    }
 
-        return audioSource;
+    public void StopSE(string _name)
+    {
+        for(int i=0; i < audioSourcesEffects.Length; i++)
+        {
+            if (PlaySoundName[i] == _name)
+            {
+                audioSourcesEffects[i].Stop();
+                return;
+            }
+        }
+        Debug.Log("재생중인" + _name + "사운드가 없습니다.");
     }
 }

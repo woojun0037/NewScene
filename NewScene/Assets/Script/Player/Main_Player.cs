@@ -5,50 +5,53 @@ using UnityEngine;
 public class Main_Player : MonoBehaviour
 {
     public static Main_Player instance;
+    public Enemy enemy;
 
+    [Header("Player 정보")]
     [SerializeField] Vector3 MovePlayer;
     [SerializeField] Collider HitBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
-
-    public TafoonSkillHit tafoonSkill;
-    public PropertySkill propertySkill;
-    public HitScript hit;
-
     public HealthManager heal;
-    public PlayerSkill skill;
+    public HitScript hit;
     public Animator Anim;
-    public Enemy enemy;
-    public CameraMovemant cam;
 
-    public bool isMove = false;
-    private bool isBackWard = false;
+    [Header("Sound")]
+    [SerializeField] private string AttackSound1;
+    [SerializeField] private string AttackSound2;//사운드
 
+    [Header("Skill")]
+    public TafoonSkillHit tafoonSkill;
+    public PlayerSkill skill;
+    public PropertySkill propertySkill;
     public GameObject windHitBox;
     public GameObject[] AtkEffect;
-    public bool[] isClicks;
 
+    [Header("cam")]
+    public CameraMovemant cam;
+
+    [Header("BoolCheck")]
+    public bool[] isClicks;
+    public bool isMove = false;
     public bool Q_skillCheck;
     public bool E_skillCheck;
     public bool R_skillCheck;
-
     public bool attackInputOn;
-
     public bool isAttack = false;
     public bool isTafoon;
 
-
+    [Header("PlayerStats")]
     public float damage;
     public float HP;
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
     public float AttackSpeed = 3f;
-
     public float addAttackSpeed;
     public float Duration;
     public float Magnitude;
 
+    private Vector3 dir;
     private int hitState;
     internal int HitState => hitState;
 
@@ -114,6 +117,7 @@ public class Main_Player : MonoBehaviour
         isClicks[0] = true;
         isClicks[1] = false;
         isClicks[2] = false;
+
         Anim.ResetTrigger("isAttack_1");
         Anim.ResetTrigger("isAttack_2");
         Anim.ResetTrigger("isAttack_3");
@@ -129,6 +133,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack1 = "isAttack_1";
             Anim.SetTrigger(Attack1);
+            SoundManager.instance.PlaySE(AttackSound1);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
         {
@@ -136,6 +141,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack2 = "isAttack_2";
             Anim.SetTrigger(Attack2);
+            SoundManager.instance.PlaySE(AttackSound2);
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
         {
@@ -143,6 +149,7 @@ public class Main_Player : MonoBehaviour
             isAttack = true;
             string Attack3 = "isAttack_3";
             Anim.SetTrigger(Attack3);
+            SoundManager.instance.PlaySE(AttackSound1);
         }
     }
 
@@ -185,70 +192,25 @@ public class Main_Player : MonoBehaviour
 
             string Vertical = "Vertical";
             float moveDirZ = Input.GetAxisRaw(Vertical);
+            
             transform.Translate(MoveSpeed * Time.deltaTime * new Vector3(moveDirX, 0f, moveDirZ).normalized);
-            if(moveDirZ == 1)
+
+            if(moveDirZ == 1 || moveDirZ == -1 || moveDirX == 1 || moveDirX == -1)
             {
                 isMove = true;
-                //if()
+                
             }
-            
-            //if (moveDirZ == 1)//앞
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Forward.normalized);
-            //    isMove = true;
-            //    isBackWard = false;
-            //}
-            //if (moveDirX == 1 && moveDirZ == 1)//오른쪽 앞 대각
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Right + UtillScript.Forward).normalized);
-            //    isMove = true;
-            //    isBackWard = false;
-            //}
-            //if (moveDirX == -1 && moveDirZ == 1)//왼쪽 앞 대각
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Left + UtillScript.Forward).normalized);
-            //    isMove = true;
-            //    isBackWard = false;
-            //}
-            //if (moveDirX == 1 && moveDirZ == -1)//오른쪽 뒤 대각
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Right + UtillScript.Back).normalized);
-            //    isBackWard = true;
-            //    isMove = false;
-            //}
-            //if (moveDirX == -1 && moveDirZ == -1)//왼쪽 뒤 대각
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * (UtillScript.Left + UtillScript.Back).normalized);
-            //    isBackWard = true;
-            //    isMove = false;
-            //}
-            //else if (moveDirX == 1)//오른쪽
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Right.normalized);
-            //    isMove = true;
-            //}
-            //else if (moveDirX == -1)//왼쪽
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Left.normalized);
-            //    isMove = true;
-            //}
-            //else if (moveDirZ == -1)//뒤
-            //{
-            //    transform.Translate(MoveSpeed * Time.deltaTime * UtillScript.Back.normalized);
-            //    isBackWard = true;
-            //    isMove = false;
-            //}
-            //else
-            //{
-            //    isMove = false;
-            //    isBackWard = false;
-            //}
+            else
+            {
+                isMove = false;
+            }
         }
     }
 
    
     private void Around()
     {
+        
         Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
     }
@@ -262,7 +224,5 @@ public class Main_Player : MonoBehaviour
     {
         string Move = "isMove";
         Anim.SetBool(Move, isMove);
-        string BackWard = "isBackWard";
-        Anim.SetBool(BackWard, isBackWard);
     }
 }
