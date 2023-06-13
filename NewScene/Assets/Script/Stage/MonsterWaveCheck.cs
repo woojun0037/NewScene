@@ -6,7 +6,8 @@ public class MonsterWaveCheck : MonoBehaviour
 {
     public List<GameObject> monsterParentsList = new List<GameObject>();
     public GameObject[] monsterParents;
-
+    private QuestScript countEnemy;
+    public bool countMonster;
     private void Start()
     {
         foreach (GameObject monsterParent in monsterParents)
@@ -54,6 +55,9 @@ public class MonsterWaveCheck : MonoBehaviour
 
         if (monsterParentsList.Count == 0)
         {
+            if (countMonster)
+                countEnemy.CountUp();
+            else
             gameObject.SetActive(false);
         }
     }
