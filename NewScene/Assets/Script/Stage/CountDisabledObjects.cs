@@ -6,6 +6,8 @@ public class CountDisabledObjects : MonoBehaviour
 {
     public int MaxCount;
     int count = 0;
+    public bool countMonster;
+
     private void Start()
     {
         MaxCount = transform.childCount;
@@ -29,8 +31,13 @@ public class CountDisabledObjects : MonoBehaviour
 
         if(count == MaxCount)
         {
-            gameObject.SetActive(false);   
-            
+            if (countMonster)
+            {
+                FindObjectOfType<QuestScript>().CountUp();
+                gameObject.SetActive(false);
+            }
+            else
+                gameObject.SetActive(false);
         }
     }
 

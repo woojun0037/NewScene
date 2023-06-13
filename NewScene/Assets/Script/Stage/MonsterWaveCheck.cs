@@ -56,7 +56,10 @@ public class MonsterWaveCheck : MonoBehaviour
         if (monsterParentsList.Count == 0)
         {
             if (countMonster)
+            {
                 countEnemy.CountUp();
+                gameObject.SetActive(false);
+            }
             else
             gameObject.SetActive(false);
         }
