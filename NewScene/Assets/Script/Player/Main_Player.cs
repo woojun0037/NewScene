@@ -43,6 +43,7 @@ public class Main_Player : MonoBehaviour
     [Header("PlayerStats")]
     public float damage;
     public float HP;
+    public float rotateSpeed = 5f;
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
     public float MaxDistance = 1.5f;
@@ -51,7 +52,9 @@ public class Main_Player : MonoBehaviour
     public float Duration;
     public float Magnitude;
 
-    private Vector3 dir;
+    private Vector3 dir = Vector3.zero;
+    private Vector3 player_Move_Input;
+    private Vector3 heading;
     private int hitState;
     internal int HitState => hitState;
 
@@ -73,7 +76,7 @@ public class Main_Player : MonoBehaviour
         Move();
         AttackInput();
         AnimationBoolCheck();
-        Around();
+        //Around();
     }
 
     public void OnWeapon()
@@ -84,7 +87,7 @@ public class Main_Player : MonoBehaviour
     public void OffWeapon()
     {
         hit.gameObject.SetActive(false);
-    }
+    }   
 
     public void OnWind()
     {
@@ -109,6 +112,7 @@ public class Main_Player : MonoBehaviour
     public void SetAnimCheck(int count)
     {
         isClicks[count] = true;
+        isAttack = false;
     }
 
     public void GetAnimCheck()
@@ -127,29 +131,33 @@ public class Main_Player : MonoBehaviour
     private void AttackInput()
     {
 
-        if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2])
+        if (Input.GetMouseButtonDown(0) && isClicks[0] && !isClicks[1] && !isClicks[2] && !isAttack)
         {
             hitState = 1;
             isAttack = true;
             string Attack1 = "isAttack_1";
             Anim.SetTrigger(Attack1);
-            SoundManager.instance.PlaySE(AttackSound1);
+            SoundManager.instance.PlaySE(SoundManager.instance.effectSounds[0].clip);
         }
-        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2])
+        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && !isClicks[2] && !isAttack)
         {
             hitState = 2;
             isAttack = true;
             string Attack2 = "isAttack_2";
             Anim.SetTrigger(Attack2);
-            SoundManager.instance.PlaySE(AttackSound2);
+            SoundManager.instance.PlaySE(SoundManager.instance.effectSounds[1].clip);
         }
-        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2])
+        else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2] && !isAttack)
         {
             hitState = 3;
             isAttack = true;
             string Attack3 = "isAttack_3";
             Anim.SetTrigger(Attack3);
-            SoundManager.instance.PlaySE(AttackSound1);
+            SoundManager.instance.PlaySE(SoundManager.instance.effectSounds[2].clip);
+        }
+        else if(!isClicks[0] && !isClicks[1] && !isClicks[2])
+        {
+            isAttack = false;
         }
     }
 
@@ -185,35 +193,37 @@ public class Main_Player : MonoBehaviour
 
     private void Move()
     {
-        if (!isAttack)
+        player_Move_Input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        player_Move_Input.Normalize();
+
+        // 카메라의 Forward를 가져옴
+        heading = Camera.main.transform.forward;
+        heading.y = 0;
+        heading.Normalize();
+
+        heading = heading - player_Move_Input;
+
+        if (player_Move_Input != Vector3.zero && !isAttack)
         {
-            string Horizontal = "Horizontal";
-            float moveDirX = Input.GetAxisRaw(Horizontal);
+            isMove = true;
 
-            string Vertical = "Vertical";
-            float moveDirZ = Input.GetAxisRaw(Vertical);
-            
-            transform.Translate(MoveSpeed * Time.deltaTime * new Vector3(moveDirX, 0f, moveDirZ).normalized);
+            float angle = Mathf.Atan2(heading.z, heading.x) * Mathf.Rad2Deg * -2;
 
-            if(moveDirZ == 1 || moveDirZ == -1 || moveDirX == 1 || moveDirX == -1)
-            {
-                isMove = true;
-                
-            }
-            else
-            {
-                isMove = false;
-            }
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, angle, 0), Time.deltaTime * rotateSpeed);
+
+            transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed);
+        }
+        else
+        {
+            isMove = false;
         }
     }
 
-   
-    private void Around()
-    {
-        
-        Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
-    }
+    //private void Around()
+    //{
+    //    Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
+    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
+    //}
 
     public void GetDamage(float damage)
     {

@@ -36,6 +36,7 @@ public class Seonbi_Script : Enemy
         DieMonster();
     }
 
+   
     protected override void monsterMove()
     {
 
