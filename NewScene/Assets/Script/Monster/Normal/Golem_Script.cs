@@ -153,7 +153,15 @@ public class Golem_Script : Enemy
         DontMove = true;
         yield return new WaitForSeconds(0.95f); //스킬
 
-        RockBullet.transform.position = targetTransform.position;
+        Vector3 targetPosition = targetTransform.position;
+        Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
+        Vector3 skillAttackPosition = targetPosition + randomOffset;
+
+        skillAttackPosition.y = targetPosition.y;
+        RockBullet.transform.position = skillAttackPosition;
+
+        yield return new WaitForSeconds(0.5f); //스킬
+
         RockBullet.SetActive(true);
 
         animator.SetBool("SkillAttack", false);
