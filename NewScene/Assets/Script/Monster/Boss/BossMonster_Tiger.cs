@@ -24,6 +24,9 @@ public class BossMonster_Tiger : Boss
     private bool isMove;
     private bool isDash;
 
+    public GameObject StoneDoor;
+    public GameObject NextStage;
+
     protected override void Awake()
     {
         anim = GetComponent<Animator>();
@@ -124,6 +127,8 @@ public class BossMonster_Tiger : Boss
         {
             anim.SetBool("isDie", true);
             isDie = true;
+            StoneDoor.SetActive(false);
+            NextStage.SetActive(true);
         }
     }
 
