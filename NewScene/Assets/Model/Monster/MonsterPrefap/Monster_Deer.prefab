@@ -1218,13 +1218,14 @@ GameObject:
   - component: {fileID: 3952781251016974960}
   - component: {fileID: 1908219942}
   - component: {fileID: 1908219952}
+  - component: {fileID: 7254658280867690986}
   m_Layer: 0
   m_Name: Monster_Deer
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8634143870603476260
 Transform:
   m_ObjectHideFlags: 0
@@ -1274,26 +1275,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32fa66e6fc15def4584406222f076b2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSkill: {fileID: 0}
   damageToGive: 1
-  maxHearth: 10
-  curHearth: 10
+  Hit1: 
+  Hit2: 
+  CriticalCount: 0
+  maxHearth: 15
+  curHearth: 15
   MaxDistance: 5
   chasespeed: 5
   DebuffCheck: 0
   StartAttack: 0
-  KnockBackForce: 0
-  targetTransform: {fileID: 0}
-  agent: {fileID: 0}
-  playerSkill: {fileID: 0}
   getTouch: 0
-  SetY: 2
+  KnockBackForce: 0
+  agent: {fileID: 0}
+  targetTransform: {fileID: 0}
+  skillHitEffect: {fileID: 4601717381511449403, guid: 690fbc686bc950c479355fab29da9d37, type: 3}
   attackCoolTime: 0
   DeerLuncher: {fileID: 3417702529338652534, guid: dce0f4e85aa711b43ba8b564e5b9ec60, type: 3}
   ragdoll_obj: {fileID: 4883376018212455235, guid: 2b0a6afcd98d8964591a80364f2972c7, type: 3}
   particle_attack: {fileID: 6440755317504901795}
   emissionController: {fileID: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
   deerMaterial: {fileID: 6031699867659727664}
-  one: 0
 --- !u!195 &5866666020077004021
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1358,26 +1362,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c95226850dbff48b565e165a8be756, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSkill: {fileID: 0}
   damageToGive: 1
+  Hit1: 
+  Hit2: 
+  CriticalCount: 0
   maxHearth: 10
   curHearth: 10
   MaxDistance: 5
   chasespeed: 5
   DebuffCheck: 0
   StartAttack: 0
-  KnockBackForce: 0
-  targetTransform: {fileID: 0}
-  agent: {fileID: 0}
-  playerSkill: {fileID: 0}
   getTouch: 0
-  SetY: 2
+  KnockBackForce: 0
+  agent: {fileID: 0}
+  targetTransform: {fileID: 0}
+  skillHitEffect: {fileID: 4601717381511449403, guid: 690fbc686bc950c479355fab29da9d37, type: 3}
   attackCoolTime: 0
   DeerLuncher: {fileID: 3417702529338652534, guid: dce0f4e85aa711b43ba8b564e5b9ec60, type: 3}
   ragdoll_obj: {fileID: 4883376018212455235, guid: 2b0a6afcd98d8964591a80364f2972c7, type: 3}
   particle_attack: {fileID: 6440755317504901795}
   emissionController: {fileID: 0}
+  startingPosition: {x: 0, y: 0, z: 0}
   deerMaterial: {fileID: 0}
-  one: 0
 --- !u!136 &3952781251016974960
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1425,6 +1432,102 @@ MonoBehaviour:
   minIntensity: 0
   maxIntensity: 500
   duration: 1
+--- !u!82 &7254658280867690986
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978335658521126814}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &8349615308975580149
 PrefabInstance:
   m_ObjectHideFlags: 0

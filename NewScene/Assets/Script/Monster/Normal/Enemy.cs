@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
     public bool DebuffCheck;
     public bool StartAttack;
     public bool getTouch;
-    
+    public bool waiting;
+
     public float KnockBackForce;
     protected float KnockBakcTime;
 
@@ -30,7 +31,7 @@ public class Enemy : MonoBehaviour
     protected GameObject damageEffect;
     protected PropertySkill property;
     protected Main_Player player;
-
+    protected AudioSource audioSource;
     public NavMeshAgent agent = null;
     public Transform targetTransform;
     public GameObject skillHitEffect;
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         boxCollier = GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
         agent.enabled = false;
     }
 
@@ -113,16 +115,19 @@ public class Enemy : MonoBehaviour
 
     protected virtual void GetDamagedAnimation(){ }
 
+    protected virtual void HitSound()
+    {
+        SoundManager.instance.MonsterSE(SoundManager.instance.effectSounds[3].clip, audioSource);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Weapon")
         {
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
-
-            SoundManager.instance.PlaySE(Hit1);
-            SoundManager.instance.PlaySE(Hit2);
-
+            HitSound();
+            
             if (player.HitState != hitNum)
             {
                 player.enemy = this;
@@ -192,6 +197,21 @@ public class Enemy : MonoBehaviour
     }
 
 
+    public void HitStop(float duration)
+    {
+        if (waiting)
+            return;
+        Time.timeScale = 0.0f;
+        StartCoroutine(WaitCor(duration));
+    }
+
+    IEnumerator WaitCor(float duration)
+    {
+        waiting = true;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1.0f;
+        waiting = false;
+    }
     private IEnumerator DotCheck(float damage = 0)
     {
         float time = 0;

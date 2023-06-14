@@ -13,7 +13,7 @@ public class SoundManager : MonoBehaviour
 {
     static public SoundManager instance;
 
-    public AudioSource[] audioSourcesEffects;
+    public AudioSource audioSourcesEffect;
     public AudioSource audioSourceBgm;
 
     public string[] PlaySoundName;
@@ -34,47 +34,53 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySE(string _name)
+    public void PlaySE(AudioClip audio)
     {
-        for(int i = 0; i < effectSounds.Length; i++)
-        {
-            if(_name == effectSounds[i].name)
-            {
-                for (int j = 0; j < audioSourcesEffects.Length; j++)
-                {
-                    if (!audioSourcesEffects[j].isPlaying)
-                    {
-                        PlaySoundName[j] = effectSounds[i].name;
-                        audioSourcesEffects[j].clip = effectSounds[i].clip;
-                        audioSourcesEffects[j].Play();
-                        return;
-                    }
-                }
-                Debug.Log("모든 가용 AudioSource가 사용중입니다");
-                return;
-            }
-        }
-        Debug.Log(_name + "사운드가 SoundManager에 등록되지 않았습니다.");
+        //for(int i = 0; i < effectSounds.Length; i++)
+        //{
+        //    if(_name == effectSounds[i].name)
+        //    {
+        //        for (int j = 0; j < audioSourcesEffects.Length; j++)
+        //        {
+        //            if (!audioSourcesEffects[j].isPlaying)
+        //            {
+        //                //audioSourcesEffects[j].clip = effectSounds[i].clip;
+
+        //                return;
+        //            }
+        //        }
+        //        Debug.Log("모든 가용 AudioSource가 사용중입니다");
+        //        return;
+        //    }
+        //}
+        //Debug.Log(_name + "사운드가 SoundManager에 등록되지 않았습니다.");
+        
+        audioSourcesEffect.PlayOneShot(audio);
     }
 
-    public void StopAllSE()
+    public void MonsterSE(AudioClip monSound, AudioSource audioSource)
     {
-        for(int i=0; i < audioSourcesEffects.Length; i++)
-        {
-            audioSourcesEffects[i].Stop();
-        }
+        audioSource.clip = monSound;
+        audioSource.Play();
     }
+    //public void StopAllSE()
+    //{
+    //    for(int i=0; i < audioSourcesEffects.Length; i++)
+    //    {
+    //        audioSourcesEffects[i].Stop();
+    //    }
+    //}
 
-    public void StopSE(string _name)
-    {
-        for(int i=0; i < audioSourcesEffects.Length; i++)
-        {
-            if (PlaySoundName[i] == _name)
-            {
-                audioSourcesEffects[i].Stop();
-                return;
-            }
-        }
-        Debug.Log("재생중인" + _name + "사운드가 없습니다.");
-    }
+    //public void StopSE(string _name)
+    //{
+    //    for(int i=0; i < audioSourcesEffects.Length; i++)
+    //    {
+    //        if (PlaySoundName[i] == _name)
+    //        {
+    //            audioSourcesEffects[i].Stop();
+    //            return;
+    //        }
+    //    }
+    //    Debug.Log("재생중인" + _name + "사운드가 없습니다.");
+    //}
 }
