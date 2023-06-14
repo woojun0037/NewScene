@@ -115,9 +115,10 @@ public class Seonbi_Script : Enemy
         Rigidbody ThrowRockrigid = Instantiate(SeonbiBullet, target_, transform.rotation);
         Seonbi_bullet bullet = ThrowRockrigid.GetComponent<Seonbi_bullet>();
         bullet.SeonbiDamageToGive = damageToGive;
+        animator.SetBool("Attack", false);
         yield return new WaitForSeconds(1.3f);
 
-        animator.SetBool("Attack", false);
+
 
         yield return new WaitForSeconds(0.7f);
         isattack = false;

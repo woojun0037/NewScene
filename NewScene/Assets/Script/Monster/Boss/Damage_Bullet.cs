@@ -10,13 +10,14 @@ public class Damage_Bullet : MonoBehaviour
     [SerializeField]
     private Collider objectCollider;
     public bool GetColliderTime;
+    public bool GetColliderTimeDelete;
 
     private void Start()
     {
         if (GetColliderTime)
         {
             objectCollider = GetComponent<Collider>();
-            objectCollider.enabled = true;
+            objectCollider.enabled = false;
             StartCoroutine(ActivateCollider());
         }
     }
@@ -41,5 +42,11 @@ public class Damage_Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(activationDelay);
         objectCollider.enabled = true;
+
+        if (GetColliderTimeDelete)
+        {
+            yield return new WaitForSeconds(0.5f);
+            objectCollider.enabled = false;
+        }
     }
 }

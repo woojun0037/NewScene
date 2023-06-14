@@ -13,6 +13,7 @@ public class BossMonster_Tiger : Boss
     [SerializeField] private float baseAttackDamage;
     [SerializeField] private float dashAttackDamage;
 
+    [SerializeField] private MaterialChange materialChange;
     public SkinnedMeshRenderer mat;
     public GameObject attackcollider;
     public GameObject throwRockObj;
@@ -27,6 +28,8 @@ public class BossMonster_Tiger : Boss
     public GameObject StoneDoor;
     public GameObject NextStage;
 
+    private float previousHearth;
+
     protected override void Awake()
     {
         anim = GetComponent<Animator>();
@@ -34,6 +37,17 @@ public class BossMonster_Tiger : Boss
     protected override void Start()
     {
         player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
+        materialChange = GetComponent<MaterialChange>();
+        previousHearth = curHearth;
+    }
+    void GetDamage()
+    {
+        if (curHearth < previousHearth && gameObject.activeSelf) // 현재 curHearth 값이 이전 값보다 작을 때
+        {
+            Debug.Log("getdamage !!");
+            materialChange.GetDamageMaterial();
+            previousHearth = curHearth;
+        }
     }
 
     private void Update()
@@ -42,6 +56,7 @@ public class BossMonster_Tiger : Boss
         {
             NotDamaged();
             DieMonster();
+            GetDamage();
 
             targetPos = player.transform.position;
 

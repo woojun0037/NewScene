@@ -32,6 +32,7 @@ public class Monster_Door : Boss
     public GameObject PatternDoonBullet; //문 분신
     public Rigidbody PatternBullet; //8각 총알
     public GameObject updownBullet; //위아래 총알
+    [SerializeField] private MaterialChange materialChange;
 
     float speed = 20;
     int pattern3_random;
@@ -55,6 +56,7 @@ public class Monster_Door : Boss
 
     [SerializeField] float pattern3Max_Z;
     Vector3 ReturnPosition; //돌아가는 위치
+    private float previousHearth;
 
     protected override void Start()
     {
@@ -62,11 +64,23 @@ public class Monster_Door : Boss
         onetime = false;
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         DoorColor = gameObject.GetComponent<Renderer>();
-
+        materialChange = GetComponent<MaterialChange>();
+        previousHearth = curHearth;
         ReturnPosition = transform.position; //기존 위치
 
         stop = false;
         readytogetpodition = false;
+    }
+
+    void GetDamage()
+    {
+        if (curHearth < previousHearth && gameObject.activeSelf) // 현재 curHearth 값이 이전 값보다 작을 때
+        {
+            Debug.Log("getdamage !!");
+            materialChange.GetDamageMaterial();
+            previousHearth = curHearth;
+
+        }
     }
 
     void Update()
@@ -75,7 +89,7 @@ public class Monster_Door : Boss
         {
             NotDamaged();
             DieMonster();
-
+            GetDamage();
 
             timer += Time.deltaTime;
 

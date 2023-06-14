@@ -1165,6 +1165,7 @@ GameObject:
   - component: {fileID: 3110994067348648090}
   - component: {fileID: 3110994067348648068}
   - component: {fileID: 8058799584008497666}
+  - component: {fileID: 1024292414}
   m_Layer: 0
   m_Name: Monster_Bat
   m_TagString: Monster
@@ -1263,6 +1264,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   getTouch: 0
+  waiting: 0
   KnockBackForce: 0
   agent: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -1280,7 +1282,7 @@ NavMeshAgent:
   m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 60
+  avoidancePriority: 70
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -1386,6 +1388,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1024292414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6467612261956257663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d6b44d1a002a4647a8dc50bceb80d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackDuration: 0.3
+  knockbackForce: 300
+  monsterRigidbody: {fileID: 3110994067348648071}
+  Player: {fileID: 0}
 --- !u!1 &6496596651068132068
 GameObject:
   m_ObjectHideFlags: 0

@@ -89,7 +89,11 @@ public class Rabbit_Script : Enemy
                 {
                     transform.LookAt(targety);
                     isattack = true;
-                    StartCoroutine("attacker");
+
+                    if (gameObject.activeSelf)
+                    {
+                        StartCoroutine("attacker");
+                    }
                 }
             }
         }

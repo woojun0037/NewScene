@@ -715,7 +715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSkill: {fileID: 0}
-  damageToGive: 10
+  damageToGive: 1
   Hit1: Hit1
   Hit2: Hit2
   CriticalCount: 0
@@ -726,6 +726,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   getTouch: 0
+  waiting: 0
   KnockBackForce: 0
   agent: {fileID: 0}
   targetTransform: {fileID: 0}
