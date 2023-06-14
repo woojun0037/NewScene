@@ -126,7 +126,7 @@ public class Enemy : MonoBehaviour
         {
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
-            HitSound();
+     
             
             if (player.HitState != hitNum)
             {
@@ -172,6 +172,7 @@ public class Enemy : MonoBehaviour
                     }
                     curHearth -= hit.damage;
                     GetDamagedAnimation();
+                    HitSound();
                 }
             }
         }

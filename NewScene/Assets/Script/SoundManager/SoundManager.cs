@@ -60,8 +60,9 @@ public class SoundManager : MonoBehaviour
 
     public void MonsterSE(AudioClip monSound, AudioSource audioSource)
     {
-        audioSource.clip = monSound;
-        audioSource.Play();
+        audioSourcesEffect.PlayOneShot(monSound);
+        //audioSource.clip = monSound;
+        //audioSource.Play();
     }
     //public void StopAllSE()
     //{
