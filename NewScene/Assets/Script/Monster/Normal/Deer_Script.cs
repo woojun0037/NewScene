@@ -42,11 +42,17 @@ public class Deer_Script : Enemy
         monsterMove();
         NotDamaged();
         DieMonster();
-
+        CanvasMove();
         if (isdash)
         {
             rosh();
         }
+    }
+
+    protected override void CanvasMove()
+    {
+
+        base.CanvasMove();
     }
 
     protected override void monsterMove()

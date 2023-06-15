@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,29 @@ using UnityEngine;
 public class Boss : Enemy
 {
     protected bool isDie = false;
+    public bool isBossStart;
+    public DOTweenAnimation bossHP_Dot;
+
+   
+
+    protected override void BossStart()
+    {
+        bossHP_Dot.DORestartById("start");
+        transform.DOLocalMove(Vector2.zero, 1f).OnComplete(() =>
+        {
+            isBossStart = true;
+        });
+    }
+
+    protected override void BossHit()
+    {
+        bossHP_Dot.DORestartById("hit");
+    }
+
+    protected override void CanvasMove()
+    {
+        
+    }
 
     protected override void Awake()
     {

@@ -28,15 +28,22 @@ public class Seonbi_Script : Enemy
     {
         base.Start();
         animator = GetComponent<Animator>();
+        
     }
     void Update()
     {
         monsterMove();
         NotDamaged();
         DieMonster();
+        CanvasMove();
     }
 
-   
+    protected override void CanvasMove()
+    {
+        
+        base.CanvasMove();
+    }
+
     protected override void monsterMove()
     {
 

@@ -22,6 +22,12 @@ public class Darkness_Seonbi_Script : Seonbi_Script
         monsterMove();
         NotDamaged();
         DieMonster();
+        CanvasMove();
     }
 
+    protected override void CanvasMove()
+    {
+
+        base.CanvasMove();
+    }
 }
