@@ -7,26 +7,34 @@ public class Monster_KnockBack : MonoBehaviour
     [SerializeField] private float knockbackDuration = 0.1f; //넉백 받는 시간
     [SerializeField] private float knockbackForce = 500f;
 
-    [SerializeField]
-    Rigidbody monsterRigidbody;
+    [SerializeField] Rigidbody monsterRigidbody;
     [SerializeField] GameObject Player;
+
+    private bool isKnockbackCoroutine = false;
+    [SerializeField] private float knockBackDelayTime =1;
+
+    private Enemy enemy;
 
     private void Start()
     {
         Player = GameObject.FindWithTag("Main_gangrim");
         monsterRigidbody = GetComponent<Rigidbody>(); // Rigidbody 할당
+        enemy = GetComponent<Enemy>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Weapon"))
+        if (other.gameObject.CompareTag("Weapon") && !isKnockbackCoroutine)
         {
-            StartCoroutine(Knockback());
+            if (enemy.curHearth > 0)
+                StartCoroutine(Knockback());
         }
     }
 
     IEnumerator Knockback()
     {
+        isKnockbackCoroutine = true;
+
         Vector3 dir = transform.position - Player.transform.position;
         dir.y = 0f;
 
@@ -37,5 +45,8 @@ public class Monster_KnockBack : MonoBehaviour
 
         monsterRigidbody.velocity = Vector3.zero;
         monsterRigidbody.angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(knockBackDelayTime);
+        isKnockbackCoroutine = false;
     }
 }

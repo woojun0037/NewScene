@@ -6,6 +6,7 @@ public class Golem_Script : Enemy
 {
     public GameObject RockBullet;
     public GameObject GolemObj;
+    public GameObject attack_body;
 
     [SerializeField] float attackDelaytime;
     [SerializeField] bool miniGolem;
@@ -39,6 +40,7 @@ public class Golem_Script : Enemy
         DontMove = false;
         animator = GetComponent<Animator>();
         animator.SetBool("Idle", true);
+        attack_body.SetActive(false);
     }
 
     void Update()
@@ -134,12 +136,15 @@ public class Golem_Script : Enemy
     {
         DontMove = true;
         animator.SetBool("isAttack", true);
-        yield return new WaitForSeconds(0.95f); //패는 애니 중간
+        yield return new WaitForSeconds(0.85f); //패는 애니 중간
         particle_attack.Play();
+        attack_body.SetActive(true);
+
         getTouch = false;
         animator.SetBool("isAttack", false);
 
         yield return new WaitForSeconds(0.9f); //패는 애니 중간
+        attack_body.SetActive(false);
         getTouch = true;
         particle_attack.Stop();
         yield return new WaitForSeconds(attackDelaytime);

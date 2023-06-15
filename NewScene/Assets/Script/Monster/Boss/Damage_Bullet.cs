@@ -22,7 +22,7 @@ public class Damage_Bullet : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Main_gangrim")
         {
@@ -30,7 +30,7 @@ public class Damage_Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {

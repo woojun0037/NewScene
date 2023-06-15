@@ -14,10 +14,10 @@ public class Boss : Enemy
     protected override void BossStart()
     {
         bossHP_Dot.DORestartById("start");
-        transform.DOLocalMove(Vector2.zero, 1f).OnComplete(() =>
-        {
+        //transform.DOLocalMove(Vector2.zero, 1f).OnComplete(() =>
+        //{
             isBossStart = true;
-        });
+        //});
     }
 
     protected override void BossHit()
