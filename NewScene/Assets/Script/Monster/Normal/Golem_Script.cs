@@ -48,6 +48,13 @@ public class Golem_Script : Enemy
         DieMonster();
         monsterMove();
         NotDamaged();
+        CanvasMove();
+    }
+
+    protected override void CanvasMove()
+    {
+
+        base.CanvasMove();
     }
 
     protected override void DieMonster()

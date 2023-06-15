@@ -32,7 +32,6 @@ public class Monster_Door : Boss
     public GameObject PatternDoonBullet; //문 분신
     public Rigidbody PatternBullet; //8각 총알
     public GameObject updownBullet; //위아래 총알
-    [SerializeField] private MaterialChange materialChange;
 
     float speed = 20;
     int pattern3_random;
@@ -56,7 +55,6 @@ public class Monster_Door : Boss
 
     [SerializeField] float pattern3Max_Z;
     Vector3 ReturnPosition; //돌아가는 위치
-    private float previousHearth;
 
     protected override void Start()
     {
@@ -64,137 +62,140 @@ public class Monster_Door : Boss
         onetime = false;
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         DoorColor = gameObject.GetComponent<Renderer>();
-        materialChange = GetComponent<MaterialChange>();
-        previousHearth = curHearth;
+
         ReturnPosition = transform.position; //기존 위치
 
         stop = false;
         readytogetpodition = false;
+        BossStart();
     }
 
-    void GetDamage()
+    protected override void BossStart()
     {
-        if (curHearth < previousHearth && gameObject.activeSelf) // 현재 curHearth 값이 이전 값보다 작을 때
-        {
-            Debug.Log("getdamage !!");
-            materialChange.GetDamageMaterial();
-            previousHearth = curHearth;
+        base.BossStart();
+    }
 
-        }
+    protected override void BossHit()
+    {
+        base.BossHit();
     }
 
     void Update()
     {
-        if (player.HP >= 0 && !isDie)
+        if(isBossStart)
         {
-            NotDamaged();
-            DieMonster();
-            GetDamage();
-
-            timer += Time.deltaTime;
-
-            if (timer >= cooltime) //쿨 타임 후에 랜덤 스킬
+            if (player.HP >= 0 && !isDie)
             {
-
-                timer = 0;
-                onetime = false;
-            }
+                NotDamaged();
+                DieMonster();
 
 
-            //몬스터 패턴 시작 + 쿨 타임 주기마다 재사용을 위한 초기화 역할
-            if (!onetime)
-            {
-                random = UnityEngine.Random.Range(0, 4);
+                timer += Time.deltaTime;
 
-                if (random == pastrandom)
+                if (timer >= cooltime) //쿨 타임 후에 랜덤 스킬
                 {
-                    if (random >= 3)
+
+                    timer = 0;
+                    onetime = false;
+                }
+
+
+                //몬스터 패턴 시작 + 쿨 타임 주기마다 재사용을 위한 초기화 역할
+                if (!onetime)
+                {
+                    random = UnityEngine.Random.Range(0, 4);
+
+                    if (random == pastrandom)
                     {
-                        random += -1;
+                        if (random >= 3)
+                        {
+                            random += -1;
+                            BossAttack(random);
+                            pastrandom = random;
+                        }
+                        else // 0 1 2
+                        {
+                            random += 1;
+                            BossAttack(random);
+                            pastrandom = random;
+                        }
+                    }
+                    else
+                    {
                         BossAttack(random);
                         pastrandom = random;
                     }
-                    else // 0 1 2
+
+                    StartCoroutine("ColorChangeBack"); //$ 1 2 패턴에 필요 //색깔 초기화
+                    onetime = true;
+                }
+
+
+                if (ispattern)//보스 옆으로 공격 패턴 Update에서 돌아야되는 조건 패턴 3
+                {
+                    StartCoroutine(rightattack());
+                }
+                else
+                {
+                    //초기화
+                    StopCoroutine(rightattack());
+                    pattern3_random = UnityEngine.Random.Range(0, 3); // 0 1 2 
+                    getready = false;
+                    isz = false;//
+                    spawnone = false;
+                }
+
+                //Update에서 돌아야되는 패턴 2 내려찍기
+                if (Pattern2Start)
+                {
+                    if (transform.position.y < SetY)
                     {
-                        random += 1;
-                        BossAttack(random);
-                        pastrandom = random;
+                        if (!stop)
+                        {
+                            Upready = true;
+                            transform.Translate(0, Time.deltaTime * upspeed, 0);
+                        }
+                    }
+
+                    if (Upready) //플레이어 위치 찾음
+                    {
+                        Vector3 spawn = targetTransform.position;
+                        spawn.y = SetY;
+
+                        if (!isdown)
+                        {
+                            transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
+                        }
+
+                        //n 초후 내려찍음
+                        StartCoroutine("downattack");
+
+                    }
+
+                    if (readytogetpodition)
+                    {
+                        transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
+
+                        if (transform.position == ReturnPosition)
+                        {
+                            Pattern2Start = false;
+                        }
                     }
                 }
                 else
                 {
-                    BossAttack(random);
-                    pastrandom = random;
+                    StopCoroutine("downattack");
+                    targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
+                    stop = false;//
+                    readytogetpodition = false;
+                    Upready = false;
+                    isdown = false;//
+                                   //bullettime = false;//혹시 버그나면 주석해제
                 }
 
-                StartCoroutine("ColorChangeBack"); //$ 1 2 패턴에 필요 //색깔 초기화
-                onetime = true;
             }
-
-
-            if (ispattern)//보스 옆으로 공격 패턴 Update에서 돌아야되는 조건 패턴 3
-            {
-                StartCoroutine(rightattack());
-            }
-            else
-            {
-                //초기화
-                StopCoroutine(rightattack());
-                pattern3_random = UnityEngine.Random.Range(0, 3); // 0 1 2 
-                getready = false;
-                isz = false;//
-                spawnone = false;
-            }
-
-            //Update에서 돌아야되는 패턴 2 내려찍기
-            if (Pattern2Start)
-            {
-                if (transform.position.y < SetY)
-                {
-                    if (!stop)
-                    {
-                        Upready = true;
-                        transform.Translate(0, Time.deltaTime * upspeed, 0);
-                    }
-                }
-
-                if (Upready) //플레이어 위치 찾음
-                {
-                    Vector3 spawn = targetTransform.position;
-                    spawn.y = SetY;
-
-                    if (!isdown)
-                    {
-                        transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
-                    }
-
-                    //n 초후 내려찍음
-                    StartCoroutine("downattack");
-                    
-                }
-
-                if (readytogetpodition)
-                {
-                    transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
-
-                    if (transform.position == ReturnPosition)
-                    {
-                        Pattern2Start = false;
-                    }
-                }
-            }
-            else
-            {
-                StopCoroutine("downattack");
-                targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-                stop = false;//
-                readytogetpodition = false;
-                Upready = false;
-                isdown = false;//
-                               //bullettime = false;//혹시 버그나면 주석해제
-            }
-
         }
+        
     }
 
     void ColorChange(int i) //몬스터 색깔 변경
@@ -443,5 +444,7 @@ public class Monster_Door : Boss
         yield return new WaitForSeconds(cooltime / 1.5f);
         ColorChange(0); //초기화
     }
+
+
 
 }

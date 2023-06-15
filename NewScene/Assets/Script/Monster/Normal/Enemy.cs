@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,12 +11,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private string Hit2;
 
     public int CriticalCount;
-
+    protected bool isBoss;
     public float maxHearth;
     public float curHearth;
     public float MaxDistance;
     public float chasespeed;
-   
+
+    public Image hpImage;
+    public Canvas canvas;
+    public Camera camera;
+
     public bool DebuffCheck;
     public bool StartAttack;
     public bool getTouch;
@@ -45,6 +50,7 @@ public class Enemy : MonoBehaviour
         DieMonster();
         monsterMove();
         NotDamaged();
+        CanvasMove();
     }
 
     protected virtual void Awake()
@@ -53,7 +59,10 @@ public class Enemy : MonoBehaviour
         boxCollier = GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
+        
+        canvas.worldCamera = camera;
         agent.enabled = false;
+        hpImage.fillAmount = curHearth / maxHearth;
     }
 
     protected virtual void Start()
@@ -88,6 +97,7 @@ public class Enemy : MonoBehaviour
             gameObject.SetActive(false);
             //Destroy(gameObject);
         }
+
     }
 
     protected void NotDamaged()
@@ -111,6 +121,13 @@ public class Enemy : MonoBehaviour
             agent.enabled = false;
             agent = null; 
         }
+        
+    }
+
+    protected virtual void CanvasMove()
+    {
+        if (camera == null) camera = FindObjectOfType<CameraMovemant>().transform.GetChild(0).transform.GetComponent<Camera>();
+        canvas.transform.LookAt(canvas.transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
     }
 
     protected virtual void GetDamagedAnimation(){ }
@@ -171,6 +188,8 @@ public class Enemy : MonoBehaviour
                         Gauge.Test();
                     }
                     curHearth -= hit.damage;
+                    if (isBoss) BossHit();
+                    hpImage.fillAmount = curHearth / maxHearth;
                     GetDamagedAnimation();
                     HitSound();
                 }
@@ -181,7 +200,7 @@ public class Enemy : MonoBehaviour
         {
             float _damage = other.GetComponent<SkillHit>().damage;
             curHearth -= _damage;
-
+            if (isBoss) BossHit();
             GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
             hitEffect.transform.position = this.transform.position;
             hitEffect.SetActive(true);
@@ -194,6 +213,7 @@ public class Enemy : MonoBehaviour
             GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
             hitEffect.transform.position = this.transform.position;
             hitEffect.SetActive(true);
+            if (isBoss) BossHit();
         }
     }
 
@@ -213,7 +233,7 @@ public class Enemy : MonoBehaviour
         Time.timeScale = 1.0f;
         waiting = false;
     }
-    private IEnumerator DotCheck(float damage = 0)
+    public IEnumerator DotCheck(float damage = 0)
     {
         float time = 0;
         while(time < 3)
@@ -240,5 +260,15 @@ public class Enemy : MonoBehaviour
         player.R_skillCheck = false;
         property.Stun = false;
         this.chasespeed = 3f;
+    }
+
+    protected virtual void BossStart()
+    {
+
+    }
+
+    protected virtual void BossHit()
+    {
+
     }
 }

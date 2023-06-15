@@ -93,9 +93,9 @@ public class GangrimSkillUi : MonoBehaviour
 
     void Start()
     {
-        abilityImage1.fillAmount = 0;
-        abilityImage2.fillAmount = 0;
-        abilityImage3.fillAmount = 0;
+        //abilityImage1.fillAmount = 0;
+        //abilityImage2.fillAmount = 0;
+        //abilityImage3.fillAmount = 0;
         dashHide.fillAmount = 0;
     }
 
@@ -155,7 +155,7 @@ public class GangrimSkillUi : MonoBehaviour
         leftDot.DORestart();
         leftDot.tween.OnComplete(() => { uiKeys[0] = "0"; uiImages[0].sprite = null; uiImages[0].enabled = false; });
         rightDot.DORestart();
-        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; uiImages[1].sprite = null; uiImages[1].enabled = false; skillKey.SetActive(false); });
+        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; uiImages[1].sprite = null; uiImages[1].enabled = false; skillKey.SetActive(false); uiImages[2].enabled = false; });
     }
 
     public void CurrentSkillUI(string key)
@@ -174,7 +174,7 @@ public class GangrimSkillUi : MonoBehaviour
             uiKeys[1] = key;
             uiImages[1].sprite = spriteDictionary[key];
             uiImages[1].enabled = true;
-            if (uiKeys[0] == "wind" || uiKeys[1] == "wind") skillKey.SetActive(true);
+            
         }
         else if (uiKeys[0] != "0" && uiKeys[1] != "0")
         {
@@ -183,6 +183,19 @@ public class GangrimSkillUi : MonoBehaviour
             uiImages[0].sprite = spriteDictionary[key];
             uiImages[1].sprite = null;
             uiImages[1].enabled = false;
+        }
+
+        if ((uiKeys[0] == "wind" && uiKeys[1] == "tornado") || (uiKeys[0] == "tornado" && uiKeys[1] == "wind"))
+        {
+            skillKey.SetActive(true);
+            uiImages[2].sprite = uiSprites[3];
+            uiImages[2].enabled = true;
+        }
+        else if((uiKeys[0] == "wind" && uiKeys[1] == "rain") || (uiKeys[0] == "rain" && uiKeys[1] == "wind"))
+        {
+            skillKey.SetActive(true);
+            uiImages[2].sprite = uiSprites[4];
+            uiImages[2].enabled = true;
         }
     }
 
