@@ -93,9 +93,9 @@ public class GangrimSkillUi : MonoBehaviour
 
     void Start()
     {
-        abilityImage1.fillAmount = 0;
-        abilityImage2.fillAmount = 0;
-        abilityImage3.fillAmount = 0;
+        //abilityImage1.fillAmount = 0;
+        //abilityImage2.fillAmount = 0;
+        //abilityImage3.fillAmount = 0;
         dashHide.fillAmount = 0;
     }
 

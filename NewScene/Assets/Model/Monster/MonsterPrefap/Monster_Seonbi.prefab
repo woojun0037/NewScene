@@ -726,6 +726,7 @@ MonoBehaviour:
   DebuffCheck: 0
   StartAttack: 0
   getTouch: 0
+  waiting: 0
   KnockBackForce: 0
   agent: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -758,7 +759,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6955681456560606827}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1
   m_Height: 1
