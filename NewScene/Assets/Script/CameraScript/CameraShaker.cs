@@ -4,46 +4,32 @@ using UnityEngine;
 
 public class CameraShaker : MonoBehaviour
 {
-    private Transform cam;
-    public PlayerSkill skill;
-    public float shakeTime = 0.3f;
-    public float shakeSpeed = 1.0f;
-    public float shakeAmount = 1.0f;
+    public Camera shakerCam;
+    Vector3 camPos;
 
+    [SerializeField][Range(0.01f, 0.1f)] float ShakerRange = 0.05f;
+    [SerializeField][Range(0.1f, 1f)] float Duration = 0.5f;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Shake()
     {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+        camPos = shakerCam.transform.position;
+        InvokeRepeating("StartShake", 0f, 0.005f);
+        Invoke("StopShake", Duration);
     }
 
-    // Update is called once per frame
-    void Update()
+    void StartShake()
     {
-        ShakeInput();
+        float camPosX = Random.value * ShakerRange * 2 - ShakerRange;
+        float camPosY = Random.value * ShakerRange * 2 + ShakerRange;
+        Vector3 camPos = shakerCam.transform.position;
+        camPos.x += camPosX;
+        camPos.y += camPosY;
+        shakerCam.transform.position = camPos; 
     }
 
-    public void ShakeInput()
+    void StopShake()
     {
-        if(skill.isShake)
-        {
-            StartCoroutine(Shake());      
-        }
-    }
-
-    IEnumerator Shake()
-    {
-        yield return new WaitForSeconds(1.2f);
-        Vector3 originPosition = cam.localPosition;
-        float elapsedTime = 0.0f;
-        while (elapsedTime < shakeTime)
-        {
-            Vector3 randomPoint = originPosition + Random.insideUnitSphere * shakeAmount;
-            cam.localPosition = Vector3.Lerp(cam.localPosition, randomPoint, Time.deltaTime * shakeSpeed);
-            elapsedTime += Time.deltaTime;
-            skill.isShake = false;
-            yield return null;
-        }
-        cam.localPosition = originPosition;
+        CancelInvoke("StartShake");
+        shakerCam.transform.position = camPos;
     }
 }
