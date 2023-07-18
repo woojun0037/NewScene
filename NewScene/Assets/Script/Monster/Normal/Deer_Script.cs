@@ -111,7 +111,6 @@ public class Deer_Script : Enemy
             random = UnityEngine.Random.Range(1, 3);
             StartCoroutine(damaged_ani(random));
         }
-
     }
 
     IEnumerator attacker()
@@ -119,7 +118,6 @@ public class Deer_Script : Enemy
         DontMove = true;
         int random;
         random = UnityEngine.Random.Range(1, 4);
-
 
         animator.SetBool("Move", false);
 
@@ -132,16 +130,12 @@ public class Deer_Script : Enemy
         target_.y = transform.position.y;
 
         Instantiate(DeerLuncher, target_, Quaternion.identity);
-        yield return new WaitForSeconds(0.5f);
-        //transform.LookAt(targety);
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         animator.SetBool("isAttack", false);
         animator.SetInteger("Attack", 0);
 
-        yield return new WaitForSeconds(3f);
-        yield return new WaitForSeconds(attackCoolTime);
+        yield return new WaitForSeconds(3f + attackCoolTime);
         isattack = false;
         DontMove = false;
     }

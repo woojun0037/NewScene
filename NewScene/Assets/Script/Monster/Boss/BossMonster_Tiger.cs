@@ -253,8 +253,9 @@ public class BossMonster_Tiger : Boss
 
     private IEnumerator BaseAttackCor()
     {
+        yield return new WaitForSeconds(0.6f);
         attackcollider.SetActive(true);
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1f);
         attackcollider.SetActive(false);
         isMove = true;
     }
@@ -278,13 +279,14 @@ public class BossMonster_Tiger : Boss
         Instantiate(effects[2], transform.position, Quaternion.identity);
         while (time > 0)
         {
+            attackcollider.SetActive(true);
             time -= Time.deltaTime;
             transform.position += dir * Time.deltaTime * 5f;
             yield return new WaitForFixedUpdate();
         }
 
         yield return new WaitForSeconds(0.5f);
-
+        attackcollider.SetActive(false);
         //isMove = true;
         isDash = false;
     }

@@ -20,18 +20,20 @@ public class Monster_Door : Boss
     }
     public BossPattern bosspattern;
 
+    [SerializeField] bool onetime = true;
+    [SerializeField] float cooltime;
+    [SerializeField] float MonsterYPosition;
     private float random;
     private float pastrandom;
-
-    [SerializeField] bool onetime = true;
-    [SerializeField] float cooltime; 
     float timer = 0;
-    [SerializeField]  float MonsterYPosition;
 
     [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
     public GameObject PatternDoonBullet; //문 분신
     public Rigidbody PatternBullet; //8각 총알
     public GameObject updownBullet; //위아래 총알
+
+    public GameObject DownAttackRange; 
+    public GameObject UpdownBulletRange; 
 
     float speed = 20;
     int pattern3_random;
@@ -144,7 +146,7 @@ public class Monster_Door : Boss
                     isz = false;//
                     spawnone = false;
                 }
-
+       
                 //Update에서 돌아야되는 패턴 2 내려찍기
                 if (Pattern2Start)
                 {
@@ -162,6 +164,7 @@ public class Monster_Door : Boss
                         Vector3 spawn = targetTransform.position;
                         spawn.y = SetY;
 
+
                         if (!isdown)
                         {
                             transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
@@ -171,7 +174,7 @@ public class Monster_Door : Boss
                         StartCoroutine("downattack");
 
                     }
-
+                        //DownAttackRange
                     if (readytogetpodition)
                     {
                         transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
@@ -283,15 +286,34 @@ public class Monster_Door : Boss
         FloorAattackObj.SetActive(true);
     }
 
-
+    bool downrange = false;
+    GameObject rangeObject;
     //코루틴
     IEnumerator downattack() //패턴 2 내려 찍기 패턴
     {
+
+        Vector3 rangemoveDirection = targetTransform.position;
+        rangemoveDirection.y = targetTransform.position.y;
+
+        if (!isdown  && !downrange)
+        {
+            downrange = true;
+            rangeObject = Instantiate(DownAttackRange, rangemoveDirection, Quaternion.identity);
+        }
+
+        if (rangeObject != null)
+        {
+            rangeObject.transform.position = rangemoveDirection;
+            Destroy(rangeObject, 3f);
+        }
+
         yield return new WaitForSeconds(3f);
+        downrange = false;
         isdown = true;
 
         if (transform.position.y >= MonsterYPosition)
         {
+
             if (!stop)
             {
                 transform.Translate(0, -Time.deltaTime * downspeed, 0);
@@ -305,7 +327,7 @@ public class Monster_Door : Boss
             if (!bullettime2 && !readytogetpodition)
             {
                 bullettime2 = true;
-                StartCoroutine(BulletTime_()); //총알 위 아래 발사 코루틴
+                StartCoroutine(BulletTime_()); //8방향 아래 발사 코루틴
             }
 
             yield return new WaitForSeconds(3f);
@@ -434,7 +456,9 @@ public class Monster_Door : Boss
     {
         yield return new WaitForSeconds(i);
         Vector3 spawn = transform.position;
-        spawn.y = 0f;
+        spawn.y = transform.position.y;
+        //spawn.z = transform.position.z + 5f;
+        spawn.x = transform.position.x + 5f;
 
         GameObject monsterspawns = Instantiate(SpawnMonsters, spawn, transform.rotation);
     }

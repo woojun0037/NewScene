@@ -200,6 +200,7 @@ public class Enemy : MonoBehaviour
         {
             float _damage = other.GetComponent<SkillHit>().damage;
             curHearth -= _damage;
+            hpImage.fillAmount = curHearth / maxHearth;
             if (isBoss) BossHit();
             GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
             hitEffect.transform.position = this.transform.position;
@@ -239,6 +240,7 @@ public class Enemy : MonoBehaviour
         while(time < 3)
         {
             curHearth -= damage;
+            hpImage.fillAmount = curHearth / maxHearth;
             yield return new WaitForSeconds(1f);
             time++;
         }

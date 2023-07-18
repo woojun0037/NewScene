@@ -138,8 +138,6 @@ public class LavaMonster_Script : Enemy
         isrotation = true;
         Vector3 attackpos = transform.position;
         attackpos.y = transform.position.y + 3f;
-        //attackpos.x = transform.position.x + 2f;
-        //attackpos.z = transform.position.z + 2f;
 
         GameObject spawnSlashObject = Instantiate(Bullet, attackpos, transform.rotation);
         animator.SetBool("isAttack", false);

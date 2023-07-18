@@ -9,6 +9,7 @@ public class Bat_Script : Enemy
     Vector3 currentpos;
 
     private Animator animator;
+    public GameObject attack_body;
 
     bool isattack;
     bool DontMove;
@@ -17,6 +18,7 @@ public class Bat_Script : Enemy
     private float Dist;
     float deletetime;
 
+    
     protected override void Awake()
     {
         base.Awake();
@@ -33,6 +35,7 @@ public class Bat_Script : Enemy
         animator.SetBool("Idle", true);
 
         currentpos = transform.position;
+        attack_body.SetActive(false);
     }
 
     void Update()
@@ -120,6 +123,8 @@ public class Bat_Script : Enemy
 
     IEnumerator attacker()
     {
+        attack_body.SetActive(true);
+
         DontMove = true;
         animator.SetBool("Attack", true);
         getTouch = false;
@@ -127,6 +132,7 @@ public class Bat_Script : Enemy
         yield return new WaitForSeconds(attackDelaytime);
         isattack = false;
         DontMove = false;
+        attack_body.SetActive(false);
 
     }
 
