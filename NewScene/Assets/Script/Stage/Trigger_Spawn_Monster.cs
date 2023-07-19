@@ -11,7 +11,6 @@ public class Trigger_Spawn_Monster : MonoBehaviour
         if (other.gameObject.tag == "Main_gangrim")
         {
             Monster.SetActive(true);
-            gameObject.SetActive(false);
         }
     }
 
