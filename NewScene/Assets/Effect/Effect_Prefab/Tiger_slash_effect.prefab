@@ -33977,10 +33977,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a790f111fd394f4bafe859495fb649f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetDamaged: 1
+  GetDamaged: 5
   activationDelay: 0.5
   objectCollider: {fileID: 0}
   GetColliderTime: 0
+  GetColliderTimeDelete: 0
 --- !u!114 &2861786008961683501
 MonoBehaviour:
   m_ObjectHideFlags: 0

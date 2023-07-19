@@ -4,6 +4,7 @@ using UnityEngine;
 public class Rabbit_Script : Enemy
 {
     public GameObject ragdoll_obj;
+    public GameObject attack_Rabbitbody;
 
     [SerializeField] float SetY;
     [SerializeField] float attackDelaytime;
@@ -33,6 +34,7 @@ public class Rabbit_Script : Enemy
         targety.y = transform.position.y;
 
         transform.LookAt(targety);
+        attack_Rabbitbody.SetActive(false);
     }
 
     void Update()
@@ -96,7 +98,11 @@ public class Rabbit_Script : Enemy
                 {
                     transform.LookAt(targety);
                     isattack = true;
-                    StartCoroutine("attacker");
+
+                    if (gameObject.activeSelf)
+                    {
+                        StartCoroutine("attacker");
+                    }
                 }
             }
         }
@@ -107,10 +113,12 @@ public class Rabbit_Script : Enemy
         DontMove = true;
         animator.SetBool("Attack", true);
         yield return new WaitForSeconds(0.9f);
-        getTouch = false;
+        //getTouch = false;
+        attack_Rabbitbody.SetActive(true);
         particle_attack.Play();
         yield return new WaitForSeconds(0.4f);
-        getTouch = true;
+        attack_Rabbitbody.SetActive(false);
+        //getTouch = true;
         animator.SetBool("Attack", false);
         particle_attack.Stop();
         animator.SetBool("Move", false);

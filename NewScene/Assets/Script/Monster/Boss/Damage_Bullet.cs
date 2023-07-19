@@ -10,18 +10,19 @@ public class Damage_Bullet : MonoBehaviour
     [SerializeField]
     private Collider objectCollider;
     public bool GetColliderTime;
+    public bool GetColliderTimeDelete;
 
     private void Start()
     {
         if (GetColliderTime)
         {
             objectCollider = GetComponent<Collider>();
-            objectCollider.enabled = true;
+            objectCollider.enabled = false;
             StartCoroutine(ActivateCollider());
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Main_gangrim")
         {
@@ -29,7 +30,7 @@ public class Damage_Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {
@@ -41,5 +42,11 @@ public class Damage_Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(activationDelay);
         objectCollider.enabled = true;
+
+        if (GetColliderTimeDelete)
+        {
+            yield return new WaitForSeconds(0.5f);
+            objectCollider.enabled = false;
+        }
     }
 }

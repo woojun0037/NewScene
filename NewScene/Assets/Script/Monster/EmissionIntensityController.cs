@@ -70,7 +70,9 @@ public class EmissionIntensityController : MonoBehaviour
     private void SetEmissionIntensity(float intensity)
     {
         Color emissionColor = baseColor * intensity;
-        renderer.material.SetColor("_EmissionColor", emissionColor);
+        //renderer.material.SetColor("_EmissionColor", emissionColor); //보통 머테리얼
+        renderer.material.SetColor("_Emissive_Color", emissionColor); //쉐이더 용
+
         renderer.material.EnableKeyword("_EMISSION");
     }
 

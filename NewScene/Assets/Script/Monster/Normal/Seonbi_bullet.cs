@@ -62,7 +62,7 @@ public class Seonbi_bullet : MonoBehaviour
         //}
 
         transform.position += forward.normalized * bulletspeed * Time.deltaTime;
-
+        time += Time.deltaTime;
 
         if (time >= 1.5f)
         {
@@ -75,7 +75,7 @@ public class Seonbi_bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {
-            FindObjectOfType<HealthManager>().HurtPlayer(SeonbiDamageToGive);
+            FindObjectOfType<HealthManager>().HurtPlayer(3f);
         }
     }
 
