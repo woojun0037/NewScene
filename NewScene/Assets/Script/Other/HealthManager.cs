@@ -23,7 +23,6 @@ public class HealthManager : MonoBehaviour
             currentHealth -= damage;
             HPbar.fillAmount = currentHealth / maxHealth;
             StartCoroutine(HitPlayerCor(currentHealth));
-
         }
 
     }
@@ -31,7 +30,7 @@ public class HealthManager : MonoBehaviour
     IEnumerator HitPlayerCor(float damge)
     { 
         FindObjectOfType<Main_Player>().PlayerHP(damge);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
         isDamage = false;
     }
 }
