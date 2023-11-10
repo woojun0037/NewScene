@@ -241,16 +241,16 @@ public class Enemy : MonoBehaviour
 
     IEnumerator WaitCor()
     {
-        waiting = true;
+        waiting = false;
         float time = 0;
-        while(time < 1)
+        while(time < 1 && Time.timeScale < 1f)
         {
             Time.timeScale += Time.deltaTime;
             Debug.Log(Time.timeScale);
             yield return null;
         }
         Time.timeScale = 1f;
-        waiting = false;
+        waiting = true;
     }
 
     public IEnumerator DotCheck(float damage = 0)
