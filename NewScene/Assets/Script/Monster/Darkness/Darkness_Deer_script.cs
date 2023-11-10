@@ -25,10 +25,10 @@ public class Darkness_Deer_script : Deer_Script
         NotDamaged();
         DieMonster();
 
-        if (isdash)
-        {
-            rosh();
-        }
+        //if (isdash)
+        //{
+        //    rosh();
+        //}
     }
 
 }
