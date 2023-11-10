@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
+    Main_Player player;
     public Image HPbar;
+
     public float maxHealth;
     public float currentHealth;
-    bool isDamage = false;
 
+    bool isDamage = false;
+    
     public void HurtPlayer(float damage)
     {
+        maxHealth = player.HP;
+        currentHealth = player.HP;
         if (!isDamage)
         {
             isDamage = true;
