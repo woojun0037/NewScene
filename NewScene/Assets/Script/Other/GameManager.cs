@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     public void AddPotion(float PotionAdd)
     {
         while (0 < PotionAdd)

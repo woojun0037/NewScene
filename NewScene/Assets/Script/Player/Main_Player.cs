@@ -42,7 +42,10 @@ public class Main_Player : MonoBehaviour
 
     [Header("PlayerStats")]
     public float damage;
+
     public float HP;
+    public float currentHp;
+
     public float rotateSpeed = 5f;
     public float MoveSpeed = 6f;
     public float BackStep = 2f;
@@ -71,12 +74,17 @@ public class Main_Player : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        currentHp = HP;
+    }
+
     void Update()
     {
         Move();
+        PlayerHP();
         AttackInput();
         AnimationBoolCheck();
-        //Around();
     }
 
     public void OnWeapon()
@@ -161,10 +169,9 @@ public class Main_Player : MonoBehaviour
         }
     }
 
-    public void PlayerHP(float PlayerHP)
+    public void PlayerHP()
     {
-        HP = PlayerHP;
-        if (HP < 1)
+        if (currentHp < 1)
         {
             string Dead = "Dead";
             Anim.SetTrigger(Dead);
@@ -216,14 +223,8 @@ public class Main_Player : MonoBehaviour
         else
         {
             isMove = false;
-        }
+        } 
     }
-
-    //private void Around()
-    //{
-    //    Vector3 playerRotate = UtillScript.Scale(cam.transform.forward, new Vector3(1, 0, 1));
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(playerRotate), Time.deltaTime * cam.smoothness);
-    //}
 
     public void GetDamage(float damage)
     {

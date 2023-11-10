@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
     protected bool isBoss;
     public float maxHearth;
     public float curHearth;
+    public float afterCurHearth;
     public float MaxDistance;
     public float chasespeed;
 
@@ -144,11 +146,11 @@ public class Enemy : MonoBehaviour
             player = other.GetComponent<HitScript>().Player;
             playerSkill = other.transform.parent.GetComponent<PlayerSkill>();
      
-            
             if (player.HitState != hitNum)
             {
                 player.enemy = this;
                 property = player.GetComponent<PropertySkill>();
+
                 hitNum = player.HitState;
                 delay = 0.0f;
 
@@ -187,9 +189,16 @@ public class Enemy : MonoBehaviour
 
                         Gauge.Test();
                     }
+                    
                     curHearth -= hit.damage;
-                    if (isBoss) BossHit();
+                    if(curHearth < afterCurHearth)
+                    {
+                        HitStop();
+                    }
+                    afterCurHearth = curHearth;
+
                     hpImage.fillAmount = curHearth / maxHearth;
+
                     GetDamagedAnimation();
                     HitSound();
                 }
@@ -212,28 +221,38 @@ public class Enemy : MonoBehaviour
             float _damage = other.GetComponent<SkillHit>().damage;
             StartCoroutine(DotCheck(_damage));
             GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
+
             hitEffect.transform.position = this.transform.position;
             hitEffect.SetActive(true);
+
             if (isBoss) BossHit();
         }
     }
 
 
-    public void HitStop(float duration)
+    public void HitStop()
     {
         if (waiting)
             return;
+
         Time.timeScale = 0.0f;
-        StartCoroutine(WaitCor(duration));
+        StartCoroutine(WaitCor());
     }
 
-    IEnumerator WaitCor(float duration)
+    IEnumerator WaitCor()
     {
         waiting = true;
-        yield return new WaitForSecondsRealtime(duration);
-        Time.timeScale = 1.0f;
+        float time = 0;
+        while(time < 1)
+        {
+            Time.timeScale += Time.deltaTime;
+            Debug.Log(Time.timeScale);
+            yield return null;
+        }
+        Time.timeScale = 1f;
         waiting = false;
     }
+
     public IEnumerator DotCheck(float damage = 0)
     {
         float time = 0;

@@ -218,18 +218,18 @@ public class GangrimSkillUi : MonoBehaviour
 
     IEnumerator HPitemCor()
     {
-        Debug.Log("체력 회복" + curHp.currentHealth);
+        Debug.Log("체력 회복" + curHp.player.currentHp);
         if (main == null) main = FindObjectOfType<Main_Player>();
 
-        while(curHp.currentHealth < curHp.maxHealth)
+        while(curHp.player.currentHp < curHp.player.HP)
         {
-            curHp.currentHealth += Time.deltaTime;
-            curHp.HPbar.fillAmount = curHp.currentHealth / curHp.maxHealth;
+            curHp.player.currentHp += Time.deltaTime;
+            curHp.HPbar.fillAmount = curHp.player.currentHp / curHp.player.HP;
 
             yield return null;
         }
-        main.HP = curHp.currentHealth;
-        Debug.Log("체력 회복" + curHp.currentHealth);
+        main.HP = curHp.player.currentHp;
+        Debug.Log("체력 회복" + curHp.player.currentHp);
         HPitemOn = false;
         HP_item.SetActive(false);
     }

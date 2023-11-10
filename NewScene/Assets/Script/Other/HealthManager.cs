@@ -5,32 +5,26 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
-    Main_Player player;
+    public Main_Player player;
     public Image HPbar;
-
-    public float maxHealth;
-    public float currentHealth;
 
     bool isDamage = false;
     
     public void HurtPlayer(float damage)
     {
-        maxHealth = player.HP;
-        currentHealth = player.HP;
         if (!isDamage)
         {
+            player.currentHp -= damage;
+            HPbar.fillAmount = player.currentHp / player.HP;
             isDamage = true;
-            currentHealth -= damage;
-            HPbar.fillAmount = currentHealth / maxHealth;
-            StartCoroutine(HitPlayerCor(currentHealth));
+            StartCoroutine(HitPlayerCor());
         }
-
+        isDamage = false;
     }
-   
-    IEnumerator HitPlayerCor(float damge)
-    { 
-        FindObjectOfType<Main_Player>().PlayerHP(damge);
-        yield return new WaitForSeconds(1.0f);
+
+    IEnumerator HitPlayerCor()
+    {
+        yield return new WaitForSeconds(1.5f);
         isDamage = false;
     }
 }
