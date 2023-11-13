@@ -25,6 +25,15 @@ public class EmissionIntensityController : MonoBehaviour
         baseColor = (colorIndex == 0) ? Blue : Red;
     }
 
+    public void selectcolor(int R, int G, int B)
+    {
+        float normalizedR = R / 255f;
+        float normalizedG = G / 255f;
+        float normalizedB = B / 255f;
+
+        baseColor = new Color(normalizedR, normalizedG, normalizedB);
+    }
+
     IEnumerator ChangeEmission()
     {
         float startTime = Time.time;
