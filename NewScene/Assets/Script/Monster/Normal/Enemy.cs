@@ -185,16 +185,11 @@ public class Enemy : MonoBehaviour
                         this.chasespeed = 0f;
                         StartCoroutine(GetStunCor());
                     }
-                    
+
                     if (!playerSkill.DarkSkillUse)
-                    { 
-                        if(Gauge.sGauge < 30)
-                           Gauge.sGauge += hit.HitGauge;
-                    }
-                    
-                    if(curHearth < afterCurHearth)
                     {
-                        Ciritical();
+                        if (Gauge.sGauge < 30)
+                            Gauge.sGauge += hit.HitGauge;
                     }
                     afterCurHearth = curHearth;
 
@@ -210,7 +205,6 @@ public class Enemy : MonoBehaviour
         {
             float _damage = other.GetComponent<SkillHit>().damage;
             curHearth -= _damage;
-            Ciritical();
             hpImage.fillAmount = curHearth / maxHearth;
 
             if (isBoss) BossHit();
@@ -232,7 +226,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public bool Ciritical()
+    public void Ciritical()
     {
         float criticalResult = 0;
 
@@ -241,17 +235,14 @@ public class Enemy : MonoBehaviour
             criticalResult = 0.05f;
         }
 
-        bool Success = false;
         int RnadAccuracy = 100;
         float RandHitRange = criticalResult * RnadAccuracy;
         int Rand = UnityEngine.Random.Range(1, RnadAccuracy+1);
 
         if(Rand <= RandHitRange)
         {
-            Success = true;
+            HitStop();
         }
-
-        return Success;
     }
 
     public void HitStop()

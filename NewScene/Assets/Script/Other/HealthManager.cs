@@ -19,12 +19,11 @@ public class HealthManager : MonoBehaviour
             isDamage = true;
             StartCoroutine(HitPlayerCor());
         }
-        isDamage = false;
     }
 
     IEnumerator HitPlayerCor()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.8f);
         isDamage = false;
     }
 }
