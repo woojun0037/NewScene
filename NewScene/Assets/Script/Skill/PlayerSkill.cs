@@ -48,17 +48,19 @@ public class PlayerSkill : MonoBehaviour
     [Header("SkillTime")]
     public float RainSkillTime;
     public float RainSkillCool;
+
     public float WindSkillTime;
     public float WindSkillCool;
+
     public float TornadoSkillTime;
     public float TornadoSkillCool;
+
     public float DashSkillTime;
     public float DashSkillCool;
 
-
-
     public float maxAbilityDistance;
     public float DarkSkill;
+
 
     private void Start()
     {
@@ -121,7 +123,7 @@ public class PlayerSkill : MonoBehaviour
         {
             GangrimSkillUi.instance.windDot.DORestart();
             GangrimSkillUi.instance.CurrentSkillUI("wind");
-            player.isAttack = true;
+            //player.isAttack = true;
             player.Anim.SetTrigger("WindSkill");
             StartCoroutine(QskillCoolDown());
         }

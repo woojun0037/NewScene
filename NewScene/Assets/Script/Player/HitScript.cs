@@ -10,11 +10,4 @@ public class HitScript : MonoBehaviour
     public bool isAttack;
     public float damage;
     public float HitGauge = 1f;
-
-    void Update()
-    {
-
-    }
-
-    
 }

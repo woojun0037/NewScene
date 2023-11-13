@@ -125,14 +125,12 @@ public class GangrimSkillUi : MonoBehaviour
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-
             }
             else
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
             }
-
             option.SetActive(isOption);
         }
     }
@@ -153,9 +151,15 @@ public class GangrimSkillUi : MonoBehaviour
     public void SkillUiInit()
     {
         leftDot.DORestart();
-        leftDot.tween.OnComplete(() => { uiKeys[0] = "0"; uiImages[0].sprite = null; uiImages[0].enabled = false; });
+        leftDot.tween.OnComplete(() => { uiKeys[0] = "0"; 
+                                         uiImages[0].sprite = null; 
+                                         uiImages[0].enabled = false; });
         rightDot.DORestart();
-        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; uiImages[1].sprite = null; uiImages[1].enabled = false; skillKey.SetActive(false); uiImages[2].enabled = false; });
+        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; 
+                                          uiImages[1].sprite = null; 
+                                          uiImages[1].enabled = false;
+                                          skillKey.SetActive(false); 
+                                          uiImages[2].enabled = false; });
     }
 
     public void CurrentSkillUI(string key)
@@ -185,13 +189,15 @@ public class GangrimSkillUi : MonoBehaviour
             uiImages[1].enabled = false;
         }
 
-        if ((uiKeys[0] == "wind" && uiKeys[1] == "tornado") || (uiKeys[0] == "tornado" && uiKeys[1] == "wind"))
+        if ((uiKeys[0] == "wind" && uiKeys[1] == "tornado") || 
+            (uiKeys[0] == "tornado" && uiKeys[1] == "wind"))
         {
             skillKey.SetActive(true);
             uiImages[2].sprite = uiSprites[3];
             uiImages[2].enabled = true;
         }
-        else if((uiKeys[0] == "wind" && uiKeys[1] == "rain") || (uiKeys[0] == "rain" && uiKeys[1] == "wind"))
+        else if((uiKeys[0] == "wind" && uiKeys[1] == "rain")|| 
+               (uiKeys[0] == "rain" && uiKeys[1] == "wind"))
         {
             skillKey.SetActive(true);
             uiImages[2].sprite = uiSprites[4];
@@ -220,18 +226,18 @@ public class GangrimSkillUi : MonoBehaviour
 
     IEnumerator HPitemCor()
     {
-        Debug.Log("체력 회복" + curHp.currentHealth);
+        Debug.Log("체력 회복" + curHp.player.currentHp);
         if (main == null) main = FindObjectOfType<Main_Player>();
 
-        while(curHp.currentHealth < curHp.maxHealth)
+        while(curHp.player.currentHp < curHp.player.HP)
         {
-            curHp.currentHealth += Time.deltaTime;
-            curHp.HPbar.fillAmount = curHp.currentHealth / curHp.maxHealth;
+            curHp.player.currentHp += Time.deltaTime;
+            curHp.HPbar.fillAmount = curHp.player.currentHp / curHp.player.HP;
 
             yield return null;
         }
-        main.HP = curHp.currentHealth;
-        Debug.Log("체력 회복" + curHp.currentHealth);
+        main.HP = curHp.player.currentHp;
+        Debug.Log("체력 회복" + curHp.player.currentHp);
         HPitemOn = false;
         HP_item.SetActive(false);
     }

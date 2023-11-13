@@ -5,25 +5,41 @@ using UnityEngine;
 public class EmissionIntensityController : MonoBehaviour
 {
     public Renderer renderer;
-    public Color baseColor; //ÇöÀç »ö±ò
-    Color Red;
-    Color Blue;
+    public Color baseColor;
     public float minIntensity = 5f;
     public float maxIntensity = 10f;
     public float duration = 2f;
 
+    private float timer = 0f;
     private bool isIncreasing = true;
-    bool red = false;
-    private void Start()
+    bool isEmission;
+    //private void Start()
+    //{
+    //    isEmission = true;
+    //}
+
+    //private void Update()
+    //{
+    //    if (isEmission)
+    //    {
+    //        isEmission = false;
+    //        EmssionMaxMin();
+    //    }
+    //}
+
+    public void continualEmission()
     {
-        Blue = baseColor;
-        Red = new Color(1f, 0f, 0f);
+        timer += Time.deltaTime;
+
+        float t = Mathf.PingPong(timer / duration, 1f);
+
+        float intensity = Mathf.Lerp(minIntensity, maxIntensity, t);
+        Color emissionColor = baseColor * intensity;
+        renderer.material.SetColor("_EmissionColor", emissionColor);
+
+        renderer.material.EnableKeyword("_EMISSION");
     }
 
-    public void setbasecolor(int colorIndex)
-    {
-        baseColor = (colorIndex == 0) ? Blue : Red;
-    }
 
     IEnumerator ChangeEmission()
     {
@@ -77,7 +93,6 @@ public class EmissionIntensityController : MonoBehaviour
     }
     public void EmssionMaxMin()
     {
-
         StartCoroutine(CorEmissions());
     }
 

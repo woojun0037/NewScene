@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a46b256067c542e4a8d38cf0b99bd77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbodythis: {fileID: 2382716783491538334}
   SeonbiDamageToGive: 1
   bulletspeed: 15
 --- !u!54 &2382716783491538334
@@ -77,7 +76,7 @@ SphereCollider:
   m_GameObject: {fileID: 250967349857438845}
   m_Material: {fileID: 13400000, guid: 8081ee826ec2d344da3529e9806c5bb5, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
