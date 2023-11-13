@@ -20,14 +20,21 @@ public class Meteo : MonoBehaviour
             parentMeteo = GetComponentInParent<Meteo>();
         }
 
-        private void OnParticleCollision(GameObject other)
+        void OnParticleCollision(GameObject other)
         {
-            if (other.CompareTag("Main_gangrim"))
+            Debug.Log("meteooooooooooo");
+            //if (other.CompareTag("Main_gangrim"))
+            //{
+            //    Debug.Log("meteooooooooooo");
+            //    FindObjectOfType<HealthManager>().HurtPlayer(parentMeteo.GetDamaged);
+            //}
+            //Debug.Log("mon");
+
+            if (other.gameObject.tag == "Main_gangrim")
             {
                 Debug.Log("meteooooooooooo");
-                FindObjectOfType<HealthManager>().HurtPlayer(parentMeteo.GetDamaged);
+                FindObjectOfType<HealthManager>().HurtPlayer(3);
             }
-            Debug.Log("mon");
         }
 
         private void OnParticleTrigger(GameObject other)
@@ -40,5 +47,7 @@ public class Meteo : MonoBehaviour
 
             Debug.Log("mon");
         }
+
+
     }
 }

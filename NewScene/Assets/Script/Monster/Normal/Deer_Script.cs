@@ -8,21 +8,17 @@ public class Deer_Script : Enemy
 
     bool isattack;
     bool DontMove;
+    bool useMoveAni =false;
 
-    public float attackCoolTime;
     public GameObject DeerLuncher;
     public GameObject ragdoll_obj;
-    private float Dist;
-
-    private float roshspeed = 10f;
-    private bool isrosh = false;
-    protected bool isdash = false;
-
     public ParticleSystem particle_attack;
     public EmissionIntensityController emissionController;
-    [SerializeField]
-    Vector3 startingPosition;
     public Renderer deerMaterial;
+    public GameObject AttackCol;
+
+    private float Dist;
+    protected bool isdash = false;
 
     protected override void Awake()
     {
@@ -43,10 +39,6 @@ public class Deer_Script : Enemy
         NotDamaged();
         DieMonster();
         CanvasMove();
-        if (isdash)
-        {
-            rosh();
-        }
     }
 
     protected override void CanvasMove()
@@ -64,12 +56,14 @@ public class Deer_Script : Enemy
 
             if (!DontMove) //공격중에는 이동 기능 정지
             {
-                animator.SetBool("Move", true);
+                if(!useMoveAni)
+                    animator.SetBool("Move", true);
                 agent.isStopped = false;
             }
             else
             {
-                animator.SetBool("Move", false);
+                if (!useMoveAni)
+                    animator.SetBool("Move", false);
                 agent.isStopped = true;
             }
 
@@ -100,6 +94,7 @@ public class Deer_Script : Enemy
 
         }
     }
+
     protected override void GetDamagedAnimation()
     {
         if (animator != null)
@@ -114,7 +109,11 @@ public class Deer_Script : Enemy
 
     IEnumerator attacker()
     {
+        isattack = true;
         DontMove = true;
+
+        yield return new WaitForSeconds(1f);
+
         int random;
         random = UnityEngine.Random.Range(1, 4);
 
@@ -124,6 +123,7 @@ public class Deer_Script : Enemy
         animator.SetInteger("Attack", random);
 
         yield return new WaitForSeconds(1f);
+        emissionController.setbasecolor(0);
         emissionController.EmssionMaxMin();
         Vector3 target_ = transform.position;
         target_.y = transform.position.y;
@@ -134,7 +134,7 @@ public class Deer_Script : Enemy
         animator.SetBool("isAttack", false);
         animator.SetInteger("Attack", 0);
 
-        yield return new WaitForSeconds(3f + attackCoolTime);
+        yield return new WaitForSeconds(3.5f);
         isattack = false;
         DontMove = false;
     }
@@ -147,61 +147,17 @@ public class Deer_Script : Enemy
         animator.SetInteger("Hit", 0);
     }
 
-
-    protected void rosh()
-    {
-        DontMove = true;
-
-        if (!isrosh)
-        {
-            if (particle_attack != null)
-            {
-                particle_attack.Play();
-            }
-            animator.SetBool("Move", true);
-            transform.LookAt(targetTransform);
-            startingPosition = targetTransform.position;
-            //startingPosition.y = 0;
-
-            isrosh = true;
-        }
-
-        if (Vector3.Distance(transform.position, startingPosition) < 1)
-        {
-            particle_attack.Stop();
-            isdash = false;
-            isattack = false;
-            DontMove = false;
-            animator.SetBool("Move", false);
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, startingPosition, roshspeed * Time.deltaTime);
-        }
-
-    }
-
-
-
-    void reset()
-    {
-        isrosh = false;
-    }
-
     private void randattack()
     {
-        reset();
         int rand = Random.Range(0, 2); //0 1
 
         if (rand == 0)
         {
-            isattack = true;
             StartCoroutine("attacker");
         }
         else if (rand == 1)
         {
-            isattack = true;
-            isdash = true;
+            NewDash();
         }
     }
 
@@ -220,6 +176,92 @@ public class Deer_Script : Enemy
 
             yield return null;
         }
+    }
+    void NewDash()
+    {
+        StartCoroutine(newDash());
+    }
+
+    IEnumerator newDash()
+    {
+        useMoveAni = true;
+        DontMove = true;
+        isattack = true;
+
+        animator.SetBool("Move", false);
+
+        yield return new WaitForSeconds(1f);
+
+        //Rotation
+        Vector3 spawn = Player.transform.position;
+        spawn.y = transform.position.y + 10f;
+
+        emissionController.setbasecolor(1);
+        emissionController.EmssionMaxMin();
+
+        Vector3 targetDirection = (spawn - transform.position).normalized;
+        targetDirection.y = 0; // y 축 회전 무시
+
+        Quaternion rotation = Quaternion.LookRotation(targetDirection);
+        Quaternion startRotation = transform.rotation;
+
+        float rotationSpeed = 1f;
+        float t = 0;
+
+        animator.SetBool("Move", true);
+
+        while (t < 1)
+        {
+            t += Time.deltaTime * rotationSpeed;
+            transform.rotation = Quaternion.Slerp(startRotation, rotation, t);
+            yield return null;
+        }
+
+        animator.SetBool("Move", false);
+        yield return new WaitForSeconds(1.5f);//cool
+
+        //Dash
+        Vector3 moveDirection = new Vector3(0, 0, 1); // 앞쪽 방향으로 이동 (Z 축) forward X
+        moveDirection.Normalize();
+
+        float elapsedTime = 0f;
+        float moveSpeed = 20f;
+
+        Vector3 currentmonster = transform.position;
+        Vector3 lastPosition = currentmonster;
+
+        animator.SetBool("Dash", true);
+
+        if (particle_attack != null)
+            particle_attack.Play();
+
+        AttackCol.SetActive(true);
+        // && Vector3.Distance(currentmonster, spawn) - Vector3.Distance(currentmonster, transform.position) >= 1f
+        while (elapsedTime < 0.8f && Vector3.Distance(currentmonster, spawn) - Vector3.Distance(lastPosition, transform.position) >= 1f)
+        {
+            RaycastHit hit;
+            Vector3 Hit = transform.position;
+            Hit.y = transform.position.y + 2f;
+
+            if (Physics.Raycast(Hit, transform.forward, out hit, 1f))
+            {
+                if (!hit.collider.CompareTag("Player")) 
+                    break;
+            }
+
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        particle_attack.Stop();
+        AttackCol.SetActive(false);
+        animator.SetBool("Dash", false);
+
+        yield return new WaitForSeconds(3f);//cool
+        isattack = false;
+        useMoveAni = false;
+        DontMove = false;
     }
 
 }
