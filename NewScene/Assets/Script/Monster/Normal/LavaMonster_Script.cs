@@ -67,7 +67,7 @@ public class LavaMonster_Script : Enemy
 
             deletetime += Time.deltaTime;
 
-            if (deletetime >= 5f)
+            if (deletetime >= 1.2f)
             {
                 MonterObj.gameObject.SetActive(false);
             }
@@ -130,7 +130,7 @@ public class LavaMonster_Script : Enemy
         getTouch = false;
         DontMove = true;
         particle_attack.Play();
-        yield return new WaitForSeconds(2.5f); //공격 준비
+        yield return new WaitForSeconds(3f); //공격 준비
 
         animator.SetBool("isAttack", true);
 
