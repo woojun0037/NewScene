@@ -37,7 +37,7 @@ public class GangrimSkillUi : MonoBehaviour
     public Image[] uiImages;
     public Sprite[] uiSprites;
     public string[] uiKeys;
-    
+
     [Header("WindSKill")]
     public Image abilityImage1;
     public float coolDown1 = 5;
@@ -73,7 +73,7 @@ public class GangrimSkillUi : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DarkPill.skill = playerSkillCheck;
@@ -88,7 +88,7 @@ public class GangrimSkillUi : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        
+
     }
 
     void Start()
@@ -117,11 +117,11 @@ public class GangrimSkillUi : MonoBehaviour
 
     private void Option()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             isOption = !isOption;
 
-            if(isOption)
+            if (isOption)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -151,15 +151,21 @@ public class GangrimSkillUi : MonoBehaviour
     public void SkillUiInit()
     {
         leftDot.DORestart();
-        leftDot.tween.OnComplete(() => { uiKeys[0] = "0"; 
-                                         uiImages[0].sprite = null; 
-                                         uiImages[0].enabled = false; });
+        leftDot.tween.OnComplete(() =>
+        {
+            uiKeys[0] = "0";
+            uiImages[0].sprite = null;
+            uiImages[0].enabled = false;
+        });
         rightDot.DORestart();
-        rightDot.tween.OnComplete(() => { uiKeys[1] = "0"; 
-                                          uiImages[1].sprite = null; 
-                                          uiImages[1].enabled = false;
-                                          skillKey.SetActive(false); 
-                                          uiImages[2].enabled = false; });
+        rightDot.tween.OnComplete(() =>
+        {
+            uiKeys[1] = "0";
+            uiImages[1].sprite = null;
+            uiImages[1].enabled = false;
+            skillKey.SetActive(false);
+            uiImages[2].enabled = false;
+        });
     }
 
     public void CurrentSkillUI(string key)
@@ -173,12 +179,12 @@ public class GangrimSkillUi : MonoBehaviour
             uiImages[0].sprite = spriteDictionary[key];
             uiImages[0].enabled = true;
         }
-        else if(uiKeys[1] == "0")
+        else if (uiKeys[1] == "0")
         {
             uiKeys[1] = key;
             uiImages[1].sprite = spriteDictionary[key];
             uiImages[1].enabled = true;
-            
+
         }
         else if (uiKeys[0] != "0" && uiKeys[1] != "0")
         {
@@ -189,14 +195,14 @@ public class GangrimSkillUi : MonoBehaviour
             uiImages[1].enabled = false;
         }
 
-        if ((uiKeys[0] == "wind" && uiKeys[1] == "tornado") || 
+        if ((uiKeys[0] == "wind" && uiKeys[1] == "tornado") ||
             (uiKeys[0] == "tornado" && uiKeys[1] == "wind"))
         {
             skillKey.SetActive(true);
             uiImages[2].sprite = uiSprites[3];
             uiImages[2].enabled = true;
         }
-        else if((uiKeys[0] == "wind" && uiKeys[1] == "rain")|| 
+        else if ((uiKeys[0] == "wind" && uiKeys[1] == "rain") ||
                (uiKeys[0] == "rain" && uiKeys[1] == "wind"))
         {
             skillKey.SetActive(true);
@@ -207,29 +213,29 @@ public class GangrimSkillUi : MonoBehaviour
 
     void ItemUse()
     {
-        if(Input.GetKey(HP_itemKey) && HPitemOn)
+        if (Input.GetKey(HP_itemKey) && HPitemOn)
         {
             StartCoroutine(HPitemCor());
         }
-        
-        if(Input.GetKey(Respwan_ItemKey) && RESPWAN_itemOn)
+
+        if (Input.GetKey(Respwan_ItemKey) && RESPWAN_itemOn)
         {
             player.gameObject.SetActive(true);
             RESPWAN_item.SetActive(false);
         }
 
-        if(Input.GetKey(DarkPillItem__itemkey) && DarkPillItemOn)
+        if (Input.GetKey(DarkPillItem__itemkey) && DarkPillItemOn)
         {
             StartCoroutine(DarkPillCor());
         }
     }
 
-    IEnumerator HPitemCor()
+    public IEnumerator HPitemCor()
     {
         Debug.Log("체력 회복" + curHp.player.currentHp);
         if (main == null) main = FindObjectOfType<Main_Player>();
 
-        while(curHp.player.currentHp < curHp.player.HP)
+        while (curHp.player.currentHp < curHp.player.HP)
         {
             curHp.player.currentHp += Time.deltaTime;
             curHp.HPbar.fillAmount = curHp.player.currentHp / curHp.player.HP;
@@ -246,7 +252,7 @@ public class GangrimSkillUi : MonoBehaviour
     {
         Debug.Log("다크 회복" + Gauge.sGauge);
 
-        while(Gauge.sGauge < DarkPill.maxGauge)
+        while (Gauge.sGauge < DarkPill.maxGauge)
         {
             Gauge.sGauge += 0.1f;
             yield return new WaitForEndOfFrame();
