@@ -10,6 +10,7 @@ public class Monster_Door : Boss
     public GameObject FloorAattackObj; //바닥 장판 스킬
 
     Renderer DoorColor;
+    public EmissionIntensityController emissionController;
 
     public enum BossPattern //보스 공격패턴
     {
@@ -63,13 +64,17 @@ public class Monster_Door : Boss
         base.Start();
         onetime = false;
         targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-        DoorColor = gameObject.GetComponent<Renderer>();
+        //DoorColor = gameObject.GetComponent<Renderer>();
+        emissionController = GetComponent<EmissionIntensityController>();
 
         ReturnPosition = transform.position; //기존 위치
 
         stop = false;
         readytogetpodition = false;
         BossStart();
+        emissionController.setbasecolor(0);
+        emissionController.EmssionMaxMin();
+
     }
 
     protected override void BossStart()
@@ -203,24 +208,24 @@ public class Monster_Door : Boss
 
     void ColorChange(int i) //몬스터 색깔 변경
     {
-        if(i == 1)
-        {
-            if (DoorColor.material.color != Color.magenta)
-                DoorColor.material.color = Color.magenta;
-            else
-                DoorColor.material.color = Color.white;
-        }
-        else if(i ==2)
-        {
-            if (DoorColor.material.color != Color.black)
-                DoorColor.material.color = Color.black;
-            else
-                DoorColor.material.color = Color.white;
-        }
-        else
-        {
-            DoorColor.material.color = Color.white;
-        }
+        //if(i == 1)
+        //{
+        //    if (DoorColor.material.color != Color.magenta)
+        //        DoorColor.material.color = Color.magenta;
+        //    else
+        //        DoorColor.material.color = Color.white;
+        //}
+        //else if(i ==2)
+        //{
+        //    if (DoorColor.material.color != Color.black)
+        //        DoorColor.material.color = Color.black;
+        //    else
+        //        DoorColor.material.color = Color.white;
+        //}
+        //else
+        //{
+        //    DoorColor.material.color = Color.white;
+        //}
 
     }
 
@@ -443,7 +448,7 @@ public class Monster_Door : Boss
     {
         //yield return new WaitForSeconds(0.5f);
         Vector3 sety = transform.position;
-        sety.y = transform.position.y + 2;
+        sety.y = transform.position.y + 0;
         yield return new WaitForSeconds(0.1f);
         GameObject bullet = Instantiate(updownBullet, sety, transform.rotation);
 

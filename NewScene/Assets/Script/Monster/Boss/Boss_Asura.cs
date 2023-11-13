@@ -20,9 +20,9 @@ public class Boss_Asura : Boss
 
     protected override void Start()
     {
+        StartCoroutine(attackstart());
         player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
         BossStart();
-        isattack = false;
     }
 
     // Update is called once per frame
@@ -250,5 +250,10 @@ public class Boss_Asura : Boss
 
     }
 
-
+    private IEnumerator attackstart()
+    {
+        isattack = true;
+        yield return new WaitForSeconds(3f);
+        isattack = false;
+    }
 }

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3730137886953058173}
   - component: {fileID: 3120060353283379883}
   - component: {fileID: 3173847398287153175}
-  - component: {fileID: 7964991697617976670}
   m_Layer: 0
   m_Name: Meteo Mesh
   m_TagString: Untagged
@@ -4858,19 +4857,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7964991697617976670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 89970086081673129}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d6a68e5e6faed49ac1a17dcd47c388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GetDamaged: 5
 --- !u!1 &656528180908870237
 GameObject:
   m_ObjectHideFlags: 0
@@ -14564,7 +14550,6 @@ GameObject:
   - component: {fileID: 9128118678510005343}
   - component: {fileID: 767138681313896057}
   - component: {fileID: 1705648172419391375}
-  - component: {fileID: 1696356655980044401}
   m_Layer: 0
   m_Name: Eff_Fire_Epic_MeteorSkill_06  Cartoon
   m_TagString: Untagged
@@ -19368,19 +19353,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &1696356655980044401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3256933056805828187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4d6a68e5e6faed49ac1a17dcd47c388, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GetDamaged: 5
 --- !u!1 &4076490480656497510
 GameObject:
   m_ObjectHideFlags: 0
@@ -29074,6 +29046,7 @@ GameObject:
   - component: {fileID: 1247650811188219502}
   - component: {fileID: 1603788881710849511}
   - component: {fileID: 8973114754321417371}
+  - component: {fileID: 388339179}
   m_Layer: 0
   m_Name: Meteo bomb
   m_TagString: Untagged
@@ -29348,7 +29321,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -32733,9 +32706,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 4
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -32910,7 +32883,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
@@ -33933,6 +33906,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &388339179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7349159549548652188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf645c3fd13bfea459faf57ed861ff0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8139740396802211668
 GameObject:
   m_ObjectHideFlags: 0

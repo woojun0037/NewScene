@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a790f111fd394f4bafe859495fb649f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetDamaged: 5
+  GetDamaged: 3
   activationDelay: 0.5
   objectCollider: {fileID: 0}
   GetColliderTime: 0
@@ -1888,7 +1888,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 300
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

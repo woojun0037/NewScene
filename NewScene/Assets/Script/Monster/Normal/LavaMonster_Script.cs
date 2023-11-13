@@ -137,7 +137,7 @@ public class LavaMonster_Script : Enemy
         yield return new WaitForSeconds(0.2f); //패는 애니 중간
         isrotation = true;
         Vector3 attackpos = transform.position;
-        attackpos.y = transform.position.y + 3f;
+        attackpos.y = transform.position.y + 1.8f;
 
         GameObject spawnSlashObject = Instantiate(Bullet, attackpos, transform.rotation);
         animator.SetBool("isAttack", false);
