@@ -51,7 +51,6 @@ public class Deer_Script : Enemy
 
     protected override void CanvasMove()
     {
-
         base.CanvasMove();
     }
 

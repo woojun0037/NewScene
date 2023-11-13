@@ -40,11 +40,6 @@ public class Gauge : MonoBehaviour
         DarkSkillsystem();
     }
 
-
-    public static void Test()
-    {
-        Debug.Log(sGauge);
-    }
     public void DarkSkillsystem()
     {
         Dark_gauge.fillAmount = sGauge / maxGauge;
@@ -62,7 +57,6 @@ public class Gauge : MonoBehaviour
             sGauge -= 0.1f;
             yield return new WaitForSeconds(0.03f);
         }
-
         dark_gauge_check = false;
     }
 }

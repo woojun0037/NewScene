@@ -21,16 +21,16 @@ public class Enemy : MonoBehaviour
 
     public Image hpImage;
     public Canvas canvas;
-    public Camera camera;
-
+    
     public bool DebuffCheck;
     public bool StartAttack;
     public bool getTouch;
     public bool waiting;
-
+    
     public float KnockBackForce;
     protected float KnockBakcTime;
 
+    protected Camera camera;
     protected Main_Player Player;
     protected Rigidbody rigid;
     protected BoxCollider boxCollier;
@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     protected PropertySkill property;
     protected Main_Player player;
     protected AudioSource audioSource;
+
     public NavMeshAgent agent = null;
     public Transform targetTransform;
     public GameObject skillHitEffect;
@@ -61,7 +62,8 @@ public class Enemy : MonoBehaviour
         boxCollier = GetComponent<BoxCollider>();
         agent = GetComponent<NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
-        
+        camera = GetComponent<Camera>();
+
         canvas.worldCamera = camera;
         agent.enabled = false;
         hpImage.fillAmount = curHearth / maxHearth;
@@ -156,6 +158,11 @@ public class Enemy : MonoBehaviour
 
                 if (player.isAttack)
                 {
+                    HitScript hit;
+                    hit = other.GetComponent<HitScript>();
+
+                    curHearth -= hit.damage;
+
                     if (damageEffect == null)
                     {
                         damageEffect = Instantiate(player.AtkEffect[3], transform.position, Quaternion.identity);
@@ -179,21 +186,15 @@ public class Enemy : MonoBehaviour
                         StartCoroutine(GetStunCor());
                     }
                     
-                    HitScript hit;
-                    hit = other.GetComponent<HitScript>();
-
                     if (!playerSkill.DarkSkillUse)
                     { 
                         if(Gauge.sGauge < 30)
-                            Gauge.sGauge += hit.HitGauge;
-
-                        Gauge.Test();
+                           Gauge.sGauge += hit.HitGauge;
                     }
                     
-                    curHearth -= hit.damage;
                     if(curHearth < afterCurHearth)
                     {
-                        HitStop();
+                        Ciritical();
                     }
                     afterCurHearth = curHearth;
 
@@ -209,7 +210,9 @@ public class Enemy : MonoBehaviour
         {
             float _damage = other.GetComponent<SkillHit>().damage;
             curHearth -= _damage;
+            Ciritical();
             hpImage.fillAmount = curHearth / maxHearth;
+
             if (isBoss) BossHit();
             GameObject hitEffect = Instantiate(skillHitEffect, transform.position, Quaternion.identity);
             hitEffect.transform.position = this.transform.position;
@@ -229,27 +232,47 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public bool Ciritical()
+    {
+        float criticalResult = 0;
+
+        if (criticalResult < 0.05f)
+        {
+            criticalResult = 0.05f;
+        }
+
+        bool Success = false;
+        int RnadAccuracy = 100;
+        float RandHitRange = criticalResult * RnadAccuracy;
+        int Rand = UnityEngine.Random.Range(1, RnadAccuracy+1);
+
+        if(Rand <= RandHitRange)
+        {
+            Success = true;
+        }
+
+        return Success;
+    }
 
     public void HitStop()
     {
         if (waiting)
             return;
-
-        Time.timeScale = 0.0f;
         StartCoroutine(WaitCor());
     }
 
     IEnumerator WaitCor()
     {
-        waiting = false;
         float time = 0;
+        Time.timeScale = 0.0f;
+        waiting = false;
         while(time < 1 && Time.timeScale < 1f)
         {
             Time.timeScale += Time.deltaTime;
-            Debug.Log(Time.timeScale);
+           
             yield return null;
         }
-        Time.timeScale = 1f;
+        Time.timeScale = 1.0f;
         waiting = true;
     }
 
@@ -282,6 +305,7 @@ public class Enemy : MonoBehaviour
         property.Stun = false;
         this.chasespeed = 3f;
     }
+
 
     protected virtual void BossStart()
     {

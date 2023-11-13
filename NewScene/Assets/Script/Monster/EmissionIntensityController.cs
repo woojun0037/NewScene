@@ -25,7 +25,6 @@ public class EmissionIntensityController : MonoBehaviour
     //        isEmission = false;
     //        EmssionMaxMin();
     //    }
-
     //}
 
     public void continualEmission()

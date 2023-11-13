@@ -43,7 +43,6 @@ public class RagDoll_delete : MonoBehaviour
 
         for (int i = 10; i >= 0; i--)
         {
-            Debug.Log("ObjFadeOut");
             float f = i / 10.0f;
             Color c = ragdollcolor.material.color;
             c.a = f;
