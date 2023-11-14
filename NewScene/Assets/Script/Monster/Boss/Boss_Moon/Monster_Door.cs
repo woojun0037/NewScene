@@ -43,6 +43,7 @@ public class Monster_Door : Boss
         ReturnPosition = transform.position; //기존 위치
 
         BossStart();
+
     }
 
     protected override void BossStart()
@@ -55,12 +56,53 @@ public class Monster_Door : Boss
         base.BossHit();
     }
 
+    private IEnumerator DieRotation()
+    {
+        while (Vector3.Distance(transform.position, ReturnPosition) > 0.01f)
+        {
+
+            transform.position = Vector3.MoveTowards(transform.position, ReturnPosition, Time.deltaTime * 10f * 1.5f);
+
+            yield return null; // 한 프레임 대기
+        }
+
+        yield return new WaitForSeconds(1f);
+
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.Euler(90, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < 0.8f)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsedTime / 0.8f);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(2f);
+
+        gameObject.SetActive(false);
+
+    }
+
     void Update()
     {
         if (BossStartDelay && isBossStart && player.HP >= 0 && !isDie)
         {
+            if (curHearth < 1)
+            {
+                StopAllCoroutines();
+                FloorAattackObj.SetActive(false);
+
+                onetime = true;
+                isDie = true;
+                StartCoroutine(DieRotation());
+
+            }
+
             NotDamaged();
-            DieMonster();
+            //DieMonster();
 
             if (!onetime)
             {
