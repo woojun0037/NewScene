@@ -12,6 +12,6 @@ public class HitScript : MonoBehaviour
     }
 
     public bool isAttack;
-    public float damage;
+    public float damage = 1f;
     public float HitGauge = 1f;
 }

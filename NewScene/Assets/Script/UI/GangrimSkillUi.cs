@@ -29,6 +29,7 @@ public class GangrimSkillUi : MonoBehaviour
     public Image dashHide;
 
     public GameObject option;
+    public GameObject MouseOptionDetail;
 
     public GameObject skillKey;
 
@@ -148,6 +149,16 @@ public class GangrimSkillUi : MonoBehaviour
         option.SetActive(isOption);
 
         SceneManager.LoadScene("Title");
+    }
+
+    public void mouseGamDoe()
+    {
+        MouseOptionDetail.SetActive(true);
+    }
+
+    public void mouseGamoeOff()
+    {
+        MouseOptionDetail.SetActive(false);
     }
 
     public void SkillUiInit()
