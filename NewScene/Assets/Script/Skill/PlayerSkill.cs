@@ -33,7 +33,7 @@ public class PlayerSkill : MonoBehaviour
     public GameObject Tornado;
     public GameObject WindSkillPrefab;
     public GameObject DarkSkillEffect;
-   
+
     [Header("position")]
     public Vector3 posUp;
     public Vector3 postion;
@@ -100,7 +100,7 @@ public class PlayerSkill : MonoBehaviour
         Vector3 forward = this.transform.forward;
         Vector3 startPos = this.transform.position;
 
-        while(Vector3.Distance(startPos, transform.position) < 2)
+        while (Vector3.Distance(startPos, transform.position) < 2)
         {
             this.transform.position += forward.normalized * 3f * Time.deltaTime;
             yield return new WaitForFixedUpdate();
@@ -123,7 +123,7 @@ public class PlayerSkill : MonoBehaviour
         {
             GangrimSkillUi.instance.windDot.DORestart();
             GangrimSkillUi.instance.CurrentSkillUI("wind");
-            //player.isAttack = true;
+
             player.Anim.SetTrigger("WindSkill");
             StartCoroutine(QskillCoolDown());
         }
@@ -155,16 +155,29 @@ public class PlayerSkill : MonoBehaviour
         }
     }
 
+
     public void TornadoSkill()
     {
-        if(Input.GetKeyDown(KeyCode.E) && TornadoSkillTime <= 0)
+        if (Input.GetKeyDown(KeyCode.E) && TornadoSkillTime <= 0)
         {
-            GangrimSkillUi.instance.tornadoDot.DORestart();
-            GangrimSkillUi.instance.CurrentSkillUI("tornado");
-            Tornado.transform.position = this.transform.position;
-            Tornado.SetActive(true);
+            StartCoroutine(MotionWaitCor());
             StartCoroutine(ESkillCoolDown());
         }
+    }
+
+    IEnumerator MotionWaitCor()
+    {
+        player.Anim.SetTrigger("tornadoMotion");
+        yield return new WaitForSeconds(0.01f);
+
+        float curAnimationTime = player.Anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(curAnimationTime - 1.2f);
+
+        GangrimSkillUi.instance.tornadoDot.DORestart();
+        GangrimSkillUi.instance.CurrentSkillUI("tornado");
+
+        Tornado.transform.position = this.transform.position;
+        Tornado.SetActive(true);
     }
 
     private IEnumerator ESkillCoolDown()
@@ -181,6 +194,7 @@ public class PlayerSkill : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R) && RainSkillTime <= 0)
         {
+            player.Anim.SetTrigger("raindropMotion");
             GangrimSkillUi.instance.rainDot.DORestart();
             GangrimSkillUi.instance.CurrentSkillUI("rain");
             FlyingObject.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
