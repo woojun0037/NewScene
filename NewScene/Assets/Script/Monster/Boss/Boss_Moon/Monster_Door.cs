@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Monster_Door : Boss
 {
-
-    public GameObject SpawnMonsters;
-
-    public GameObject FloorAattackObj; //바닥 장판 스킬
-
-    Renderer DoorColor;
-    public EmissionIntensityController emissionController;
-
     public enum BossPattern //보스 공격패턴
     {
         Pattern_0 = 0,
@@ -21,60 +13,36 @@ public class Monster_Door : Boss
     }
     public BossPattern bosspattern;
 
-    [SerializeField] bool onetime = true;
-    [SerializeField] float cooltime;
-    [SerializeField] float MonsterYPosition;
+    public GameObject SpawnMonsters;
+    public GameObject SpawnMonstersRange;
+    public GameObject FloorAattackObj; //바닥 장판 스킬
+    public GameObject PatternDoonBullet; //문 분신
+    public GameObject DownAttackRange;
+    public GameObject updownBullet; //위아래 총알
+    public EmissionIntensityController emissionController;
+    [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
+    public Rigidbody PatternBullet; //8각 총알
+
     private float random;
     private float pastrandom;
-    float timer = 0;
 
-    [SerializeField] Transform[] AttackPosition; //이동 자리(3자리 중 랜덤)
-    public GameObject PatternDoonBullet; //문 분신
-    public Rigidbody PatternBullet; //8각 총알
-    public GameObject updownBullet; //위아래 총알
-
-    public GameObject DownAttackRange; 
-    public GameObject UpdownBulletRange; 
-
-    float speed = 20;
-    int pattern3_random;
-    bool getready; //AttackPosition 이동 자리에 도착함
-    bool isz;
-    bool ispattern;
-    bool bullettime;
+    bool onetime;
     bool spawnone;
+    bool BossStartDelay;
 
-    //패턴 2 공격
-    [SerializeField] float SetY;
-    [SerializeField] float upspeed; //올라가는 속도
-    [SerializeField] float downspeed; //내려가는 속도
-    [SerializeField] float chasespeed4;
-    bool isdown;
-    bool Upready;
-    bool bullettime2;
-    bool Pattern2Start;
-    bool stop;
-    bool readytogetpodition;
-
-    [SerializeField] float pattern3Max_Z;
     Vector3 ReturnPosition; //돌아가는 위치
 
     protected override void Start()
     {
-        base.Start();
-        onetime = false;
-        targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-        //DoorColor = gameObject.GetComponent<Renderer>();
         emissionController = GetComponent<EmissionIntensityController>();
 
+        base.Start();
+        StartCoroutine(attackstart()); //몬스터 최초 대기 시간
+        onetime = false;
+        targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
         ReturnPosition = transform.position; //기존 위치
 
-        stop = false;
-        readytogetpodition = false;
         BossStart();
-        emissionController.setbasecolor(0);
-        emissionController.EmssionMaxMin();
-
     }
 
     protected override void BossStart()
@@ -89,149 +57,44 @@ public class Monster_Door : Boss
 
     void Update()
     {
-        if(isBossStart)
+        if (BossStartDelay && isBossStart && player.HP >= 0 && !isDie)
         {
-            if (player.HP >= 0 && !isDie)
+            NotDamaged();
+            DieMonster();
+
+            if (!onetime)
             {
-                NotDamaged();
-                DieMonster();
+                random = UnityEngine.Random.Range(0, 4);
 
-
-                timer += Time.deltaTime;
-
-                if (timer >= cooltime) //쿨 타임 후에 랜덤 스킬
+                if (random == pastrandom)
                 {
-
-                    timer = 0;
-                    onetime = false;
-                }
-
-
-                //몬스터 패턴 시작 + 쿨 타임 주기마다 재사용을 위한 초기화 역할
-                if (!onetime)
-                {
-                    random = UnityEngine.Random.Range(0, 4);
-
-                    if (random == pastrandom)
+                    if (random >= 3)
                     {
-                        if (random >= 3)
-                        {
-                            random += -1;
-                            BossAttack(random);
-                            pastrandom = random;
-                        }
-                        else // 0 1 2
-                        {
-                            random += 1;
-                            BossAttack(random);
-                            pastrandom = random;
-                        }
-                    }
-                    else
-                    {
+                        random += -1;
                         BossAttack(random);
                         pastrandom = random;
                     }
-
-                    StartCoroutine("ColorChangeBack"); //$ 1 2 패턴에 필요 //색깔 초기화
-                    onetime = true;
-                }
-
-
-                if (ispattern)//보스 옆으로 공격 패턴 Update에서 돌아야되는 조건 패턴 3
-                {
-                    StartCoroutine(rightattack());
-                }
-                else
-                {
-                    //초기화
-                    StopCoroutine(rightattack());
-                    pattern3_random = UnityEngine.Random.Range(0, 3); // 0 1 2 
-                    getready = false;
-                    isz = false;//
-                    spawnone = false;
-                }
-       
-                //Update에서 돌아야되는 패턴 2 내려찍기
-                if (Pattern2Start)
-                {
-                    if (transform.position.y < SetY)
+                    else // 0 1 2
                     {
-                        if (!stop)
-                        {
-                            Upready = true;
-                            transform.Translate(0, Time.deltaTime * upspeed, 0);
-                        }
-                    }
-
-                    if (Upready) //플레이어 위치 찾음
-                    {
-                        Vector3 spawn = targetTransform.position;
-                        spawn.y = SetY;
-
-
-                        if (!isdown)
-                        {
-                            transform.position = Vector3.MoveTowards(gameObject.transform.position, spawn, chasespeed4 * Time.deltaTime);
-                        }
-
-                        //n 초후 내려찍음
-                        StartCoroutine("downattack");
-
-                    }
-                        //DownAttackRange
-                    if (readytogetpodition)
-                    {
-                        transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, chasespeed4 * Time.deltaTime);
-
-                        if (transform.position == ReturnPosition)
-                        {
-                            Pattern2Start = false;
-                        }
+                        random += 1;
+                        BossAttack(random);
+                        pastrandom = random;
                     }
                 }
                 else
                 {
-                    StopCoroutine("downattack");
-                    targetTransform = GameObject.FindWithTag("Main_gangrim").transform;
-                    stop = false;//
-                    readytogetpodition = false;
-                    Upready = false;
-                    isdown = false;//
-                                   //bullettime = false;//혹시 버그나면 주석해제
+                    BossAttack(random);
+                    pastrandom = random;
                 }
 
+                onetime = true;
             }
+
         }
-        
-    }
-
-    void ColorChange(int i) //몬스터 색깔 변경
-    {
-        //if(i == 1)
-        //{
-        //    if (DoorColor.material.color != Color.magenta)
-        //        DoorColor.material.color = Color.magenta;
-        //    else
-        //        DoorColor.material.color = Color.white;
-        //}
-        //else if(i ==2)
-        //{
-        //    if (DoorColor.material.color != Color.black)
-        //        DoorColor.material.color = Color.black;
-        //    else
-        //        DoorColor.material.color = Color.white;
-        //}
-        //else
-        //{
-        //    DoorColor.material.color = Color.white;
-        //}
-
     }
 
     void BossAttack(float random) //보스 랜덤 공격
     {
-
         if (random == 0)
             bosspattern = BossPattern.Pattern_0;
         else if (random == 1)
@@ -245,103 +108,162 @@ public class Monster_Door : Boss
         switch (bosspattern) //초기화
         {
             case BossPattern.Pattern_0: //몬스터 생성
-                ColorChange(1);
                 monsterspawn();
 
                 break;
             case BossPattern.Pattern_1: //바닥 장판 생성
-                ColorChange(1);
                 FloorAttack();
 
                 break;
             case BossPattern.Pattern_2: //내려찍기
-                Pattern2Start = true;
-
+                StartCoroutine(downattack());
                 break;
 
             case BossPattern.Pattern_3: //옆으로 밀기
-                ispattern = true;
+                StartCoroutine(rightattack());
 
                 break;
 
             default:
-                Debug.Log("default.. is");
                 break;
-
         }
 
     }
 
     void monsterspawn()
     {
+        StartCoroutine(spawntime());
+    }
+
+    IEnumerator spawntime()
+    {
+        emissionController.selectcolor(255, 0, 0);
+        emissionController.EmssionMaxMin();
+
+        yield return new WaitForSeconds(1f);
+
+        onetime = true;
         float spawnrandom;
         int i = 0;
 
         spawnrandom = Random.Range(1, 4); //1 2 3
 
-        while(i < spawnrandom)
+        Vector3 spawn = transform.position;
+        spawn.x = transform.position.x + 2f;
+        spawn.y = transform.position.y;
+        GameObject monsterspawns = Instantiate(SpawnMonstersRange, spawn, transform.rotation);
+
+        yield return new WaitForSeconds(1f);
+
+        while (i < spawnrandom)
         {
-            StartCoroutine(spawntime(i));
+            spawn.y = transform.position.y;
+            spawn.x = transform.position.x + 2f;
+
+            GameObject Spawnmonster = Instantiate(SpawnMonsters, spawn, transform.rotation);
             i++;
+            yield return new WaitForSeconds(1f);
         }
+
+        Destroy(monsterspawns);
+        yield return new WaitForSeconds(4f);
+
+        onetime = false;
     }
 
     void FloorAttack() //장판 공격
     {
-        FloorAattackObj.SetActive(true);
+        StartCoroutine(FloorBullet());
     }
 
     bool downrange = false;
     GameObject rangeObject;
-    //코루틴
+
+    IEnumerator FloorBullet() {
+        emissionController.selectcolor(5, 255, 0);
+        emissionController.EmssionMaxMin();
+
+        yield return new WaitForSeconds(1f);
+
+        onetime = true;
+        FloorAattackObj.SetActive(true);
+        yield return new WaitForSeconds(9f);
+        FloorAattackObj.SetActive(false); 
+        onetime = false;
+    }
+
+
     IEnumerator downattack() //패턴 2 내려 찍기 패턴
     {
+        emissionController.selectcolor(0, 97, 191);
+        emissionController.EmssionMaxMin();
 
-        Vector3 rangemoveDirection = targetTransform.position;
-        rangemoveDirection.y = targetTransform.position.y;
+        yield return new WaitForSeconds(1f);
 
-        if (!isdown  && !downrange)
+        onetime = true;
+  
+        while(transform.position.y < 8) //최대 높이
         {
-            downrange = true;
-            rangeObject = Instantiate(DownAttackRange, rangemoveDirection, Quaternion.identity);
+            transform.Translate(0, Time.deltaTime * 5f, 0); //upspeed
+            yield return null;
         }
 
-        if (rangeObject != null)
+        yield return new WaitForSeconds(0.6f);
+
+        float elapsedTime = 0f;
+        rangeObject = Instantiate(DownAttackRange, targetTransform.position, Quaternion.identity);
+
+        while (elapsedTime < 3f) //플레이어 쫒아오는 시간
         {
+            Vector3 spawn = targetTransform.position;
+            spawn.y = transform.position.y;
+
+            Vector3 rangemoveDirection = targetTransform.position;
+            rangemoveDirection.y = targetTransform.position.y;
+
             rangeObject.transform.position = rangemoveDirection;
-            Destroy(rangeObject, 3f);
+            transform.position = Vector3.MoveTowards(transform.position, spawn, 5f * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        Destroy(rangeObject);
+
+        yield return new WaitForSeconds(0.8f);
+
+        while (transform.position.y > ReturnPosition.y)
+        {
+            Vector3 rangemoveDirection = transform.position;
+            rangemoveDirection.y = ReturnPosition.y;
+
+            transform.position = Vector3.MoveTowards(transform.position, rangemoveDirection, 30f * Time.deltaTime); 
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        for(int i =0; i < 4; i++)
+        {
+            StartCoroutine(downattackBullet()); //8방향 아래 발사 코루틴
+
+            yield return new WaitForSeconds(0.5f);
         }
 
         yield return new WaitForSeconds(3f);
-        downrange = false;
-        isdown = true;
 
-        if (transform.position.y >= MonsterYPosition)
+
+        while (Vector3.Distance(transform.position, ReturnPosition) > 0.01f) //return transpos
         {
+            transform.position = Vector3.MoveTowards(transform.position, ReturnPosition, Time.deltaTime * 10f);
 
-            if (!stop)
-            {
-                transform.Translate(0, -Time.deltaTime * downspeed, 0);
-            }
-
+            yield return null;
         }
-        else
-        {
-            stop = true;
 
-            if (!bullettime2 && !readytogetpodition)
-            {
-                bullettime2 = true;
-                StartCoroutine(BulletTime_()); //8방향 아래 발사 코루틴
-            }
-
-            yield return new WaitForSeconds(3f);
-            readytogetpodition = true;
-
-        }
+        yield return new WaitForSeconds(3f);
+        onetime = false;
     }
 
-    IEnumerator BulletTime_()
+    IEnumerator downattackBullet()
     {
         yield return new WaitForSeconds(0.5f);
 
@@ -362,118 +284,101 @@ public class Monster_Door : Boss
             Rigidbody bullet = Instantiate(PatternBullet, transform.position, Quaternion.LookRotation(directions[i] * 90));
             bullet.velocity = bullet.transform.forward * 10;
         }
-
-        bullettime2 = false;
     }
 
-    IEnumerator rightattack() //패턴3
+
+
+    IEnumerator rightattack() //패턴3 분신소환
     {
-        Vector3 trans_3 = AttackPosition[pattern3_random].position; //랜덤 넣고
+        emissionController.selectcolor(132, 0, 181);
+        emissionController.EmssionMaxMin();
 
-        if (transform.position != trans_3 && !getready)
+        yield return new WaitForSeconds(1f);
+
+        onetime = true;
+
+        int pattern3_random = UnityEngine.Random.Range(0, AttackPosition.Length);
+        Vector3 targetPosition = AttackPosition[pattern3_random].position;
+        float speed = 10f;
+
+        while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
-            transform.position = Vector3.MoveTowards(gameObject.transform.position, trans_3, Time.deltaTime * speed);
-            isz = false;
-
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+            yield return null; // 한 프레임 대기
         }
-        else
+
+        yield return new WaitForSeconds(2f);
+
+        switch (pattern3_random)
         {
-            getready = true;
-            yield return new WaitForSeconds(1f);
-
-            if (transform.position.z <= pattern3Max_Z && !isz && getready) //x 축 좌표
-            {
-                transform.Translate(-1 * speed * Time.deltaTime, 0, 0); //돌아가 있는데 축 때문에 -1이동
-
-                if (!bullettime)
+            case 0:
+                if (!spawnone)
                 {
-                    bullettime = true;
-                    StartCoroutine(Pattern3BulletTime_()); //총알 위 아래 발사 코루틴
+                    spawnone = true;
+                    GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[1].position, transform.rotation);
+                    GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[2].position, transform.rotation);
                 }
-            }
-            else //원래 자리로 돌아감
-            {
-                Debug.Log("Back");
-                StopCoroutine(Pattern3BulletTime_());
-                isz = true;
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, ReturnPosition, Time.deltaTime * speed / 2 * 5);
-                ispattern = false; //패턴 초기화
-            }
+                break;
+            case 1:
+                if (!spawnone)
+                {
+                    spawnone = true;
+                    GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[0].position, transform.rotation);
+                    GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[2].position, transform.rotation);
+
+                }
+                break;
+            case 2:
+                if (!spawnone)
+                {
+                    spawnone = true;
+                    GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[0].position, transform.rotation);
+                    GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[1].position, transform.rotation);
+                }
+                break;
+            default:
+                break;
         }
 
-        if (getready)
+        float bulletTime = 0;
+        float elapsedTime = 0;
+
+        while (elapsedTime < 4f)
         {
-            switch (pattern3_random)
+            transform.Translate(-1 * speed * Time.deltaTime, 0, 0); //돌아가 있는데 축 때문에 -1이동
+
+            bulletTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime;
+
+            if (bulletTime > 1f)
             {
-
-                case 0:
-                    if (!spawnone)
-                    {
-                        spawnone = true;
-                        GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[1].position, transform.rotation);
-                        GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[2].position, transform.rotation);
-                    }
-
-                    break;
-                case 1:
-
-                    if (!spawnone)
-                    {
-                        spawnone = true;
-                        GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[0].position, transform.rotation);
-                        GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[2].position, transform.rotation);
-
-                    }
-
-                    break;
-                case 2:
-
-                    if (!spawnone)
-                    {
-                        spawnone = true;
-                        GameObject bullet = Instantiate(PatternDoonBullet, AttackPosition[0].position, transform.rotation);
-                        GameObject bullet2 = Instantiate(PatternDoonBullet, AttackPosition[1].position, transform.rotation);
-                    }
-                    break;
-
-                default:
-
-                    break;
+                GameObject bullet = Instantiate(updownBullet, transform.position, transform.rotation);
+                bulletTime = 0;
             }
+
+            yield return null;
         }
 
+        yield return new WaitForSeconds(1f);
+
+        while (Vector3.Distance(transform.position, ReturnPosition) > 0.01f)
+        {
+
+            transform.position = Vector3.MoveTowards(transform.position, ReturnPosition, Time.deltaTime * speed);
+
+            yield return null; // 한 프레임 대기
+        }
+
+        yield return new WaitForSeconds(2f);
+        spawnone = false;
+        onetime = false;
     }
 
-    IEnumerator Pattern3BulletTime_() //패턴 3 총알 위아래
+
+    private IEnumerator attackstart()
     {
-        //yield return new WaitForSeconds(0.5f);
-        Vector3 sety = transform.position;
-        sety.y = transform.position.y + 0;
-        yield return new WaitForSeconds(0.1f);
-        GameObject bullet = Instantiate(updownBullet, sety, transform.rotation);
-
-        yield return new WaitForSeconds(0.5f);
-
-        bullettime = false;
+        yield return new WaitForSeconds(3f);
+        BossStartDelay = true;
     }
-
-    IEnumerator spawntime(int i)
-    {
-        yield return new WaitForSeconds(i);
-        Vector3 spawn = transform.position;
-        spawn.y = transform.position.y;
-        //spawn.z = transform.position.z + 5f;
-        spawn.x = transform.position.x + 5f;
-
-        GameObject monsterspawns = Instantiate(SpawnMonsters, spawn, transform.rotation);
-    }
-
-    IEnumerator ColorChangeBack()
-    {
-        yield return new WaitForSeconds(cooltime / 1.5f);
-        ColorChange(0); //초기화
-    }
-
-
 
 }

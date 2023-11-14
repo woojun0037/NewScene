@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffe5ee54f6540041812928c53372583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorBulletDamage: 5
+  floorBulletDamage: 10
 --- !u!135 &357907847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2728,7 +2728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483603748}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: 2, z: -18}
+  m_LocalPosition: {x: -3, y: 2, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6010,6 +6010,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1789979014, guid: 1ca43028d6920654bbb9aa6235308bc9, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1230707262435450062, guid: 1ca43028d6920654bbb9aa6235308bc9, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5194966681787493129, guid: 3b6fa4ab999640c4f98695a8398b361d, type: 3}
     - target: {fileID: 2790967507932566379, guid: 1ca43028d6920654bbb9aa6235308bc9, type: 3}
       propertyPath: m_RootOrder
       value: 39
@@ -6060,7 +6068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3310236460846287313, guid: 1ca43028d6920654bbb9aa6235308bc9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ca43028d6920654bbb9aa6235308bc9, type: 3}
@@ -11081,6 +11089,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1506955672957982368, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -4728887496425296429, guid: 65baf5604973e404abc7ffc73b8f0731, type: 3}
     - target: {fileID: 2541740643599030533, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
       propertyPath: m_RootOrder
       value: 40
@@ -11128,6 +11140,30 @@ PrefabInstance:
     - target: {fileID: 2886177386453582783, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
       propertyPath: m_Name
       value: hp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412734327216812, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_Radius
+      value: 0.537079
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412734327216812, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_Center.x
+      value: 0.073606215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412734327216812, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_Center.y
+      value: -0.00035634846
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412734327216812, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_Center.z
+      value: 0.20264068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412734836980226, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444412735706348767, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 292de70f66e83a747b1697d5f00bd261, type: 3}
@@ -12352,7 +12388,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748109213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18, y: 2, z: -18}
+  m_LocalPosition: {x: 15, y: 2, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12541,7 +12577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792581242}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.5, y: 2, z: -18}
+  m_LocalPosition: {x: 6, y: 2, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -111465,9 +111501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430a8046fce2814ca3751730437980f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   HPbar: {fileID: 0}
-  maxHealth: 100
-  currentHealth: 100
 --- !u!4 &3168150987624846565
 Transform:
   m_ObjectHideFlags: 0
@@ -112066,6 +112101,7 @@ MonoBehaviour:
   isTafoon: 0
   damage: 5
   HP: 100
+  currentHp: 0
   rotateSpeed: 5
   MoveSpeed: 5
   BackStep: 2
@@ -118867,11 +118903,11 @@ MonoBehaviour:
   CriticalCount: 0
   maxHearth: 80
   curHearth: 80
+  afterCurHearth: 0
   MaxDistance: 10
   chasespeed: 10
   hpImage: {fileID: 1768257174}
   canvas: {fileID: 619356524}
-  camera: {fileID: 0}
   DebuffCheck: 0
   StartAttack: 0
   getTouch: 0
@@ -118882,26 +118918,19 @@ MonoBehaviour:
   skillHitEffect: {fileID: 4601717381511449403, guid: 690fbc686bc950c479355fab29da9d37, type: 3}
   isBossStart: 0
   bossHP_Dot: {fileID: 1085864234}
-  SpawnMonsters: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
-  FloorAattackObj: {fileID: 357907845}
   bosspattern: 0
-  onetime: 1
-  cooltime: 10
-  MonsterYPosition: 2
+  SpawnMonsters: {fileID: 7028113343770036532, guid: 3bf0e867b79a1c2458c1f0ed38798172, type: 3}
+  SpawnMonstersRange: {fileID: 1191660409249651786, guid: 4b98e29d3717cab45bdeadb2311b1453, type: 3}
+  FloorAattackObj: {fileID: 357907845}
+  PatternDoonBullet: {fileID: 5825728683406470607, guid: d73037becfbfc5b42ae7575a0d3189e5, type: 3}
+  DownAttackRange: {fileID: 6624399385603312643, guid: 63e9d73b558e07d45bf0903abfa56639, type: 3}
+  updownBullet: {fileID: 1889790873879617779, guid: c9d642b9708bf5c408d2ac0206cec30b, type: 3}
+  emissionController: {fileID: 0}
   AttackPosition:
   - {fileID: 483603749}
   - {fileID: 1792581243}
   - {fileID: 1748109214}
-  PatternDoonBullet: {fileID: 5825728683406470607, guid: d73037becfbfc5b42ae7575a0d3189e5, type: 3}
   PatternBullet: {fileID: 7706819983224470255, guid: 852f864e4f0b5854aa55efbf6b203c10, type: 3}
-  updownBullet: {fileID: 1889790873879617779, guid: c9d642b9708bf5c408d2ac0206cec30b, type: 3}
-  DownAttackRange: {fileID: 6624399385603312643, guid: 63e9d73b558e07d45bf0903abfa56639, type: 3}
-  UpdownBulletRange: {fileID: 0}
-  SetY: 10
-  upspeed: 5
-  downspeed: 30
-  chasespeed4: 10
-  pattern3Max_Z: -10
 --- !u!4 &6235821703660715499
 Transform:
   m_ObjectHideFlags: 0
@@ -119151,6 +119180,7 @@ GameObject:
   - component: {fileID: 1839452484}
   - component: {fileID: 7369841004337213272}
   - component: {fileID: 7369841004337213273}
+  - component: {fileID: 7369841004337213274}
   m_Layer: 0
   m_Name: Boss_door
   m_TagString: Monster
@@ -130594,6 +130624,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &7369841004337213274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6531033516885408328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31aed6c60927fd94d9a0ca468e4a4400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderer: {fileID: 4729369021071252381}
+  baseColor: {r: 1, g: 0, b: 0, a: 0}
+  minIntensity: 0
+  maxIntensity: 30
+  duration: 0.8
 --- !u!4 &7386333731037814628
 Transform:
   m_ObjectHideFlags: 0
