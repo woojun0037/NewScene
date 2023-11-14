@@ -269,7 +269,7 @@ public class BossMonster_Tiger : Boss
         //±¸½½
         emissionController.selectcolor(255, 255, 0);
         emissionController.EmssionMaxMin();
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(1.2f);
 
         anim.SetTrigger("SlashAttack");
 
