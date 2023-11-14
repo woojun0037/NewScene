@@ -125,11 +125,13 @@ public class GangrimSkillUi : MonoBehaviour
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0;
             }
             else
             {
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1;
             }
             option.SetActive(isOption);
         }
@@ -215,17 +217,22 @@ public class GangrimSkillUi : MonoBehaviour
     {
         if (Input.GetKey(HP_itemKey) && HPitemOn)
         {
+            HP_item.SetActive(false);
             StartCoroutine(HPitemCor());
         }
 
         if (Input.GetKey(Respwan_ItemKey) && RESPWAN_itemOn)
         {
+            curHp.HPbar.fillAmount = 1;
+            main.currentHp = main.HP;
+
             player.gameObject.SetActive(true);
             RESPWAN_item.SetActive(false);
         }
 
         if (Input.GetKey(DarkPillItem__itemkey) && DarkPillItemOn)
         {
+            DARKPILL_item.SetActive(false);
             StartCoroutine(DarkPillCor());
         }
     }
@@ -245,7 +252,6 @@ public class GangrimSkillUi : MonoBehaviour
         main.HP = curHp.player.currentHp;
         Debug.Log("체력 회복" + curHp.player.currentHp);
         HPitemOn = false;
-        HP_item.SetActive(false);
     }
 
     IEnumerator DarkPillCor()

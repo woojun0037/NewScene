@@ -12,6 +12,7 @@ public class Main_Player : MonoBehaviour
     [SerializeField] Collider HitBox;
     [SerializeField] Collider TafoonBox;
     [SerializeField] GameObject currentATKEffect;
+
     public HealthManager heal;
     public HitScript hit;
     public Animator Anim;
@@ -173,10 +174,19 @@ public class Main_Player : MonoBehaviour
     {
         if (currentHp < 1)
         {
-            string Dead = "Dead";
-            Anim.SetTrigger(Dead);
-            this.gameObject.SetActive(false);
+            StartCoroutine(DeadCor());
         }
+    }
+
+    IEnumerator DeadCor()
+    {
+        string Dead = "Dead";
+        Anim.SetTrigger(Dead);
+        yield return new WaitForSeconds(0.01f);
+        float curAnimationTime = Anim.GetCurrentAnimatorStateInfo(0).length;
+
+        yield return new WaitForSeconds(curAnimationTime);
+        this.gameObject.SetActive(false);
     }
 
     public void ATK_Effect_On(int on_count)

@@ -26,6 +26,4 @@ public static class UtillScript
 
         return temp;
     }
-
-
 }
