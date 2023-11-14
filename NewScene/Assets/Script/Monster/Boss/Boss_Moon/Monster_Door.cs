@@ -187,7 +187,7 @@ public class Monster_Door : Boss
 
         onetime = true;
         FloorAattackObj.SetActive(true);
-        yield return new WaitForSeconds(9f);
+        yield return new WaitForSeconds(8f);
         FloorAattackObj.SetActive(false); 
         onetime = false;
     }
@@ -222,14 +222,14 @@ public class Monster_Door : Boss
             rangemoveDirection.y = targetTransform.position.y;
 
             rangeObject.transform.position = rangemoveDirection;
-            transform.position = Vector3.MoveTowards(transform.position, spawn, 5f * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, spawn, 10f * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
         Destroy(rangeObject);
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.7f);
 
         while (transform.position.y > ReturnPosition.y)
         {
@@ -303,7 +303,7 @@ public class Monster_Door : Boss
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * speed * 1.5f);
             yield return null; // 한 프레임 대기
         }
 
@@ -364,7 +364,7 @@ public class Monster_Door : Boss
         while (Vector3.Distance(transform.position, ReturnPosition) > 0.01f)
         {
 
-            transform.position = Vector3.MoveTowards(transform.position, ReturnPosition, Time.deltaTime * speed);
+            transform.position = Vector3.MoveTowards(transform.position, ReturnPosition, Time.deltaTime * speed * 1.5f);
 
             yield return null; // 한 프레임 대기
         }

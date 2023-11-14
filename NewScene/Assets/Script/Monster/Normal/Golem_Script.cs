@@ -7,6 +7,7 @@ public class Golem_Script : Enemy
     public GameObject RockBullet;
     public GameObject GolemObj;
     public GameObject attack_body;
+    public GameObject rockrange;
 
     [SerializeField] float attackDelaytime;
     [SerializeField] bool miniGolem;
@@ -203,6 +204,8 @@ public class Golem_Script : Enemy
     IEnumerator skillerattacker()
     {
 
+         
+
         animator.SetBool("SkillAttack", true);
         getTouch = false; //공격
         DontMove = true;
@@ -215,6 +218,11 @@ public class Golem_Script : Enemy
         skillAttackPosition.y = targetPosition.y;
         RockBullet.transform.position = skillAttackPosition;
 
+        GameObject rangeObject = Instantiate(rockrange, skillAttackPosition, Quaternion.identity);
+
+        Destroy(rangeObject, 1f);
+        yield return new WaitForSeconds(1f); //스킬
+
         yield return new WaitForSeconds(0.5f); //스킬
 
         RockBullet.SetActive(true);
@@ -222,7 +230,7 @@ public class Golem_Script : Enemy
         animator.SetBool("SkillAttack", false);
 
         //공격 종료
-        yield return new WaitForSeconds(attackDelaytime);
+        yield return new WaitForSeconds(3f);
         RockBullet.SetActive(false);
 
         getTouch = true;

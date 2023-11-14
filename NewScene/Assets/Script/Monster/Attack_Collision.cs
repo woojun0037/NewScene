@@ -21,7 +21,6 @@ public class Attack_Collision : MonoBehaviour
     {
         if (other.gameObject.tag == "Main_gangrim")
         {
-            Debug.Log("OnTriggerStay");
             if (!isCollision)
                 damage();
         }
@@ -31,7 +30,6 @@ public class Attack_Collision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {
-            Debug.Log("OnCollisionStay");
             if (!isCollision)
                 damage();
         }
@@ -44,12 +42,11 @@ public class Attack_Collision : MonoBehaviour
 
     IEnumerator PlayerAttackTime()
     {
-        Debug.Log("PlayerAttackTime");
         isCollision = true;
 
         FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         isCollision = false;
     }
 

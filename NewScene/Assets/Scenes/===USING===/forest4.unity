@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffe5ee54f6540041812928c53372583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorBulletDamage: 10
+  floorBulletDamage: 5
 --- !u!135 &357907847
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -122156,6 +122156,7 @@ MonoBehaviour:
   rightDot: {fileID: 6637187687976165720}
   dashHide: {fileID: 6637187686646580669}
   option: {fileID: 6637187688022702355}
+  MouseOptionDetail: {fileID: 0}
   skillKey: {fileID: 6637187686384692162}
   uiImages:
   - {fileID: 6637187687748290110}
