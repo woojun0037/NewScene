@@ -5,19 +5,25 @@ using UnityEngine;
 public class Attack_Collision : MonoBehaviour
 {
     public float GetDamaged = 1;
-    public Collider objectCollider;
-
+    bool isCollision;
 
     private void Start()
     {
-        objectCollider = GetComponent<Collider>();
+        isCollision = false;
+    }
+
+    void OnEnable()
+    {
+        isCollision = false;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Main_gangrim")
         {
-            FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
+            Debug.Log("OnTriggerStay");
+            if (!isCollision)
+                damage();
         }
     }
 
@@ -25,8 +31,26 @@ public class Attack_Collision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Main_gangrim")
         {
-            FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
+            Debug.Log("OnCollisionStay");
+            if (!isCollision)
+                damage();
         }
+    }
+
+    void damage()
+    {
+        StartCoroutine(PlayerAttackTime());
+    }
+
+    IEnumerator PlayerAttackTime()
+    {
+        Debug.Log("PlayerAttackTime");
+        isCollision = true;
+
+        FindObjectOfType<HealthManager>().HurtPlayer(GetDamaged);
+
+        yield return new WaitForSeconds(1f);
+        isCollision = false;
     }
 
 }
