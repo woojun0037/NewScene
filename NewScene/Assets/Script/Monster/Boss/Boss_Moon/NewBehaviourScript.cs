@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class NewBehaviourScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] GameObject canv;
+    [SerializeField] GameObject minMap;
+
     void Start()
     {
-        
+        minMap = GameObject.Find("MiniMap");
+        canv = GameObject.Find("Canvas");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void On()
     {
-        
+        minMap.SetActive(true);
+        canv.SetActive(true);
+    }
+
+    public void Off()
+    {
+        minMap.SetActive(false);
+        canv.SetActive(false);
     }
 }
