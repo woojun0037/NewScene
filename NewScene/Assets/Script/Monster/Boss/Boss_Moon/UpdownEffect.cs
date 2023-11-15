@@ -19,7 +19,7 @@ public class UpdownEffect : MonoBehaviour
     IEnumerator ProcessCollision()
     {
         canCollide = false;
-        FindObjectOfType<HealthManager>().HurtPlayer(3);
+        FindObjectOfType<HealthManager>().HurtPlayer(5);
 
         // 일정 시간 대기
         yield return new WaitForSeconds(1f);

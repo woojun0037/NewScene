@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class CheatScript : MonoBehaviour
 {
     public static CheatScript instance;
-    [SerializeField]GameObject Gangrim;
-    [SerializeField]public Image HP;
-    Main_Player player;
+    [SerializeField] GameObject Gangrim;
+    [SerializeField] public Image HP;
+    public Main_Player player;
     public HitScript hit;
 
     private void Awake()
@@ -23,7 +23,6 @@ public class CheatScript : MonoBehaviour
             Destroy(this.gameObject);
         }
         Gangrim = GameObject.Find("Main_gangrim2");
-        player = GetComponent<Main_Player>();
     }
 
     void Update()
@@ -44,7 +43,7 @@ public class CheatScript : MonoBehaviour
             player.currentHp = player.HP;
             Gangrim.gameObject.SetActive(true);
         }
-        if(Input.GetKeyDown(KeyCode.Keypad2))
+        if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             hit.damage = 100f;
         }

@@ -14,7 +14,7 @@ public class UIDisable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemy.curHearth < 1)
+        if (ui != null && enemy.curHearth < 1)
         {
             ui.SetActive(false);
         }

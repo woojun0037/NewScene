@@ -23,10 +23,17 @@ public class BossMonster_Tiger : Boss
     private Vector3 tempPos;
     private bool isAttack;
     private bool isMove;
-    private bool isDash;
+    //private bool isDash;
+    private bool StartDist = false;
 
     public GameObject StoneDoor;
     public GameObject NextStage;
+    public EmissionIntensityController emissionController;
+
+    public GameObject effectAttack;
+
+    private float random;
+    private float currentrandom;
 
     protected override void Awake()
     {
@@ -34,6 +41,9 @@ public class BossMonster_Tiger : Boss
     }
     protected override void Start()
     {
+        emissionController = GetComponent<EmissionIntensityController>();
+
+
         player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
         BossStart();
     }
@@ -59,6 +69,7 @@ public class BossMonster_Tiger : Boss
 
             if (Vector3.Distance(targetPos, transform.position) < attackRange) //보스와 캐릭터의 거리가 attackRange 보다 작고 공격중이 아닐 때
             {
+                StartDist = true;
                 if (Vector3.Distance(targetPos, transform.position) < attackRange / 2)
                 {
                     if (!isAttack)
@@ -83,6 +94,13 @@ public class BossMonster_Tiger : Boss
                 }
 
             }
+            else
+            {
+                if (!isAttack && StartDist)
+                {
+                    isMove = true;
+                }
+            }
 
             if (Vector3.Distance(targetPos, transform.position) < 3) //멈춤
             {
@@ -105,18 +123,18 @@ public class BossMonster_Tiger : Boss
                 Move();
             }
 
-            if (isAttack)
-            {
-                if (attackCoolTime >= 0)
-                {
-                    attackCoolTime -= Time.deltaTime;
-                }
-                else
-                {
-                    isAttack = false;
-                    attackCoolTime = 5f;
-                }
-            }
+            //if (isAttack)
+            //{
+            //    if (attackCoolTime >= 0)
+            //    {
+            //        attackCoolTime -= Time.deltaTime;
+            //    }
+            //    else
+            //    {
+            //        isAttack = false;
+            //        attackCoolTime = 5f;
+            //    }
+            //}
 
         }
         else
@@ -125,14 +143,14 @@ public class BossMonster_Tiger : Boss
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Main_gangrim" && isDash)
-        {
-            isDash = false;
-            player.GetDamage(dashAttackDamage);
-        }
-    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Main_gangrim" && isDash)
+    //    {
+    //        isDash = false;
+    //        player.GetDamage(dashAttackDamage);
+    //    }
+    //}
     protected override void DieMonster()
     {
         if (curHearth < 1)
@@ -148,127 +166,157 @@ public class BossMonster_Tiger : Boss
     {
         Vector3 dir = targetPos - transform.position;
         transform.forward = dir;
-        transform.position += dir * Time.deltaTime * moveSpeed;
+        transform.position += new Vector3(dir.x, 0f, dir.z) * Time.deltaTime * moveSpeed;
     }
 
     private void AttackChoice()
     {
         isMove = false;
-        int rand = Random.Range(0, 3);
-        if (rand == 0)
+        random = Random.Range(0, 3);//012
+
+        if (random == currentrandom)
+        {
+            if (random < 2)
+                random++;
+            else
+                random--;
+        }
+
+        currentrandom = random;
+
+        if (currentrandom == 0)
             JumpAttack();
-        else if (rand == 1)
+        else if (currentrandom == 1)
             StartCoroutine(DashAndDash());
-        else if (rand == 2)
+        else if (currentrandom == 2)
             SlashAttack();
     }
 
     private void CloseAttackChoice()
     {
         isMove = false;
-        int rand = Random.Range(0, 3);
-        if (rand == 0)
-            BaseAttack();
-        else if (rand == 1)
+
+        random = Random.Range(0, 4);//0123
+
+        if (random == currentrandom)
+        {
+            if (random < 3)
+                random++;
+            else
+                random--;
+        }
+
+        currentrandom = random;
+
+
+        if (currentrandom == 0)
             JumpAttack();
-        else if (rand == 2)
+        else if (currentrandom == 1)
+            StartCoroutine(DashAndDash());
+        else if (currentrandom == 2)
             SlashAttack();
+        else if (currentrandom == 3)
+            BaseAttack();
     }
 
 
     private void BaseAttack()
     {
         isMove = false;
-        player.GetDamage(baseAttackDamage);
         StartCoroutine(BaseAttackCor());
-        anim.SetTrigger("BaseAttack");
     }
 
     private void SlashAttack()
     {
         StartCoroutine(SlashAttackCor());
-        anim.SetTrigger("SlashAttack");
-    }
-    private void DashAttack()
-    {
-        isDash = true;
-        StartCoroutine(DashAttackCor());
-        anim.SetTrigger("DashAttack");
     }
 
     private void JumpAttack()
     {
         StartCoroutine(JumpAttackCor());
-        anim.SetTrigger("JumpAttack");
     }
-
-    private void RockAttack()
-    {
-        StartCoroutine(ThrowRockCor());
-        //anim.SetTrigger("ThrowRock");
-    }
-
-    void ThrowRock() //바위 던지기
-    {
-        Vector3 spawn = player.transform.position;
-        spawn.y = transform.position.y;
-        transform.LookAt(spawn); //그 방향 보고 던짐 + 방향 고정
-
-        Vector3 rockpos = transform.position;
-        rockpos.y = transform.position.y +5f;
-        GameObject ThrowRockrigid = Instantiate(throwRockObj, rockpos, transform.rotation);
-    }
-
-    private IEnumerator ThrowRockCor()
-    {
-        isMove = false;
-        for (int i = 0; i < 5; i++)
-        {
-            ThrowRock();
-            yield return new WaitForSeconds(0.7f);
-        }
-        isMove = true;
-    }
-
 
     private IEnumerator DashAndDash()
     {
+        isAttack = true;
+        isMove =false;
+
         for (int i = 0; i < 2; i++)
         {
             DashAttack();
             yield return new WaitForSeconds(1.8f);
-            transform.LookAt(player.transform);
-        }
-        isMove = true;
+            Vector3 targetPosition = player.transform.position;
+            targetPosition.y = transform.position.y;
 
+            transform.LookAt(targetPosition);
+        }
+        yield return new WaitForSeconds(1f);
+        isMove = true;
+        isAttack = false;
     }
+
+    private void DashAttack()
+    {
+        //isDash = true;
+        StartCoroutine(DashAttackCor());
+        anim.SetTrigger("DashAttack");
+    }
+
     private IEnumerator SlashAttackCor()
     {
         isMove = false;
+        isAttack = true;
+        //구슬
+        emissionController.selectcolor(255, 255, 0);
+        emissionController.EmssionMaxMin();
+        yield return new WaitForSeconds(1.2f);
+
+        anim.SetTrigger("SlashAttack");
 
         GameObject spawnSlashObject = Instantiate(SlashObj, transform.position, transform.rotation);
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(4f);
+        isMove = true;
+        isAttack = false;
     }
 
     private IEnumerator BaseAttackCor()
     {
+        isMove = false;
+        isAttack = true;
+        //할퀴기
+        emissionController.selectcolor(0, 252, 255);
+        emissionController.EmssionMaxMin();
+
+        yield return new WaitForSeconds(1f);
+
+        anim.SetTrigger("BaseAttack");
+
         yield return new WaitForSeconds(0.6f);
+        effectAttack.SetActive(true);
         attackcollider.SetActive(true);
         yield return new WaitForSeconds(1f);
+        effectAttack.SetActive(false);
         attackcollider.SetActive(false);
         isMove = true;
+        isAttack = false;
     }
 
     private IEnumerator DashAttackCor()
     {
+        //대쉬
+        emissionController.selectcolor(255, 0, 0);
+        emissionController.EmssionMaxMin();
+
+
         bool isTarget = false;
         float time = 0.3f;
         tempPos = Vector3.zero;
 
         if (!isTarget)
         {
-            tempPos = targetPos;
+            tempPos = new Vector3(targetPos.x, transform.position.y, targetPos.z); 
+
             isTarget = true;
         }
         yield return new WaitForSeconds(0.5f);
@@ -281,30 +329,36 @@ public class BossMonster_Tiger : Boss
         {
             attackcollider.SetActive(true);
             time -= Time.deltaTime;
-            transform.position += dir * Time.deltaTime * 5f;
+            transform.position += new Vector3(dir.x, 0f, dir.z) * Time.deltaTime * 5f; 
             yield return new WaitForFixedUpdate();
         }
 
         yield return new WaitForSeconds(0.5f);
         attackcollider.SetActive(false);
-        //isMove = true;
-        isDash = false;
     }
 
     private IEnumerator JumpAttackCor()
     {
+        isAttack = true;
+        //돌맹이
+        emissionController.selectcolor(0, 0, 255);
+        emissionController.EmssionMaxMin();
+        yield return new WaitForSeconds(0.8f);
+
+        anim.SetTrigger("JumpAttack");
+
         float time = 2f;
         while (time > 0f)
         {
             time -= 0.05f;
             yield return new WaitForSeconds(0.01f);
-            //if (time > 1f)
-            //    transform.position = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-            //else
-            //    transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
+
         }
 
         yield return new WaitForSeconds(2.5f);
+
+        yield return new WaitForSeconds(3f);
+        isAttack = false;
         isMove = true;
     }
 

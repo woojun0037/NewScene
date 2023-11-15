@@ -9,7 +9,11 @@ public class Boss_Asura : Boss
     public GameObject Rock_Wall;
     public GameObject FireRing;
     private Animator anim;
+
     bool isattack;
+
+    float currentrandom;
+    public float randomAttack = 0;
 
     public GameObject RightHandPos;
     public GameObject FireLine;
@@ -28,11 +32,29 @@ public class Boss_Asura : Boss
     // Update is called once per frame
     void Update()
     {
-        if (!isattack)
+        if (curHearth < 1 && !isDie)//보스 사망시
         {
-            int randomAttack = Random.Range(0, 4);
+            isDie = true;
 
-            switch (randomAttack)
+
+        }
+
+        if (player.HP >= 0&& !isattack)
+        {
+            //같은 공격 연속 방지
+             randomAttack = Random.Range(0, 4);
+
+            if (randomAttack == currentrandom)
+            {
+                if (randomAttack < 3)
+                    randomAttack++;
+                else
+                    randomAttack--;
+            }
+
+            currentrandom = randomAttack;
+
+            switch (currentrandom)
             {
                 case 0:
                     Meteo();
@@ -128,38 +150,41 @@ public class Boss_Asura : Boss
         transform.LookAt(spawn);
         GameObject Rock = Instantiate(Rock_Wall, spawn, transform.rotation);
 
-        int numFireRings = 20;
+        //버그 있어서 변경함 Rock_Wall안에서 불꽃링 생성
+        //int numFireRings = 20;
 
-        for (int i = 0; i < numFireRings; i++) //불꽃링 발사
-        {
+        //for (int i = 0; i < numFireRings; i++) //불꽃링 발사
+        //{
 
-            Vector3 spawnpos = RandomFireRingPosition();
-            spawnpos.y = transform.position.y + 3f;
+        //    Vector3 spawnpos = RandomFireRingPosition();
+        //    spawnpos.y = transform.position.y + 3f;
 
-            GameObject FireRing_i = Instantiate(FireRing, spawnpos, transform.rotation);
-            Rigidbody rb = FireRing_i.GetComponent <Rigidbody>();
+        //    GameObject FireRing_i = Instantiate(FireRing, spawnpos, transform.rotation);
+        //    Rigidbody rb = FireRing_i.GetComponent <Rigidbody>();
 
-            float speed = 10f;//속도
+        //    float speed = 10f;//속도
 
-            Vector3 moveDirection = transform.forward * speed;
-            rb.velocity = moveDirection;
+        //    Vector3 moveDirection = transform.forward * speed;
+        //    rb.velocity = moveDirection;
 
-            yield return new WaitForSeconds(1f);
-        }
+        //    yield return new WaitForSeconds(1f);
+        //}
 
-        yield return new WaitForSeconds(4f);
-        Rock.SetActive(false);
+        yield return new WaitForSeconds(10f);
+        //Rock.SetActive(false);
+        Destroy(Rock);
+        yield return new WaitForSeconds(2f);
         isattack = false;
     }
 
-    private Vector3 RandomFireRingPosition() //3가지 위치중 랜덤
-    {
-        float[] positions = new float[] { -5f, 0f, 5f };
-        float x = positions[Random.Range(0, positions.Length)];
+    //private Vector3 RandomFireRingPosition() //3가지 위치중 랜덤
+    //{
+    //    float[] positions = new float[] { -5f, 0f, 5f };
+    //    float x = positions[Random.Range(0, positions.Length)];
 
-        Vector3 spawnpos = transform.position + new Vector3(x, 0, 0);
-        return spawnpos;
-    }
+    //    Vector3 spawnpos = transform.position + new Vector3(x, 0, 0);
+    //    return spawnpos;
+    //}
 
 
     void Punch()
@@ -183,7 +208,7 @@ public class Boss_Asura : Boss
 
         float rotationSpeed = 1.5f;
         float t = 0;
-        while (t < 1)
+        while (t < 1) //플레이어 방향으로 바라봄
         {
             t += Time.deltaTime * rotationSpeed;
             transform.rotation = Quaternion.Slerp(startRotation, rotation, t);

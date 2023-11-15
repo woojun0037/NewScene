@@ -7,6 +7,7 @@ public class Golem_Script : Enemy
     public GameObject RockBullet;
     public GameObject GolemObj;
     public GameObject attack_body;
+    public GameObject rockrange;
 
     [SerializeField] float attackDelaytime;
     [SerializeField] bool miniGolem;
@@ -107,9 +108,10 @@ public class Golem_Script : Enemy
             {
                 if (!isattack && !isskillattack)
                 {
+                    //DontMove = true;
                     timer = 0;
                     transform.LookAt(targety);
-                    isattack = true;
+                    //isattack = true;
                     StartCoroutine("attacker");
                 }
             }
@@ -134,9 +136,13 @@ public class Golem_Script : Enemy
 
     IEnumerator attacker()
     {
+        isattack = true;
         DontMove = true;
+
+        yield return new WaitForSeconds(1f);
+
         animator.SetBool("isAttack", true);
-        yield return new WaitForSeconds(0.85f); //패는 애니 중간
+        yield return new WaitForSeconds(0.75f); //패는 애니 중간
         particle_attack.Play();
         attack_body.SetActive(true);
 
@@ -148,17 +154,57 @@ public class Golem_Script : Enemy
         getTouch = true;
         particle_attack.Stop();
         yield return new WaitForSeconds(attackDelaytime);
-        isattack = false;
+        //isattack = false;
         timer = 0;
-        if (Dist > MaxDistance)
-        {
-            DontMove = false;
-        }
 
+        //if (Dist > MaxDistance)
+        //{
+        //    DontMove = false;
+        //}
+
+        yield return new WaitForSeconds(2f);
+
+        isattack = false;
+        DontMove = false;
     }
+
+    //IEnumerator oldattacker()
+    //{
+
+    //    DontMove = true;
+    //    animator.SetBool("isAttack", true);
+    //    yield return new WaitForSeconds(0.75f); //패는 애니 중간
+    //    particle_attack.Play();
+    //    attack_body.SetActive(true);
+
+    //    getTouch = false;
+    //    animator.SetBool("isAttack", false);
+
+    //    yield return new WaitForSeconds(0.9f); //패는 애니 중간
+    //    attack_body.SetActive(false);
+    //    getTouch = true;
+    //    particle_attack.Stop();
+    //    yield return new WaitForSeconds(attackDelaytime);
+    //    //isattack = false;
+    //    timer = 0;
+
+    //    //if (Dist > MaxDistance)
+    //    //{
+    //    //    DontMove = false;
+    //    //}
+
+    //    yield return new WaitForSeconds(2f);
+
+    //    isattack = false;
+
+    //    DontMove = false;
+    //}
+
 
     IEnumerator skillerattacker()
     {
+
+         
 
         animator.SetBool("SkillAttack", true);
         getTouch = false; //공격
@@ -172,6 +218,11 @@ public class Golem_Script : Enemy
         skillAttackPosition.y = targetPosition.y;
         RockBullet.transform.position = skillAttackPosition;
 
+        GameObject rangeObject = Instantiate(rockrange, skillAttackPosition, Quaternion.identity);
+
+        Destroy(rangeObject, 1f);
+        yield return new WaitForSeconds(1f); //스킬
+
         yield return new WaitForSeconds(0.5f); //스킬
 
         RockBullet.SetActive(true);
@@ -179,7 +230,7 @@ public class Golem_Script : Enemy
         animator.SetBool("SkillAttack", false);
 
         //공격 종료
-        yield return new WaitForSeconds(attackDelaytime);
+        yield return new WaitForSeconds(3f);
         RockBullet.SetActive(false);
 
         getTouch = true;
