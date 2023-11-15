@@ -64,7 +64,7 @@ public class Main_Player : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -96,7 +96,7 @@ public class Main_Player : MonoBehaviour
     public void OffWeapon()
     {
         hit.gameObject.SetActive(false);
-    }   
+    }
 
     public void OnWind()
     {
@@ -155,6 +155,7 @@ public class Main_Player : MonoBehaviour
             string Attack2 = "isAttack_2";
             Anim.SetTrigger(Attack2);
             SoundManager.instance.PlaySE(SoundManager.instance.effectSounds[1].clip);
+
         }
         else if (Input.GetMouseButtonDown(0) && isClicks[0] && isClicks[1] && isClicks[2] && !isAttack)
         {
@@ -164,7 +165,7 @@ public class Main_Player : MonoBehaviour
             Anim.SetTrigger(Attack3);
             SoundManager.instance.PlaySE(SoundManager.instance.effectSounds[2].clip);
         }
-        else if(!isClicks[0] && !isClicks[1] && !isClicks[2])
+        else if (!isClicks[0] && !isClicks[1] && !isClicks[2])
         {
             isAttack = false;
         }
@@ -233,12 +234,12 @@ public class Main_Player : MonoBehaviour
         else
         {
             isMove = false;
-        } 
+        }
     }
 
     public void GetDamage(float damage)
     {
-        Debug.Log("Get Damage" + damage);
+        //Debug.Log("Get Damage" + damage);
     }
 
     private void AnimationBoolCheck()
