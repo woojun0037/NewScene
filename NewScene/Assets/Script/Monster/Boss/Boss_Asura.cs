@@ -19,7 +19,8 @@ public class Boss_Asura : Boss
 
     public GameObject RightHandPos;
     public GameObject FireLine;
-
+    public GameObject PunchAttackCol;
+    public ParticleSystem particlePunchAttack;
 
 
     protected override void Awake()
@@ -49,7 +50,6 @@ public class Boss_Asura : Boss
     // Update is called once per frame
     void Update()
     {
-
         if (player.HP >= 0 && !isattack && !die)
         {
             NotDamaged();
@@ -213,13 +213,23 @@ public class Boss_Asura : Boss
             yield return null;
         }
 
-        yield return new WaitForSeconds(1f); //
+        if (particlePunchAttack != null)
+            particlePunchAttack.Play();
+
+        yield return new WaitForSeconds(1.5f);
 
         anim.SetBool("isPunch", true);
-        yield return new WaitForSeconds(0.1f);//cool
-        anim.SetBool("isPunch", false);
+        yield return new WaitForSeconds(1.1f);//cool
 
-        yield return new WaitForSeconds(4f);//cool
+        PunchAttackCol.SetActive(true);
+
+        anim.SetBool("isPunch", false);
+        yield return new WaitForSeconds(0.1f);//cool
+        PunchAttackCol.SetActive(false);
+
+        yield return new WaitForSeconds(3f);//cool
+        particlePunchAttack.Stop();
+
         isattack = false;
 
     }

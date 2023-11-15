@@ -27,7 +27,7 @@ public class Asura_RockWall : MonoBehaviour
         {
 
             Vector3 spawnpos = RandomFireRingPosition();
-            spawnpos.y = transform.position.y + 2f;
+            spawnpos.y = transform.position.y + 3f;
 
             GameObject FireRing_i = Instantiate(FireRing, spawnpos, transform.rotation);
             Rigidbody rb = FireRing_i.GetComponent<Rigidbody>();
