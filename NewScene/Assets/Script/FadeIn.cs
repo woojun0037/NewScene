@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class FadeIn : MonoBehaviour
 {
     private Image image;
-        
+    
     private void Awake()
     {
         image = GetComponent<Image>();

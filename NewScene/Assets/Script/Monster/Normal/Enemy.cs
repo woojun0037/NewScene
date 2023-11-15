@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float damageToGive;
     [SerializeField] private string Hit1;
     [SerializeField] private string Hit2;
+    [SerializeField] public GameObject BossEffectManager;
 
     public int CriticalCount;
     protected bool isBoss;

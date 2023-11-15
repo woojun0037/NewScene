@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class Boss_Asura : Boss
 {
@@ -49,10 +50,9 @@ public class Boss_Asura : Boss
     void Update()
     {
 
-        if (player.HP >= 0&& !isattack &&!die)
+        if (player.HP >= 0 && !isattack && !die)
         {
             NotDamaged();
-            DieMonster();
 
             //같은 공격 연속 방지
             randomAttack = Random.Range(0, 4);
@@ -83,6 +83,8 @@ public class Boss_Asura : Boss
                     break;
             }
         }
+        DieMonster();
+
     }
 
     private void RotateTowardsTarget(Vector3 targetPosition)
@@ -108,7 +110,7 @@ public class Boss_Asura : Boss
         {
             die = true;
             StopAllCoroutines();
-
+            BossEffectManager.SetActive(true);
         }
     }
 
@@ -173,25 +175,7 @@ public class Boss_Asura : Boss
         transform.LookAt(spawn);
         GameObject Rock = Instantiate(Rock_Wall, spawn, transform.rotation);
 
-        //버그 있어서 변경함 Rock_Wall안에서 불꽃링 생성
-        //int numFireRings = 20;
-
-        //for (int i = 0; i < numFireRings; i++) //불꽃링 발사
-        //{
-
-        //    Vector3 spawnpos = RandomFireRingPosition();
-        //    spawnpos.y = transform.position.y + 3f;
-
-        //    GameObject FireRing_i = Instantiate(FireRing, spawnpos, transform.rotation);
-        //    Rigidbody rb = FireRing_i.GetComponent <Rigidbody>();
-
-        //    float speed = 10f;//속도
-
-        //    Vector3 moveDirection = transform.forward * speed;
-        //    rb.velocity = moveDirection;
-
-        //    yield return new WaitForSeconds(1f);
-        //}
+        
 
         yield return new WaitForSeconds(10f);
         //Rock.SetActive(false);
@@ -200,16 +184,7 @@ public class Boss_Asura : Boss
         isattack = false;
     }
 
-    //private Vector3 RandomFireRingPosition() //3가지 위치중 랜덤
-    //{
-    //    float[] positions = new float[] { -5f, 0f, 5f };
-    //    float x = positions[Random.Range(0, positions.Length)];
-
-    //    Vector3 spawnpos = transform.position + new Vector3(x, 0, 0);
-    //    return spawnpos;
-    //}
-
-
+    
     void Punch()
     {
         StartCoroutine(Punch_Attack());

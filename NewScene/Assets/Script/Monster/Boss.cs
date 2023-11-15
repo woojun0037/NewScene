@@ -9,7 +9,6 @@ public class Boss : Enemy
     public bool isBossStart;
     public DOTweenAnimation bossHP_Dot;
 
-   
     protected override void BossStart()
     {
         bossHP_Dot.DORestartById("start");
