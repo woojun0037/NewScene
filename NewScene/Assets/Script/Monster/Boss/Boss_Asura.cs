@@ -11,12 +11,16 @@ public class Boss_Asura : Boss
     private Animator anim;
 
     bool isattack;
+    bool die;
 
     float currentrandom;
     public float randomAttack = 0;
 
     public GameObject RightHandPos;
     public GameObject FireLine;
+
+
+
     protected override void Awake()
     {
         anim = GetComponent<Animator>();
@@ -24,25 +28,34 @@ public class Boss_Asura : Boss
 
     protected override void Start()
     {
+        base.Start();
+
         StartCoroutine(attackstart());
         player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
         BossStart();
     }
 
+    protected override void BossHit()
+    {
+        base.BossHit();
+    }
+
+    protected override void BossStart()
+    {
+        base.BossStart();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (curHearth < 1 && !isDie)//보스 사망시
+
+        if (player.HP >= 0&& !isattack &&!die)
         {
-            isDie = true;
+            NotDamaged();
+            DieMonster();
 
-
-        }
-
-        if (player.HP >= 0&& !isattack)
-        {
             //같은 공격 연속 방지
-             randomAttack = Random.Range(0, 4);
+            randomAttack = Random.Range(0, 4);
 
             if (randomAttack == currentrandom)
             {
@@ -86,6 +99,16 @@ public class Boss_Asura : Boss
         {
             t += Time.deltaTime * rotationSpeed;
             transform.rotation = Quaternion.Slerp(startRotation, rotation, t);
+        }
+    }
+
+    protected override void DieMonster()
+    {
+        if (curHearth < 1)
+        {
+            die = true;
+            StopAllCoroutines();
+
         }
     }
 
