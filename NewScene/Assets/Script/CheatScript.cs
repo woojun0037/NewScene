@@ -11,6 +11,8 @@ public class CheatScript : MonoBehaviour
     public Main_Player player;
     public HitScript hit;
 
+    CameraMovemant cameSensitivity;
+
     private void Awake()
     {
         if (instance == null)
@@ -46,6 +48,21 @@ public class CheatScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad2))
         {
             hit.damage = 100f;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            cameSensitivity =FindObjectOfType<CameraMovemant>();
+            cameSensitivity.sensitivity = 200;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            cameSensitivity = FindObjectOfType<CameraMovemant>();
+            cameSensitivity.sensitivity += 10;
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            cameSensitivity = FindObjectOfType<CameraMovemant>();
+            cameSensitivity.sensitivity -= 10;
         }
     }
 }

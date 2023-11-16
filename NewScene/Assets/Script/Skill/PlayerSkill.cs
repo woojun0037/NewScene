@@ -61,8 +61,16 @@ public class PlayerSkill : MonoBehaviour
     public float maxAbilityDistance;
     public float DarkSkill;
 
+    void OnEnable() //add
+    {
+        RainSkillTime = 0;
+        WindSkillTime = 0;
+        TornadoSkillTime = 0;
+        DashSkillTime = 0;
+    }
 
-    private void Start()
+
+private void Start()
     {
         gauge = FindObjectOfType<Gauge>();
         player = GetComponent<Main_Player>();

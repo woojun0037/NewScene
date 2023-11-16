@@ -62,6 +62,12 @@ public class Main_Player : MonoBehaviour
     private int hitState;
     internal int HitState => hitState;
 
+    void OnEnable() //add
+    {
+
+    }
+
+
     private void Awake()
     {
         if (instance == null)
