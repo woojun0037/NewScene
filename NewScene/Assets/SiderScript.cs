@@ -9,19 +9,22 @@ public class SiderScript : MonoBehaviour
     public Slider slider;
     public CameraMovemant cam;
 
+    CameraMovemant cameSensitivity;
+
     public void OnEnable()
     {
-        slider.value = cam.sensitivity;
+       slider.value = cam.sensitivity;
     }
 
-    private void Update()
+    private void Start()
     {
-        SlideScroll();
+        slider.onValueChanged.AddListener(OnSliderValueChanged);
     }
 
-    public void SlideScroll()
+
+    public void OnSliderValueChanged(float value)
     {
-        slider.value = slider.minValue/slider.maxValue;
-        cam.sensitivity = slider.value;
+        cam.sensitivity = value;
     }
+
 }
