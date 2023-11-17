@@ -57,7 +57,7 @@ public class CheatScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Keypad6))
         {
             cameSensitivity = FindObjectOfType<CameraMovemant>();
-            cameSensitivity.sensitivity = 300;
+            cameSensitivity.sensitivity = 400;
         }
         if (Input.GetKeyDown(KeyCode.Keypad8))
         {
