@@ -285,6 +285,8 @@ public class Boss_Asura : Boss
 
     private IEnumerator attackstart()
     {
+        player = GameObject.FindWithTag("Main_gangrim").GetComponent<Main_Player>();
+
         isattack = true;
         yield return new WaitForSeconds(3f);
         isattack = false;
