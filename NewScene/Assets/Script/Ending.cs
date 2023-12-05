@@ -40,7 +40,7 @@ public class Ending : MonoBehaviour
 
     private void NextScene()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("EndingCreadit");
     }
 
     private void Update()
